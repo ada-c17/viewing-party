@@ -1,3 +1,4 @@
+# My beggest takeway from this lesson is able to push changes at GitHub
 # import source code
 from viewing_party.party import *
 
