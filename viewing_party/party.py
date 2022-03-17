@@ -57,7 +57,30 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-        
+# TODO: consider refactoring these using set comparisons
+
+def get_unique_watched(user_data):
+    common_titles_set = set()
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie in user_data["watched"]:
+                common_titles_set.add(movie["title"])
+    
+    uniquely_watched = []
+    for movie in user_data["watched"]:
+        if movie["title"] not in common_titles_set:
+            uniquely_watched.append(movie)
+    return uniquely_watched
+
+def get_friends_unique_watched(user_data):
+    friends_unique_watched = []
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if (movie not in user_data["watched"] and
+                    movie not in friends_unique_watched):
+                friends_unique_watched.append(movie)
+    return friends_unique_watched
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
