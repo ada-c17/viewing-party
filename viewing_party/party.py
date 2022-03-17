@@ -4,7 +4,7 @@ def create_movie(title, genre, rating):
     movies = {"title" : title,
                 "genre" : genre,
                 "rating" : rating}
-    if not title or not genre:
+    if not title or not genre or not rating:
         movies = None
     return movies
 
