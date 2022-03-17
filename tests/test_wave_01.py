@@ -9,7 +9,7 @@ def test_create_successful_movie():
     # Arrange
     movie_title = MOVIE_TITLE_1
     genre = GENRE_1
-    rating = RATING_1 #int or float
+    rating = RATING_1
 
     # Act
     new_movie = create_movie(movie_title, genre, rating)
@@ -79,7 +79,7 @@ def test_adds_movie_to_user_watched():
     assert updated_data["watched"][0]["genre"] is GENRE_1
     assert updated_data["watched"][0]["rating"] is RATING_1
 
-@pytest.mark.skip()
+#@pytest.mark.skip()
 def test_adds_movie_to_user_watchlist():
     # Arrange
     movie = {
@@ -100,7 +100,7 @@ def test_adds_movie_to_user_watchlist():
     assert updated_data["watchlist"][0]["genre"] is GENRE_1
     assert updated_data["watchlist"][0]["rating"] is RATING_1
 
-@pytest.mark.skip()
+#@pytest.mark.skip()
 def test_moves_movie_from_watchlist_to_empty_watched():
     # Arrange
     janes_data = {
