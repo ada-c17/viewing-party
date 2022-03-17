@@ -3,7 +3,7 @@ import pytest
 # from viewing_party.main import *
 from viewing_party.party import *
 from tests.test_constants import *
-
+# commit test
 @pytest.mark.skip()
 def test_create_successful_movie():
     # Arrange
