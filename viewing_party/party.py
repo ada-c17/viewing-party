@@ -26,9 +26,9 @@ def watch_movie(user_data, movie_title):
         movie = user_watchlist[index]
         if movie["title"] == movie_title:
             watching_index = index
-    user_watched.append(user_watchlist[watching_index])
-    user_watchlist.pop(watching_index)
-
+    if watching_index is not None:
+        user_watched.append(user_watchlist[watching_index])
+        user_watchlist.pop(watching_index)
     return user_data
 
 # -----------------------------------------
