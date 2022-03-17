@@ -1,7 +1,23 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
-    pass
+    dictt = {}
+    dictt["title"] = title
+    dictt["genre"] = genre
+    dictt["rating"] = rating
+    return dictt
+
+# def test_create_no_title_movie():
+#     # Arrange
+#     movie_title = None
+#     genre = "Horror"
+#     rating = 3.5
+
+#     # Act
+#     new_movie = create_movie(movie_title, genre, rating)
+
+#     # Assert
+    assert new_movie is None
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
