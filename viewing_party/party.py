@@ -26,9 +26,11 @@ def watch_movie(user_data, title):
         index += 1
     if index > len(user_data["watchlist"]):
         return user_data
-    user_data["watched"].append(move_movie)
-    pop_movie = user_data["watchlist"][index]
-    user_data["watchlist"].pop(index)
+    try:
+        user_data["watched"].append(move_movie)
+        user_data["watchlist"].pop(index)
+    except(UnboundLocalError):
+        pass
     return user_data
 
 
