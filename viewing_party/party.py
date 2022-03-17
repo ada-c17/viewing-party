@@ -1,15 +1,22 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
-    pass
-# test comment!!
+    new_movie_dict = {}
+    new_movie_dict["title"] = title
+    new_movie_dict["genre"] = genre
+    new_movie_dict["rating"] = rating
+    for value in new_movie_dict.values():
+        if value == None:
+            return None
+    return new_movie_dict
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 
 
 # -----------------------------------------
-# ------------- WAVE 3 --------------------
+# ------------- WAVE 3 -------∫-------------
 # -----------------------------------------
 
 
