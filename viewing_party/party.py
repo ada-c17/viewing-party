@@ -2,9 +2,16 @@
 
 def create_movie(title, genre, rating):
     new_movie = {}
-    new_movie["title"] = title
-    new_movie["genre"] = genre
-    new_movie["rating"] = rating
+    if title == None:
+        return None
+    elif genre == None:
+        return None
+    elif rating == None:
+        return None
+    else:
+        new_movie["title"] = title
+        new_movie["genre"] = genre
+        new_movie["rating"] = rating
 
     return new_movie
 
