@@ -44,8 +44,10 @@ def get_most_watched_genre(user_data):
             genre_dict[watched_genre] += 1
         else:
             genre_dict[watched_genre] = 0
-    
-    most_watched_genre = max(genre_dict, key=genre_dict.get)
+    try:
+        most_watched_genre = max(genre_dict, key=genre_dict.get)
+    except ValueError:
+        most_watched_genre = None
     return most_watched_genre
 
 
