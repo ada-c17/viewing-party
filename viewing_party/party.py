@@ -8,6 +8,9 @@ def create_movie(movie_title, genre, rating):
     elif genre == None:
         new_movie = None
         return new_movie
+    elif rating == None:
+        new_movie = None
+        return new_movie
     return new_movie
 
 
