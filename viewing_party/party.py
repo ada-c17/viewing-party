@@ -1,7 +1,15 @@
 # ------------- WAVE 1 --------------------
-#add comment to test committing
 def create_movie(title, genre, rating):
-    pass
+    if title == None or genre == None or rating == None:
+        movie = None
+    else:
+        movie = {
+            "title": title,
+            "genre": genre,
+            "rating": rating
+        }
+    
+    return movie
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
