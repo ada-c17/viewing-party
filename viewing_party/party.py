@@ -1,8 +1,20 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
-    pass
-print("something")
+    movie_dict = {}
+    if title:
+        movie_dict['title'] = title 
+
+    if genre:
+        movie_dict['genre'] = genre 
+
+    if rating:
+        movie_dict['rating'] = rating 
+    
+    print('WORKKKKK')
+    print(movie_dict)
+    return movie_dict
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
