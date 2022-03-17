@@ -12,7 +12,7 @@ def create_movie(title, genre, rating):
         "rating": rating
     }
 
-    if title == None:
+    if title == None or genre == None:
         return None
     else:
         return new_movie
