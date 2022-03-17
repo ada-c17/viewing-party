@@ -1,6 +1,6 @@
 # import source code
 from viewing_party.party import *
-# test comment!
+
 # import test data
 from tests.test_constants import *
 
