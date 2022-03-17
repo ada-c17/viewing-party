@@ -1,3 +1,5 @@
+# I was able to complete untill this point
+
 # import source code
 from viewing_party.party import *
 
