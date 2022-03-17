@@ -2,6 +2,7 @@
 
 def create_movie(title, genre, rating):
     pass
+    "git test 1, 2, 3"
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
