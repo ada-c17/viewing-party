@@ -1,5 +1,3 @@
-def tell_me_favorite_movie(favorite_movie):
-    return f"Your favorite movie is {favorite_movie}"
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
