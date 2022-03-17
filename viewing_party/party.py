@@ -1,3 +1,5 @@
+# this is a comment to test first commit/push to repo
+
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
