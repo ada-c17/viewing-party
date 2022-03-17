@@ -63,7 +63,7 @@ def test_create_no_rating_movie():
     assert new_movie is None
 
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_adds_movie_to_user_watched():
     # Arrange
     movie = {
