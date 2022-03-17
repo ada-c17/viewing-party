@@ -7,9 +7,13 @@ def create_movie(title, genre, rating):
     # and values that are equal to title, genre, rating
 
     new_movie = {}
-    new_movie["title"] = title
-    new_movie["genre"] = genre
-    new_movie["rating"] = rating
+
+    if title and genre and rating:
+        new_movie["title"] = title
+        new_movie["genre"] = genre
+        new_movie["rating"] = rating
+    else:
+        new_movie = None
 
     return new_movie
 
