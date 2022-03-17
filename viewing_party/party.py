@@ -1,5 +1,5 @@
 # ------------- WAVE 1 --------------------
-
+#adding a comment in the code to commit :)
 def create_movie(title, genre, rating):
     pass
 
