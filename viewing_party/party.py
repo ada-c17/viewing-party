@@ -3,7 +3,13 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
-    pass
+    '''this function adds movie details to movie dictionary'''
+    new_movie = {
+        "title": title,
+        "genre":genre,
+        "rating": rating
+    }
+    return new_movie
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
