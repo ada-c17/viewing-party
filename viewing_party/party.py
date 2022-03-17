@@ -1,7 +1,14 @@
 # ------------- WAVE 1 --------------------
 # testing commit
 def create_movie(title, genre, rating):
-    pass
+    movie_dict = {}
+    movie_dict["title"] = title
+    movie_dict["genre"] = genre
+    movie_dict["rating"] = rating
+    for value in movie_dict.values():
+        if value == None:
+            return None
+    return movie_dict
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
