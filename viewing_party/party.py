@@ -1,6 +1,10 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
+    """
+    Input: title (string), genre (string), rating (float)
+    Output: If parameters are truthy, return dictionary. If not, return None
+    """
     movies = {}
 
     if (title and genre and rating):
@@ -11,11 +15,14 @@ def create_movie(title, genre, rating):
     
     return None
 
-# MOVIE_TITLE_1 = "It Came from the Stack Trace"
-# GENRE_1 = "Horror"
-# RATING_1 = 3.5
 
-# create_movie()
+def add_to_watched(user_data, movie):
+    """
+    Input: user_data (dictionary with key = "watched" and value = list of dictionaries), movie (dictionary from create_movie)
+    Output: return user_data
+    """
+
+
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
