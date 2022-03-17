@@ -15,6 +15,10 @@ def add_to_watched(data, movie):
     data["watched"].append(movie)
     return data
 
+def add_to_watchlist(data, movie):
+    data["watchlist"].append(movie)
+    return data
+
 movie = create_movie("title 1", "genre 1", "rating 1")
 
 user_data = {
