@@ -11,6 +11,11 @@ def create_movie(title, genre, rating):
             return None
     return movie_dict
 
+def add_to_watched(user_data, movie):
+    for value in user_data.values():
+        value = value.append(movie)
+    return user_data
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
