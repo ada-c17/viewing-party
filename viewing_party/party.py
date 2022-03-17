@@ -1,5 +1,5 @@
-good_movies =["Get Out", "Parasite"]
-print(f"{good_movies[0]} and {good_movies[1]} are good movies.")
+def tell_me_favorite_movie(favorite_movie):
+    return f"Your favorite movie is {favorite_movie}"
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
