@@ -2,8 +2,7 @@
 
 def create_movie(title, genre, rating):
     movie_dict = {}
-    if isinstance(title, str) and isinstance(genre, str) and\
-        isinstance(rating, int):
+    if title and genre and rating:
         movie_dict["title"] = title   
         movie_dict["genre"] = genre        
         movie_dict["rating"] = rating
