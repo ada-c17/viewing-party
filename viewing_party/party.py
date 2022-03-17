@@ -1,7 +1,19 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
-    print("this made it to github")
+    movie_dict = {}
+    if title is None or genre is None or rating is None:
+        return None
+    movie_dict["title"] = title
+    movie_dict["genre"] =  genre 
+    movie_dict["rating"] =  rating
+    return movie_dict
+
+def add_to_watch(user_data, movie):
+    pass
+
+
+
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
