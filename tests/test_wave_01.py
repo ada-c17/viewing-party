@@ -4,22 +4,21 @@ import pytest
 from viewing_party.party import *
 from tests.test_constants import *
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_create_successful_movie():
     # Arrange
-    movie_title = MOVIE_TITLE_1
-    genre = GENRE_1
-    rating = RATING_1
-
+    movie_title = "The Ring"
+    genre = "Horror"
+    rating = "R"
     # Act
     new_movie = create_movie(movie_title, genre, rating)
 
     # Assert
-    assert new_movie["title"] is MOVIE_TITLE_1
-    assert new_movie["genre"] is GENRE_1
-    assert new_movie["rating"] == pytest.approx(RATING_1)
+    assert new_movie["title"] is "The Ring"
+    assert new_movie["genre"] is "Horror"
+    assert new_movie["rating"] == pytest.approx("R")
 
-@pytest.mark.skip()
+#@pytest.mark.skip()
 def test_create_no_title_movie():
     # Arrange
     movie_title = None
@@ -32,7 +31,7 @@ def test_create_no_title_movie():
     # Assert
     assert new_movie is None
 
-@pytest.mark.skip()
+#@pytest.mark.skip()
 def test_create_no_genre_movie():
     # Arrange
     movie_title = "Title A"
