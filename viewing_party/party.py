@@ -16,6 +16,12 @@ def add_to_watched(user_data, movie):
         value = value.append(movie)
     return user_data
 
+def add_to_watchlist(user_data, movie):
+    for value in user_data.values():
+        value = value.append(movie)
+    return user_data
+
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
