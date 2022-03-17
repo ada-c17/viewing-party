@@ -8,7 +8,7 @@ def create_movie(title, genre, rating):
     movie["rating"] = 3.5
 
     if (movie["title"]) == "" or (movie["genre"]) == "" or (movie["rating"]) == "":
-        return None
+        return "None"
 
 
 def add_to_watched(user_data, movie):
