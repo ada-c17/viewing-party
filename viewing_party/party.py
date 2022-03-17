@@ -1,7 +1,21 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
-    pass
+    movies = {}
+
+    if (title and genre and rating):
+        movies["title"] = title
+        movies["genre"] = genre
+        movies["rating"] = rating
+        return movies
+    
+    return None
+
+# MOVIE_TITLE_1 = "It Came from the Stack Trace"
+# GENRE_1 = "Horror"
+# RATING_1 = 3.5
+
+# create_movie()
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
