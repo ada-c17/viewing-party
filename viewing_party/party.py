@@ -1,7 +1,8 @@
 # ------------- WAVE 1 --------------------
 
-def create_movie(title, genre, rating):
-    pass
+def create_movie():
+    # title, genre, rating
+    print("hello")
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
