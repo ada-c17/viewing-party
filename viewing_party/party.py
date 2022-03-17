@@ -9,8 +9,11 @@ def create_movie(title, genre, rating):
     movie_dict["rating"] =  rating
     return movie_dict
 
-def add_to_watch(user_data, movie):
-    pass
+def add_to_watched(user_data, movie):
+    user_data["watched"] =  [movie]
+    return user_data
+
+
 
 
 
