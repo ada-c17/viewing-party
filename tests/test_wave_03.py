@@ -53,10 +53,8 @@ def test_friends_unique_movies_not_duplicated():
 
     # Arrange
     assert len(friends_unique_movies) == 3
+    assert friends_unique_movies == [FANTASY_4, HORROR_1, INTRIGUE_3]
 
-    # *************************************************************************************************
-    # ****** Add assertions here to test that the correct movies are in friends_unique_movies **********
-    # **************************************************************************************************
 
 
 def test_friends_not_unique_movies():
