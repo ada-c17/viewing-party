@@ -1,5 +1,6 @@
+from statistics import mean
+
 # ------------- WAVE 1 --------------------
-# testing commit
 def create_movie(title, genre, rating):
     movie_dict = {}
     movie_dict["title"] = title
@@ -29,7 +30,11 @@ def watch_movie(user_data, movie):
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
-
+def get_watched_avg_rating(user_data):
+    average_rating = []
+    for i in range(len(user_data["watched"])):
+        average_rating.append(user_data["watched"][i]['rating'])
+    return mean(average_rating)
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
