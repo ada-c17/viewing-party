@@ -1,5 +1,5 @@
 # ------------- WAVE 1 --------------------
-    
+
 def create_movie(title, genre, rating):
     new_movie = {"title" : title, "genre" : genre, "rating" : rating}
     if new_movie["title"] == None or new_movie["genre"] == None or new_movie["rating"] == None:
@@ -17,6 +17,18 @@ def add_to_watchlist(user_data, movie):
         "watchlist": [movie]
     }
     return user_data
+
+def watch_movie(janes_data, MOVIE_TITLE_1):
+
+    second_dict = {"title" : "purple", "apple" : 4}
+
+    for i in range(len(janes_data["watchlist"])):
+        if janes_data["watchlist"][i]["title"] == MOVIE_TITLE_1:
+            janes_data["watched"].append(janes_data["watchlist"][i])
+            janes_data["watchlist"].pop(i)
+    print(janes_data)
+    return janes_data
+
 
 
 # -----------------------------------------
