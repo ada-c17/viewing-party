@@ -29,7 +29,7 @@ def watch_movie(user_data, title):
     
     watchlist = user_data["watchlist"] #list we iterate over
     new_watchlist = [] #new list, avoiding mutating iterated list^
-    watched= user_data["watched"] #list we append to
+    watched = user_data["watched"] #list we append to
 
     for i in range(len(watchlist)):
         if title in watchlist[i].values(): #titles
@@ -38,7 +38,7 @@ def watch_movie(user_data, title):
         else: #remain in watchlist
             new_watchlist.append(watchlist[i])
 
-    user_data["watchlist"]=new_watchlist #update watchlist in user data
+    user_data["watchlist"] = new_watchlist #update watchlist in user data
 
     return user_data
 
@@ -51,9 +51,9 @@ def get_watched_avg_rating(user_data):
     watched= user_data["watched"]
 
     #initiate running total
-    total=0
+    total = 0
     for i in range(len(watched)):
-            total+=watched[i]["rating"]
+            total += watched[i]["rating"]
     
     try:
         average = total/len(watched)
@@ -64,30 +64,30 @@ def get_watched_avg_rating(user_data):
 
 def get_most_watched_genre(user_data):
 
-    watched=user_data["watched"]
+    watched = user_data["watched"]
 
     #return None for empty watched list
-    if len(watched)==0:
+    if len(watched) == 0:
         return None
     
     #set count for each genre
-    genre_count= {"Fantasy": 0, "Action": 0, "Intrigue": 0, "Horror": 0}
+    genre_count = {"Fantasy": 0, "Action": 0, "Intrigue": 0, "Horror": 0}
 
     #loop over each item's genre and check which genre it matches, 
     for movie in watched:
-        if movie["genre"]=="Fantasy":
+        if movie["genre"] == "Fantasy":
             genre_count["Fantasy"]+=1
-        elif movie["genre"]=="Action":
+        elif movie["genre"] == "Action":
             genre_count["Action"]+=1
-        elif movie["genre"]=="Intrigue":
-            genre_count["Intrigue"]+=1
+        elif movie["genre"] == "Intrigue":
+            genre_count["Intrigue"] += 1
         else:
-            genre_count["Horror"]+=1
+            genre_count["Horror"] += 1
     
 
     #return max genre count genre
 
-    return max(genre_count, key=genre_count.get)
+    return max(genre_count, key = genre_count.get)
     
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
@@ -101,7 +101,7 @@ def get_unique_watched(user_data):
     user_watched_movies = user_data["watched"]
     
     #access friends' movie titles as list of strings
-    friends_watched_titles=[]
+    friends_watched_titles = []
 
     for friends in user_data["friends"]:
         for movie in friends["watched"]:
@@ -121,7 +121,7 @@ def get_unique_watched(user_data):
 def get_friends_unique_watched(user_data):
     
     #get list of dicts of all friend watched movies
-    friends_watched_movies=[]
+    friends_watched_movies = []
 
     for friend in user_data["friends"]:
         for movie in friend["watched"]:
@@ -152,7 +152,7 @@ def get_available_recs(user_data):
     friends_unique_watched_movies = get_friends_unique_watched(user_data)
 
     #"host" of the movie is a service that is in the user's `"subscriptions"
-    recommended_movies= []
+    recommended_movies = []
 
     for movie in friends_unique_watched_movies:
         if movie["host"] in user_data["subscriptions"]:
@@ -174,7 +174,7 @@ def get_new_rec_by_genre(user_data):
     #get movies friends have watched but user has no
     friends_unique_watched_movies = get_friends_unique_watched(user_data)
 
-    recommended_movies= []
+    recommended_movies = []
 
     for movie in friends_unique_watched_movies:
         if movie["genre"] == most_watched_genre:
@@ -185,13 +185,13 @@ def get_new_rec_by_genre(user_data):
 
 def get_rec_from_favorites(user_data):
     
-    recommended_movies= []
+    recommended_movies = []
 
         #access user fav movies as list of dicts
     user_fav_movies = user_data["favorites"]
     
     #access friends' movie titles as list of strings
-    friends_watched_titles=[]
+    friends_watched_titles = []
 
     for friends in user_data["friends"]:
         for movie in friends["watched"]:
