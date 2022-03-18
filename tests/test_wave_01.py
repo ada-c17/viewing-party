@@ -4,7 +4,7 @@ import pytest
 from viewing_party.party import *
 from tests.test_constants import *
 
-# @pytest.mark.skip()
+# @pytest.mark.skip()1
 def test_create_successful_movie():
     # Arrange
     movie_title = "The Ring"
@@ -18,7 +18,7 @@ def test_create_successful_movie():
     assert new_movie["genre"] is "Horror"
     assert new_movie["rating"] == pytest.approx("R")
 
-#@pytest.mark.skip()
+#@pytest.mark.skip()2
 def test_create_no_title_movie():
     # Arrange
     movie_title = None
@@ -31,7 +31,7 @@ def test_create_no_title_movie():
     # Assert
     assert new_movie is None
 
-#@pytest.mark.skip()
+#@pytest.mark.skip()3
 def test_create_no_genre_movie():
     # Arrange
     movie_title = "Title A"
@@ -44,7 +44,7 @@ def test_create_no_genre_movie():
     # Assert
     assert new_movie is None
 
-#@pytest.mark.skip()
+#@pytest.mark.skip()4
 def test_create_no_rating_movie():
     # Arrange
     movie_title = "Title A"
@@ -57,7 +57,7 @@ def test_create_no_rating_movie():
     # Assert
     assert new_movie is None
 
-@pytest.mark.skip()
+#@pytest.mark.skip()5
 def test_adds_movie_to_user_watched():
     # Arrange
     movie = {

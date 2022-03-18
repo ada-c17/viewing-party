@@ -14,6 +14,14 @@ def create_movie(movie_title, genre, rating):
     return new_movie
 
 
+def add_to_watched(user_data, movie):
+    user_data = {
+        "watched": []
+    }
+    user_data["watched"] += [movie]
+    return user_data
+    
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
