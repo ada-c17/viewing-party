@@ -5,7 +5,7 @@
 def create_movie(title, genre, rating):
     
     dict_of_movies = {}
-    if title == None:
+    if title == None or genre  == None or rating == None:
         return None
     dict_of_movies["title"] = title
     dict_of_movies["genre"] = genre
