@@ -1,4 +1,4 @@
-# import source code #myfirst comment
+# import source code
 from viewing_party.party import *
 
 # import test data
