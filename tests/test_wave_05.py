@@ -39,7 +39,6 @@ def test_new_genre_rec_from_empty_watched():
     assert len(recommendations) == 0
 
 
-@pytest.mark.skip()
 def test_new_genre_rec_from_empty_friends():
     # Arrange
     sonyas_data = {
@@ -54,12 +53,34 @@ def test_new_genre_rec_from_empty_friends():
         ]
     }
 
-    # *********************************************************************
-    # ****** Complete the Act and Assert Portions of theis tests **********
-    # *********************************************************************
+    # Act
+    recommendations = get_new_rec_by_genre(sonyas_data)
+
+    # Assert
+    assert len(recommendations) == 0
 
 
-@pytest.mark.skip()
+def test_new_rec_from_empty_friends():
+    # Arrange
+    sonyas_data = {
+        "watched": [INTRIGUE_1b],
+        "friends": [
+            {
+                "watched": []
+            },
+            {
+                "watched": []
+            }
+        ]
+    }
+
+    # Act
+    recommendations = get_new_rec_by_genre(sonyas_data)
+
+    # Assert
+    assert len(recommendations) == 0
+
+
 def test_unique_rec_from_favorites():
     # Arrange
     sonyas_data = clean_wave_5_data()
@@ -89,28 +110,7 @@ def test_unique_from_empty_favorites():
     }
 
     # Act
-    recommendations = get_new_rec_by_genre(sonyas_data)
-
-    # Assert
-    assert len(recommendations) == 0
-
-
-def test_new_rec_from_empty_friends():
-    # Arrange
-    sonyas_data = {
-        "watched": [INTRIGUE_1b],
-        "friends": [
-            {
-                "watched": []
-            },
-            {
-                "watched": []
-            }
-        ]
-    }
-
-    # Act
-    recommendations = get_new_rec_by_genre(sonyas_data)
+    recommendations = get_rec_from_favorites(sonyas_data)
 
     # Assert
     assert len(recommendations) == 0
