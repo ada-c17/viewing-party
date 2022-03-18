@@ -51,6 +51,11 @@ def get_most_watched_genre(user_data):
     for movie in watched_list:
         genres.append(movie["genre"])
 
+    if genres: # Find most popular genre if at least 1 genre exists in data
+        return mode(genres)
+    else: # Return None if genres watched is empty
+        return None
+    
     return mode(genres)
     
 
