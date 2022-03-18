@@ -36,12 +36,27 @@ def add_to_watched(user_data, movie):
     return user_data
 
 
-# TESTING!!
+# TESTING add_to_watched()
 # user_data = { "watched": []}
 # movie = {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}
 
 # add_to_watched(user_data, movie)
 
+
+def add_to_watchlist(user_data, movie):
+    """
+    Input: 
+    user_data = {"watchlist":["Spider-man: No Way Home", "Dune"]}
+    movie = { "title": "Title A", "genre": "Horror", "rating": 3.5}
+
+    """
+    # Add movie to the "watchlist" inside of user_data
+    # return user_data
+
+    if "watchlist" in user_data:
+        user_data["watchlist"].append(movie)
+    
+    return user_data
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
