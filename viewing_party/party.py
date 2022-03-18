@@ -164,6 +164,10 @@ def get_available_recs(user_data):
 def get_new_rec_by_genre(user_data):
     fav_genre = get_most_watched_genre(user_data)
     user_watched_list = user_data["watched"]
+
+    if not user_data.get("subscriptions"):
+        user_data["subscriptions"] = []
+        
     not_by_genre_recs = get_available_recs(user_data) 
     
     recs_list = []
