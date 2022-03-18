@@ -12,6 +12,7 @@ def create_movie(title: str, genre: str, rating: float) -> Optional[dict]:
         return new_movie
     return None
 
+# comment
 def add_to_watched(user_data: dict, movie: dict) -> dict:
     user_data["watched"].append(movie)
     return user_data
