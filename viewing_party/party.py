@@ -66,7 +66,7 @@ def get_unique_watched(user_data):
                     friend_movies.append(i)
     # find users unique movies
     for i in user_movies:
-        if i not in friend_movies:
+        if i not in friend_movies and i not in unique_user_movies:
             unique_user_movies.append(i)
     return unique_user_movies
 
@@ -78,8 +78,11 @@ def get_friends_unique_watched(user_data):
     for i in range(len(user_data["watched"])):
         user_movies.append(user_data["watched"][i])
     # generate friend watched movies list
+    # get friends data dictionaries
     for dict in user_data["friends"]:
+        # get each friends' watched dictionary
         for key, value in dict.items():
+            # if the key of the dict is watched, then add that key's value to the movie list
             if key == "watched":
                 for i in value:
                     friend_movies.append(i)
@@ -93,6 +96,19 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+def get_available_recs(user_data):
+    unique_friend_movies = get_friends_unique_watched(user_data)
+    user_subscriptions = user_data['subscriptions']
+    recommendations = []
+
+    for movie in unique_friend_movies:
+        for key, value in movie.items():
+            if key == "host" and value in user_subscriptions:
+                recommendations.append(movie)
+    
+    return recommendations
+
+
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
