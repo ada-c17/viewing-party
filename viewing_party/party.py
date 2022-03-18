@@ -18,15 +18,11 @@ def add_to_watchlist(user_data, movie):
     }
     return user_data
 
-def watch_movie(janes_data, MOVIE_TITLE_1):
-
-    second_dict = {"title" : "purple", "apple" : 4}
-
+def watch_movie(janes_data, movie_to_watch):
     for i in range(len(janes_data["watchlist"])):
-        if janes_data["watchlist"][i]["title"] == MOVIE_TITLE_1:
+        if janes_data["watchlist"][i]["title"] == movie_to_watch:
             janes_data["watched"].append(janes_data["watchlist"][i])
             janes_data["watchlist"].pop(i)
-    print(janes_data)
     return janes_data
 
 
