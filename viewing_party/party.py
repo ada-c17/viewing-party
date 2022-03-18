@@ -96,6 +96,34 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
+
+def get_unique_watched(user_data):
+
+    unique_movies = []
+
+    #COPY USER'S WATCHED MOVIES
+    for x in user_data["watched"]:
+        unique_movies.append(x)
+
+    for movie in user_data["watched"]:
+
+        for friend in user_data["friends"]:
+
+            for i in friend["watched"]:
+                if i["title"] == movie["title"]:
+                    
+                    #remove i from unique_movies
+                    if i in unique_movies:
+                        unique_movies.remove(i)
+
+    return unique_movies
+            
+
+
+
+
+
+
         
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
