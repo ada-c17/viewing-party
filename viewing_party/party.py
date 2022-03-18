@@ -28,6 +28,20 @@ def add_to_watched(user_data, movie):
     
     return watched_movies
 
+def add_to_watchlist(user_data, movie):
+    # create a dict with "watchlist" as key and empty list as value
+    movies_to_watch = {
+        "watchlist": []
+    }
+
+    # checks to see if list is empty, if it is empty, it returns empty list. If not empty, continues with conditional and appends movie dictionary to value in movies_to_watch dictionary
+    if not user_data:
+        return user_data
+    else:
+        movies_to_watch["watchlist"].append(movie)
+    
+    return movies_to_watch
+
 
 
 
