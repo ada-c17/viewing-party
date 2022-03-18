@@ -22,17 +22,16 @@ def add_to_watchlist(user_data, movie):
     user_data["watchlist"]= [movie]
     return user_data
 
-watch_list = []
 def watch_movie(user_data, movie):
-    # user_data["watched"] = [movie]
-    already_watched_list = user_data["watchlist"]
-    user_data["watched"]= watch_list.append(movie)
-    already_watched_list.remove(movie)
+    # already_watched_list = user_data["watched"]
+    # to_watch_list = user_data["watchlist"]
+    for value in user_data["watchlist"]:
+        if value["title"] == movie:
+            movie_watched = value
+            user_data["watched"].append(movie_watched)
+            user_data["watchlist"].remove(movie_watched)
     return user_data
     
-    # AssertionError: assert ['It Came from the Stack Trace'] is [{'genre': 'Horror', 'rating': 3.5,\
-    #  'title': 'It Came from the Stack Trace'}]
-
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
