@@ -1,5 +1,4 @@
 # ------------- WAVE 1 --------------------
-
 def create_movie(title, genre, rating):
     if title == None or genre == None or rating == None:
         return None
@@ -94,8 +93,6 @@ def get_friends_watched_movies_list(user_data):
             friends_watched_movies.append(friend_watched_movie)
 
     return friends_watched_movies
-
-
 # ----------- HELPER FUNCTIONS ------------
 # -----------------------------------------
 
@@ -146,9 +143,27 @@ def get_available_recs(user_data):
 
 
 
-
-
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+def get_new_rec_by_genre(user_data):
+    genre = get_most_watched_genre(user_data)
+    not_watched_movies = get_friends_unique_watched(user_data)  
+    recommendations = []
+    print(user_data)
 
+    for not_watched_movie in not_watched_movies:
+        if not_watched_movie["genre"] is genre:
+            recommendations.append(not_watched_movie)
+
+    return recommendations
+
+def get_rec_from_favorites(user_data):
+    recommendations = []
+    favorites = user_data["favorites"]
+    friends_watched_movies = get_friends_watched_movies_list(user_data)
+    for favorite in favorites:
+        if favorite not in friends_watched_movies:
+            recommendations.append(favorite)
+
+    return recommendations
