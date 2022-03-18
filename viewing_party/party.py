@@ -1,5 +1,5 @@
 from collections import Counter
-
+import copy
 # ------------- WAVE 1 -----------
 def create_movie(title, genre, rating):
     new_movie={}
@@ -42,13 +42,12 @@ def get_most_watched_genre(user_data):
     frequency=Counter(d['genre'] for d in user_data['watched'])
     return frequency.most_common(1)[0][0]
 
-
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
 def get_unique_watched(user_data):
-    user_unique_movies=list(user_data['watched'])
+    user_unique_movies=copy.deepcopy(user_data['watched'])
     for data in user_data['friends']:
         for movie in data['watched']:
             if movie in user_unique_movies:
@@ -74,8 +73,23 @@ def get_available_recs(user_data):
                 recommendations.append(movie)
     return recommendations 
 
-
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+def get_new_rec_by_genre(user_data):
+    favourite_genre=get_most_watched_genre(user_data)
+    recommendations=[]
+    for data in user_data['friends']:
+        for movie in data['watched']:
+            if movie not in user_data['watched'] and movie['genre'] == favourite_genre:
+                recommendations.append(movie)
+    return recommendations
+
+def get_rec_from_favorites(user_data):
+    recommended=copy.deepcopy(user_data['favorites'])
+    for data in user_data['friends']:
+            for movie in data['watched']:
+                if movie in recommended:
+                    recommended.remove(movie)
+    return recommended
