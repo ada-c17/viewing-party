@@ -31,11 +31,9 @@ def watch_movie(user_data, title):
 
     for i in range(watchlist_length):
         if user_data['watchlist'][i]['title'] == title:
-            movie_index = i
-    
-    
-    user_data['watched'].append(user_data['watchlist'][movie_index])
-    del user_data['watchlist'][movie_index]
+            movie_index = i   
+            user_data['watched'].append(user_data['watchlist'][movie_index])
+            del user_data['watchlist'][movie_index]
     
     return user_data
 
