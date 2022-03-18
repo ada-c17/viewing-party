@@ -22,14 +22,12 @@ def add_to_watchlist(user_data, movie): #adding movides to watchlist
   return user_data
 
 def watch_movie(user_data, title):
-  if title == user_data["watchlist"][0]["title"]: #suggestion to make variables
-    #position = user_data["watchlist"].index("title")
-    user_data["watchlist"].pop(0) #leads to empty watchlist 
-    user_data["watched"].append(title)
-    return user_data
-  else:
-    return user_data
-  print (user_data)
+  for i in range(len(user_data["watchlist"])): #used for loop to iterate through n number of watchlists
+    if title == user_data["watchlist"][i]["title"]: #suggestion to make variables
+      user_data["watchlist"].pop(i) #leads to empty watchlist, pop only works for index
+      user_data["watched"].append(title)
+  return user_data
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
