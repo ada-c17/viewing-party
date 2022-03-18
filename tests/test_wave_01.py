@@ -149,6 +149,8 @@ def test_moves_movie_from_watchlist_to_watched():
     # Assert
     assert len(updated_data["watchlist"]) is 1
     assert len(updated_data["watched"]) is 2
+    assert updated_data["watched"][-1]["title"] is movie_to_watch["title"]
+
     
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
