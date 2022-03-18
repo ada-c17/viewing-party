@@ -58,25 +58,12 @@ def get_most_watched_genre(user_data):
     #list of movie dicts
     watched_list = user_data["watched"]
     
-    if not watched_list:
-        return None
-
-    movie_count = {
-            "Fantasy": 0,
-            "Action": 0,
-            "Horror": 0,
-            "Intrigue": 0
-        }
-
-    #movie is a dictionary with key "genre"
+    genre_list = []
     for movie in watched_list:
-        movie_count[movie["genre"]] += 1
+        genre_list.append(movie["genre"])
     
-    max_count = max(movie_count.values())
-
-    for genre in movie_count:
-        if movie_count[genre] == max_count:
-            return genre
+    max_count = max(genre_list, default=None, key=genre_list.count)
+    return max_count
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
@@ -134,7 +121,6 @@ def get_available_recs(user_data):
             if movie["host"] in subscription_list and movie not in user_watched_list:
                 rec_list.append(movie)
     return rec_list
-
 
 #user-data
     #key "subscriptions"
