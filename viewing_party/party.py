@@ -50,8 +50,9 @@ def get_most_watched_genre(user_data):
     genre_list = []
     for value in user_data["watched"]:
         genre_list.append(value["genre"])
-    popular_genre = statistics.mode(genre_list)
-    return popular_genre
+    if genre_list != []:
+        popular_genre = statistics.mode(genre_list)
+        return popular_genre
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
