@@ -69,7 +69,7 @@ def test_unique_rec_from_favorites():
     recommendations = get_rec_from_favorites(sonyas_data)
 
     # Assert
-    assert len(recommendations) == 2#
+    assert len(recommendations) == 2
     assert FANTASY_2b in recommendations
     assert INTRIGUE_2b in recommendations
     assert sonyas_data == clean_wave_5_data()
