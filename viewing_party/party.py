@@ -22,9 +22,11 @@ def watch_movie(user_data, movie_title):
             user_data["watched"].append(movie)
     user_data["watchlist"] = updated_watchlist
     return user_data
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+
 def get_watched_avg_rating(user_data):
     if not user_data["watched"]:
         return 0.0
@@ -84,6 +86,14 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+
+def get_available_recs(user_data):
+    available_recs = []
+    friends_unique_watched = get_friends_unique_watched(user_data)
+    for movie in friends_unique_watched:
+        if movie["host"] in user_data["subscriptions"]:
+            available_recs.append(movie)
+    return available_recs
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
