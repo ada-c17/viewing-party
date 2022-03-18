@@ -2,7 +2,7 @@ import pytest
 from viewing_party.party import *
 from tests.test_constants import *
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_new_genre_rec():
     # Arrange
     sonyas_data = clean_wave_5_data()
@@ -17,7 +17,7 @@ def test_new_genre_rec():
     assert FANTASY_4b in recommendations
     assert sonyas_data == clean_wave_5_data()
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_new_genre_rec_from_empty_watched():
     # Arrange
     sonyas_data = {
@@ -38,7 +38,7 @@ def test_new_genre_rec_from_empty_watched():
     # Assert
     assert len(recommendations) == 0
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_new_genre_rec_from_empty_friends():
     # Arrange
     sonyas_data = {
@@ -52,12 +52,15 @@ def test_new_genre_rec_from_empty_friends():
             }
         ]
     }
+    
+    recommendations = get_new_rec_by_genre(sonyas_data)
+    assert recommendations == []
 
     # *********************************************************************
     # ****** Complete the Act and Assert Portions of theis tests **********
     # *********************************************************************
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_unique_rec_from_favorites():
     # Arrange
     sonyas_data = clean_wave_5_data()
@@ -71,7 +74,7 @@ def test_unique_rec_from_favorites():
     assert INTRIGUE_2b in recommendations
     assert sonyas_data == clean_wave_5_data()
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_unique_from_empty_favorites():
     # Arrange
     sonyas_data = {
@@ -92,9 +95,9 @@ def test_unique_from_empty_favorites():
     # Assert
     assert len(recommendations) == 0
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_new_rec_from_empty_friends():
-    # Arrange
+    # Arrange              
     sonyas_data = {
         "watched": [INTRIGUE_1b],
         "friends": [
@@ -112,3 +115,53 @@ def test_new_rec_from_empty_friends():
 
     # Assert
     assert len(recommendations) == 0
+
+
+#*************************************************************#
+#Added another test here. The "test_new_rec_from_empty_friends"
+#Tested if BOTH of the friends lists were empty, this just makes
+#Sure it runs if only ONE of the friends lists is empty
+
+def test_new_rec_from_one_empty_friend():
+    # Arrange              
+    sonyas_data = full_but_one_watched
+
+    # Act
+    recommendations = get_new_rec_by_genre(sonyas_data)
+
+    # Assert
+    assert len(recommendations) == 1
+
+
+full_but_one_watched = {
+	"subscriptions" : ["netflix", "hulu"],
+	"favorites" : [
+		FANTASY_1b, 
+		FANTASY_2b, 
+        INTRIGUE_1b,
+		INTRIGUE_2b,
+        ACTION_1b
+		],
+    "watched": [
+        FANTASY_1b, 
+        FANTASY_2b, 
+        FANTASY_3b, 
+        ACTION_1b, 
+        INTRIGUE_1b, 
+        INTRIGUE_2b
+        ],  
+    "friends":  [
+        {
+            "watched": [
+            ]
+        },
+        {
+            "watched": [
+                FANTASY_1b,
+                ACTION_3b,
+                INTRIGUE_1b,
+                INTRIGUE_3b,
+            ]
+        }  
+    ]
+}
