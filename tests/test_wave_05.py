@@ -2,7 +2,7 @@ import pytest
 from viewing_party.party import *
 from tests.test_constants import *
 
-@pytest.mark.skip()
+
 def test_new_genre_rec():
     # Arrange
     sonyas_data = clean_wave_5_data()
@@ -17,7 +17,7 @@ def test_new_genre_rec():
     assert FANTASY_4b in recommendations
     assert sonyas_data == clean_wave_5_data()
 
-@pytest.mark.skip()
+
 def test_new_genre_rec_from_empty_watched():
     # Arrange
     sonyas_data = {
@@ -38,7 +38,7 @@ def test_new_genre_rec_from_empty_watched():
     # Assert
     assert len(recommendations) == 0
 
-@pytest.mark.skip()
+
 def test_new_genre_rec_from_empty_friends():
     # Arrange
     sonyas_data = {
@@ -53,11 +53,13 @@ def test_new_genre_rec_from_empty_friends():
         ]
     }
 
-    # *********************************************************************
-    # ****** Complete the Act and Assert Portions of theis tests **********
-    # *********************************************************************
+    #Act 
+    recommendations = get_new_rec_by_genre(sonyas_data)
 
-@pytest.mark.skip()
+    #Assert
+    assert len(recommendations) ==0
+
+
 def test_unique_rec_from_favorites():
     # Arrange
     sonyas_data = clean_wave_5_data()
@@ -71,8 +73,8 @@ def test_unique_rec_from_favorites():
     assert INTRIGUE_2b in recommendations
     assert sonyas_data == clean_wave_5_data()
 
-@pytest.mark.skip()
-def test_unique_from_empty_favorites():
+
+def test_unique_from_empty_favorites(): #updated test, updated Act to match favorites function(prviously matched genre function), and updated sonya's data to include favorites key with empty value list
     # Arrange
     sonyas_data = {
         "watched": [],
@@ -83,16 +85,17 @@ def test_unique_from_empty_favorites():
             {
                 "watched": [INTRIGUE_2b,HORROR_1b]
             }
-        ]
+        ],
+        "favorites": []
     }
 
     # Act
-    recommendations = get_new_rec_by_genre(sonyas_data)
+    recommendations = get_rec_from_favorites(sonyas_data)
 
     # Assert
     assert len(recommendations) == 0
 
-@pytest.mark.skip()
+
 def test_new_rec_from_empty_friends():
     # Arrange
     sonyas_data = {
