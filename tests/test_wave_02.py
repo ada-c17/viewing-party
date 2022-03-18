@@ -51,3 +51,21 @@ def test_genre_is_None_if_empty_watched():
 
     # Assert
     assert popular_genre == None
+
+
+########################
+# Future test
+########################
+
+# @pytest.mark.skip()
+# def test_more_than_one_most_watched_genre():
+#     # Arrange
+#     janes_data = {
+#         "watched": []
+#     }
+
+#     # Act
+#     popular_genre = get_most_watched_genre(janes_data)
+
+#     # Assert
+#     assert popular_genre == ## List? longer string?
