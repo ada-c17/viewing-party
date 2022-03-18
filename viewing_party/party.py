@@ -8,7 +8,7 @@ def create_movie(title, genre, rating):
 
     new_movie = {}
 
-    if title and genre:
+    if title and genre and rating:
         new_movie["title"] = title
         new_movie["genre"] = genre
         new_movie["rating"] = rating
