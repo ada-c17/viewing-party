@@ -32,6 +32,22 @@ def watch_movie(user_data, title):
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 
+def get_watched_avg_rating(user_data):
+    list_of_ratings=[]
+    for item in user_data["watched"]:
+        list_of_ratings.append(item["rating"])
+    if len(list_of_ratings) == 0:
+        list_of_ratings.append(0)
+    return sum(list_of_ratings)/len(list_of_ratings)
+
+def get_most_watched_genre(user_data):
+    list_of_genres=[]
+    for item in user_data["watched"]:
+        list_of_genres.append(item["genre"])
+    if len(list_of_genres) == 0:
+        return None
+    popular_value = max(set(list_of_genres), key = list_of_genres.count) #getting the mode of a list
+    return popular_value
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
