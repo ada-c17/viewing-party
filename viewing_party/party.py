@@ -124,6 +124,38 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
+def get_available_recs(user_data):
+    rec_list = []
+
+    subscription_list = user_data["subscriptions"]
+    user_watched_list = user_data["watched"]
+    user_title_list = []
+    for movie in user_watched_list:
+        user_title_list.append(movie["title"])
+
+    friends_list = user_data["friends"]
+    friends_title_list = []
+    for friend in friends_list:
+        #friend is dictionary 
+        friend_watched_list = friend["watched"]
+        for movie in friend_watched_list:
+            if movie["title"] not in user_title_list and movie["title"] not in friend_watched_list:
+                if movie["host"] in subscription_list:
+                    rec_list.append(movie)
+    return rec_list
+                
+
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+
+#user-data
+    #key "subscriptions"
+        #list of strings
+
+#friends (list)
+    #index is dictionary for each friend
+        #key - 'watched' is list
+            #each index is a movie's dictionary
+                #key "host", for subscribtion service
+        
