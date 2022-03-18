@@ -167,7 +167,7 @@ def get_new_rec_by_genre(user_data):
 
     if not user_data.get("subscriptions"):
         user_data["subscriptions"] = []
-        
+
     not_by_genre_recs = get_available_recs(user_data) 
     
     recs_list = []
@@ -178,3 +178,20 @@ def get_new_rec_by_genre(user_data):
 
     return recs_list
         
+def get_rec_from_favorites(user_data):
+    # user_data has key "favorites", which is a list of dictionaries
+    movie_recs = []
+    user_favs = user_data["favorites"]
+
+    #list of dictionaries for each friend
+    friends_watched_list = user_data["friends"]
+    
+    for movie in user_favs:
+        watched_movie = False
+        for friend in friends_watched_list:
+            for friend_movie in friend["watched"]:
+                if movie == friend_movie:
+                    watched_movie = True
+        if not watched_movie:
+            movie_recs.append(movie)
+    return movie_recs
