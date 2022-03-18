@@ -133,3 +133,48 @@ def get_available_recs(user_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+def get_new_rec_by_genre(user_data):
+    rec = []
+
+    friend_unique_watched = get_friends_unique_watched(user_data)           # movies that friends watched but user has not
+    user_watched = user_data["watched"]                                     # all user watched movies
+    user_watched_genre = {}                                                 # a dict of users watched genre with freq
+
+    # get the frequency of user watched genre
+    for movie in user_watched:
+        genre = movie["genre"]
+        if genre not in user_watched_genre :
+            user_watched_genre [genre] = 1
+        else:
+            user_watched_genre [genre] += 1
+    
+    # find the most frequently watched genre
+    most_watched = 0
+    most_genre = ""
+
+    for genre, freq in user_watched_genre.items():
+        if freq > most_watched:
+            most_watched = freq
+            most_genre = genre
+
+    # build the rec list: friends watched, and its genre is same as the users most freq genre
+    for movie in friend_unique_watched:
+        if movie['genre'] == most_genre:
+            rec.append(movie)
+
+    return rec
+
+def get_rec_from_favorites(user_data):
+    user_fav = user_data["favorites"]
+    friend_watched = []
+
+    # get the list of movies that friends have watched
+    for friend in user_data['friends']:
+        for movie in friend["watched"]:
+            if movie not in friend_watched:
+                friend_watched.append(movie)
+    
+    # use the WAVE_03 help function to get the list of movies that in user_favorite but friends haven't watched
+    rec = ele_in_a_not_b(user_fav, friend_watched)                         
+
+    return rec
