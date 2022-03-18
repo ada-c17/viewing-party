@@ -15,6 +15,22 @@ def create_movie(title, genre, rating):
     else:
         return new_movie
 
+def add_to_watched(user_data, movie):
+    # create a dict with "watched" as key and empty list as value
+    watched_movies = {
+        "watched": []
+    }
+    # checks to see if list is empty, if it is empty, it returns empty list. If not empty, continues with conditional and appends movie dictionary to value in watched_movies dictionary
+    if not user_data:
+        return user_data
+    else:
+        watched_movies["watched"].append(movie)
+    
+    return watched_movies
+
+
+
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
