@@ -26,7 +26,7 @@ def watch_movie(user_data, title):
     for movie in watchlist:
         if movie['title'] == title:
             watchlist.remove(movie)
-            watched.append(title)
+            add_to_watched(user_data, title)
     return user_data
         
     

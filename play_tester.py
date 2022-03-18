@@ -1,6 +1,3 @@
-# my bigest takeaway from this lesson is getting project from Git, 
-# installing venv and making my first commit
-
 # import source code
 from viewing_party.party import *
 
