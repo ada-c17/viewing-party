@@ -1,5 +1,8 @@
 # ------------- WAVE 1 --------------------
 
+from tests.test_constants import USER_DATA_5
+
+
 def create_movie(title, genre, rating):
     movies = {"title" : title,
                 "genre" : genre,
@@ -95,4 +98,15 @@ def get_available_recs(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+def get_new_rec_by_genre(user_data):
+    recommendations_genre = []
+    most_watched_genre_of_user = get_most_watched_genre(user_data)
+    possible_recs = get_available_recs(user_data) #-> [{},{}]
+    for movie in possible_recs:
+        if movie["genre"]== most_watched_genre_of_user and not movie["genre"] in recommendations_genre:
+            recommendations_genre.append(movie)
 
+    return recommendations_genre
+
+
+    
