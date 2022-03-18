@@ -1,6 +1,7 @@
 # ------------- WAVE 1 --------------------
 
 from imp import new_module
+from turtle import up
 
 
 def create_movie(title, genre, rating):
@@ -20,6 +21,15 @@ def add_to_watchlist(user_data, movie):
     user_data['watchlist'].append(movie)
     return user_data
 
+def watch_movie(user_data, movie_title):
+    watchlist = user_data['watchlist']
+    watched = user_data['watched']
+    for film in watchlist:
+        if film['title'] == movie_title:
+            watchlist.remove(film)
+            watched.append(film) 
+    return user_data
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
@@ -29,7 +39,7 @@ def add_to_watchlist(user_data, movie):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-        
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
@@ -37,4 +47,3 @@ def add_to_watchlist(user_data, movie):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
-
