@@ -143,3 +143,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+#ignore copy of test_constants in viewing party folder
+viewing_party/test_constants.py
