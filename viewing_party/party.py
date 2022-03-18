@@ -1,4 +1,8 @@
-from test_constants import *
+
+#----------WAVE01-------------
+MOVIE_TITLE_1 = "It Came from the Stack Trace"
+GENRE_1 = "Horror"
+RATING_1 = 3.5
 
 def create_movie(title, genre, rating):
     # If title, genre, or rating are "None", return None
@@ -44,7 +48,6 @@ janes_data = {
 movie = create_movie(MOVIE_TITLE_1, GENRE_1, RATING_1)
 updated_data = add_to_watched(janes_data, movie)
 updated_data = watch_movie(janes_data, MOVIE_TITLE_1)
-<<<<<<< HEAD
 # def test_moves_movie_from_watchlist_to_empty_watched():
 #     # Arrange
 #     janes_data = {
@@ -67,8 +70,6 @@ updated_data = watch_movie(janes_data, MOVIE_TITLE_1)
 # ****** Add assertions here to test that the correct movie was added to "watched" **********
 # *******************************************************************************************
 
-=======
->>>>>>> 942373a670b8ad9903ceede8c9be73a2e83895d9
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
