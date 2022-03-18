@@ -58,6 +58,10 @@ def add_to_watchlist(user_data, movie):
     
     return user_data
 
+
+def watch_movie():
+    pass
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
