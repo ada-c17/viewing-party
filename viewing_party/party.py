@@ -55,7 +55,6 @@ def get_watched_avg_rating(user_data):
         return sum(ratings) / float(len(ratings))
 
 def get_most_watched_genre(user_data):
-
     #list of movie dicts
     watched_list = user_data["watched"]
     
@@ -82,20 +81,19 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+
 # return list of movie dicts that only the user has watched
 def get_unique_watched(user_data):
-
     # add user's list of watched movies
     user_watched_list = user_data["watched"]
 
-    #names of friends
+    # each friend is an index holding a dictionary
     friends_list = user_data["friends"]
     friends_watched_list = []
-    # friend is dictionary of movie lists for each friend (watched and watchlist)
+    # friend is dictionary of movie lists for each friend (keys: watched, watchlist)
     for friend in friends_list:
         friends_watched_list += friend["watched"]
 
-    # sets: user_watched_list - friends_watched_list
     unique_list = []
     for movie in user_watched_list:
         if movie not in friends_watched_list:
@@ -126,35 +124,27 @@ def get_friends_unique_watched(user_data):
 
 def get_available_recs(user_data):
     rec_list = []
-
     subscription_list = user_data["subscriptions"]
     user_watched_list = user_data["watched"]
-    user_title_list = []
-    for movie in user_watched_list:
-        user_title_list.append(movie["title"])
 
     friends_list = user_data["friends"]
-    friends_title_list = []
     for friend in friends_list:
-        #friend is dictionary 
         friend_watched_list = friend["watched"]
         for movie in friend_watched_list:
-            if movie["title"] not in user_title_list and movie["title"] not in friend_watched_list:
-                if movie["host"] in subscription_list:
-                    rec_list.append(movie)
-                    #is this in the right spot? 
-                    friends_title_list.append(movie["title"])
+            if movie["host"] in subscription_list and movie not in user_watched_list:
+                rec_list.append(movie)
     return rec_list
+
 
 #user-data
     #key "subscriptions"
         #list of strings
 
-#friends (list)
-    #index is dictionary for each friend
-        #key - 'watched' is list
-            #each index is a movie's dictionary
-                #key "host", for subscribtion service
+    # key friends (value is a list)
+        #index is dictionary for each friend
+            #key - 'watched' is list
+                #each index is a movie's dictionary
+                    #key "host", for subscribtion service
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
