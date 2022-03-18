@@ -1,5 +1,3 @@
-from statistics import mean
-
 # ------------- WAVE 1 --------------------
 def create_movie(title, genre, rating):
     movie_dict = {}
@@ -53,6 +51,43 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+def get_unique_watched(user_data):
+    user_movies = []
+    friend_movies = []
+    unique_user_movies = []
+    # generate user movies list
+    for i in range(len(user_data["watched"])):
+        user_movies.append(user_data["watched"][i])
+    # generate friend watched movies list
+    for dict in user_data["friends"]:
+        for key, value in dict.items():
+            if key == "watched":
+                for i in value:
+                    friend_movies.append(i)
+    # find users unique movies
+    for i in user_movies:
+        if i not in friend_movies:
+            unique_user_movies.append(i)
+    return unique_user_movies
+
+def get_friends_unique_watched(user_data):
+    user_movies = []
+    friend_movies = []
+    unique_friend_movies = []
+    # generate user movies list
+    for i in range(len(user_data["watched"])):
+        user_movies.append(user_data["watched"][i])
+    # generate friend watched movies list
+    for dict in user_data["friends"]:
+        for key, value in dict.items():
+            if key == "watched":
+                for i in value:
+                    friend_movies.append(i)
+    # find users unique movies
+    for i in friend_movies:
+        if i not in user_movies and i not in unique_friend_movies:
+            unique_friend_movies.append(i)
+    return unique_friend_movies
 
         
 # -----------------------------------------
