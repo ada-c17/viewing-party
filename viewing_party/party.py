@@ -39,14 +39,15 @@ def watch_movie(user_data, title):
 
 
 def get_watched_avg_rating(user_data):
-    total_points = 0.0
+    total_ratings = 0.0
     total_movies = 0
     avg_rating = 0.0
+
     if user_data["watched"]:
         for movie in user_data["watched"]:
             total_movies += 1
-            total_points += movie["rating"]
-        avg_rating = total_points/total_movies
+            total_ratings += movie["rating"]
+        avg_rating = total_ratings/total_movies
     return avg_rating
 
 
@@ -65,8 +66,6 @@ def get_most_watched_genre(user_data):
                 most_watched_genre = genre
 
     return most_watched_genre
-
-# ******** note to self: maybe update to handle a tie in most watched genres ********
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
@@ -120,11 +119,11 @@ def get_available_recs(user_data):
 def get_new_rec_by_genre(user_data):
     recommended = []
 
-    genre = get_most_watched_genre(user_data)
+    fav_genre = get_most_watched_genre(user_data)
 
     for friend in user_data["friends"]:
         for movie in friend["watched"]:
-            if movie not in user_data["watched"] and movie["genre"] == genre:
+            if movie not in user_data["watched"] and movie["genre"] == fav_genre:
                 recommended.append(movie)
 
     return recommended
