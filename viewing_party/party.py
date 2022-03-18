@@ -30,10 +30,21 @@ def watch_movie(user_data, title):
             
 
 
-
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+def get_watched_avg_rating(user_data):
+    lst = []
+    sum = 0
+    for item in user_data["watched"]:
+        lst.append(item["rating"])
+    for number in lst:
+        sum += number
+    if lst:
+        return sum / len(lst)
+    else:
+        return 0.0
+
 
 
 # -----------------------------------------
