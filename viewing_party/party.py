@@ -35,9 +35,14 @@ def watch_movie(janes_data, movie_to_watch):
 
 def get_watched_avg_rating(janes_data):
     total_rating = 0
-    for movie in range(len(janes_data["watched"])):
-        total_rating += janes_data["watched"][movie]["rating"]
-        average = total_rating / len(janes_data["watched"])
+    average = 0
+    watched_list_length = len(janes_data["watched"])
+    if watched_list_length == 0:
+        return average
+    else:
+        for movie in range(watched_list_length):
+            total_rating += janes_data["watched"][movie]["rating"]
+            average = total_rating / watched_list_length
     return average
 
 
