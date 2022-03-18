@@ -78,7 +78,58 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-        
+# -----------------------------------------
+# ----------- HELPER FUNCTIONS ------------
+def get_watched_movies_list(user_data):
+    watched_movies = user_data["watched"]
+    return watched_movies
+
+def get_friends_watched_movies_list(user_data):
+    friends = user_data["friends"]
+    friends_watched_movies = []
+    # friend = user_data["friends"]["watched"][i]
+    for friend in friends:
+        friend_watched_movies = friend["watched"]
+        for friend_watched_movie in friend_watched_movies:
+            friends_watched_movies.append(friend_watched_movie)
+
+    return friends_watched_movies
+
+
+# ----------- HELPER FUNCTIONS ------------
+# -----------------------------------------
+
+def get_unique_watched(user_data):
+    # get list of watched movie dictionaries 
+    watched_movies = get_watched_movies_list(user_data)
+
+    # get friends' list of watched movie dictionaries
+    friends_watched_movies = get_friends_watched_movies_list(user_data)
+
+    unique_watched_list = []
+
+    for watched_movie in watched_movies:
+        if watched_movie not in friends_watched_movies:
+            unique_watched_list.append(watched_movie)
+    
+    return unique_watched_list
+
+
+def get_friends_unique_watched(user_data):
+    # get list of watched movie dictionaries 
+    watched_movies = get_watched_movies_list(user_data)
+
+    # get friends' list of watched movie dictionaries
+    friends_watched_movies = get_friends_watched_movies_list(user_data)
+
+    unique_friends_watched_list = []
+
+    for friends_watched_movie in friends_watched_movies:
+        if friends_watched_movie not in watched_movies and friends_watched_movie not in unique_friends_watched_list:
+            unique_friends_watched_list.append(friends_watched_movie)
+    
+    return unique_friends_watched_list
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
