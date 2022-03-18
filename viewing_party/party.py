@@ -1,4 +1,6 @@
+# -----------------------------------------
 # ------------- WAVE 1 --------------------
+# -----------------------------------------
 
 def create_movie(title, genre, rating):
     new_movie = {"title" : title, "genre" : genre, "rating" : rating}
@@ -29,6 +31,14 @@ def watch_movie(janes_data, movie_to_watch):
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+
+
+def get_watched_avg_rating(janes_data):
+    total_rating = 0
+    for movie in range(len(janes_data["watched"])):
+        total_rating += janes_data["watched"][movie]["rating"]
+        average = total_rating / len(janes_data["watched"])
+    return average
 
 
 # -----------------------------------------
