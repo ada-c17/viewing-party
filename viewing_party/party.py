@@ -70,10 +70,38 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 
 
-# -----------------------------------------
-# ------------- WAVE 4 --------------------
-# -----------------------------------------
+def get_unique_watched(user_data):
+    unique_watched = []
+    friends_watched = []
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            friends_watched.append(movie)
 
-# -----------------------------------------
-# ------------- WAVE 5 --------------------
-# -----------------------------------------
+    for movie in user_data["watched"]:
+        if movie not in friends_watched:
+            unique_watched.append(movie)
+
+    return unique_watched
+
+
+def get_friends_unique_watched(user_data):
+    friends_unique_watched = []
+    amanda_watched = []
+
+    for movie in user_data["watched"]:
+        amanda_watched.append(movie)
+
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie not in amanda_watched and movie not in friends_unique_watched:
+                friends_unique_watched.append(movie)
+
+    return friends_unique_watched
+
+    # -----------------------------------------
+    # ------------- WAVE 4 --------------------
+    # -----------------------------------------
+
+    # -----------------------------------------
+    # ------------- WAVE 5 --------------------
+    # -----------------------------------------
