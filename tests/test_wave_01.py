@@ -19,7 +19,7 @@ def test_create_successful_movie():
     assert new_movie["genre"] is GENRE_1
     assert new_movie["rating"] == pytest.approx(RATING_1)
 
-@pytest.mark.skip()
+#@pytest.mark.skip()
 def test_create_no_title_movie():
     # Arrange
     movie_title = None
@@ -39,7 +39,7 @@ def test_create_no_genre_movie():
     genre = None
     rating = 3.5
 
-    # Act
+    # Acts
     new_movie = create_movie(movie_title, genre, rating)
 
     # Assert
