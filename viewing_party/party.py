@@ -129,23 +129,14 @@ def get_watched_avg_rating(user_data):
         sum_ratings += movie["rating"]
         count_ratings += 1
 
-    avg_rating = sum_ratings / count_ratings
+    if user_data["watched"] == []:
+        avg_rating = 0
+    else:
+        avg_rating = sum_ratings / count_ratings
 
     return avg_rating
 
-get_watched_avg_rating(USER_DATA_2)
-
-# USER_DATA_2 = {
-#     "watched": [
-#         FANTASY_1, 
-#         FANTASY_2, 
-#         FANTASY_3, 
-#         ACTION_1, 
-#         INTRIGUE_1, 
-#         INTRIGUE_2
-#         ],    
-# }
-
+#get_watched_avg_rating(USER_DATA_2)
 
 
 # movie = create_movie(MOVIE_TITLE_1, GENRE_1, RATING_1)
