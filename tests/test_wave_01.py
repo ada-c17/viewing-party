@@ -116,9 +116,10 @@ def test_moves_movie_from_watchlist_to_empty_watched():
     updated_data = watch_movie(janes_data, MOVIE_TITLE_1)
 
     # Assert
-    assert len(updated_data["watchlist"]) == 0
-    assert len(updated_data["watched"]) == 1
-    #assert updated_data["watched"]
+    assert len(updated_data["watchlist"]) == 0 #length of watchlist is 0 now
+    assert len(updated_data["watched"]) == 1 # length of watched is now 1
+    assert updated_data["watched"][0] == MOVIE_TITLE_1 #we test to see if movie_title_1 is in watched [], and tests pass
+
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
@@ -141,7 +142,8 @@ def test_moves_movie_from_watchlist_to_watched():
     # Assert
     assert len(updated_data["watchlist"]) == 1
     assert len(updated_data["watched"]) == 2
-    
+    for i in range(len(updated_data["watched"])): #natascha helped me with this :)
+      assert updated_data["watched"][i]
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************

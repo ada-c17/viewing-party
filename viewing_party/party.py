@@ -26,6 +26,7 @@ def watch_movie(user_data, title):
     if title == user_data["watchlist"][i]["title"]: #suggestion to make variables
       user_data["watchlist"].pop(i) #leads to empty watchlist, pop only works for index
       user_data["watched"].append(title)
+      #print(user_data)
   return user_data
 
 # -----------------------------------------
