@@ -26,8 +26,8 @@ def add_to_watchlist(user_data, movie):
 #if found remove from watchlist and move dictionary for movie to watched
 #return user data
 def watch_movie(user_data, title):
-    watchlist = user_data['watchlist']
-    watched = user_data['watched']
+    watchlist = user_data["watchlist"]
+    watched = user_data["watched"]
     for movie in watchlist:
         if title == movie["title"]:
             watchlist.remove(movie)
@@ -39,6 +39,26 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+
+#create a get_watched_avg_rating() function with one parameter user_data
+#create a variable called "watched" to access dictioanry of movies watched
+#create an empty list to hold ratings
+#check if watched has any values if so loop through them else return 0.0
+#loop through each movie in watched and access "rating" for each movie
+#append each rating to list
+#calculate average of list outside loop
+#return rating
+def get_watched_avg_rating(user_data):
+    watched = user_data["watched"]
+    ratings_list = []
+    if len(watched) > 0:
+        for movie in watched:
+            ratings_list.append(movie["rating"])
+        return sum(ratings_list)/len(ratings_list)
+    return 0.0
+
+
+
 
 
 # -----------------------------------------
