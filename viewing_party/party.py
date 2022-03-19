@@ -26,14 +26,26 @@ def watch_movie(user_data, movie):
     for i in user_data['watchlist']:
         if i['title'] == movie:
             user_data['watched'].append(i)
-            user_data['watchlist'].remove(i)
-        
+            user_data['watchlist'].remove(i)    
     return user_data
 
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+def get_watched_avg_rating(user_data):
+    rating_total = 0
+    counter = 0
+    for i in user_data['watched']:
+        rating_total += i['rating']
+        counter += 1
+        
+    if rating_total >0:
+        avg_rating = rating_total/counter
+    else:
+        avg_rating = 0
+    return avg_rating
+
 
 
 # -----------------------------------------
