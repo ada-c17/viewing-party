@@ -1,8 +1,8 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
-    pass
-
+    movie_dict = {'title': title, 'genre': genre, 'rating': rating}
+    return movie_dict
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
