@@ -19,7 +19,7 @@ def add_to_watchlist(user_data, movie):
     return user_data
 
 def watch_movie(user_data, title):
-    movie_watched = ""
+    # movie_watched = ""
     for i in range(len(user_data["watchlist"])):
         if user_data["watchlist"][i]["title"] == title:
             movie_watched = user_data["watchlist"][i]
@@ -43,7 +43,16 @@ def get_watched_avg_rating(user_data):
         return 0
     else:
         return sum_rating/count
-    
+
+def get_most_watched_genre(user_data):
+    genre_list = []
+    for i in range(len(user_data["watched"])):
+        genre_list.append(user_data["watched"][i]["genre"])
+    if len(genre_list) == 0:
+        return None
+    else:
+        return max(set(genre_list), key=genre_list.count)
+        # might be better to use Count from importing collections.. look at StackOverflow
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
