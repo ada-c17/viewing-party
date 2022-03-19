@@ -35,6 +35,15 @@ def add_to_watchlist(user_data, movie):
     user_data["watchlist"].append(movie)
     return user_data
 
+def watch_movie(user_data, title):
+    '''
+    this function will move a movie from watchlist to watched
+    '''
+    for movie in user_data["watchlist"]:
+        if title in movie.values():
+            user_data["watchlist"].pop()
+            user_data["watched"].append(movie)
+    return user_data
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
