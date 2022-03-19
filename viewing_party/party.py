@@ -2,28 +2,30 @@
 
 from re import U
 
-
+# Creates a dictionary for a movie if the parameters are all truthy
 def create_movie(title, genre, rating):
-    if None in [title, genre, rating]:
+    if all([title, genre, rating]):
+        return {
+            "title": title,
+            "genre": genre,
+            "rating": rating,
+        }
+    else:
         return None
-    
-    movie_dict = {
-        "title": title,
-        "genre": genre,
-        "rating": rating,
-    }
-    return movie_dict
 
+# Add movie to the user's watched list of movies
 def add_to_watched(user_data, movie):
     watched = user_data["watched"]
     watched.append(movie)
     return user_data
 
+# Add movie to the user's watchlist list of movies
 def add_to_watchlist(user_data, movie):
     watchlist = user_data["watchlist"]
     watchlist.append(movie)
     return user_data
 
+# Move a movie from the user's watchlist to watched list 
 def watch_movie(user_data, title):
     index = 0
     transfer_movie = False
@@ -42,6 +44,8 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+
+# Calculates the average rating (float) for all watched movies
 def get_watched_avg_rating(user_data):
     ratings = []
     movie_list = user_data["watched"]
@@ -54,38 +58,33 @@ def get_watched_avg_rating(user_data):
     else:
         return sum(ratings) / float(len(ratings))
 
+# Find the most watched genre in watched list
 def get_most_watched_genre(user_data):
-    #list of movie dicts
+    genre_list = []
     watched_list = user_data["watched"]
     
-    genre_list = []
     for movie in watched_list:
         genre_list.append(movie["genre"])
     
-    max_count = max(genre_list, default=None, key=genre_list.count)
-    return max_count
+    max_genre = max(genre_list, default=None, key=genre_list.count)
+    return max_genre
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-# return list of movie dicts that only the user has watched
+# Return list of movie dicts that only the user has watched
 def get_unique_watched(user_data):
-    # add user's list of watched movies
     user_watched_list = user_data["watched"]
 
-    # each index is a "friend" holding a dictionary
+    # Each index is a "friend" holding a dictionary
     friends_list = user_data["friends"]
+    # List will hold movie dicts on one level
     friends_watched_list = []
-    # friend is dictionary of movie lists for each friend (keys: watched, watchlist)
     for friend in friends_list:
-        # keep it at one level
         friends_watched_list += friend["watched"]
-
-    unique_list = []
-    for movie in user_watched_list:
-        if movie not in friends_watched_list:
-            unique_list.append(movie)
+    # m is movie
+    unique_list = [m for m in user_watched_list if m not in friends_watched_list]
     return unique_list
 
 def get_friends_unique_watched(user_data):
