@@ -30,18 +30,41 @@ def add_to_watchlist(user_data, movie):
     user_data["watchlist"] = updated_list    
     return user_data
 
+def watch_movie(user_data, title):
+    move_film = False
+    for film in range(len(user_data["watchlist"])):
+        if user_data["watchlist"][film]["title"] == title:
+            move_film = user_data["watchlist"][film]
+            del user_data["watchlist"][film]
+    if not move_film:
+        return user_data
+    user_data["watched"].append(move_film)
+    return user_data
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
-#def get_watched_avg_rating(user_data):
-#    if len(user_data["watched"]) == 0:
-#        average = 0.0
-#        return average
-    
+def get_watched_avg_rating(user_data):
+    if len(user_data["watched"]) == 0:
+        average = 0.0
+        return average
+    rating_list = []
+    for dict in range (len(user_data["watched"])):
+        rating_list.append(user_data["watched"][dict]["rating"])
+    average = sum(rating_list)/len(rating_list)
+    return average
 
-
-#    return average
-
+def get_most_watched_genre(user_data):
+    if len(user_data["watched"]) == 0:
+        return None
+    genre_dict = {}
+    for dict in range (len(user_data["watched"])):
+        genre = user_data["watched"][dict]["genre"]
+        if genre not in genre_dict:
+            genre_dict[genre] = 1
+        else:
+            genre_dict[genre] += 1
+    return max(genre_dict, key=genre_dict.get)
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
