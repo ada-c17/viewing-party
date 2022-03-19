@@ -58,9 +58,9 @@ def get_watched_avg_rating(user_data):
             return total / count
         else:
             return 0.0
-    #except ZeroDivisionError:
+        #option: try, except ZeroDivisionError:
         #print("List is empty, the rating can't divide by 0!")
-#questions about two for loop, is it O(n^2)
+        
 def get_most_watched_genre(user_data):
     len_watched = 0
     genre_frequency = {}
