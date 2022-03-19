@@ -126,7 +126,7 @@ def get_friends_unique_watched(user_data):
     
     #avoiding duplicate movies by not adding movie that 
     #is already in friends_unique_movies list
-    
+
     for i in range(len(user_data['friends'])):
         for movie in user_data['friends'][i]['watched']:
             if movie['title'] in unique_watched and movie not in friends_unique_movies:
@@ -137,6 +137,15 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+def get_available_recs(user_data):
+    movie_recs = []
+    friends_unique_watched = get_friends_unique_watched(user_data)
+    
+    for movie in friends_unique_watched:
+        if movie['host'] in user_data['subscriptions']:
+            movie_recs.append(movie)
+
+    return movie_recs
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
