@@ -14,8 +14,20 @@ def add_to_watched(user_data, movie):
     user_data["watched"].append(movie)
     return user_data
 
-# def add_to_watchlist(user_data, movie):
-    
+def add_to_watchlist(user_data, movie):
+    user_data["watchlist"].append(movie)
+    return user_data
+
+def watch_movie(user_data, title):
+    movie_watched = ""
+    for i in range(len(user_data["watchlist"])):
+        if user_data["watchlist"][i]["title"] == title:
+            movie_watched = user_data["watchlist"][i]
+            del user_data["watchlist"][i]
+            user_data["watched"].append(movie_watched)  
+    return user_data
+
+    # .haskey() does NOT work in python3 --> use key in list of dictionary
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
