@@ -83,10 +83,11 @@ def get_unique_watched(user_data):
     friends_watched_list = []
     for friend in friends_list:
         friends_watched_list += friend["watched"]
-    # m is movie
+    # m is movie dict
     unique_list = [m for m in user_watched_list if m not in friends_watched_list]
     return unique_list
 
+# Return list of movie dicts that only friends have watched
 def get_friends_unique_watched(user_data):
     user_watched_list = user_data["watched"]
     friends_list = user_data["friends"]
@@ -103,20 +104,18 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 
 def get_available_recs(user_data):
-    rec_list = []
+    
     subscription_list = user_data["subscriptions"]
     friends_watched_list = get_friends_unique_watched(user_data)
-
-    for movie in friends_watched_list:
-        if movie["host"] in subscription_list:
-            rec_list.append(movie)
+    # m is movie dict
+    rec_list = [m for m in friends_watched_list if m["host"] in subscription_list]
     return rec_list
 
 #user-data
     #key "subscriptions"
         #list of strings
 
-    # key friends (value is a list)
+    # key "friends" (value is a list)
         #index is dictionary for each friend
             #key - 'watched' is list
                 #each index is a movie's dictionary
@@ -132,11 +131,8 @@ def get_new_rec_by_genre(user_data):
         user_data["subscriptions"] = []
 
     all_recs_list = get_available_recs(user_data) 
-    genre_recs_list = []
-
-    for movie in all_recs_list:
-        if movie["genre"] == fav_genre:
-            genre_recs_list.append(movie)
+    # m is movie dict
+    genre_recs_list = [m for m in all_recs_list if m["genre"] == fav_genre]
 
     return genre_recs_list
         
