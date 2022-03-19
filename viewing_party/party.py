@@ -103,8 +103,8 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
+# Return list of movie recommendations based on user's subscriptions
 def get_available_recs(user_data):
-    
     subscription_list = user_data["subscriptions"]
     friends_watched_list = get_friends_unique_watched(user_data)
     # m is movie dict
@@ -124,25 +124,20 @@ def get_available_recs(user_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+# Return list of movie recommendations based on favorite genre
 def get_new_rec_by_genre(user_data):
     fav_genre = get_most_watched_genre(user_data)
-
-    if not user_data.get("subscriptions"):
-        user_data["subscriptions"] = []
-
-    all_recs_list = get_available_recs(user_data) 
+    friends_watched_list = get_friends_unique_watched(user_data)
     # m is movie dict
-    genre_recs_list = [m for m in all_recs_list if m["genre"] == fav_genre]
+    rec_list = [m for m in friends_watched_list if m["genre"] == fav_genre]
+    return rec_list
 
-    return genre_recs_list
-        
+# Return list of movie dicts that is a user favorite and friends haven't watched
 def get_rec_from_favorites(user_data):
     # user_data has key "favorites", which is a list of dictionaries
-    movie_recs = []
     user_favs = user_data["favorites"]
-
-    #list of dictionaries for each friend
     friends_watched_list = user_data["friends"]
+    movie_recs = []
     
     for user_movie in user_favs:
         watched_movie = False
