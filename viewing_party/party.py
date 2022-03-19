@@ -58,6 +58,25 @@ def get_watched_avg_rating(user_data):
 
     return average
 
+def get_most_watched_genre(user_data):
+    # make new list of just genres
+    genre_list = []
+
+    for i in range(len(user_data["watched"])):
+        genre_list.append(user_data["watched"][i]["genre"])
+    
+    most_watched_count = 0
+    most_watched_genre = ''
+    # iterate through genre list, updating most_watched_genre as counts increase
+    for genre in genre_list:
+        genre_count = genre_list.count(genre)
+        if genre_count > most_watched_count:
+            most_watched_count = genre_count
+            most_watched_genre = genre
+
+    return most_watched_genre
+        
+
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
