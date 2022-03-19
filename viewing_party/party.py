@@ -48,6 +48,44 @@ def get_watched_avg_rating(user_data):
     else:
         return 0
 
+
+def get_most_watched_genre(user_data):
+    watched_movies = user_data["watched"]
+    watched_genres = [movie["genre"] for movie in watched_movies]
+    most_watched_genre_dict = {}
+    most_watched_genre = ""
+    most_watched_counter = 0
+    for genre in watched_genres:
+        if genre in most_watched_genre_dict:
+            most_watched_genre_dict[genre] += 1
+        else:
+            most_watched_genre_dict[genre] = 1
+    for genre in most_watched_genre_dict:
+        if most_watched_genre_dict[genre] > most_watched_counter:
+            most_watched_genre = genre
+            most_watched_counter = most_watched_genre_dict[genre]
+    if most_watched_counter == 0:
+        return None
+    return most_watched_genre
+
+
+# janes_data = {
+#     "watched": [{
+#         "title": "Grease",
+#         "genre": "Fantasy",
+#         "rating": 4.8},
+#         {
+#             "title": "Up",
+#             "genre": "Action",
+#             "rating": 4.0},
+#         {
+#         "title": "Sammy",
+#         "genre": "Fantasy",
+#         "rating": 4.0}]
+# }
+# print(get_most_watched_genre(janes_data))
+
+
 # -----------------------------------------
 # ------------- WAVE 3 -------∫-------------
 # -----------------------------------------
