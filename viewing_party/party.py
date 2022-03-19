@@ -57,7 +57,7 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 
 def get_watched_avg_rating(user_data):
-    movie_ratings= user_data
+    movie_ratings = user_data
     ratings_list = []
     empty_list_rating = 0.0
 
@@ -72,6 +72,23 @@ def get_watched_avg_rating(user_data):
         return empty_list_rating
     
     return movie_ratings_average # returns if finished with average calculation 
+
+def get_most_watched_genre(user_data):
+    movie_genre = user_data
+    genre_list = []
+
+    for item in movie_genre["watched"]:
+        genre_list.append(item["genre"])
+        print("*************************************") # testing
+        print(len(genre_list)) # testing
+
+    if len(movie_genre["watched"]) != 0:
+        genre_list.sort() # sorts list in place (modifies original list)
+        most_common_genre = max(genre_list, key = genre_list.count) # uses the max function to find the most common genre in genre_list with list.count function to count the occurences
+    else:
+        return None 
+    
+    return most_common_genre
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
