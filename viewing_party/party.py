@@ -92,6 +92,62 @@ USER_DATA_3["friends"] =  [
         }
     ]  
 
+#-----WAVE 4--------
+
+HORROR_1b = copy.deepcopy(HORROR_1)
+FANTASY_1b = copy.deepcopy(FANTASY_1)
+FANTASY_2b = copy.deepcopy(FANTASY_2)
+FANTASY_3b = copy.deepcopy(FANTASY_3)
+FANTASY_4b = copy.deepcopy(FANTASY_4)
+ACTION_1b = copy.deepcopy(ACTION_1)
+ACTION_2b = copy.deepcopy(ACTION_2)
+ACTION_3b = copy.deepcopy(ACTION_3)
+INTRIGUE_1b = copy.deepcopy(INTRIGUE_1)
+INTRIGUE_2b = copy.deepcopy(INTRIGUE_2)
+INTRIGUE_3b = copy.deepcopy(INTRIGUE_3)
+
+HORROR_1b["host"] = "netflix"
+FANTASY_1b["host"] = "netflix"
+FANTASY_2b["host"] = "netflix"
+FANTASY_3b["host"] = "amazon"
+FANTASY_4b["host"] = "hulu"
+ACTION_1b["host"] = "amazon"
+ACTION_2b["host"] = "amazon"
+ACTION_3b["host"] = "hulu"
+INTRIGUE_1b["host"] = "hulu"
+INTRIGUE_2b["host"] = "disney+"
+INTRIGUE_3b["host"] = "disney+"
+
+USER_DATA_4 = {
+    "watched": [
+        FANTASY_1b, 
+        FANTASY_2b, 
+        FANTASY_3b, 
+        ACTION_1b, 
+        INTRIGUE_1b, 
+        INTRIGUE_2b
+        ],  
+    "friends":  [
+        {
+            "watched": [
+                FANTASY_1b,
+                FANTASY_3b,
+                FANTASY_4b,
+                HORROR_1b,
+            ]
+        },
+        {
+            "watched": [
+                FANTASY_1b,
+                ACTION_1b,
+                INTRIGUE_1b,
+                INTRIGUE_3b,
+            ]
+        }  
+    ]
+}
+
+USER_DATA_4["subscriptions"] = ["netflix", "hulu"]  
 
 
 def create_movie(title, genre, rating):
@@ -209,6 +265,15 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+
+def get_available_recs(user_data):
+    friend_watched = get_friends_unique_watched(user_data)
+    recommendations = []
+    for movie in friend_watched:
+        if movie["host"] in user_data["subscriptions"]:
+            recommendations.append(movie)
+    
+    return recommendations
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
