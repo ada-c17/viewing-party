@@ -1,8 +1,10 @@
 """
 Project1: viewing party
 3/19/2022
-Goal: Being able to read tests to understand what is expected of our program is 
-a skill that needs to be developed.
+Goal: 1. Use Test-Driven-Development approach to implement movie recommendation program. 
+      2. Practice data structures like (nested)dictionary, list, set, and control flow and manipulating given data
+      3. Reuse function code and write helper function
+      4. Debug, pytest, refactor code
  """
  
 # ------------- WAVE 1 --------------------
