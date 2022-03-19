@@ -25,6 +25,20 @@ def add_to_watchlist(user_data, movie):
 
     return user_data
 
+def watch_movie(user_data, movie):
+    movie_index = 0
+    # find index of watched movie in watchlist list
+    for i in range(len(user_data["watchlist"])):
+        if user_data["watchlist"][i]["title"] == movie:
+            movie_index = i
+    
+    # remove element at that index from watchlist list and add to variable
+    watched_movie = user_data["watchlist"].pop(movie_index)
+
+    # add variable to watched list
+    user_data["watched"].append(watched_movie)
+
+    return user_data
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
