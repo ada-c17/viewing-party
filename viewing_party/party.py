@@ -26,12 +26,36 @@ def watch_movie(user_data, title):
     if title == user_data["watchlist"][i]["title"]: #suggestion to make variables
       user_data["watchlist"].pop(i) #leads to empty watchlist, pop only works for index
       user_data["watched"].append(title)
-      #print(user_data)
+    #print(user_data)
   return user_data
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+def get_watched_avg_rating(user_data):
+  #print(user_data)
+  #rating_in_list = [] #empty list
+  average_rating = 0
+  sum_rating = 0
+  count = 0
+  for i in range(len(user_data["watched"])):
+    rating = user_data["watched"][i]['rating']
+    #rating_in_list.append(rating)
+    sum_rating += rating
+    count += 1 #adding counter everytime goes through watched dictionary
+  if count != 0:
+    average_rating = sum_rating / count
+    return average_rating
+  else:
+    return average_rating #this works because avg_rating italized to 0????
+
+def get_most_watched_genre(user_data):
+  print(user_data)
+  for i in range(len(user_data["watched"])):
+    genre = user_data["watched"][i]['genre']
+    print(genre)
+  return user_data
+
 
 
 # -----------------------------------------
