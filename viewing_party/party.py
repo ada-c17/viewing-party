@@ -2,6 +2,9 @@
 
 # ------------- WAVE 1 --------------------
 
+from pyparsing import empty
+
+
 def create_movie(title, genre, rating):
     # creating a dictionary that stores the variables passed into the function as the values
     new_movie_added = {
@@ -16,8 +19,9 @@ def create_movie(title, genre, rating):
         return new_movie_added
 
 def add_to_watched(user_data, movie):
+    # creating variable that stores user_data
     watched_movies = user_data
-    # checks to see if list is empty, if it is empty, it returns empty list. If not empty, continues with conditional and appends movie dictionary to value in watched_movies dictionary
+    # checks to see if list is empty, if it is empty, it returns empty list. If not empty, continues with conditional and appends movie dictionary to value in watched_movies 
     if not watched_movies:
         return watched_movies
     else:
@@ -37,12 +41,13 @@ def add_to_watchlist(user_data, movie):
     return movies_to_watch
 
 def watch_movie(user_data, title):
+    # stores user_data in all_movies variable
     all_movies = user_data
     
-    for i in range(len(user_data["watchlist"])):
-        if title in all_movies["watchlist"][i]["title"]:
-            all_movies["watchlist"].remove(all_movies["watchlist"][i])
-            all_movies["watched"].append(title)
+    for i in range(len(all_movies["watchlist"])): # loops through all_movies["watchlist"] 
+        if title in all_movies["watchlist"][i]["title"]: # conditional that checks if the title is in the all_movies["watchlist"] at index i 
+            all_movies["watchlist"].remove(all_movies["watchlist"][i]) # removes the title from the all_movies["watchlist"]  at index i 
+            all_movies["watched"].append(title) # adds the title to the all_movies["watched"] 
 
     return all_movies
 
@@ -51,6 +56,22 @@ def watch_movie(user_data, title):
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 
+def get_watched_avg_rating(user_data):
+    movie_ratings= user_data
+    ratings_list = []
+    empty_list_rating = 0.0
+
+    for item in movie_ratings["watched"]: # loops through all items in "watched"
+        ratings_list.append(item["rating"]) # adds the ratings from "watched" to ratings_list
+        print("*************************************") # testing
+        print(len(ratings_list)) # testing
+    
+    if len(movie_ratings["watched"]) != 0:
+        movie_ratings_average = sum(ratings_list) / len(ratings_list)
+    else:
+        return empty_list_rating
+    
+    return movie_ratings_average # returns if finished with average calculation 
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
