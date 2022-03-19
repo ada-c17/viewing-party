@@ -1,8 +1,10 @@
 """
+Project1: viewing party
+3/19/2022
 Goal: Being able to read tests to understand what is expected of our program is 
 a skill that needs to be developed.
-"""
-
+ """
+ 
 # ------------- WAVE 1 --------------------
 #1
 def create_movie(title, genre, rating):
@@ -111,7 +113,8 @@ def get_friends_unique_watched(user_data):
         if friends[dict] not in list_of_user_watched:
             unique_movies_from_friends.append(friends[dict])
     return unique_movies_from_friends            
-        
+
+#helper function
 def get_unique_helper(user_data):
     user_movies_dict = {}
     friends_movies_dict = {}
@@ -123,37 +126,87 @@ def get_unique_helper(user_data):
                 user_movies_dict[i] = value[i]
         elif value == user_data["friends"]:
             for watched_key in value:#["watched":[{},{}], "watched":[{},{}]]
-                print(watched_key)
+                #print(watched_key)
                 for movie_values_list in watched_key["watched"]:
                         if movie_values_list not in friends_list:
                             friends_list.append(movie_values_list)
             
     return user_movies_dict, friends_list
-user_data = { 
-        "watched": [
-            {"title": "The Lord of the Functions: The Fellowship of the Function","genre": "Fantasy","rating": 4.8},
-            { "title": "The Lord of the Functions: The Two Parameters","genre": "Fantasy","rating": 4.0},
-            {"title": "The Lord of the Functions: The Return of the Value","genre": "Fantasy","rating": 4.0},
-            { "title": "The JavaScript and the React","genre": "Action","rating": 2.2},
-            { "title": "Recursion","genre": "Intrigue","rating": 2.0},
-            { "title": "Instructor Student TA Manager","genre": "Intrigue","rating": 4.5}],
-        "friends": [{
-        "watched": [ 
-            {"title": "The Lord of the Functions: The Fellowship of the Function","genre": "Fantasy","rating": 4.8},
-            {"title": "The Lord of the Functions: The Return of the Value","genre": "Fantasy","rating": 4.0},
-            {"title": "The Programmer: An Unexpected Stack Trace","genre": "Fantasy","rating": 4.0},
-            {"title": "It Came from the Stack Trace","genre": "Horror", "rating": 3.5}
-        ]},
-        {"watched": 
-          [ 
-           {"title": "The Lord of the Functions: The Fellowship of the Function","genre": "Fantasy","rating": 4.8}, 
-           {"title": "The JavaScript and the React","genre": "Action","rating": 2.2},
-           {"title": "Recursion","genre": "Intrigue","rating": 2.0},
-           {"title": "Zero Dark Python","genre": "Intrigue","rating": 3.0}
-           ]
-        }
-        ]}
-        
+
+
+# -----------------------------------------
+# ------------- WAVE 4 --------------------
+# -----------------------------------------
+"""
+structure: {"watched":[{}], "friends":["watched":[{},{}], "watched":[{"host":"" ...},{}] ..., "subscription":["","",..]]}
+return a list of recommended movies:
+1. The user has not watched it
+2. At least one of the user's friends has watched
+3. The "host" of the movie is a service that is in the user's "subscriptions"
+INTRIGUE_3b["host"] = "disney+"
+USER_DATA_4["subscriptions"] = ["netflix", "hulu"] 
+"""
+def get_available_recs(user_data):
+    recommended_list = []
+    friends_unique = get_friends_unique_watched(user_data)
+    for dict in friends_unique:
+        for list_of_host in user_data["subscriptions"]:
+            if dict["host"] in list_of_host:
+                recommended_list.append(dict)
+    return recommended_list            
+          
+    
+# -----------------------------------------
+# ------------- WAVE 5 --------------------
+# -----------------------------------------
+""" 
+Consider the user's most frequently watched genre. Then, determine a list of recommended movies. 
+return a list of recommended movies by genre:
+1. The user has not watched it
+2. At least one of the user's friends has watched
+3. The "genre" of the movie is the same as the user's most frequent genre
+"""
+def get_new_rec_by_genre(user_data):
+    recommended_genre_list = []
+    genre_dict = {}
+    genre_dict = get_most_watched_genre(user_data)
+    #print(genre_dict)
+    
+    list_from_friends = get_friends_unique_watched(user_data)
+    #print(list_from_friends)
+    if len(list_from_friends) == 0:
+        return []
+    else:
+        for dict in list_from_friends:
+            if genre_dict is not None:
+                if genre_dict in dict["genre"]:
+            #print(genre_dict)
+                    recommended_genre_list.append(dict)
+            else:
+                return []
+    return recommended_genre_list
+
+"""
+structure: {"watched":[{}], "friends":["watched":[{},{}], "watched":[{"host":"" ...},{}] ..., "subscription":["","",..]], "favorates":[{},{}]}
+return a list of recommendate movies:
+1. The movie is in the user's "favorites"
+2. None of the user's friends have watched it
+"""
+def get_rec_from_favorites(user_data):
+    recommended_favorites = []
+    unique_list_from_user = []
+    unique_list_from_user = get_unique_watched(user_data)
+    for list in user_data["favorites"]:
+        if list is not None:
+            for movie in unique_list_from_user:
+                if movie  == list:
+                    recommended_favorites.append(list)
+    return recommended_favorites
+
+            
+#Below comment is for my own referrence and record of wave03 functions
+#misundersting of return value caused wrong approach and code 
+#set(dictionary) causes KeyError, set is immutable
 #get_unique_watched(user_data)          
 # def get_unique_watched(user_data):
 #     user_movies = set()
@@ -190,10 +243,6 @@ user_data = {
 #                 else:
 #                     return list_of_dictionary_user
 #     #Return a list of dictionaries, that represents a list of movies
-#     print(list_of_dictionary_user)
-#     print("----------------------")
-#     print(list_of_dictionary_friends)
-#     print()
 #     #print(list_of_dictionary_user  - list_of_dictionary_friends)
 #     return (set(list_of_dictionary_user) - set(list_of_dictionary_friends)) ####didn't print the whole {} but title TypeError: unhashable type: 'dict'
 
@@ -232,90 +281,8 @@ user_data = {
 #                 else:
 #                     return list(user_movies)
 #     #Return a list of dictionaries, that represents a list of movies
-#     print("user's watched")
-#     print(list_of_dictionary_user)
-#     print("----------------------")
-#     print("friend's watched")
-#     print(list_of_dictionary_friends)
-#     print()
-#     print(friend_movies-user_movies)
-    
 #     #no unique movies from friends:
 #     if friend_movies.issubset(user_movies):
 #         return []
 #     else:
 #         return friend_movies-user_movies
-
-
-# -----------------------------------------
-# ------------- WAVE 4 --------------------
-# -----------------------------------------
-"""
-structure: {"watched":[{}], "friends":["watched":[{},{}], "watched":[{"host":"" ...},{}] ..., "subscription":["","",..]]}
-return a list of recommended movies:
-1. The user has not watched it
-2. At least one of the user's friends has watched
-3. The "host" of the movie is a service that is in the user's "subscriptions"
-INTRIGUE_3b["host"] = "disney+"
-USER_DATA_4["subscriptions"] = ["netflix", "hulu"] 
-"""
-def get_available_recs(user_data):
-    recommended_list = []
-    friends_unique = get_friends_unique_watched(user_data)
-    for dict in friends_unique:
-        for list_of_host in user_data["subscriptions"]:
-            if dict["host"] in list_of_host:
-                recommended_list.append(dict)
-    return recommended_list            
-        
-    
-    
-    
-# -----------------------------------------
-# ------------- WAVE 5 --------------------
-# -----------------------------------------
-""" 
-Consider the user's most frequently watched genre. Then, determine a list of recommended movies. 
-return a list of recommended movies by genre:
-1. The user has not watched it
-2. At least one of the user's friends has watched
-3. The "genre" of the movie is the same as the user's most frequent genre
-"""
-def get_new_rec_by_genre(user_data):
-    recommended_genre_list = []
-    genre_dict = {}
-    genre_dict = get_most_watched_genre(user_data)
-    print(genre_dict)
-    
-    list_from_friends = get_friends_unique_watched(user_data)
-    print(list_from_friends)
-    if len(list_from_friends) == 0:
-        return []
-    else:
-        for dict in list_from_friends:
-            if genre_dict is not None:
-                if genre_dict in dict["genre"]:
-            #print(genre_dict)
-                    recommended_genre_list.append(dict)
-            else:
-                return []
-    return recommended_genre_list
-
-"""
-structure: {"watched":[{}], "friends":["watched":[{},{}], "watched":[{"host":"" ...},{}] ..., "subscription":["","",..]], "favorates":[{},{}]}
-return a list of recommendate movies:
-1. The movie is in the user's "favorites"
-2. None of the user's friends have watched it
-"""
-def get_rec_from_favorites(user_data):
-    recommended_favorites = []
-    unique_list_from_user = []
-    unique_list_from_user = get_unique_watched(user_data)
-    for list in user_data["favorites"]:
-        if list is not None:
-            for movie in unique_list_from_user:
-                if movie  == list:
-                    recommended_favorites.append(list)
-    return recommended_favorites
-
-            
