@@ -24,28 +24,8 @@ pp = pprint.PrettyPrinter(indent=4)
 # print("\n-----Wave 03 user_data-----")
 # pp.pprint(clean_wave_3_data())
 
-prac = [{
-    "test" : "fire",
-    "real" : "snow"
-},
-{
-    "test" : "rain",
-    "real" : "fog"
-},
-{
-    "test" : "fire",
-    "real" : "snow"
-}]
 
-index = 0
-# for i in prac:
-#     print(prac[index])
-
-empty = []
-for i in prac:
-    if i["test"] in prac["test"]:
-        empty.append(i)
-        index +=  1
+empty = list(set(["fire", "fire", "rain"]))
 print(empty)
 
 # Wave 04 user data
