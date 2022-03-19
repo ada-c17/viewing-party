@@ -40,7 +40,7 @@ def watch_movie(user_data, title):
     all_movies = user_data
     
     for i in range(len(user_data["watchlist"])):
-        if title == all_movies["watchlist"][i]["title"]:
+        if title in all_movies["watchlist"][i]["title"]:
             all_movies["watchlist"].remove(all_movies["watchlist"][i])
             all_movies["watched"].append(title)
 
