@@ -57,6 +57,29 @@ def get_watched_avg_rating(user_data):
         return sum(ratings_list)/len(ratings_list)
     return 0.0
 
+#create a get_most_watched_genre function with parameter user_data
+#create variable called "watched" to access dict of movies watched
+#create an empty dictionary with genre as key and total as value
+#check if watched has any values, if empty return None
+#if there are values, loop through each movie and access "genre"
+#append genre as key to dictionary if not there and set value to 1
+#if genre already in dictionary add one to the value for that genre
+# return genre with highest count
+# What should it return if there are no genre's with more than oen movie?
+def get_most_watched_genre(user_data):
+    watched = user_data["watched"]
+    genre_dict = {}
+    if len(watched) > 0:
+        for movie in watched:
+            genre = movie["genre"]
+            if genre in genre_dict:
+                genre_dict[genre] += 1
+            else:
+                genre_dict[genre] = 1
+        return max(genre_dict, key = genre_dict.get)
+    return None
+
+
 
 
 
