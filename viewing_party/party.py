@@ -67,6 +67,66 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+def get_unique_watched(user_data):
+    # if not user_data["watched"] or not user_data["friends"]:
+    #     return None
+    watched = user_data["watched"]
+    print(watched)
+    friends_watched = user_data["friends"]
+    print(friends_watched)
+    all_movies = []
+    final_list = []
+    # print (len(list(friends_watched)))
+    
+    for friends in range(len(list(friends_watched))):
+        for movie in range(len(list(friends_watched[friends]["watched"]))):
+            all_movies.append(friends_watched[friends]["watched"][movie]["title"])
+        
+    print (all_movies)
+    not_unique = []
+    for movie in range(len(watched)):
+        if watched[movie]["title"] not in all_movies:
+
+            final_list.append(watched[movie])
+            # all_movies.pop(watched[movie])
+        else:
+            not_unique.append(watched[movie])
+
+    print (final_list)
+    return final_list
+
+def get_friends_unique_watched(user_data):
+
+    watched = user_data["watched"]
+    # print(watched)
+    friends_watched = user_data["friends"]
+    print(friends_watched)
+    all_movies = []
+    
+    
+    # final_list = []
+    # print (len(list(friends_watched)))
+    
+    for movies in range(len(list(watched))):
+        all_movies.append(watched[movies]["title"])
+    print (all_movies) 
+    friends_movies = []
+    for movie in range(len(friends_watched)):
+    
+        friends_movies.append(friends_watched[movie]["watched"])
+    print(f"all_movies_friends are equal to {friends_movies}")
+    result = []
+    for movies in range(len(friends_movies)):
+        for name in range(len(friends_movies[movie])):
+        # print(friends_movies[movies][name]["title"])
+            if friends_movies[movies][name]["title"] not in all_movies:
+                result.append(friends_movies[movies][name])
+        
+    print(result)  
+
+    return result
+
+        
 
         
 # -----------------------------------------
