@@ -27,7 +27,7 @@ def add_to_watchlist(user_data, movie):
 
 def watch_movie(user_data, movie):
     movie_index = -1
-    
+
     # find index of watched movie in watchlist list
     for i in range(len(user_data["watchlist"])):
         if user_data["watchlist"][i]["title"] == movie:
@@ -46,7 +46,16 @@ def watch_movie(user_data, movie):
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+def get_watched_avg_rating(user_data):
+    # add up ratings
+    sum = 0
+    for i in range(len(user_data["watched"])):
+        sum += user_data["watched"][i]["rating"]
+    
+    # divide total by number of movies (length of list) to get average
+    average = sum / len(user_data["watched"])
 
+    return average
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
