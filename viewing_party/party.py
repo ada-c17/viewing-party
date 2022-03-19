@@ -257,8 +257,72 @@ user_data = {
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
-
+"""
+structure: {"watched":[{}], "friends":["watched":[{},{}], "watched":[{"host":"" ...},{}] ..., "subscription":["","",..]]}
+return a list of recommended movies:
+1. The user has not watched it
+2. At least one of the user's friends has watched
+3. The "host" of the movie is a service that is in the user's "subscriptions"
+INTRIGUE_3b["host"] = "disney+"
+USER_DATA_4["subscriptions"] = ["netflix", "hulu"] 
+"""
+def get_available_recs(user_data):
+    recommended_list = []
+    friends_unique = get_friends_unique_watched(user_data)
+    for dict in friends_unique:
+        for list_of_host in user_data["subscriptions"]:
+            if dict["host"] in list_of_host:
+                recommended_list.append(dict)
+    return recommended_list            
+        
+    
+    
+    
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+""" 
+Consider the user's most frequently watched genre. Then, determine a list of recommended movies. 
+return a list of recommended movies by genre:
+1. The user has not watched it
+2. At least one of the user's friends has watched
+3. The "genre" of the movie is the same as the user's most frequent genre
+"""
+def get_new_rec_by_genre(user_data):
+    recommended_genre_list = []
+    genre_dict = {}
+    genre_dict = get_most_watched_genre(user_data)
+    print(genre_dict)
+    
+    list_from_friends = get_friends_unique_watched(user_data)
+    print(list_from_friends)
+    if len(list_from_friends) == 0:
+        return []
+    else:
+        for dict in list_from_friends:
+            if genre_dict is not None:
+                if genre_dict in dict["genre"]:
+            #print(genre_dict)
+                    recommended_genre_list.append(dict)
+            else:
+                return []
+    return recommended_genre_list
 
+"""
+structure: {"watched":[{}], "friends":["watched":[{},{}], "watched":[{"host":"" ...},{}] ..., "subscription":["","",..]], "favorates":[{},{}]}
+return a list of recommendate movies:
+1. The movie is in the user's "favorites"
+2. None of the user's friends have watched it
+"""
+def get_rec_from_favorites(user_data):
+    recommended_favorites = []
+    unique_list_from_user = []
+    unique_list_from_user = get_unique_watched(user_data)
+    for list in user_data["favorites"]:
+        if list is not None:
+            for movie in unique_list_from_user:
+                if movie  == list:
+                    recommended_favorites.append(list)
+    return recommended_favorites
+
+            
