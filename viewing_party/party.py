@@ -1,3 +1,4 @@
+from collections import Counter
 
 #----------WAVE01-------------
 MOVIE_TITLE_1 = "It Came from the Stack Trace"
@@ -94,14 +95,6 @@ def add_to_watchlist(user_data, movie):
     user_data["watchlist"].append(movie)
     return user_data
 
-# janes_data = {
-#     "watchlist": [
-#         FANTASY_1,
-#         movie_to_watch
-#     ],
-#     "watched": [FANTASY_2]
-# }
-
 def watch_movie(user_data, title):
     # Move movie from user's watchlist to watched
     for movie in user_data["watchlist"]:
@@ -110,8 +103,8 @@ def watch_movie(user_data, title):
             user_data["watchlist"].remove(movie)
     return user_data
 
-#watch_movie(janes_data, movie_to_watch["title"])
-# # test data
+# watch_movie(janes_data, movie_to_watch["title"])
+####### test data #######
 # janes_data = {
 #         "watchlist": [{
 #             "title": MOVIE_TITLE_1,
@@ -120,7 +113,25 @@ def watch_movie(user_data, title):
 #         }],
 #         "watched": []
 #     }
+# janes_data = {
+#     "watchlist": [
+#         FANTASY_1,
+#         movie_to_watch
+#     ],
+#     "watched": [FANTASY_2]
+# }
 
+
+#get_watched_avg_rating(USER_DATA_2)
+#get_most_watched_genre(USER_DATA_2)
+
+# movie = create_movie(MOVIE_TITLE_1, GENRE_1, RATING_1)
+# updated_data = add_to_watched(janes_data, movie)
+# updated_data = watch_movie(janes_data, MOVIE_TITLE_1)
+
+# -----------------------------------------
+# ------------- WAVE 2 --------------------
+# -----------------------------------------
 def get_watched_avg_rating(user_data):
     sum_ratings = 0
     count_ratings = 0
@@ -136,17 +147,20 @@ def get_watched_avg_rating(user_data):
 
     return avg_rating
 
-#get_watched_avg_rating(USER_DATA_2)
+def get_most_watched_genre(user_data):
+    if user_data["watched"] == []:
+        most_watched_genre = None
+    
+    else:
+        genre_list = []
 
+        for movie in user_data["watched"]:
+            genre_list.append(movie["genre"])
+        
+        frequency = Counter(genre_list)
+        most_watched_genre = frequency.most_common(1)[0][0]
 
-# movie = create_movie(MOVIE_TITLE_1, GENRE_1, RATING_1)
-# updated_data = add_to_watched(janes_data, movie)
-# updated_data = watch_movie(janes_data, MOVIE_TITLE_1)
-
-# -----------------------------------------
-# ------------- WAVE 2 --------------------
-# -----------------------------------------
-
+    return most_watched_genre
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
