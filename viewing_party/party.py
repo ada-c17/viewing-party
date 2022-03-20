@@ -114,7 +114,30 @@ def get_friends_unique_watched(user_data):
             if movie not in watched_user:
                 if movie not in unique_friend_movies:
                     unique_friend_movies.append(movie)     
-    return unique_friend_movies   
+    return unique_friend_movies 
+
+#create get_available_recs function
+# within movie dict there is a 'host' key with streaming services as values
+# create empty list for recommended movies
+# for each movie in friend's watched 
+# if movie not in user's watched
+# and movie's 'host' value in subcriptions
+# append movie to recommended movies list
+def get_available_recs(user_data):
+    recommended_movies = []
+    watched_user = user_data["watched"]
+    subscriptions = user_data["subscriptions"]
+    friends = user_data["friends"]
+    for friend in friends:
+        watched_friend = friend["watched"]
+        for movie in watched_friend:
+            if movie not in watched_user:
+                if movie["host"] in subscriptions:
+                    recommended_movies.append(movie)
+    return recommended_movies
+
+
+
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
