@@ -17,13 +17,14 @@ def add_to_watchlist(user_data, movie):
     user_data["watchlist"].append(movie)
     return user_data
 
-def watch_movie(user_data, movie):
-    for i in range(len(user_data["watchlist"])):
-        if user_data["watchlist"][i]["title"] == movie:
-            add_to_watched(user_data, movie)
-            del user_data["watchlist"][i]
+def watch_movie(user_data, title):
+    for movie in user_data["watchlist"]:
+        for key, value in movie.items():
+            if key == 'title' and value == title:
+                user_data["watchlist"].remove(movie)
+                add_to_watched(user_data, movie)
+    print(user_data["watched"][0]["title"])
     return user_data
-
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
@@ -41,8 +42,10 @@ def get_watched_avg_rating(user_data):
 
 def get_most_watched_genre(user_data):
     genres = []
-    for i in range(len(user_data["watched"])):
-        genres.append(user_data["watched"][i]['genre'])
+    for movie in user_data["watched"]:
+        for key, value in movie.items():
+            if key == 'genre':
+                genres.append(value)
     if len(genres) == 0:
         return None
     else:
@@ -92,7 +95,6 @@ def get_friends_unique_watched(user_data):
             unique_friend_movies.append(i)
     return unique_friend_movies
 
-        
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
@@ -105,7 +107,6 @@ def get_available_recs(user_data):
         for key, value in movie.items():
             if key == "host" and value in user_subscriptions:
                 recommendations.append(movie)
-    
     return recommendations
 
 # -----------------------------------------
@@ -130,4 +131,3 @@ def get_rec_from_favorites(user_data):
         if movie in user_unique_watched:
             recommendation.append(movie)
     return recommendation
-
