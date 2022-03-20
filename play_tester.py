@@ -38,19 +38,27 @@ pp = pprint.PrettyPrinter(indent=4)
 pp.pprint(clean_wave_2_data())
 
 print("~~~")
-janes_data = clean_wave_2_data()
+# janes_data = clean_wave_2_data()
+janes_data = {
+        "watched": []
+    }
 
-def get_watched_avg_rating(user_data):
-    num_movies_watched = 0
-    rating_sum = 0
-    for lst_name, lst_contents in user_data.items():
-        num_movies_watched += len(lst_contents)
-        for movie in lst_contents:
-            rating_sum += movie["rating"]
-        # print(rating_sum)
-            # rating_sum +=
-    average_rating = rating_sum/num_movies_watched
-    return average_rating
+# def get_watched_avg_rating(user_data):
+#     num_movies_watched = 0
+#     rating_sum = 0
+
+#     for lst_name, lst_contents in user_data.items():
+#         num_movies_watched += len(lst_contents)
+        
+#         for movie in lst_contents:
+#             rating_sum += movie["rating"]
+        
+#         if num_movies_watched == 0:
+#             average_rating = 0
+#         else:
+#             average_rating = rating_sum/num_movies_watched
+
+#     return average_rating
 
 print(get_watched_avg_rating(janes_data))
 

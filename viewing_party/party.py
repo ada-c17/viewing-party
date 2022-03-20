@@ -52,7 +52,7 @@ def watch_movie(user_data, title):
 def get_watched_avg_rating(user_data):
     '''
     this function calculates the average rating of the
-    movies in the watchlist
+    movies in the watched list
     '''
     num_movies_watched = 0
     rating_sum = 0
@@ -60,7 +60,12 @@ def get_watched_avg_rating(user_data):
         num_movies_watched += len(lst_contents)
         for movie in lst_contents:
             rating_sum += movie["rating"]
-    average_rating = rating_sum/num_movies_watched
+
+    if num_movies_watched == 0:
+        average_rating = 0
+    else:
+        average_rating = rating_sum/num_movies_watched
+        
     return average_rating
 
 
