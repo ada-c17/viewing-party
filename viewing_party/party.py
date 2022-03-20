@@ -85,8 +85,10 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 def get_available_recs(user_data):
     recommendations = []
+    # get movies that only firends watched
     friends_unique_watched = get_friends_unique_watched(user_data)
     for movie in friends_unique_watched:
+        # use try, except in case there is no key 'subscriptions'
         try:
             if movie["host"] in user_data["subscriptions"]:
                 recommendations.append(movie)
