@@ -59,8 +59,41 @@ def add_to_watchlist(user_data, movie):
     return user_data
 
 
-def watch_movie():
-    pass
+def watch_movie(user_data, title):
+    """
+    Input: 
+    user_data = {"watchlist" : ["Spider-man: No Way Home", "Dune"], "watched" : ["Star Wars", "Black Panther"]}
+    title = "Iron Man 2"
+
+    Output: return user_data
+    """
+    # title = string of movie title the user has watched
+
+    # TASK ONE: search for title in user_data dictionary 
+    # --> access with key "watchlist", look through list of movie titles
+
+    # TASK TWO 
+    # If you find it, remove the movie title from watchlist and add it to watched
+
+    if title in user_data["watchlist"]:
+        # print("yes!")
+        user_data["watchlist"].remove(title)
+        user_data["watched"].append(title)
+        return user_data
+    else:
+        return user_data
+
+    # print("watchlist:", user_data["watchlist"])
+    # print("watched:", user_data["watched"])
+    # print(user_data)
+    
+
+
+# TESTING!!
+user_data = {"watchlist" : ["Spider-man: No Way Home", "Dune", "Iron Man 2"], "watched" : ["Star Wars", "Black Panther"]}
+title = "Iron Man 2"
+
+watch_movie(user_data, title)
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
