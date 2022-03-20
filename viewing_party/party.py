@@ -110,6 +110,8 @@ def get_friends_unique_watched(user_data):
     user_watched = user_data 
     user_watched_movies = []
     friends_watched_movies = []
+    unique_friend_movies = []
+
 
     for item in user_watched["watched"]:
         user_watched_movies.append(item)
@@ -118,8 +120,11 @@ def get_friends_unique_watched(user_data):
         for item in user_watched["friends"][i]["watched"]: 
             friends_watched_movies.append(item)
 
-    unique_friend_movies = [item for item in friends_watched_movies if item not in user_watched_movies] # list comprehension that stores all movie titles not in friends_watched_movies
-    
+    friend_movies = [item for item in friends_watched_movies if item not in user_watched_movies] # list comprehension that stores all movie titles not in friends_watched_movies
+    for item in friend_movies:
+        if item not in unique_friend_movies:
+            unique_friend_movies.append(item)
+
     return unique_friend_movies
 
 
