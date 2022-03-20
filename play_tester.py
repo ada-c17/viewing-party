@@ -38,10 +38,10 @@ pp = pprint.PrettyPrinter(indent=4)
 pp.pprint(clean_wave_2_data())
 
 print("~~~")
-# janes_data = clean_wave_2_data()
-janes_data = {
-        "watched": []
-    }
+janes_data = clean_wave_2_data()
+# janes_data = {
+#         "watched": []
+#     }
 
 # def get_watched_avg_rating(user_data):
 #     num_movies_watched = 0
@@ -60,7 +60,39 @@ janes_data = {
 
 #     return average_rating
 
-print(get_watched_avg_rating(janes_data))
+# print(get_watched_avg_rating(janes_data))
+
+print("test 12:")
+
+def get_most_watched_genre(user_data):
+
+    # initialize empty dictionary
+    # if genre type is not a key in the dictonary, create key
+    # with default value of 1
+    # for movie in watched list,
+    # update value count 
+
+    user_genre_count = {}
+
+    for movie in janes_data["watched"]:
+        genre = movie["genre"]
+        print(genre)
+        if genre not in user_genre_count.keys():
+            user_genre_count[genre] = 1
+        else:
+            user_genre_count[genre] += 1
+        print(user_genre_count)
+
+    most_watched = max(user_genre_count, key=user_genre_count.get)
+    
+    return most_watched
+
+print(get_most_watched_genre(janes_data))
+# print(janes_data["watched"][0]["genre"])
+
+
+
+
 
 #print("\n-----Wave 03 user_data-----")
 #pp.pprint(clean_wave_3_data())

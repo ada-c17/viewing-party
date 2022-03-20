@@ -65,8 +65,29 @@ def get_watched_avg_rating(user_data):
         average_rating = 0
     else:
         average_rating = rating_sum/num_movies_watched
-        
+
     return average_rating
+
+def get_most_watched_genre(user_data):
+    '''
+    this function returns the genre most
+    frequently listed in the watched list
+    '''
+    user_genre_count = {}
+
+    for movie in user_data["watched"]:
+        genre = movie["genre"]
+
+        if genre not in user_genre_count.keys():
+            user_genre_count[genre] = 1
+        else:
+            user_genre_count[genre] += 1
+
+    most_watched = max(user_genre_count, key=user_genre_count.get)
+    
+    return most_watched
+
+
 
 
 # -----------------------------------------
