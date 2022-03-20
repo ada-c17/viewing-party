@@ -111,15 +111,6 @@ def get_available_recs(user_data):
     rec_list = [m for m in friends_watched_list if m["host"] in subscription_list]
     return rec_list
 
-#user-data
-    #key "subscriptions"
-        #list of strings
-
-    # key "friends" (value is a list)
-        #index is dictionary for each friend
-            #key - 'watched' is list
-                #each index is a movie's dictionary
-                    #key "host", for subscribtion service
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
@@ -134,17 +125,29 @@ def get_new_rec_by_genre(user_data):
 
 # Return list of movie dicts that is a user favorite and friends haven't watched
 def get_rec_from_favorites(user_data):
-    # user_data has key "favorites", which is a list of dictionaries
-    user_favs = user_data["favorites"]
-    friends_watched_list = user_data["friends"]
     movie_recs = []
-    
-    for user_movie in user_favs:
-        watched_movie = False
-        for friend in friends_watched_list:
-            for friend_movie in friend["watched"]:
-                if user_movie == friend_movie:
-                    watched_movie = True
-        if not watched_movie:
-            movie_recs.append(user_movie)
+    # check user_data has key "favorites", which is a list of dictionaries
+    if user_data.get("favorites"):
+        user_favs = user_data["favorites"]
+        friends_list = user_data["friends"]
+
+        friends_watched_list = []
+        for friend in friends_list:
+            friends_watched_list += friend["watched"]
+        for movie in user_favs:
+            if movie not in friends_watched_list:
+                movie_recs.append(movie)
+
     return movie_recs
+
+    # for user_movie in user_favs:
+    #     watched_movie = False
+    #     for friend in friends_watched_list:
+    #         for friend_movie in friend["watched"]:
+    #             if user_movie == friend_movie:
+    #                 watched_movie = True
+    #                 break
+    #     if not watched_movie:
+    #         movie_recs.append(user_movie)
+
+    
