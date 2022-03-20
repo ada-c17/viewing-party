@@ -64,7 +64,7 @@ janes_data = clean_wave_2_data()
 
 print("test 12:")
 
-def get_most_watched_genre(user_data):
+# def get_most_watched_genre(user_data):
 
     # initialize empty dictionary
     # if genre type is not a key in the dictonary, create key
@@ -72,20 +72,20 @@ def get_most_watched_genre(user_data):
     # for movie in watched list,
     # update value count 
 
-    user_genre_count = {}
+    # user_genre_count = {}
 
-    for movie in janes_data["watched"]:
-        genre = movie["genre"]
-        print(genre)
-        if genre not in user_genre_count.keys():
-            user_genre_count[genre] = 1
-        else:
-            user_genre_count[genre] += 1
-        print(user_genre_count)
+    # for movie in janes_data["watched"]:
+    #     genre = movie["genre"]
+    #     print(genre)
+    #     if genre not in user_genre_count.keys():
+    #         user_genre_count[genre] = 1
+    #     else:
+    #         user_genre_count[genre] += 1
+    #     print(user_genre_count)
 
-    most_watched = max(user_genre_count, key=user_genre_count.get)
+    # most_watched = max(user_genre_count, key=user_genre_count.get)
     
-    return most_watched
+    # return most_watched
 
 print(get_most_watched_genre(janes_data))
 # print(janes_data["watched"][0]["genre"])
