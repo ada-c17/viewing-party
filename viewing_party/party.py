@@ -102,9 +102,12 @@ def get_available_recs(user_data):
 # -----------------------------------------
 def get_new_rec_by_genre(user_data):
     recommendations_genre = []
+    # get most watched genre of user 
     most_watched_genre_of_user = get_most_watched_genre(user_data)
-    possible_recs = get_available_recs(user_data) #-> [{},{}]
+    # get possible recommendations for user
+    possible_recs = get_available_recs(user_data) 
     for movie in possible_recs:
+        # add movie if genre is equal to user's most watched genre and if it is not recommended yet
         if movie["genre"]== most_watched_genre_of_user and not movie["genre"] in recommendations_genre:
             recommendations_genre.append(movie)
 
@@ -112,7 +115,9 @@ def get_new_rec_by_genre(user_data):
 
 def get_rec_from_favorites(user_data):
     recommendations_fav = []
+    # get user's favorite movies
     user_favorites = user_data["favorites"]
+    # get movies that only user watched
     user_unique_watched = get_unique_watched(user_data)
     for movie in user_favorites:
         if movie in user_unique_watched:
