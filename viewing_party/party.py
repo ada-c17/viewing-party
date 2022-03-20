@@ -45,14 +45,16 @@ def get_watched_avg_rating(janes_data):
     return average
 
 def get_most_watched_genre(janes_data):
-    genre_counting_dict = {}
-    for movie in range(len(janes_data["watched"])):
-        if janes_data["watched"][movie]["genre"] not in genre_counting_dict:
-             genre_counting_dict[janes_data["watched"][movie]["genre"]] = 1
-        else:
-            genre_counting_dict[janes_data["watched"][movie]["genre"]] += 1
+    if len(janes_data["watched"]) == 0:
+        return None
+    else:
+        genre_counting_dict = {}
+        for movie in range(len(janes_data["watched"])):
+            if janes_data["watched"][movie]["genre"] not in genre_counting_dict:
+                genre_counting_dict[janes_data["watched"][movie]["genre"]] = 1
+            else:
+                genre_counting_dict[janes_data["watched"][movie]["genre"]] += 1
     popular_genre = max(genre_counting_dict, key = genre_counting_dict.get)
-    print(popular_genre)
     return popular_genre
 
 
