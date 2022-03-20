@@ -63,13 +63,11 @@ def get_watched_avg_rating(user_data):
 
     for item in movie_ratings["watched"]: # loops through all items in "watched"
         ratings_list.append(item["rating"]) # adds the ratings from "watched" to ratings_list
-        print("*************************************") # testing
-        print(len(ratings_list)) # testing
     
     if len(movie_ratings["watched"]) != 0:
         movie_ratings_average = sum(ratings_list) / len(ratings_list)
     else:
-        return empty_list_rating
+        return empty_list_rating # returns 0.0
     
     return movie_ratings_average # returns if finished with average calculation 
 
@@ -77,10 +75,8 @@ def get_most_watched_genre(user_data):
     movie_genre = user_data
     genre_list = []
 
-    for item in movie_genre["watched"]:
-        genre_list.append(item["genre"])
-        print("*************************************") # testing
-        print(len(genre_list)) # testing
+    for item in movie_genre["watched"]: # loops through list
+        genre_list.append(item["genre"]) # appends values of "genre" key to genre_list dictionary
 
     if len(movie_genre["watched"]) != 0:
         genre_list.sort() # sorts list in place (modifies original list)
@@ -93,6 +89,22 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+
+def get_unique_watched(user_data):
+    user_watched = user_data 
+    user_watched_movies = []
+    friends_watched_movies = []
+
+    for item in user_watched["watched"]:
+        user_watched_movies.append(item)
+    
+    for i in range(len(user_watched["friends"])):
+        for item in user_watched["friends"][i]["watched"]: # just was appending "title" to the list before, but that was failing the test since it didn't match output of tests
+            friends_watched_movies.append(item)
+
+    unique_user_movies = [item for item in user_watched_movies if item not in friends_watched_movies] # list comprehension that stores all movie titles not in friends_watched_movies
+    
+    return unique_user_movies
 
         
 # -----------------------------------------
