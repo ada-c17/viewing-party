@@ -118,8 +118,30 @@ def get_available_recs(user_data):
 
     return recs_list
 
-
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+
+def get_new_rec_by_genre(user_data):
+    most_watched_genre = get_most_watched_genre(user_data)
+
+    set_watched = set()
+    for movie in user_data["watched"]:
+        set_watched.add(movie["title"])
+
+    friends_watched_list = []
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            friends_watched_list.append(movie)
+
+    list_friends_watched = []
+    for movie in friends_watched_list:
+        if movie["title"] not in set_watched:
+            list_friends_watched.append(movie)
+
+    rec_by_genre_list = []
+    for movie in list_friends_watched:
+        if movie["genre"] == most_watched_genre:
+            rec_by_genre_list.append(movie)
+    return rec_by_genre_list
 
