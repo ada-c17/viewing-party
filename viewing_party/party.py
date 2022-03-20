@@ -77,7 +77,22 @@ def get_unique_watched(user_data):
             list_unique.append(movie)
     return list_unique
 
+def get_friends_unique_watched(user_data):
+    set_watched = set()
+    for movie in user_data["watched"]:
+        set_watched.add(movie["title"])
 
+    friends_watched_dict = {}
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            friends_watched_dict[movie["title"]] = movie
+
+    list_unique = []
+    for key, value in friends_watched_dict.items():
+        if key not in set_watched:
+            list_unique.append(value)
+
+    return list_unique
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
