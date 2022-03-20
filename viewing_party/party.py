@@ -79,6 +79,10 @@ def get_most_watched_genre(user_data):
         return max(genre_dict, key = genre_dict.get)
     return None
 
+# -----------------------------------------
+# ------------- WAVE 3 --------------------
+# -----------------------------------------
+
 # Create get_unique_watched function with one parameter user_data 
 #create variable called "watched_user" to access list of movies watched by user
 #create variable called "friends" to access list of friends watched dictionaries
@@ -115,6 +119,10 @@ def get_friends_unique_watched(user_data):
                 if movie not in unique_friend_movies:
                     unique_friend_movies.append(movie)     
     return unique_friend_movies 
+        
+# -----------------------------------------
+# ------------- WAVE 4 --------------------
+# -----------------------------------------
 
 #create get_available_recs function
 # within movie dict there is a 'host' key with streaming services as values
@@ -136,19 +144,26 @@ def get_available_recs(user_data):
                     recommended_movies.append(movie)
     return recommended_movies
 
-
-
-
-# -----------------------------------------
-# ------------- WAVE 3 --------------------
-# -----------------------------------------
-
-        
-# -----------------------------------------
-# ------------- WAVE 4 --------------------
-# -----------------------------------------
-
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+# create a get new rec by genre function
+# create empty list called recommended_movies
+# create a variable called "favorite genre"
+# assign result from most watched genre function to variable
+# if movie in friend's watched list
+# and if movie not in user watched list
+# and movie["genre"] == favorite genre
+# append movie to recommended_movies list
+def get_new_rec_by_genre(user_data):
+    recommended_movies = []
+    favorite_genre = get_most_watched_genre(user_data)
+    friends = user_data["friends"]
+    watched_user = user_data["watched"]
+    for friend in friends:
+        watched_friend = friend["watched"]
+        for movie in watched_friend:
+            if movie not in watched_user and movie["genre"] == favorite_genre:
+                recommended_movies.append(movie)
+    return recommended_movies
