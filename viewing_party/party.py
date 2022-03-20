@@ -37,11 +37,43 @@ def get_watched_avg_rating(user_data):
     watched = user_data['watched']
     rating_sum = 0
 
+    # if len(watched) != 0:
+    #     try:
+    #         for movie in watched:
+    #             rating_sum  += movie['rating']
+    #         rating_avg = rating_sum / len(watched)
+    #         return rating_avg
+    #     except ZeroDivisionError:
+    #         return 0.0
+    
+
     for movie in watched:
         rating_sum  += movie['rating']
+
+    if len(watched) != 0:
+        rating_avg = rating_sum / len(watched)
+        return rating_avg
+    else:
+        return 0.0
+            
+
+def get_most_watched_genre(user_data):
+    watched = user_data['watched']
+    all_genres_watched = {}
     
-    rating_avg = rating_sum / len(watched)
-    return rating_avg
+    if watched == []:
+        return None
+    else:
+        for movie in watched:
+            if movie['genre'] in all_genres_watched:
+                all_genres_watched[movie['genre']] += 1
+            else:
+                all_genres_watched[movie['genre']] = 1
+        
+        max_value = max(all_genres_watched.values())
+        popular_genre = [genre for genre, number_watched in all_genres_watched.items() if number_watched == max_value]
+
+        return (', '.join(popular_genre))
 
 
 # -----------------------------------------
