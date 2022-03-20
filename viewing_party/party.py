@@ -93,7 +93,7 @@ def get_unique_watched(user_data):
     # get the list of friends watched dictionaries
     friends_watched_list = get_friends_watched_list(user_data)
     
-    # get unique user movies
+    # get unique just by user watched movies
     just_user_watched = []
     for movie in watched_movies:
         if movie not in friends_watched_list:
@@ -106,7 +106,7 @@ def get_friends_unique_watched(user_data):
     # get the list of friends watched dictionaries
     friends_watched_list = get_friends_watched_list(user_data)
     
-    # get unique friends movies
+    # get unique just by friends watched movies
     just_friend_watched = []
     for friend_movie in friends_watched_list:
         if friend_movie not in watched_movies:
@@ -118,6 +118,22 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
+
+def get_available_recs(user_data):
+    # collect data: watched movies, list of subscriptions, friends watch list
+    watched_movies = user_data["watched"]
+    user_subscriptions= user_data["subscriptions"]
+    friends_watched_list = get_friends_watched_list(user_data)
+   
+    # make a recomendation list by subscription
+    recomendation_list = []
+    for friend_movie in friends_watched_list:
+        if friend_movie not in watched_movies:
+            if friend_movie["host"] in user_subscriptions:
+                recomendation_list.append(friend_movie)
+    return recomendation_list
+
+# 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
