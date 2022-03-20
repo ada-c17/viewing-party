@@ -27,8 +27,6 @@ def watch_movie(user_data, title):
             user_data["watchlist"].remove(movie)
             user_data = add_to_watched(user_data, movie)
     return user_data
-            
-
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
@@ -60,14 +58,26 @@ def get_most_watched_genre(user_data):
             max_value = value
             max_key = key
     return max_key
-
-
-
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+def get_unique_watched(user_data):
+    list_watched = []
+    for movie in user_data["watched"]:
+        list_watched.append(movie)
 
-        
+    friends_watched_set = set()
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            friends_watched_set.add(movie["title"])
+
+    list_unique = []
+    for movie in list_watched:
+        if movie["title"] not in friends_watched_set:
+            list_unique.append(movie)
+    return list_unique
+
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
