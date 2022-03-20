@@ -51,6 +51,7 @@ def get_most_watched_genre(user_data):
     if len(genre_list) == 0:
         return None
     else:
+        # To get the most frequent genre. I'm not sure if it accounts for ties.
         return max(set(genre_list), key=genre_list.count)
         # might be better to use Count from importing collections.. look at StackOverflow
 
@@ -58,7 +59,16 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-        
+def get_unique_watched(user_data):
+    # Can I also create a set with a combination of the users and friends watched list?"
+    friends_movie_lists = [d["watched"] for d in user_data["friends"]] 
+    unique_watched_list = []
+
+    for movie in user_data["watched"]:
+        if not any(movie in d for d in friends_movie_lists):
+            unique_watched_list.append(movie)
+    return unique_watched_list        
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
