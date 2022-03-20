@@ -155,3 +155,54 @@ def get_available_recs(user_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+from collections import Counter
+def   get_new_rec_by_genre(user_data):
+    if not user_data["watched"] and user_data["friends"]:
+        return []
+    watched = user_data["watched"]
+    friends_watched = user_data["friends"]
+
+    genre = []
+    watched_user = []
+    for movie in range(len(list(watched))):
+        watched_user.append(watched[movie]["title"])
+        genre.append(watched[movie]["genre"])
+
+    
+    favorite = Counter(genre)
+    fave_max = max(favorite, key=favorite.get)
+    
+
+    results = []
+    for i in range(len(list(friends_watched[0]["watched"]))):
+        if friends_watched[0]["watched"][i]["title"] not in watched_user and friends_watched[0]["watched"][i]["genre"] == fave_max:
+                results.append(friends_watched[0]["watched"][i])
+   
+
+    return results
+
+def get_rec_from_favorites(user_data):
+    if not user_data["favorites"] and user_data["friends"]:
+        return []
+    favorites = user_data["favorites"]
+    print(favorites)
+    all = []
+    # print(favorites)
+    friends_watched = user_data["friends"]
+    print (friends_watched)
+    for a in range(len(friends_watched)):
+        for b in range(len(friends_watched[a]["watched"])):
+            all.append(friends_watched[a]["watched"][b]["title"])
+    print(all)
+    mutual = []
+    for movie in range(len(favorites)):
+        if favorites[movie]["title"] in all :
+            mutual.append(favorites[movie])
+    
+    # # c = list(set(favorites) - set(mutual))
+    print (mutual)
+    c = [x for x in favorites if x not in mutual]
+    print (c)
+    return c
+
+
