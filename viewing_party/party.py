@@ -79,6 +79,28 @@ def get_most_watched_genre(user_data):
         return max(genre_dict, key = genre_dict.get)
     return None
 
+# Create get_unique_watched function with one parameter user_data 
+#create variable called "watched_user" to access list of movies watched by user
+#create variable called "friends" to access list of friends watched dictionaries
+#create empty list to hold unique movies
+#if watched not an empty list then loop through 
+#nest a loop to iterate through the list of friends
+#within list of friends iterate through the movies in their watched list
+#compare the titles from friends movies to titles in user movies
+#if movie appears in both append to duplicate list
+#iterate through user list and dupes and create list of unique movies to return
+
+def get_unique_watched(user_data):
+    watched_user = user_data["watched"]
+    friends = user_data["friends"]
+    dupes = []
+    for friend in friends:
+        watched_friend = friend["watched"]
+        for movie in watched_user:
+            if movie in watched_friend:
+                dupes.append(movie)
+    unique_user_movies = [movie for movie in watched_user if movie not in dupes]
+    return unique_user_movies
 
 
 
