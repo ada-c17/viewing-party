@@ -16,6 +16,18 @@ def add_to_watchlist(user_data, movie):
     user_data["watchlist"].append(movie)
     return user_data
 
+def watch_movie(user_dict, movie_title):
+    movie_watched = None
+    for i in range(len(user_dict["watchlist"])):
+        if user_dict["watchlist"][i]["title"] == movie_title:
+            movie_watched = user_dict["watchlist"].pop(i)
+    if movie_watched == None:
+        return user_dict
+    else:
+        user_dict["watched"].append(movie_watched)
+    return user_dict
+
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------

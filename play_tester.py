@@ -27,3 +27,15 @@ pp.pprint(FANTASY_2)
 # Wave 05 user data
 #print("\n-----Wave 05 user_data-----")
 #pp.pprint(clean_wave_5_data())
+
+
+janes_data = {
+    "watchlist": [{
+        "title": MOVIE_TITLE_1,
+        "genre": GENRE_1,
+        "rating": RATING_1
+    }],
+    "watched": []
+}
+    
+print(f'{janes_data["watchlist"]=}')
