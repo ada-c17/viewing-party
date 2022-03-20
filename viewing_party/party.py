@@ -75,13 +75,48 @@ def watch_movie(user_data, title):
     # TASK TWO 
     # If you find it, remove the movie title from watchlist and add it to watched
 
-    if title in user_data["watchlist"]:
-        # print("yes!")
-        user_data["watchlist"].remove(title)
-        user_data["watched"].append(title)
-        return user_data
-    else:
-        return user_data
+    # TEST EIGHT: need to account for duplicate title names --> can only have unique title names
+
+    
+    # TEST SEVEN: dictionary where key = string, value = list of dictionaries
+    # janes_data = {
+    #     "watchlist": [{
+    #         "title": MOVIE_TITLE_1,
+    #         "genre": GENRE_1,
+    #         "rating": RATING_1
+    #     }],
+    #     "watched": []
+    # }
+
+    # # Act
+    # updated_data = watch_movie(janes_data, MOVIE_TITLE_1)
+
+    for val in user_data["watchlist"]:
+        
+        if title == val:
+            # print("YES!")
+
+            user_data["watchlist"].remove(title)
+            user_data["watched"].append(title)
+    
+    return user_data
+
+    # print("watchlist:  ", user_data["watchlist"])
+
+    # print("watched: ", user_data["watched"])
+
+
+
+
+
+
+    # if title in user_data["watchlist"]:
+    #     # print("yes!")
+    #     user_data["watchlist"].remove(title)
+    #     user_data["watched"].append(title)
+    #     return user_data
+    # else:
+    #     return user_data
 
     # print("watchlist:", user_data["watchlist"])
     # print("watched:", user_data["watched"])
