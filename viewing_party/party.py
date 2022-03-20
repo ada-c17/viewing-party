@@ -23,7 +23,6 @@ def watch_movie(user_data, title):
             if key == 'title' and value == title:
                 user_data["watchlist"].remove(movie)
                 add_to_watched(user_data, movie)
-    print(user_data["watched"][0]["title"])
     return user_data
 
 # -----------------------------------------
@@ -74,25 +73,14 @@ def get_unique_watched(user_data):
     return unique_user_movies
 
 def get_friends_unique_watched(user_data):
-    user_movies = []
-    friend_movies = []
+    user_movies = user_data["watched"]
     unique_friend_movies = []
-    # generate user movies list
-    for i in range(len(user_data["watched"])):
-        user_movies.append(user_data["watched"][i])
-    # generate friend watched movies list
-    # get friends data dictionaries
     for dict in user_data["friends"]:
-        # get each friends' watched dictionary
         for key, value in dict.items():
-            # if the key of the dict is watched, then add that key's value to the movie list
             if key == "watched":
-                for i in value:
-                    friend_movies.append(i)
-    # find users unique movies
-    for i in friend_movies:
-        if i not in user_movies and i not in unique_friend_movies:
-            unique_friend_movies.append(i)
+                for movie in value:
+                    if movie not in user_movies and movie not in unique_friend_movies:
+                        unique_friend_movies.append(movie)
     return unique_friend_movies
 
 # -----------------------------------------
