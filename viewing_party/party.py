@@ -33,6 +33,7 @@ def get_watched_avg_rating(user_data):
     total_rating = 0
     for movie in user_data["watched"]:
         total_rating += movie["rating"]
+    # use try, except in case there is no data in user_data["watched"]
     try:
         ave_rating = total_rating / len(user_data["watched"])
     except ZeroDivisionError:
@@ -47,6 +48,7 @@ def get_most_watched_genre(user_data):
             genre_dict[watched_genre] += 1
         else:
             genre_dict[watched_genre] = 0
+    # use try, except in case there is no value for most_watched_genre        
     try:
         most_watched_genre = max(genre_dict, key=genre_dict.get)
     except ValueError:
