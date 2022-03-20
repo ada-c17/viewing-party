@@ -1,26 +1,61 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
-    movie = {}
+
+    if title and genre and rating:
     
-    movie["title"] = "Title A"
-    movie["genre"] = "Horror"
-    movie["rating"] = 3.5
-
-    if (movie["title"]) == "" or (movie["genre"]) == "" or (movie["rating"]) == "":
-        return "None"
-
-
+        movie = {
+            "title" : title,
+            "genre" : genre,
+            "rating" : rating
+            }
+        return movie
+    
+    else:
+        return None
+    
 def add_to_watched(user_data, movie):
     
     watched = []
-    user_data = {watched: movie}
+
+    user_data = {"watched": watched}
+
+    #for item in movie.items():
+    for value in user_data:
+        watched.append(movie)
+        print(watched)
+        #len_watched += 1
+        #return len_watched
+
+    # for key, value in user_data["watched", ]:
+    # for value in watched:
+    #     watched.append(movie)
+    #     len_watched += 1
+    #     return len_watched
+    
+    #print(len_watched)
+                
     return user_data
 
+
 def add_to_watchlist(user_data, movie):
+
     watchlist = []
-    user_data = {watchlist, watched}
+    len_watchlist = 0
+    user_data = {"watchlist", watchlist}
+
+    for key, value in user_data.items():
+        len_watchlist = len(value)
+        if len(value) > 0:
+            watchlist.append(movie)
+            len_watchlist =+ 1
+            return len_watchlist
+
     return user_data
+
+#def watch_movie():
+
+
 
 #the value of user_data will be a dictionary with a key "watched", and a value which is a list of dictionaries representing the movies the user has watched
 #An empty list represents that the user has no movies in their watched list
