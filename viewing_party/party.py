@@ -1,160 +1,10 @@
 from collections import Counter
 import copy
-#----------WAVE01-------------
-MOVIE_TITLE_1 = "It Came from the Stack Trace"
-GENRE_1 = "Horror"
-RATING_1 = 3.5
-#----------WAVE02-------------
-HORROR_1 = {
-    "title": MOVIE_TITLE_1,
-    "genre": GENRE_1,
-    "rating": RATING_1
-}
-FANTASY_1 = {
-    "title": "The Lord of the Functions: The Fellowship of the Function",
-    "genre": "Fantasy",
-    "rating": 4.8
-}
-FANTASY_2 = {
-    "title": "The Lord of the Functions: The Two Parameters",
-    "genre": "Fantasy",
-    "rating": 4.0
-}
-FANTASY_3 = {
-    "title": "The Lord of the Functions: The Return of the Value",
-    "genre": "Fantasy",
-    "rating": 4.0
-}
-FANTASY_4 = {
-    "title": "The Programmer: An Unexpected Stack Trace",
-    "genre": "Fantasy",
-    "rating": 4.0
-}
-ACTION_1 = {
-    "title": "The JavaScript and the React",
-    "genre": "Action",
-    "rating": 2.2
-}
-ACTION_2 = {
-    "title": "2 JavaScript 2 React",
-    "genre": "Action",
-    "rating": 4.2
-}
-ACTION_3 = {
-    "title": "JavaScript 3: VS Code Lint",
-    "genre": "Action",
-    "rating": 3.5
-}
-INTRIGUE_1 = {
-    "title": "Recursion",
-    "genre": "Intrigue",
-    "rating": 2.0
-}
-INTRIGUE_2 = {
-    "title": "Instructor Student TA Manager",
-    "genre": "Intrigue",
-    "rating": 4.5
-}
-INTRIGUE_3 = {
-    "title": "Zero Dark Python",
-    "genre": "Intrigue",
-    "rating": 3.0
-}
-USER_DATA_2 = {
-    "watched": [
-        FANTASY_1, 
-        FANTASY_2, 
-        FANTASY_3, 
-        ACTION_1, 
-        INTRIGUE_1, 
-        INTRIGUE_2
-        ],    
-}
-
-#-----WAVE 3--------
-USER_DATA_3 = copy.deepcopy(USER_DATA_2)
-USER_DATA_3["friends"] =  [
-        {
-            "watched": [
-                FANTASY_1,
-                FANTASY_3,
-                FANTASY_4,
-                HORROR_1,
-            ]
-        },
-        {
-            "watched": [
-                FANTASY_1,
-                ACTION_1,
-                INTRIGUE_1,
-                INTRIGUE_3,
-            ]
-        }
-    ]  
-
-#-----WAVE 4--------
-
-HORROR_1b = copy.deepcopy(HORROR_1)
-FANTASY_1b = copy.deepcopy(FANTASY_1)
-FANTASY_2b = copy.deepcopy(FANTASY_2)
-FANTASY_3b = copy.deepcopy(FANTASY_3)
-FANTASY_4b = copy.deepcopy(FANTASY_4)
-ACTION_1b = copy.deepcopy(ACTION_1)
-ACTION_2b = copy.deepcopy(ACTION_2)
-ACTION_3b = copy.deepcopy(ACTION_3)
-INTRIGUE_1b = copy.deepcopy(INTRIGUE_1)
-INTRIGUE_2b = copy.deepcopy(INTRIGUE_2)
-INTRIGUE_3b = copy.deepcopy(INTRIGUE_3)
-
-HORROR_1b["host"] = "netflix"
-FANTASY_1b["host"] = "netflix"
-FANTASY_2b["host"] = "netflix"
-FANTASY_3b["host"] = "amazon"
-FANTASY_4b["host"] = "hulu"
-ACTION_1b["host"] = "amazon"
-ACTION_2b["host"] = "amazon"
-ACTION_3b["host"] = "hulu"
-INTRIGUE_1b["host"] = "hulu"
-INTRIGUE_2b["host"] = "disney+"
-INTRIGUE_3b["host"] = "disney+"
-
-USER_DATA_4 = {
-    "watched": [
-        FANTASY_1b, 
-        FANTASY_2b, 
-        FANTASY_3b, 
-        ACTION_1b, 
-        INTRIGUE_1b, 
-        INTRIGUE_2b
-        ],  
-    "friends":  [
-        {
-            "watched": [
-                FANTASY_1b,
-                FANTASY_3b,
-                FANTASY_4b,
-                HORROR_1b,
-            ]
-        },
-        {
-            "watched": [
-                FANTASY_1b,
-                ACTION_1b,
-                INTRIGUE_1b,
-                INTRIGUE_3b,
-            ]
-        }  
-    ]
-}
-
-USER_DATA_4["subscriptions"] = ["netflix", "hulu"]  
-
 
 def create_movie(title, genre, rating):
-    # If title, genre, or rating are "None", return None
+    # If title, genre, or rating are "None", return None, otherwise create movie
     if title == None or genre == None or rating == None:
         movie = None
-    # Otherwise, create movie with title, genre, and rating
     else:
         movie = {
             "title": title,
@@ -165,7 +15,7 @@ def create_movie(title, genre, rating):
     return movie
 
 def add_to_watched(user_data, movie):
-    # Add movie to user's watched
+    # Add movie to user's "watched" list
     user_data["watched"].append(movie)
     return user_data
 
@@ -182,28 +32,12 @@ def watch_movie(user_data, title):
             user_data["watchlist"].remove(movie)
     return user_data
 
-####### test data #######
-# janes_data = {
-#         "watchlist": [{
-#             "title": MOVIE_TITLE_1,
-#             "genre": GENRE_1,
-#             "rating": RATING_1
-#         }],
-#         "watched": []
-#     }
-# janes_data = {
-#     "watchlist": [
-#         FANTASY_1,
-#         movie_to_watch
-#     ],
-#     "watched": [FANTASY_2]
-# }
-
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 
 def get_watched_avg_rating(user_data):
+    # Calculate average rating for movie in user's "watched" list
     sum_ratings = 0
     count_ratings = 0
 
@@ -219,16 +53,19 @@ def get_watched_avg_rating(user_data):
     return avg_rating
 
 def get_most_watched_genre(user_data):
+    # Find most watched genre
     if user_data["watched"] == []:
         most_watched_genre = None
-    
     else:
         genre_list = []
 
         for movie in user_data["watched"]:
             genre_list.append(movie["genre"])
         
+        # Get list of frequencies of each genre
         frequency = Counter(genre_list)
+
+        # Find most frequent genre name
         most_watched_genre = frequency.most_common(1)[0][0]
 
     return most_watched_genre
@@ -238,6 +75,9 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 
 def get_unique_watched(user_data):
+    '''
+    Get list of movies the user watched that none of their friends have watched
+    '''
     user_unique_watched = []
     for movie in user_data["watched"]:
         movie_unique = True
@@ -250,6 +90,9 @@ def get_unique_watched(user_data):
     return user_unique_watched
 
 def get_friends_unique_watched(user_data):
+    '''
+    Get list of movies any of the user's friends watched but the user has not
+    '''
     friends_unique_watched = []
     for friend in range(len(user_data["friends"])):
         for movie in user_data["friends"][friend]["watched"]:
@@ -267,6 +110,11 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 
 def get_available_recs(user_data):
+    '''
+    Get list of movie recommendations that any of the user's friends have
+    watched but that the user has not. Excludes movies available on a
+    host/subscription service that the user does not have access to.
+    '''
     friends_unique_watched = get_friends_unique_watched(user_data)
     recommendations = []
     for movie in friends_unique_watched:
@@ -280,23 +128,29 @@ def get_available_recs(user_data):
 # -----------------------------------------
 
 def get_new_rec_by_genre(user_data):
+    '''Get movie recommendations that match the user's most watched genre'''
+    # Get movies unique to friends (user hasn't watched)
+    # available_recommendations = get_available_recs(user_data) <--using this 
+    # instead of the following line requires user_data to have "subscriptions"
+    available_recommendations = get_friends_unique_watched(user_data)
+    
+    # Get user's most watched genre
     most_watched_genre = get_most_watched_genre(user_data)
 
-    # available_recommendations = get_available_recs(user_data) <--using this 
-    # instead of the following 4 lines requires the user_data to have a list
-    # of subscriptions
-    friends_unique_watched = get_friends_unique_watched(user_data)
-    available_recommendations = []
-    for movie in friends_unique_watched:
-        available_recommendations.append(movie)
-    
+    # For each movie in the recommendation list that is the user's most
+    # watched genre, add it to the recommendations by genre list
     recs_by_genre = []
     for movie in available_recommendations:
         if movie["genre"] == most_watched_genre:
             recs_by_genre.append(movie)
+    
     return recs_by_genre
 
 def get_rec_from_favorites(user_data):
+    '''
+    Recommend list of movies the user has watched that is in their favorites
+    list when their friends have not watched the movie.
+    '''
     user_unique_watched = get_unique_watched(user_data)
     recommended = []
     for movie in user_unique_watched:
