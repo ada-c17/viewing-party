@@ -133,7 +133,6 @@ def get_available_recs(user_data):
                 recomendation_list.append(friend_movie)
     return recomendation_list
 
-# 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
