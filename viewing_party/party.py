@@ -99,12 +99,29 @@ def get_unique_watched(user_data):
         user_watched_movies.append(item)
     
     for i in range(len(user_watched["friends"])):
-        for item in user_watched["friends"][i]["watched"]: # just was appending "title" to the list before, but that was failing the test since it didn't match output of tests
+        for item in user_watched["friends"][i]["watched"]: 
             friends_watched_movies.append(item)
 
     unique_user_movies = [item for item in user_watched_movies if item not in friends_watched_movies] # list comprehension that stores all movie titles not in friends_watched_movies
     
     return unique_user_movies
+
+def get_friends_unique_watched(user_data): 
+    user_watched = user_data 
+    user_watched_movies = []
+    friends_watched_movies = []
+
+    for item in user_watched["watched"]:
+        user_watched_movies.append(item)
+    
+    for i in range(len(user_watched["friends"])):
+        for item in user_watched["friends"][i]["watched"]: 
+            friends_watched_movies.append(item)
+
+    unique_friend_movies = [item for item in friends_watched_movies if item not in user_watched_movies] # list comprehension that stores all movie titles not in friends_watched_movies
+    
+    return unique_friend_movies
+
 
         
 # -----------------------------------------
