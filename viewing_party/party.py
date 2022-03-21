@@ -65,3 +65,13 @@ def get_friends_unique_watched(user_data):
             if movie not in friends_watched_unique and movie not in watched_list:
                 friends_watched_unique.append(movie)
     return friends_watched_unique
+
+def get_available_recs(user_data):
+    recommended = []
+    friends_list = user_data["friends"]
+    watched_list = [movie["title"] for movie in user_data["watched"]]
+    for friend in friends_list:
+        for movie in friend["watched"]:
+            if movie not in recommended and movie["title"] not in watched_list and movie["host"] in user_data["subscriptions"]:
+                recommended.append(movie)
+    return recommended
