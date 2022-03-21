@@ -1,3 +1,5 @@
+from collections import Counter
+
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
@@ -43,6 +45,32 @@ def watch_movie(user_data, movie):
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 
+def get_watched_avg_rating(user_data):
+    tot_rating = 0.0
+    
+    if not user_data["watched"]:
+        return tot_rating
+
+    for elem in user_data["watched"]:
+        tot_rating += elem["rating"]
+    
+    return tot_rating / len(user_data["watched"])
+
+def get_most_watched_genre(user_data):
+    genre_list = []
+
+    if not user_data["watched"]:
+        return None
+
+    for elem in user_data["watched"]:
+        genre_list.append(elem["genre"])
+        
+    counters = Counter(genre_list)
+    return max(counters, key=counters.get)
+
+
+
+    
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
