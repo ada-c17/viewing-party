@@ -113,6 +113,29 @@ def get_friends_unique_watched(user_data): #Test 16 is similar to test 15, inste
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+def get_available_recs(user_data):
+  recommended_movies = []
+  movies_friends_watched = [] 
+  movies_user_watched = []
+  user_host_list = []
+  for movie in user_data["watched"]:
+    movies_user_watched.append(movie)
+  print(movies_user_watched)
+  print()
+  print()
+  for movie in range(len(user_data["friends"])):
+    for friends_watched in user_data["friends"][movie]["watched"]:
+      movies_friends_watched.append(friends_watched)
+  print(movies_friends_watched)
+  print("hi")
+  for movie in movies_friends_watched:
+    if movie not in movies_user_watched: #and user_data["watched"][movie]["host"] == 'hulu' or 'netflix':
+      recommended_movies.append(movie)
+  print(recommended_movies) #rn i have the unique recommended movies
+  # but do not have the host distinguished 
+  #seems like the next step, after having the recommended movies, 
+  # is to compare the recommended movies host and once again code it make it equal user subscription
+
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
