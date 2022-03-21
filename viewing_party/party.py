@@ -42,7 +42,7 @@ def get_watched_avg_rating(user_data):
     try:
         ave_rating = total_rating / len(user_data["watched"])
     except ZeroDivisionError:
-        ave_rating = 0
+        ave_rating = 0.0
     return ave_rating
 
 def get_most_watched_genre(user_data):
