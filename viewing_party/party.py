@@ -74,7 +74,7 @@ def get_friends_unique_watched(user_data):
     flat_list = [movie for sublist in friends_movie_lists for movie in sublist]
     friends_unique_list = []
     for movie in flat_list:
-        if movie not in user_data["watched"]:
+        if movie not in user_data["watched"] and movie not in friends_unique_list:
             friends_unique_list.append(movie)
     return friends_unique_list
 
