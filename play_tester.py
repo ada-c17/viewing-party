@@ -92,33 +92,52 @@ pp = pprint.PrettyPrinter(indent=4)
 
 
 
-print("\n-----Wave 03 user_data-----")
+# print("\n-----Wave 03 user_data-----")
 # pp.pprint(clean_wave_3_data())
 
 # amandas_data = clean_wave_3_data()
-amandas_data = clean_wave_3_data()
-amandas_data["friends"][0]["watched"].append(INTRIGUE_3)
+# amandas_data = clean_wave_3_data()
+# amandas_data["friends"][0]["watched"].append(INTRIGUE_3)
 
-pp.pprint(amandas_data)
+# amandas_data = {
+#     "watched": [
+#         HORROR_1,
+#         FANTASY_1,
+#         INTRIGUE_1
+#     ],
+#     "friends": [
+#         {
+#             "watched": [
+#                 HORROR_1,
+#                 FANTASY_1,
+#             ]
+#         },
+#         {
+#             "watched": []
+#         }
+#     ]
+# }
 
-#amanda's watched list
-print(f"this is amanda's watched list:")
-pp.pprint(amandas_data["watched"])
-print(f"---")
-#friend 1's watched list
-print(f"this is amanda's friend #1 watched list:")
-pp.pprint(amandas_data["friends"][0]["watched"])
-print(f"---")
-#friend 2's watched list
-print(f"this is amanda's friend #2 watched list:")
-pp.pprint(amandas_data["friends"][1]["watched"])
-print(f"---")
+# pp.pprint(amandas_data)
+
+# #amanda's watched list
+# print(f"this is amanda's watched list:")
+# pp.pprint(amandas_data["watched"])
+# print(f"---")
+# #friend 1's watched list
+# print(f"this is amanda's friend #1 watched list:")
+# pp.pprint(amandas_data["friends"][0]["watched"])
+# print(f"---")
+# #friend 2's watched list
+# print(f"this is amanda's friend #2 watched list:")
+# pp.pprint(amandas_data["friends"][1]["watched"])
+# print(f"---")
 
 
-print(f"test section")
-# pp.pprint(get_unique_watched(amandas_data))
+# print(f"test section")
+# # pp.pprint(get_unique_watched(amandas_data))
 
-pp.pprint(get_friends_unique_watched(amandas_data))
+# pp.pprint(get_friends_unique_watched(amandas_data))
 
 
 # print("this is scratchpad for test 14")
@@ -180,10 +199,12 @@ pp.pprint(get_friends_unique_watched(amandas_data))
     #     for movie in friend_list["watched"]:
     #         print(movie["title"])
 
+# pp.pprint(get_friends_unique_watched(amandas_data))
+
 
 # Wave 04 user data
-#print("\n-----Wave 04 user_data-----")
-#pp.pprint(clean_wave_4_data())
+print("\n-----Wave 04 user_data-----")
+pp.pprint(clean_wave_4_data())
 
 # Wave 05 user data
 #print("\n-----Wave 05 user_data-----")
