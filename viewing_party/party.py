@@ -1,7 +1,4 @@
 # ------------- WAVE 1 --------------------
-from enum import unique
-
-
 movies = {}
 
 def create_movie(title, genre, rating):
@@ -86,7 +83,7 @@ def get_most_watched_genre(user_data):
     #if no data, return None
     else:
         return None
-        
+
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
