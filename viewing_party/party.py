@@ -109,3 +109,13 @@ def get_new_rec_by_genre(user_data):
             if movie["genre"] == max_genre:
                 new_rec.append(movie)
     return new_rec
+
+
+def get_rec_from_favorites(user_data):
+    user_unique_list = get_unique_watched(user_data)
+    fav_recs = []
+    for movie in user_unique_list:
+        if movie in user_data["favorites"]:
+            fav_recs.append(movie)
+    return fav_recs
+
