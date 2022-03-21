@@ -41,24 +41,22 @@ pp = pprint.PrettyPrinter(indent=4)
 # print(f'{janes_data["watchlist"]=}')
 
 amandas_data = clean_wave_3_data()
-# print(f"{amandas_data['friends']=}")
-# print("_______________")
-# print(f"{amandas_data['friends'][1]['watched']=}")
 
-# def get_unique_watched(user_dict):
-#     # user_watched_titles = set()
-#     # friends_watched = set()
-#     friends_watched_list = user_dict["friends"]
-#     combined_friends_list = []
-#     for watched_dict in friends_watched_list:
-#         combined_friends_list.extend(watched_dict["watched"])
-#     users_watched_list = user_dict["watched"]
-#     unique_watched = []
-#     for movie in users_watched_list:
-#         if movie not in combined_friends_list:
-#             unique_watched.append(movie)
-#     return unique_watched
+def get_friends_unique_watched(user_dict):
+    friends_watched_list = user_dict["friends"]
+    combined_friends_list = []
+    for watched_dict in friends_watched_list:
+        combined_friends_list.extend(watched_dict["watched"])
+    users_watched_list = user_dict["watched"]
+    unique_watched = []
+    for movie in combined_friends_list:
+        if movie not in users_watched_list:
+            unique_watched.append(movie)
+    print(f"{combined_friends_list=}")
+    print(f"{users_watched_list=}")
+    print("this is the list: \n")
+    return unique_watched
 
 
-# print(get_unique_watched(amandas_data))
+print(get_friends_unique_watched(amandas_data))
 # # pp.pprint(amandas_data)
