@@ -1,11 +1,9 @@
-from typing import Optional
-
 
 # -----------------------------------------
 # ------------- WAVE 1 --------------------
 # -----------------------------------------
 
-def create_movie(title: str, genre: str, rating: float) -> Optional[dict]:
+def create_movie(title, genre, rating):
     if title and genre and rating:
         new_movie = {
             "title": title,
@@ -16,17 +14,17 @@ def create_movie(title: str, genre: str, rating: float) -> Optional[dict]:
     return None
 
 
-def add_to_watched(user_data: dict, movie: dict) -> dict:
+def add_to_watched(user_data, movie):
     user_data["watched"].append(movie)
     return user_data
 
 
-def add_to_watchlist(user_data: dict, movie: dict) -> dict:
+def add_to_watchlist(user_data, movie):
     user_data["watchlist"].append(movie)
     return user_data
 
 
-def watch_movie(user_data: dict, title: str) -> dict:
+def watch_movie(user_data, title):
     for index, movie in enumerate(user_data["watchlist"]):
         if movie["title"] == title:
             user_data["watched"].append(movie)
@@ -38,7 +36,7 @@ def watch_movie(user_data: dict, title: str) -> dict:
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 
-def get_watched_avg_rating(user_data: dict) -> float:
+def get_watched_avg_rating(user_data):
     watched_count = len(user_data["watched"])
     if watched_count == 0:
         return 0.0
@@ -46,7 +44,7 @@ def get_watched_avg_rating(user_data: dict) -> float:
         return sum(movie["rating"] for movie in user_data["watched"]) / watched_count
 
 
-def get_most_watched_genre(user_data: dict) -> Optional[str]:
+def get_most_watched_genre(user_data):
     if len(user_data["watched"]) == 0:
         return None
     else:
@@ -67,7 +65,7 @@ def get_most_watched_genre(user_data: dict) -> Optional[str]:
 # -----------------------------------------
 
 # A helper function to get all distinct movies from friends' "watched" lists
-def get_friends_watched(user_data: dict) -> list[dict]:
+def get_friends_watched(user_data):
     friends_watched_movies = []
     for friend in user_data["friends"]:
         for movie in friend["watched"]:
@@ -76,7 +74,7 @@ def get_friends_watched(user_data: dict) -> list[dict]:
     return friends_watched_movies
 
 
-def get_unique_watched(user_data: dict) -> list[dict]:
+def get_unique_watched(user_data):
     user_watched_movies = user_data["watched"]
     friends_watched_movies = get_friends_watched(user_data)
 
@@ -88,7 +86,7 @@ def get_unique_watched(user_data: dict) -> list[dict]:
     return user_unique_watched
 
 
-def get_friends_unique_watched(user_data: dict) -> list[dict]:
+def get_friends_unique_watched(user_data):
     user_watched_movies = user_data["watched"]
     friends_watched_movies = get_friends_watched(user_data)  
     
@@ -98,13 +96,13 @@ def get_friends_unique_watched(user_data: dict) -> list[dict]:
             friends_unique_watched.append(movie)
 
     return friends_unique_watched
-   
+
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
-def get_available_recs(user_data: dict) -> list[dict]:
+def get_available_recs(user_data):
     not_watched_movies = get_friends_unique_watched(user_data)
 
     recommended_movies = []
@@ -119,7 +117,7 @@ def get_available_recs(user_data: dict) -> list[dict]:
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
-def get_new_rec_by_genre(user_data: dict) -> list[dict]:
+def get_new_rec_by_genre(user_data):
     not_watched_movies = get_friends_unique_watched(user_data)
     most_watched_genre = get_most_watched_genre(user_data)
 
@@ -131,7 +129,7 @@ def get_new_rec_by_genre(user_data: dict) -> list[dict]:
     return recommended_movies    
 
 
-def get_rec_from_favorites(user_data: dict) -> list[dict]:
+def get_rec_from_favorites(user_data):
     friends_watched_movies = get_friends_watched(user_data)
 
     recommended_movies = []
