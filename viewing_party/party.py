@@ -75,3 +75,26 @@ def get_available_recs(user_data):
             if movie not in recommended and movie["title"] not in watched_list and movie["host"] in user_data["subscriptions"]:
                 recommended.append(movie)
     return recommended
+
+def get_new_rec_by_genre(user_data):
+    genre_rec = []
+    most_watched_genre = get_most_watched_genre(user_data)
+    overall_recs = get_friends_unique_watched(user_data)
+    for rec in overall_recs:
+        if rec["genre"] == most_watched_genre:
+            genre_rec.append(rec)
+    return genre_rec
+
+def get_rec_from_favorites(user_data):
+    friends_list = user_data["friends"]
+    fav_list = user_data["favorites"]
+    friends_watched = []
+    no_overlap = []
+    for friend in friends_list:
+        for movie in friend["watched"]:
+            if movie not in friends_watched and movie in fav_list:
+                friends_watched.append(movie)
+    for fav_movie in fav_list:
+        if fav_movie not in friends_watched:
+            no_overlap.append(fav_movie)
+    return no_overlap
