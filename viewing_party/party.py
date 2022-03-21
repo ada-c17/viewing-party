@@ -1,30 +1,35 @@
 # ------------- WAVE 1 --------------------
 
 from tests.test_constants import USER_DATA_5
-
+import copy
 
 def create_movie(title, genre, rating):
-    movies = {"title" : title,
+    if not title or not genre or not rating:
+        return None
+    movie = {"title" : title,
                 "genre" : genre,
                 "rating" : rating}
-    if not title or not genre or not rating:
-        movies = None
-    return movies
+    return movie
 
 def add_to_watched(user_data, movie):
-    user_data["watched"].append(movie)
-    return user_data
+    # make deep copy of original data and modifying that instead of modifying user_data in place
+    # because consuming unit tests expect a return value
+    copied_user_data = copy.deepcopy(user_data)
+    copied_user_data["watched"].append(movie)
+    return copied_user_data
 
 def add_to_watchlist(user_data, movie):
-    user_data["watchlist"].append(movie)
-    return user_data
+    copied_user_data = copy.deepcopy(user_data)
+    copied_user_data["watchlist"].append(movie)
+    return copied_user_data
 
-def watch_movie(user_data, MOVIE_TITLE_1):
-    for movie in user_data["watchlist"]:
-        if movie["title"] == MOVIE_TITLE_1:
-            user_data["watched"].append(movie)
-            user_data["watchlist"].remove(movie)
-    return user_data
+def watch_movie(user_data, movie_title):
+    copied_user_data = copy.deepcopy(user_data)
+    for movie in copied_user_data["watchlist"]:
+        if movie["title"] == movie_title:
+            copied_user_data["watched"].append(movie)
+            copied_user_data["watchlist"].remove(movie)
+    return copied_user_data
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
