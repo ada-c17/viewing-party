@@ -96,3 +96,15 @@ def get_available_recs(user_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+def get_new_rec_by_genre(user_data):
+    friends_unique_list = get_friends_unique_watched(user_data)
+    genre_list = []
+    new_rec = []
+    for movie in user_data["watched"]:
+        genre_list.append(movie["genre"])
+    max_genre = max(set(genre_list), key=genre_list.count)
+    # how??!
+    for movie in friends_unique_list:
+        if movie["genre"] == max_genre:
+            new_rec.append(movie)
+    return new_rec
