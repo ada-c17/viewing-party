@@ -34,6 +34,7 @@ def watch_movie(user_data, movie_title):
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+
 def get_watched_avg_rating(user_data):
     total_rating = 0
     for movie in user_data["watched"]:
@@ -63,6 +64,7 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+
 def get_unique_watched(user_data):
     # get the list of movies that all friends watched
     friends_watched_movie = []
@@ -87,10 +89,10 @@ def get_friends_unique_watched(user_data):
 
     return friends_uniqute_watched
 
-        
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+
 def get_available_recs(user_data):
     recommendations = []
     # get movies that only friends watched
@@ -105,12 +107,10 @@ def get_available_recs(user_data):
             pass
     return recommendations
 
-
-
-
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+
 def get_new_rec_by_genre(user_data):
     recommendations_genre = []
     # get most watched genre of user 
