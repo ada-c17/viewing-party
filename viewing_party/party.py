@@ -31,11 +31,11 @@ def watch_movie(user_data, movie):
     
     filtered_user_data = dict(user_data)
 
-    for i in range(len(user_data["watchlist"])):
-        watched_movie = user_data["watchlist"][i]["title"]
+    for elem in user_data["watchlist"]:
+        watched_movie = elem["title"]
         if movie == watched_movie:
-            filtered_user_data["watched"].append(filtered_user_data["watchlist"][i])
-            filtered_user_data["watchlist"].remove(filtered_user_data["watchlist"][i])
+            filtered_user_data["watched"].append(elem)
+            filtered_user_data["watchlist"].remove(elem)
 
     return filtered_user_data
 
