@@ -93,7 +93,7 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 def get_available_recs(user_data):
     recommendations = []
-    # get movies that only firends watched
+    # get movies that only friends watched
     friends_unique_watched = get_friends_unique_watched(user_data)
     for movie in friends_unique_watched:
         # use try, except in case there is no key 'subscriptions'
@@ -101,7 +101,8 @@ def get_available_recs(user_data):
             if movie["host"] in user_data["subscriptions"]:
                 recommendations.append(movie)
         except KeyError:
-            recommendations.append(movie)
+            # don't recommend a move if it is not available on any of the user's subscriptions
+            pass
     return recommendations
 
 
