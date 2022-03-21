@@ -152,7 +152,7 @@ def get_available_recs(user_data):
 # create empty list called recommended_movies
 # create a variable called "favorite genre"
 # assign result from most watched genre function to variable
-# if movie in friend's watched list
+# if movie in friends' watched list
 # and if movie not in user watched list
 # and movie["genre"] == favorite genre
 # append movie to recommended_movies list
@@ -166,4 +166,22 @@ def get_new_rec_by_genre(user_data):
         for movie in watched_friend:
             if movie not in watched_user and movie["genre"] == favorite_genre:
                 recommended_movies.append(movie)
+    return recommended_movies
+
+# create get_rec_from_favorites function with user_data parameter
+# user_data has a "favorites" dict with list of user's favorite movies as strings
+# create an empty list called recommended_movies
+# create "unique_movies" variable to hold output from get_unique watched function
+# create "favorites" variable to access favorites list
+# loop through movies in watched_user
+# if movie in unique movies and favorites
+# append movie to recommended_list
+def get_rec_from_favorites(user_data):
+    recommended_movies = []
+    favorites = user_data["favorites"]
+    watched_user = user_data["watched"]
+    unique_movies = get_unique_watched(user_data)
+    for movie in watched_user:
+        if movie in unique_movies and movie in favorites:
+            recommended_movies.append(movie)
     return recommended_movies
