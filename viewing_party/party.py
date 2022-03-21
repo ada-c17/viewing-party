@@ -111,17 +111,15 @@ def get_friends_unique_watched(user_data):
     for value in user.values():
         list_of_user_watched.append(value)
         
-    for dict in range(len(friends)):
-        if friends[dict] not in list_of_user_watched:
-            unique_movies_from_friends.append(friends[dict])
+    for dict_movie in range(len(friends)):
+        if friends[dict_movie] not in list_of_user_watched:
+            unique_movies_from_friends.append(friends[dict_movie])
     return unique_movies_from_friends            
 
 #helper function
 def get_unique_helper(user_data):
     user_movies_dict = {}
-    friends_movies_dict = {}
     friends_list = []
-    result_dict = {}
     for value in user_data.values():
         if value == user_data["watched"]:
             for i in range(len(user_data["watched"])):
@@ -179,11 +177,11 @@ def get_new_rec_by_genre(user_data):
     if len(list_from_friends) == 0:
         return []
     else:
-        for dict in list_from_friends:
+        for dict_movie in list_from_friends:
             if genre_dict is not None:
-                if genre_dict in dict["genre"]:
+                if genre_dict in dict_movie["genre"]:
             #print(genre_dict)
-                    recommended_genre_list.append(dict)
+                    recommended_genre_list.append(dict_movie)
             else:
                 return []
     return recommended_genre_list
@@ -198,11 +196,12 @@ def get_rec_from_favorites(user_data):
     recommended_favorites = []
     unique_list_from_user = []
     unique_list_from_user = get_unique_watched(user_data)
-    for list in user_data["favorites"]:
-        if list is not None:
+    for list_movie in user_data["favorites"]:
+        print(list_movie)
+        if list_movie is not None:
             for movie in unique_list_from_user:
-                if movie  == list:
-                    recommended_favorites.append(list)
+                if movie == list_movie:
+                    recommended_favorites.append(movie)
     return recommended_favorites
 
             
