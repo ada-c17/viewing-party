@@ -1,3 +1,5 @@
+# Q: how to use test_constants??
+# from viewing_party.tests import test_constants
 # ------------- WAVE 1 --------------------
 import statistics
 user_data = {}
@@ -56,9 +58,42 @@ def get_most_watched_genre(user_data):
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
-# -----------------------------------------
+# ----------------------------------------
 
-        
+def get_unique_watched(user_data):
+    # movies watched by user, and by friends
+    movies_user_watched = []
+    movies_friends_watched = []
+
+    # add movie dictionaries to the lists
+    for i in range(len(user_data["watched"])):
+        movie_title = user_data["watched"][i]['title']
+        movies_user_watched.append(movie_title)
+
+    for i in range(len(user_data["friends"])):
+        list_of_dicts = user_data["friends"][i]['watched']
+        for i in range(len(list_of_dicts)):
+            movies_friends_watched.append(list_of_dicts[i]['title'])
+    
+
+    # use set to compare the lists, taking the difference between the user's set from the friends set.
+    user_set = set(movies_user_watched)
+    friends_set = set(movies_friends_watched)
+    # new_set = set_a - set_b
+    unique_user_set = user_set - friends_set
+    list(unique_user_set)
+
+    unique_list_of_dicts = []
+    for movie in unique_user_set:
+        for i in range(len(user_data["watched"])):
+            if movie == user_data["watched"][i]['title']:
+                unique_list_of_dicts.append(user_data["watched"][i])
+
+    return unique_list_of_dicts
+
+def get_friends_unique_watched():
+    pass
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
@@ -66,4 +101,3 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
-
