@@ -9,10 +9,10 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 # play testing section
-print("\n-----Wave 01 test data-----")
-pp.pprint(HORROR_1)
-pp.pprint(FANTASY_1)
-pp.pprint(FANTASY_2)
+# print("\n-----Wave 01 test data-----")
+# pp.pprint(HORROR_1)
+# pp.pprint(FANTASY_1)
+# pp.pprint(FANTASY_2)
 
 # print("\n-----Wave 02 user_data-----")
 # pp.pprint(clean_wave_2_data())
@@ -29,13 +29,36 @@ pp.pprint(FANTASY_2)
 #pp.pprint(clean_wave_5_data())
 
 
-janes_data = {
-    "watchlist": [{
-        "title": MOVIE_TITLE_1,
-        "genre": GENRE_1,
-        "rating": RATING_1
-    }],
-    "watched": []
-}
+# janes_data = {
+#     "watchlist": [{
+#         "title": MOVIE_TITLE_1,
+#         "genre": GENRE_1,
+#         "rating": RATING_1
+#     }],
+#     "watched": []
+# }
     
-print(f'{janes_data["watchlist"]=}')
+# print(f'{janes_data["watchlist"]=}')
+
+amandas_data = clean_wave_3_data()
+# print(f"{amandas_data['friends']=}")
+# print("_______________")
+# print(f"{amandas_data['friends'][1]['watched']=}")
+
+# def get_unique_watched(user_dict):
+#     # user_watched_titles = set()
+#     # friends_watched = set()
+#     friends_watched_list = user_dict["friends"]
+#     combined_friends_list = []
+#     for watched_dict in friends_watched_list:
+#         combined_friends_list.extend(watched_dict["watched"])
+#     users_watched_list = user_dict["watched"]
+#     unique_watched = []
+#     for movie in users_watched_list:
+#         if movie not in combined_friends_list:
+#             unique_watched.append(movie)
+#     return unique_watched
+
+
+# print(get_unique_watched(amandas_data))
+# # pp.pprint(amandas_data)
