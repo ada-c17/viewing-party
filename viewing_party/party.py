@@ -190,4 +190,32 @@ def get_new_rec_by_genre(user_data):
     return recommended_movies
 
 
+def get_rec_from_favorites(user_data):
+
+    recommended_favorites = []
+
+    for movie in user_data["favorites"]:
+
+        movie_found = False
+
+        for friend in user_data["friends"]:
+
+            for friend_movie in friend["watched"]:
+
+                if friend_movie["title"] == movie["title"]:
+                    movie_found = True
+                    break
+            if movie_found == True:
+                break
+
+        if movie_found == False:
+            recommended_favorites.append(movie)
+
+    return recommended_favorites
+
+
+
+        
+
+
 
