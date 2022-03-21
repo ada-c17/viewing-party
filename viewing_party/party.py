@@ -2,6 +2,7 @@
 
 from imp import new_module
 from turtle import up
+from zoneinfo import available_timezones
 
 
 def create_movie(title, genre, rating):
@@ -93,7 +94,7 @@ def get_unique_watched(user_data):
     return user_unique_movies
 
 def get_movies_watched_by_friends(user_data):
-    #returns a list with all frineds' watched movies
+    #returns a list with all friends' watched movies
     watched_by_friends = [] 
 
     for friends in user_data['friends']:
@@ -114,11 +115,22 @@ def get_friends_unique_watched(user_data):
     
     return friends_unique_movies
 
-
-
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+
+def get_available_recs(user_data):
+    #returns a list of recommended films that user hasn't watched 
+    #and has a subscription to the service where movie is streamed.
+    user_subscriptions = user_data['subscriptions']
+    all_recommendations = get_friends_unique_watched(user_data)
+    available_recommendation = []
+    
+    for recommendation in all_recommendations:
+        if recommendation['host'] in user_subscriptions:
+            available_recommendation.append(recommendation)
+    
+    return available_recommendation
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
