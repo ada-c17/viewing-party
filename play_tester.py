@@ -114,8 +114,12 @@ print(f"---")
 
 
 print(f"test section")
-pp.pprint(get_unique_watched(amandas_data))
+# pp.pprint(get_unique_watched(amandas_data))
 
+pp.pprint(get_friends_unique_watched(amandas_data))
+
+
+# print("this is scratchpad for test 14")
     # create a unique movies empty list (of dicts)
     # iterate through the users watched
     # for each movie, compare the titles

@@ -98,7 +98,7 @@ def get_unique_watched(user_data):
     '''
     this function compares a user's watched movie list
     to their friends' watched movies lists and
-    returns a list of unique movies
+    returns a list of unique movies the user has watched
     '''
 
     user_all_movies = []
@@ -120,6 +120,34 @@ def get_unique_watched(user_data):
                     user_unique_movies.append(movie)
 
     return user_unique_movies
+
+def get_friends_unique_watched(user_data):
+    '''
+    this function compares a user's watched movie list
+    to their friends' watched movies lists and
+    returns a list of unique movies the user's friends have watched
+    '''
+    user_all_movies = []
+    friends_all_movies = []
+    friends_unique_movies = []
+
+    for friend in user_data["friends"]:
+        for friend_movie in friend["watched"]:
+            friends_all_movies.append(friend_movie["title"])
+
+    for movie in user_data["watched"]:
+        user_all_movies.append(movie["title"])
+
+    for title in friends_all_movies:
+        if not title in user_all_movies:
+            unique_movie = title
+        
+            for friend in user_data["friends"]:
+                for friend_movie in friend["watched"]:
+                    if unique_movie == friend_movie["title"]:
+                        friends_unique_movies.append(friend_movie)
+
+    return friends_unique_movies
 
 
 
