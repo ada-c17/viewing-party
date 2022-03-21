@@ -2,7 +2,8 @@ import pytest
 from viewing_party.party import *
 from tests.test_constants import *
 
-@pytest.mark.skip()
+# Wave 3 / Test 1
+# Movies Amanda watched, but her friends haven't
 def test_my_unique_movies():
     # Arrange
     amandas_data = clean_wave_3_data()
@@ -17,6 +18,8 @@ def test_my_unique_movies():
     assert amandas_data == clean_wave_3_data()
 
 @pytest.mark.skip()
+# Wave 3 / Test 2
+# If no movies in Amanda's list, no unique movies
 def test_my_not_unique_movies():
     # Arrange
     amandas_data = clean_wave_3_data()
@@ -29,6 +32,8 @@ def test_my_not_unique_movies():
     assert len(amandas_unique_movies) == 0
 
 @pytest.mark.skip()
+# Wave 3 / Test 3
+# Amanda's friends watched, but Amanda hasn't
 def test_friends_unique_movies():
     # Arrange
     amandas_data = clean_wave_3_data()
@@ -44,6 +49,8 @@ def test_friends_unique_movies():
     assert amandas_data == clean_wave_3_data()
 
 @pytest.mark.skip()
+# Wave 3 / Test 4
+# Make sure no duplicates in list of friend's unique movies
 def test_friends_unique_movies_not_duplicated():
     # Arrange
     amandas_data = clean_wave_3_data()
