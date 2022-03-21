@@ -23,40 +23,39 @@ def add_to_watchlist(user_data, movie):
     }
     return user_data
 
-def watch_movie(janes_data, movie_to_watch):
-    for i in range(len(janes_data["watchlist"])):
-        if janes_data["watchlist"][i]["title"] == movie_to_watch:
-            janes_data["watched"].append(janes_data["watchlist"][i])
-            janes_data["watchlist"].pop(i)
-    return janes_data
-
+def watch_movie(user_data, movie_to_watch):
+    for i in range(len(user_data["watchlist"])):
+        if user_data["watchlist"][i]["title"] == movie_to_watch:
+            user_data["watched"].append(user_data["watchlist"][i])
+            user_data["watchlist"].pop(i)
+    return user_data
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 
-def get_watched_avg_rating(janes_data):
+def get_watched_avg_rating(user_data):
     total_rating = 0
     average = 0
-    watched_list_length = len(janes_data["watched"])
+    watched_list_length = len(user_data["watched"])
     if watched_list_length == 0:
         return average
     else:
         for movie in range(watched_list_length):
-            total_rating += janes_data["watched"][movie]["rating"]
+            total_rating += user_data["watched"][movie]["rating"]
             average = total_rating / watched_list_length
     return average
 
-def get_most_watched_genre(janes_data):
-    if len(janes_data["watched"]) == 0:
+def get_most_watched_genre(user_data):
+    if len(user_data["watched"]) == 0:
         return None
     else:
         genre_counting_dict = {}
-        for movie in range(len(janes_data["watched"])):
-            if janes_data["watched"][movie]["genre"] not in genre_counting_dict:
-                genre_counting_dict[janes_data["watched"][movie]["genre"]] = 1
+        for movie in range(len(user_data["watched"])):
+            if user_data["watched"][movie]["genre"] not in genre_counting_dict:
+                genre_counting_dict[user_data["watched"][movie]["genre"]] = 1
             else:
-                genre_counting_dict[janes_data["watched"][movie]["genre"]] += 1
+                genre_counting_dict[user_data["watched"][movie]["genre"]] += 1
     popular_genre = max(genre_counting_dict, key = genre_counting_dict.get)
     return popular_genre
 
@@ -65,18 +64,17 @@ def get_most_watched_genre(janes_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-def get_unique_watched(amandas_data):
-    amandas_unique_movies = []
-    friend_movies = []
-    for friend_movie_dict_index in range(len(amandas_data["friends"])):
-        friend_movies += amandas_data["friends"][friend_movie_dict_index]["watched"]
-    print(friend_movies)
+def get_unique_watched(user_data):
+    users_unique_movies = []
+    friends_movies = []
+    for friend_movie_dict_index in range(len(user_data["friends"])):
+        friends_movies += user_data["friends"][friend_movie_dict_index]["watched"]
 
-    for movie in amandas_data["watched"]:
-        if movie not in friend_movies:
-            amandas_unique_movies.append(movie)
+    for movie in user_data["watched"]:
+        if movie not in friends_movies:
+            users_unique_movies.append(movie)
 
-    return amandas_unique_movies
+    return users_unique_movies
 
 
 
