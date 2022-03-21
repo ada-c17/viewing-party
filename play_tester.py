@@ -9,10 +9,10 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 # play testing section
-print("\n-----Wave 01 test data-----")
-pp.pprint(HORROR_1)
-pp.pprint(FANTASY_1)
-pp.pprint(FANTASY_2)
+# print("\n-----Wave 01 test data-----")
+# pp.pprint(HORROR_1)
+# pp.pprint(FANTASY_1)
+# pp.pprint(FANTASY_2)
 
 # print("\n-----Wave 02 user_data-----")
 # pp.pprint(clean_wave_2_data())
@@ -27,3 +27,46 @@ pp.pprint(FANTASY_2)
 # Wave 05 user data
 #print("\n-----Wave 05 user_data-----")
 #pp.pprint(clean_wave_5_data())
+
+
+# janes_data = {
+#     "watchlist": [{
+#         "title": MOVIE_TITLE_1,
+#         "genre": GENRE_1,
+#         "rating": RATING_1
+#     }],
+#     "watched": []
+# }
+    
+# print(f'{janes_data["watchlist"]=}')
+
+sonyas_data = clean_wave_5_data()
+
+def get_new_rec_by_genre(user_dict):
+    friends_list = user_dict["friends"]
+    for friend in friends_list:
+        if not friend["watched"]:
+            return []
+    if user_dict["watched"]:
+        recommendations = []
+        watched = user_dict["watched"]
+        subscriptions = user_dict["subscriptions"]
+        fave_genres = []
+        for movie in user_dict["favorites"]:
+            if movie["genre"] not in fave_genres:
+                fave_genres.append(movie["genre"])
+        friends_unique_watched = get_friends_unique_watched(user_dict)
+        for movie in friends_unique_watched:
+            if (movie not in watched) \
+                and (movie["host"] in subscriptions) \
+                and (movie["genre"] in fave_genres):
+
+                recommendations.append(movie)
+        return recommendations
+    else:
+        return []
+
+
+print(get_new_rec_by_genre(sonyas_data))
+# print(get_friends_unique_watched(sonyas_data))
+# pp.pprint(sonyas_data)
