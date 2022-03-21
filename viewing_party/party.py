@@ -123,7 +123,49 @@ def get_unique_watched(user_data):
         # continue until all movies on user's watch list have been checked. 
         continue
 
-    return user_unique_watched               
+    return user_unique_watched       
+
+
+def get_friends_unique_watched(user_data):
+    friends_unique_watched = []
+
+    friends_unique_watched_titles = []
+
+    friend_index = 0
+    
+    # iterate through friends list
+    for friend in user_data["friends"]:
+        # iterate through specific friend's watched list
+        for i in range(len(user_data["friends"][friend_index]["watched"])):
+            # set title we're currently considering
+            looking_for_title = user_data["friends"][friend_index]["watched"][i]["title"]
+
+            searching_for_movie = True
+            # start iterating over user's watched list
+            for num in range(len(user_data["watched"])):
+                # check if title matches item on user's watched list
+                if looking_for_title == user_data["watched"][num]["title"]:
+                    searching_for_movie = False
+                    break
+                # if title does not match user's watched list, see if it is already listed on unique_watched_list
+            if searching_for_movie == False:
+                continue
+            elif looking_for_title in friends_unique_watched_titles:
+                continue
+            else:
+                friends_unique_watched_titles.append(looking_for_title)
+                friends_unique_watched.append(user_data["friends"][friend_index]["watched"][i])
+        friend_index += 1
+    
+    return friends_unique_watched
+
+
+
+
+    # iterate through each friends watched list, comparing to user's watched list
+    # for every movie that user has not watched:
+    # check if it is already in the new list
+    # if not, add full movie dictionary to list
 
 
 # -----------------------------------------
