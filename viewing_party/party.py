@@ -1,4 +1,5 @@
 # ------------- WAVE 1 --------------------
+import copy
 
 def create_movie(title, genre, rating):
 
@@ -45,7 +46,6 @@ def watch_movie(user_data, title):
 def get_watched_avg_rating(user_data):
     avg = 0
     counter = 0
-    #for k,v in user_data["watched"]:
     for i in user_data["watched"]:
         for k,v in i.items():
             if k == "rating":
@@ -99,11 +99,9 @@ def get_most_watched_genre(user_data):
 
 def get_unique_watched(user_data):
 
-    unique_movies = []
 
-    #COPY USER'S WATCHED MOVIES
-    for x in user_data["watched"]:
-        unique_movies.append(x)
+    unique_movies = copy.deepcopy(user_data["watched"])
+    
 
     for movie in user_data["watched"]:
 
@@ -125,6 +123,7 @@ def get_friends_unique_watched(user_data):
     unique_movies = []
     #COPY FRIENDS' WATCHED MOVIES
     #deep copy??????????????????????????????????????????????????
+
     for friend in user_data["friends"]:
         for i in friend["watched"]:
 
@@ -134,7 +133,6 @@ def get_friends_unique_watched(user_data):
 
 
     for friend in user_data["friends"]:
-        #for movie in friend["watched"]:
 
         for movie in user_data["watched"]:
 
@@ -145,8 +143,6 @@ def get_friends_unique_watched(user_data):
                     if movie in unique_movies:
                         unique_movies.remove(movie)
 
-    #print("MOVIES***********")
-    #print(unique_movies)
     return unique_movies
 
 
