@@ -40,8 +40,33 @@ pp = pprint.PrettyPrinter(indent=4)
     
 # print(f'{janes_data["watchlist"]=}')
 
-amandas_data = clean_wave_4_data()
+sonyas_data = clean_wave_5_data()
+
+def get_new_rec_by_genre(user_dict):
+    friends_list = user_dict["friends"]
+    for friend in friends_list:
+        if not friend["watched"]:
+            return []
+    if user_dict["watched"]:
+        recommendations = []
+        watched = user_dict["watched"]
+        subscriptions = user_dict["subscriptions"]
+        fave_genres = []
+        for movie in user_dict["favorites"]:
+            if movie["genre"] not in fave_genres:
+                fave_genres.append(movie["genre"])
+        friends_unique_watched = get_friends_unique_watched(user_dict)
+        for movie in friends_unique_watched:
+            if (movie not in watched) \
+                and (movie["host"] in subscriptions) \
+                and (movie["genre"] in fave_genres):
+
+                recommendations.append(movie)
+        return recommendations
+    else:
+        return []
 
 
-print(get_friends_unique_watched(amandas_data))
-# pp.pprint(amandas_data)
+print(get_new_rec_by_genre(sonyas_data))
+# print(get_friends_unique_watched(sonyas_data))
+# pp.pprint(sonyas_data)

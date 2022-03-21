@@ -105,3 +105,42 @@ def get_available_recs(user_dict):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+def get_new_rec_by_genre(user_dict):
+    friends_list = user_dict["friends"]
+    for friend in friends_list:
+        if not friend["watched"]:
+            return []
+    if user_dict["watched"]:
+        recommendations = []
+        watched = user_dict["watched"]
+        subscriptions = user_dict["subscriptions"]
+        fave_genres = []
+        for movie in user_dict["favorites"]:
+            if movie["genre"] not in fave_genres:
+                fave_genres.append(movie["genre"])
+        friends_unique_watched = get_friends_unique_watched(user_dict)
+        for movie in friends_unique_watched:
+            if (movie not in watched) \
+                and (movie["host"] in subscriptions) \
+                and (movie["genre"] in fave_genres):
+
+                recommendations.append(movie)
+        return recommendations
+    else:
+        return []
+
+
+
+def get_rec_from_favorites(user_dict):
+    recommendations = []
+    friends_watched_list = user_dict["friends"]
+    combined_friends_list = []
+    for watched_dict in friends_watched_list:
+        combined_friends_list.extend(watched_dict["watched"])
+    user_faves = user_dict["favorites"]
+    for movie in user_faves:
+        if (movie not in combined_friends_list) \
+            and (movie not in recommendations):
+
+            recommendations.append(movie)
+    return recommendations
