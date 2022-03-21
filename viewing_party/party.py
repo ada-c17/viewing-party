@@ -57,22 +57,23 @@ def get_most_watched_genre(user_data):
     return most_watched_genre        
 
 
-
-
-
-
-
-
-
-
-
-
-
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-        
+def get_unique_watched(user_data): 
+    unique_watched = []
+    unique_watched += user_data["watched"]
+    for data in user_data["friends"]:
+        for movie in data["watched"]:
+            if movie in unique_watched:
+                unique_watched.remove(movie)
+            
+    return unique_watched
+
+
+
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
