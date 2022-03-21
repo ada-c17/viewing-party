@@ -9,6 +9,7 @@ def create_movie(title, genre, rating):
 
     if None in movie.values():
         return None
+
     else:
         return movie
 
@@ -35,8 +36,10 @@ def get_watched_avg_rating(user_data):
     sum = 0
     if not user_data["watched"]:
         return 0
+
     for movie in user_data["watched"]:
         sum += movie["rating"]
+
     average = sum / len(user_data["watched"])
     return average
 
@@ -67,6 +70,7 @@ def get_most_watched_genre(user_data):
 
 def get_unique_watched(user_data):
     users_unique_watched = list(user_data["watched"])
+
     for movie in user_data["watched"]:
         for friend in range(len(user_data["friends"])):
             if movie in user_data["friends"][friend]["watched"] and movie in users_unique_watched:
@@ -76,10 +80,12 @@ def get_unique_watched(user_data):
 
 def get_friends_unique_watched(user_data):
     friends_unique_watched = []
+
     for friend in range(len(user_data["friends"])):
         for movie in user_data["friends"][friend]["watched"]:
             if movie not in friends_unique_watched and movie not in user_data["watched"]:
                 friends_unique_watched.append(movie)
+
     return friends_unique_watched
 
 # -----------------------------------------
@@ -87,9 +93,11 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 def get_available_recs(user_data):
     reccomendations = []
+
     for movie in get_friends_unique_watched(user_data):
         if movie["host"] in user_data["subscriptions"]:
             reccomendations.append(movie)
+
     return reccomendations
 
 
@@ -105,6 +113,7 @@ def get_new_rec_by_genre(user_data):
     for movie in friends_movies:
         if movie["genre"] is favorite_genre:
             recommendations.append(movie)
+
     return recommendations
 
 def get_rec_from_favorites(user_data):
@@ -114,5 +123,6 @@ def get_rec_from_favorites(user_data):
     for movie in user_data["favorites"]:
         if movie in unique_movies:
             recommendations.append(movie)
+            
     return recommendations
 
