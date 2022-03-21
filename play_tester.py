@@ -35,10 +35,10 @@ pp = pprint.PrettyPrinter(indent=4)
 
 
 # print("\n-----Wave 02 user_data-----")
-pp.pprint(clean_wave_2_data())
+# pp.pprint(clean_wave_2_data())
 
-print("~~~")
-janes_data = clean_wave_2_data()
+# print("~~~")
+# janes_data = clean_wave_2_data()
 # janes_data = {
 #         "watched": []
 #     }
@@ -62,7 +62,7 @@ janes_data = clean_wave_2_data()
 
 # print(get_watched_avg_rating(janes_data))
 
-print("test 12:")
+# print("test 12:")
 
 # def get_most_watched_genre(user_data):
 
@@ -87,15 +87,93 @@ print("test 12:")
     
     # return most_watched
 
-print(get_most_watched_genre(janes_data))
+# print(get_most_watched_genre(janes_data))
 # print(janes_data["watched"][0]["genre"])
 
 
 
+print("\n-----Wave 03 user_data-----")
+# pp.pprint(clean_wave_3_data())
+
+amandas_data = clean_wave_3_data()
+
+pp.pprint(amandas_data)
+
+#amanda's watched list
+print(f"this is amanda's watched list:")
+pp.pprint(amandas_data["watched"])
+print(f"---")
+#friend 1's watched list
+print(f"this is amanda's friend #1 watched list:")
+pp.pprint(amandas_data["friends"][0]["watched"])
+print(f"---")
+#friend 2's watched list
+print(f"this is amanda's friend #2 watched list:")
+pp.pprint(amandas_data["friends"][1]["watched"])
+print(f"---")
 
 
-#print("\n-----Wave 03 user_data-----")
-#pp.pprint(clean_wave_3_data())
+print(f"test section")
+pp.pprint(get_unique_watched(amandas_data))
+
+    # create a unique movies empty list (of dicts)
+    # iterate through the users watched
+    # for each movie, compare the titles
+    # it they don't match, add to unique movies list
+
+        # user_unique_movies.append(movie["title"])
+        # print(movie["title"])
+
+        # if movie["title"] in user_data["friends"]["watched"]:
+        #     print("yes")
+        
+        # # print(user_movie)
+        # # print(user_movie["title"])
+        # for friend_list in user_data["friends"]:
+        #     # print(friend_list["watched"])
+        #     for friend_movie in friend_list["watched"]:
+        #         # print(friend_movie["title"])
+        #         if user_movie["title"] != friend_movie["title"]:
+        #             user_unique_movies.append(user_movie)
+
+    # for i in user_data["watched"]:
+    #     print(i["title"])
+    #     print(user_data["friends"])
+
+        # print(user_movie)
+        # print(user_movie["title"])
+    #     for friend_list in user_data["friends"]:
+    #         # print(friend_list["watched"])
+    #         for friend_movie in friend_list["watched"]:
+    #             # print(friend_movie["title"])
+    #             if movie["title"] != friend_movie["title"]:
+    #                 user_unique_movies.append(user_movie)
+    # return user_unique_movies
+
+    # for user_movie in user_data["watched"]:
+    #     # print(user_movie)
+    #     # print(user_movie["title"])
+    #     for friend_list in user_data["friends"]:
+    #         # print(friend_list["watched"])
+    #         for friend_movie in friend_list["watched"]:
+    #             # print(friend_movie["title"])
+    #             if user_movie["title"] != friend_movie["title"]:
+    #                 user_unique_movies.append(user_movie)
+    # return user_unique_movies
+
+
+
+    # user_unique_movies = []
+
+    # for user_movie in user_data["watched"]:
+    #     # print(my_movie)
+    #     print(user_movie["title"])
+    
+    # for friend_list in user_data["friends"]:
+    #     # print(friend_list["watched"])
+    #     for movie in friend_list["watched"]:
+    #         print(movie["title"])
+
 
 # Wave 04 user data
 #print("\n-----Wave 04 user_data-----")
