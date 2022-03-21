@@ -120,6 +120,40 @@ def get_unique_watched(user_data):
             
 
 
+def get_friends_unique_watched(user_data):
+
+    unique_movies = []
+    #COPY FRIENDS' WATCHED MOVIES
+    for friend in user_data["friends"]:
+        for i in friend["watched"]:
+
+            if i not in unique_movies:
+
+             unique_movies.append(i)
+
+
+    for friend in user_data["friends"]:
+        #for movie in friend["watched"]:
+
+        for movie in user_data["watched"]:
+
+            for i in friend["watched"]:
+                if i["title"] == movie["title"]:
+
+                    #remove i from unique_movies
+                    if movie in unique_movies:
+                        unique_movies.remove(movie)
+
+
+    return unique_movies
+
+
+
+
+
+
+
+
 
 
 
