@@ -1,5 +1,5 @@
 import pytest
-from viewing_party.party import *
+from viewing_party.party import get_new_rec_by_genre, get_rec_from_favorites
 from tests.test_constants import *
 
 # @pytest.mark.skip()
@@ -112,6 +112,19 @@ def test_new_rec_from_empty_friends():
 
     # Act
     recommendations = get_new_rec_by_genre(sonyas_data)
+
+    # Assert
+    assert len(recommendations) == 0
+
+
+# Added test for get_rec_from_favorites
+def test_rec_from_empty_favorites():
+    # Arrange
+    data = clean_wave_5_data()
+    data["favorites"] = []
+
+    # Act
+    recommendations = get_rec_from_favorites(data)
 
     # Assert
     assert len(recommendations) == 0
