@@ -54,10 +54,10 @@ def genres(user_data):
     #set up set, dictionary for the count
     genres = set()
     
-    #make a set of genres
+    #make a set of genres, and return it as a list
     for i in range(len(user_data["watched"])):
         genres.add(user_data["watched"][i]["genre"])
-    return genres
+    return list(genres)
 
 def genre_count(user_data):
     #set up set, dictionary for the count
@@ -65,9 +65,9 @@ def genre_count(user_data):
     genre_count = {}
 
     #iterate over the genres and add a count to a dictionary
-    for genre in user_genres:
+    for i in range(len(user_data["watched"])):
         count = 0
-        for i in range(len(user_data["watched"])):
+        for genre in user_genres:
             if user_data["watched"][i]["genre"] == genre:
                 count += 1
                 genre_count[genre] = count
@@ -140,15 +140,13 @@ def get_new_rec_by_genre(user_data):
     #initialize data
     friends_unique_watched = get_friends_unique_watched(user_data)
     most_frequent_genre = get_most_watched_genre(user_data)
-    recommendations = []
- 
+    recommendations = []   
     #interate over the movies that user's friends have watched,
     #that user has not watched
     for i in range(len(friends_unique_watched)):
         #if a friend's movie is user's favorite genre, recommend it
         if friends_unique_watched[i]["genre"] == most_frequent_genre:
             recommendations.append(friends_unique_watched[i])
- 
     return recommendations
 
 def get_rec_from_favorites(user_data):
