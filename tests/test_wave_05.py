@@ -89,8 +89,8 @@ def test_unique_from_empty_favorites():
     }
 
     # Act
-    recommendations = get_new_rec_by_genre(sonyas_data)
-
+    #recommendations = get_new_rec_by_genre(sonyas_data)
+    recommendations = get_rec_from_favorites(sonyas_data)
     # Assert
     assert len(recommendations) == 0
 
@@ -110,7 +110,8 @@ def test_new_rec_from_empty_friends():
     }
 
     # Act
-    recommendations = get_new_rec_by_genre(sonyas_data)
-
+    #recommendations = get_new_rec_by_genre(sonyas_data)
+    recommendations = get_rec_from_favorites(sonyas_data)
+    
     # Assert
     assert len(recommendations) == 0

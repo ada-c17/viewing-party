@@ -140,14 +140,4 @@ def get_rec_from_favorites(user_data):
 
     return movie_recs
 
-    # for user_movie in user_favs:
-    #     watched_movie = False
-    #     for friend in friends_watched_list:
-    #         for friend_movie in friend["watched"]:
-    #             if user_movie == friend_movie:
-    #                 watched_movie = True
-    #                 break
-    #     if not watched_movie:
-    #         movie_recs.append(user_movie)
-
     
