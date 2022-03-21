@@ -13,13 +13,13 @@ def add_to_watchlist(user_data, movie):
     user_data["watchlist"].append(movie)
     return user_data
 
-def watch_movie(user_data, movie_title):
+def watch_movie(user_data, watched_movie_title):
     updated_watchlist = []
     for movie in user_data["watchlist"]:
-        if movie_title != movie["title"]:
-            updated_watchlist.append(movie)
-        else:
+        if movie["title"] == watched_movie_title:
             user_data["watched"].append(movie)
+        else:
+            updated_watchlist.append(movie)
     user_data["watchlist"] = updated_watchlist
     return user_data
 
@@ -41,7 +41,6 @@ def get_most_watched_genre(user_data):
         return None
     
     watched_genre_frequencies = {}
-    
     for movie in user_data["watched"]:
         if movie["genre"] in watched_genre_frequencies.keys():
             watched_genre_frequencies[movie["genre"]] += 1
@@ -53,7 +52,6 @@ def get_most_watched_genre(user_data):
         if count > current_top[1]:
             current_top = [genre, count]
     return current_top[0]
-
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
