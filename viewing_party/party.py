@@ -83,8 +83,49 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+def get_unique_watched(user_data):
+    # create empty list to store unique movies
+    user_unique_watched = []
 
-        
+    # iterate over user's watched list
+    for i in range(len(user_data["watched"])):
+        # set flag to signal if we're still looking
+        searching_for_movie = True
+
+        # set current title we're looking for
+        looking_for_title = user_data["watched"][i]["title"]
+
+        while searching_for_movie:
+            friend_index = 0
+            # iterate through friends list
+            for friend in user_data["friends"]:
+                # iterate through every movie on friend's watch list
+                if searching_for_movie:
+                    for num in range(len(user_data["friends"][friend_index]["watched"])):
+                        # if title matches title we're looking for, break out of loop and start looking for next title
+                        # once a title has been found once, we don't need to see if it's watched by multiple friends
+                        if user_data["friends"][friend_index]["watched"][num]["title"] == looking_for_title:
+                            searching_for_movie = False
+                            break
+                        else:
+                            continue
+                    # increment friend index to check next friend's watched list
+                    friend_index += 1
+                # if no longer searching for movie, break out of all loops
+                if searching_for_movie == False:
+                    break
+
+            if searching_for_movie:
+                # if after iterating through all friends we are still searching for movie, add it to the unique list
+                user_unique_watched.append(user_data["watched"][i])
+                # then change flag to switch to next movie
+                searching_for_movie = False
+        # continue until all movies on user's watch list have been checked. 
+        continue
+
+    return user_unique_watched               
+
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
