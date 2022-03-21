@@ -67,7 +67,17 @@ def get_unique_watched(user_data):
     for movie in user_data["watched"]:
         if not any(movie in d for d in friends_movie_lists):
             unique_watched_list.append(movie)
-    return unique_watched_list        
+    return unique_watched_list      
+
+def get_friends_unique_watched(user_data):
+    friends_movie_lists = [d["watched"] for d in user_data["friends"]]
+    flat_list = [movie for sublist in friends_movie_lists for movie in sublist]
+    friends_unique_list = []
+    for movie in flat_list:
+        if movie not in user_data["watched"]:
+            friends_unique_list.append(movie)
+    return friends_unique_list
+
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
