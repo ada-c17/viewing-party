@@ -95,7 +95,9 @@ pp = pprint.PrettyPrinter(indent=4)
 print("\n-----Wave 03 user_data-----")
 # pp.pprint(clean_wave_3_data())
 
+# amandas_data = clean_wave_3_data()
 amandas_data = clean_wave_3_data()
+amandas_data["friends"][0]["watched"].append(INTRIGUE_3)
 
 pp.pprint(amandas_data)
 
