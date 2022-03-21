@@ -64,25 +64,52 @@ def get_most_watched_genre(user_data):
 def get_unique_watched(user_data):
   movies_friends_watched = []
   movies_user_watched = []
-  unique_list = []
+  unique_list_user_watched = []
 
-  print(user_data)
-  for i in user_data["watched"]:
+  for i in user_data["watched"]: #iterating through every value
     movies_user_watched.append(i)
   #print(movies_user_watched)
   #print(len(movies_user_watched))
 
   for i in range(len(user_data["friends"])): #0,1,2,3,4,5,6,7
-    for item in user_data["friends"][i]["watched"]:
-      movies_friends_watched.append(item)
-  #print(movies_friends_watched)
+    for item in user_data["friends"][i]["watched"]: #this loop goes into the 2 watched key inside friends key
+      movies_friends_watched.append(item) #append all movies that friends watched
+    #print(movies_friends_watched)
 
   for i in movies_user_watched: #comparing elements in movies_user_watched to movies_friends_watched
     if i not in movies_friends_watched:
-      unique_list.append(i)
+      unique_list_user_watched.append(i)
   #print(unique_list)
-  return unique_list
+  return unique_list_user_watched
 
+def get_friends_unique_watched(user_data): #Test 16 is similar to test 15, instead of testing for 
+  #movies watched by user and not friends, we test for movies watched by friends but not user. 
+  ### I need to make this code more efficient because i copied and pasted it from previous function.
+  movies_friends_watched = [] 
+  movies_user_watched = []
+  unique_list_friends_watched = []
+  no_dup_list = []
+
+  for i in user_data["watched"]: #iterating through every value
+    movies_user_watched.append(i)
+  #print(movies_user_watched)
+  #print(len(movies_user_watched))
+
+  for i in range(len(user_data["friends"])): #0,1,2,3,4,5,6,7
+    for item in user_data["friends"][i]["watched"]: #this loop goes into the 2 watched key inside friends key
+      movies_friends_watched.append(item) #append all movies that friends watched
+    #print(movies_friends_watched)
+
+  for i in movies_friends_watched:
+    if i not in movies_user_watched:
+      unique_list_friends_watched.append(i)
+      #print(i)
+    print(unique_list_friends_watched) #last two elements are duplicates
+  #print(len(unique_list_friends_watched)) #prints 4 but expected 3
+  for i in unique_list_friends_watched: #go through unique_list_friends_watched
+    if i not in no_dup_list: #if each movie is not already in no_dup_list
+      no_dup_list.append(i) #append the movie to this list. thus not appending any duplicate movies
+  return no_dup_list
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
@@ -90,11 +117,3 @@ def get_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
-
-# a = {"abc": [{
-#   "123" : [{
-#     "abc123": "def456"
-#   }]
-# }]}
-
-# print(a["abc"][0]["123"][0]["abc123"])
