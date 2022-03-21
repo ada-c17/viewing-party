@@ -120,22 +120,13 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 
 def get_available_recs(user_data):
-    user_watched_movies = []
-    friends_watched_movies= []
     user_movie_recs = []
 
-    for item in user_data["watched"]:
-        user_watched_movies.append(item)
-    
-    for i in range(len(user_data["friends"])):
-        for item in user_data ["friends"][i]["watched"]: 
-            friends_watched_movies.append(item)
-
-    movie_recs = [item for item in friends_watched_movies if item not in user_watched_movies] # list comprehension that stores all movie titles not in friends_watched_movies
-    for i in range(len(user_data)- 1):
-        if movie_recs[i]["host"] not in user_data["subscriptions"][i]:
-            user_movie_recs.append(movie_recs[i])
-
+    for i in user_data["friends"]:
+        for j in i["watched"]:
+            if j not in user_data["watched"] and j["host"] in user_data["subscriptions"]: 
+                user_movie_recs.append(j)
+                
     return user_movie_recs
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
