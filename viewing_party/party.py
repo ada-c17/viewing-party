@@ -41,3 +41,27 @@ def get_most_watched_genre(user_data):
     
     key = max(genre_counts,key=lambda k: genre_counts[k])
     return key
+
+def get_unique_watched(user_data):
+    friends_list = user_data["friends"]
+    watched_list = user_data["watched"]
+    friends_watched = []
+    no_overlap = []
+    for friend in friends_list:
+        for movie in friend["watched"]:
+            if movie not in friends_watched and movie in watched_list:
+                friends_watched.append(movie)
+    for watched_movie in watched_list:
+        if watched_movie not in friends_watched:
+            no_overlap.append(watched_movie)
+    return no_overlap
+
+def get_friends_unique_watched(user_data):
+    friends_list = user_data["friends"]
+    watched_list = user_data["watched"]
+    friends_watched_unique = []
+    for friend in friends_list:
+        for movie in friend["watched"]:
+            if movie not in friends_watched_unique and movie not in watched_list:
+                friends_watched_unique.append(movie)
+    return friends_watched_unique
