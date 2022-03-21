@@ -73,7 +73,7 @@ def get_unique_watched(user_data):
     # get user's unique watched movies by checking if same movie is in friend's watched list
     unique_watched_movie = []
     for movie in user_data["watched"]:
-        if not movie in friends_watched_movie:
+        if not movie in friends_watched_movie and not movie in unique_watched_movie:
             unique_watched_movie.append(movie)
     
     return unique_watched_movie
