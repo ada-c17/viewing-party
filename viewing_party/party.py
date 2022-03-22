@@ -74,12 +74,6 @@ def watch_movie(user_data, title):
     # TASK TWO 
     # If you find it, remove the movie title from watchlist and add it to watched
 
-
-    # TEST EIGHT: need to account for duplicate title names --> can only have unique title names
-
-    # Act
-    # updated_data = watch_movie(janes_data, MOVIE_TITLE_1)
-
     for key, val in user_data.items():
         # Loop enters dictionary and checks for the "watchlist" key
         if key == "watchlist":
@@ -87,34 +81,59 @@ def watch_movie(user_data, title):
 
             for category in user_data[key]:
                 # Loop through the list value of the "watchlist" key 
-                # print(user_data[key])
+
                 if title == category["title"]:
                     # If title is in the inner dictionary as a key, loop enters the dictionary inside the list
                     
                     move_movie = (user_data[key][0])
-
-                    # user_data["watched"].append(user_data[key][0])
                     user_data[key].pop(0)
-                    # print(user_data)
-                    # print(move_movie)
 
                     if move_movie not in user_data["watched"]:
+                        # If the movie title isn't already in the "watched" list, add the title
+                        # Can't have duplicate names
                         user_data["watched"].append(move_movie)
-
 
     return user_data
 
 
-# TESTING!!
-user_data = {'watchlist': [{'title': 'The Lord of the Functions: The Fellowship of the Function','genre': 'Fantasy', 'rating': 4.8}], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}]}
-title = 'The Lord of the Functions: The Fellowship of the Function'
-
-watch_movie(user_data, title)
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 
+def get_watched_avg_rating(user_data):
+    # Calculate the average rating of all the movies in the watched list
+        # Empty list average rating is 0.0
+    # Return average rating
+    total = 0
+    count = 0
+    
+    for category in user_data:
+        # print(user_data[category])
+        if category == "watched":
+            # print(user_data[category])
+            for val in user_data[category]:
+                # print(user_data[category])
+                for info in val:
+                    
+                    if info == "rating":
+                        # print(val[info])
+                        total += val[info]
+                        count += 1
+    
+    ave_rating = float(total/count)
+    return ave_rating
+
+
+# TESTING!!
+
+# user_data = {'watchlist': [{'title': 'The Lord of the Functions: The Fellowship of the Function','genre': 'Fantasy', 'rating': 4.8}], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}]}
+# title = 'The Lord of the Functions: The Fellowship of the Function'
+
+# watch_movie(user_data, title)
+# # # output from watch_movie:
+# # # {'watchlist': [], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}]}
+# get_watched_avg_rating(user_data)
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
