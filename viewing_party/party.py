@@ -168,7 +168,7 @@ def get_available_recs(user_data):
     available_recs = []
 
     friends_watched = get_friends_unique_watched(user_data)
-    
+
     # check friends watched list hosts against user subscriptions
     for i in range(len(friends_watched)):
         if friends_watched[i]["host"] in user_data["subscriptions"]:
@@ -180,3 +180,4 @@ def get_available_recs(user_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+# def get_new_rec_by_genre(user_data):

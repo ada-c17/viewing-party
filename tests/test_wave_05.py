@@ -54,7 +54,7 @@ def test_new_genre_rec_from_empty_friends():
     }
 
     # *********************************************************************
-    # ****** Complete the Act and Assert Portions of theis tests **********
+    # ****** Complete the Act and Assert Portions of this test **********
     # *********************************************************************
 
 @pytest.mark.skip()
