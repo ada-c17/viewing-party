@@ -185,26 +185,5 @@ def clean_wave_5_data():
 
 
 
-
-def get_unique_watched(user_data):
-    list_both_watched = []
-    for i in range(len(user_data["watched"])):
-        for j in range(len(user_data["friends"])):
-            for k in range(len(user_data["friends"][j]["watched"])):
-                if user_data["watched"][i]["title"] == user_data["friends"][j]["watched"][k]["title"] \
-                    and user_data["watched"][i]["title"] not in list_both_watched:
-                    list_both_watched.append(user_data["watched"][i])
-    list_user_watched = []
-    for i in range(len(user_data["watched"])):
-        list_user_watched.append(user_data["watched"][i])
-    set_both_watched = set(list_both_watched)
-    set_user_watched = set(list_user_watched)
-    set_unique_watched = set_user_watched - set_both_watched
-    list_unique_watched = list(set_unique_watched)
-
-    return list_unique_watched
-
-amandas_data = clean_wave_3_data()
-
-
-get_unique_watched(amandas_data)
+empty_l = []
+print(len(empty_l))
