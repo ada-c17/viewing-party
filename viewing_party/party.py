@@ -142,6 +142,19 @@ def get_new_rec_by_genre(user_data):
 
     return [movie for movie in friends_unique_watched if movie not in user_watched and movie["genre"] == most_watched_genre]
 
+def get_rec_from_favorites(user_data):
+    favorites = user_data["favorites"]
+    friends_unique_watched = []
+    for friend in user_data["friends"]:
+        for watched, movies in friend.items():
+            if watched == "watched":
+                for movie in movies:
+                    if movie not in friends_unique_watched:
+                        friends_unique_watched.append(movie)
+    
+    return [movie for movie in favorites if movie not in friends_unique_watched]
+
+
 
 
 FANTASY_1 = {
