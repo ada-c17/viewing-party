@@ -1,5 +1,6 @@
 # ------------- WAVE 1 --------------------
 
+import enum
 from re import U
 
 # Creates a dictionary for a movie if the parameters are all truthy
@@ -27,17 +28,14 @@ def add_to_watchlist(user_data, movie):
 
 # Move a movie from the user's watchlist to watched list 
 def watch_movie(user_data, title):
-    index = 0
-    transfer_movie = False
     watched_list = user_data["watched"]
     watchlist = user_data["watchlist"]
-    for movie in watchlist:
+
+    for index, movie in enumerate(watchlist):
         if movie["title"] == title:
             transfer_movie = watchlist.pop(index)
-            break
-        index += 1
-    if transfer_movie:
-        watched_list.append(transfer_movie)
+            watched_list.append(transfer_movie)
+    
     return user_data
 
 
@@ -57,6 +55,7 @@ def get_watched_avg_rating(user_data):
         return 0.0
     else:
         return sum(ratings) / float(len(ratings))
+
 
 # Find the most watched genre in watched list
 def get_most_watched_genre(user_data):
@@ -79,10 +78,11 @@ def get_unique_watched(user_data):
 
     # Each index is a "friend" holding a dictionary
     friends_list = user_data["friends"]
-    # List will hold movie dicts on one level
+    # Will hold friends' "watched" movie dicts on one level
     friends_watched_list = []
     for friend in friends_list:
         friends_watched_list += friend["watched"]
+
     # m is movie dict
     unique_list = [m for m in user_watched_list if m not in friends_watched_list]
     return unique_list
@@ -93,6 +93,8 @@ def get_friends_unique_watched(user_data):
     friends_list = user_data["friends"]
     unique_list = []
 
+    # Go through each friend and then each movie they have watched
+    # Compare it to what the user has watched, don't take in duplicates
     for friend in friends_list:
         for movie in friend["watched"]:
             if movie not in user_watched_list and movie not in unique_list:
@@ -106,6 +108,7 @@ def get_friends_unique_watched(user_data):
 # Return list of movie recommendations based on user's subscriptions
 def get_available_recs(user_data):
     subscription_list = user_data["subscriptions"]
+    # Recommendations will include movies the user hasn't watched but a friend has watched
     friends_watched_list = get_friends_unique_watched(user_data)
     # m is movie dict
     rec_list = [m for m in friends_watched_list if m["host"] in subscription_list]
@@ -126,18 +129,15 @@ def get_new_rec_by_genre(user_data):
 # Return list of movie dicts that is a user favorite and friends haven't watched
 def get_rec_from_favorites(user_data):
     movie_recs = []
-    # check user_data has key "favorites", which is a list of dictionaries
-    if user_data.get("favorites"):
-        user_favs = user_data["favorites"]
-        friends_list = user_data["friends"]
+    user_favs = user_data["favorites"]
+    friends_list = user_data["friends"]
 
-        friends_watched_list = []
-        for friend in friends_list:
-            friends_watched_list += friend["watched"]
-        for movie in user_favs:
-            if movie not in friends_watched_list:
-                movie_recs.append(movie)
+    friends_watched_list = []
+    for friend in friends_list:
+        friends_watched_list += friend["watched"]
+
+    for movie in user_favs:
+        if movie not in friends_watched_list:
+            movie_recs.append(movie)
 
     return movie_recs
-
-    
