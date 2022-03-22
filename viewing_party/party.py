@@ -101,9 +101,28 @@ def get_available_recs(user_data):
             recommendations.append(movie)
     return recommendations 
 
-
-
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+
+def get_new_rec_by_genre(user_data):
+    available_recs = get_available_recs(user_data)
+    recommendations = []
+
+    genres = {}
+    for movie in user_data["watched"]:
+        if movie["genre"] not in genres:
+            genres[movie["genre"]] = 1
+        else:
+            genres[movie["genre"]] += 1
+
+    favorite_genre = max(genres, key=genres.get)
+
+    for movie in available_recs:
+        if movie["genre"] == favorite_genre:
+            recommendations.append(movie)
+
+    return recommendations
+
+
 
