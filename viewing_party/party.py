@@ -74,6 +74,7 @@ def get_unique_watched(user_data):
     unique_user_watched = []
     for friend in user_data["friends"]:
         for key, value in friend.items():
+# Not strictly necessary for the data set we have but in theory there could be "subscriptions" etc like for the main user
             if key == 'watched':
                 for movie in value:
                     friend_watched.append(movie)
