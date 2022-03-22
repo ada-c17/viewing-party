@@ -166,7 +166,8 @@ def get_rec_from_favorites(user_data):
 
     user_movie_recs_from_favorites = [item for item in user_favorites_list if item not in friends_watched_list]
 
-    print(user_movie_recs_from_favorites)
+    if len(user_movie_recs_from_favorites) == 0:
+        return user_movie_recs_from_favorites
 
     return user_movie_recs_from_favorites
 
