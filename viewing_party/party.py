@@ -100,7 +100,6 @@ def get_friends_unique_watched(user_data):
     friends_watched_movies = []
     unique_friend_movies = []
 
-
     for item in user_data ["watched"]:
         user_watched_movies.append(item)
     
@@ -122,13 +121,32 @@ def get_friends_unique_watched(user_data):
 def get_available_recs(user_data):
     user_movie_recs = []
 
-    for i in user_data["friends"]:
-        for j in i["watched"]:
-            if j not in user_data["watched"] and j["host"] in user_data["subscriptions"]: 
-                user_movie_recs.append(j)
-                
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie not in user_data["watched"] and movie["host"] in user_data["subscriptions"]: 
+                user_movie_recs.append(movie)
+
     return user_movie_recs
+
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+def get_new_rec_by_genre(user_data):
+    most_common_genre = []
+    user_movie_recs_by_genre = []
+
+    for item in user_data["watched"]: # loops through list
+        most_common_genre.append(item["genre"]) # appends values of "genre" key to genre_list dictionary
+
+    most_common_genre.sort() # sorts list in place (modifies original list)
+    most_freq_genre = max(most_common_genre, key = most_common_genre.count) # uses the max function to find the most common genre in genre_list with list.count function to count the occurences
+
+    print(most_freq_genre)
+
+    for i in user_data["friends"]:
+        for j in i["watched"]:
+            if j not in user_data["watched"] and j["genre"] == most_freq_genre:
+                user_movie_recs_by_genre.append(j)
+
+    return user_movie_recs_by_genre
