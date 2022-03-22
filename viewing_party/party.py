@@ -171,9 +171,10 @@ def get_available_recs(user_data):
 
     friend_unique_movies = get_friends_unique_watched(user_data)
 
-    for movie in friend_unique_movies:
-        if movie["host"] in user_data["subscriptions"]:
-            movie_recommendations.append(movie)
+    if len(user_data["watched"]) > 0:
+        for movie in friend_unique_movies:
+            if movie["host"] in user_data["subscriptions"]:
+                movie_recommendations.append(movie)
 
     return movie_recommendations
 
@@ -188,11 +189,6 @@ def get_new_rec_by_genre(user_data):
     that the user has not watched, and at least one of the user's
     friends has watched 
     '''
-    # initialize rec list
-    # get users most frequently watched genre
-    # if the user has not watched, the users friend has watched, genre 
-    # == the most freq genre,
-    # append to rec list
 
     movie_recommendations_by_genre = []
 
@@ -205,3 +201,4 @@ def get_new_rec_by_genre(user_data):
             movie_recommendations_by_genre.append(movie)
 
     return movie_recommendations_by_genre
+

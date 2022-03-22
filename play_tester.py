@@ -203,16 +203,32 @@ pp = pprint.PrettyPrinter(indent=4)
 
 
 # Wave 04 user data
-print("\n-----Wave 04 user_data-----")
+# print("\n-----Wave 04 user_data-----")
 # pp.pprint(clean_wave_4_data())
-pp.pprint(clean_wave_5_data())
+
 
 # amandas_data = clean_wave_4_data()
-sonyas_data = clean_wave_5_data()
+
 
 # pp.pprint(get_friends_unique_watched(amandas_data))
-pp.pprint(get_new_rec_by_genre(sonyas_data))
+
 
 # Wave 05 user data
-#print("\n-----Wave 05 user_data-----")
-#pp.pprint(clean_wave_5_data())
+print("\n-----Wave 05 user_data-----")
+pp.pprint(clean_wave_5_data())
+
+sonyas_data = clean_wave_5_data()
+
+sonyas_data = {
+    "watched": [],
+    "friends": [
+        {
+            "watched": [INTRIGUE_1b]
+        },
+        {
+            "watched": [INTRIGUE_2b,HORROR_1b]
+        }
+    ]
+}
+
+pp.pprint(get_new_rec_by_genre(sonyas_data))
