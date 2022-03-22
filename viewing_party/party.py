@@ -1,17 +1,48 @@
 # ------------- WAVE 1 --------------------
 
+from multiprocessing.sharedctypes import Value
+
+
 def create_movie(title, genre, rating):
+    
+    if None in [title, genre, rating]:
+        return None
+    
+    
     movie_dict = {}
-    return movie_dict(title, genre, rating)
+    movie_dict["title"] = title
+    movie_dict["genre"] = genre
+    movie_dict["rating"] = rating
+    
+    return movie_dict
+    
+
+
     
 def add_to_watched(user_data, movie):
-    pass
+    """Takes in a user_data list of dictionaries containing
+    watched movies. Takes in a movie and adds to this watched
+    list."""
+    user_data["watched"].append(movie)
+    return user_data
+    
 
 def add_to_watchlist(user_data, movie):
-    pass
-
+    user_data["watchlist"].append(movie)
+    return user_data
+    
 def watch_movie(user_data, title):
-    pass
+    # Find if title is in list of watchlist movies
+    for movie in user_data["watchlist"]:
+        if movie.get("title") == title:
+            # Found the title in list of movies
+            user_data["watchlist"].remove(movie)
+            user_data["watched"].append(movie)
+            return user_data
+        
+    # Never found movie in the watchlist
+    return user_data
+    
 
 
 # -----------------------------------------
