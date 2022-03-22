@@ -97,9 +97,10 @@ def get_available_recs(user_data):
     friends_unique_movies = get_friends_unique_watched(user_data)
     recommendations = []
     for movie in friends_unique_movies:
-        if movie["rating"] >= 3.5:
+        if movie["host"] in user_data["subscriptions"]:
             recommendations.append(movie)
     return recommendations 
+
 
 
 # -----------------------------------------
