@@ -108,15 +108,10 @@ def get_friends_unique_watched(user_data):
 
     # set of movie titles  --> list of dictionaries of those movies
     unique_list_of_dicts = []
-    for i in range(len(user_data["friends"])):
-        for i in range(len(list_of_dicts)):
-            if list_of_dicts[i]['title'] in unique_friends_set == True:
-                unique_list_of_dicts.append(list_of_dicts[i])
-
-# unique_friends_set is populated with 3 movie titles. For some reason the following expression never 
-# evaluates to True: if user_data["friends"][i]["watched"][i]["title"] in unique_friends_set:
- # if user_data["friends"][i]["watched"][i]["title"] in unique_friends_set == True:
-#             IndexError: list index out of range
+    for list in user_data['friends']:
+        for movie in list['watched']:
+            if movie['title'] in unique_friends_set and movie not in unique_list_of_dicts:
+                unique_list_of_dicts.append(movie)
 
     return unique_list_of_dicts
 
