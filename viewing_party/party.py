@@ -90,12 +90,80 @@ def get_unique_watched(user_data):
     for movie in user_data["watched"]:
         title_of_movie=movie['title']
         user_set_of_watched_movies.add(title_of_movie)
+
     unique_movies_set=user_set_of_watched_movies.difference(set_friends_watched) 
     list_of_unique_movies=[]   
     for movie in user_data["watched"]:
         if movie["title"]in unique_movies_set:
             list_of_unique_movies.append(movie)
-    return list_of_unique_movies        
+    return list_of_unique_movies  
+
+
+def get_friends_unique_watched(user_data):
+    allMovies=[]
+    friends_watched=user_data["friends"]
+    for f in friends_watched:
+       
+        allMovies.extend(f["watched"])
+    #result = list(set(val for dic in allMovies for val in dic.values()))
+
+    uniqueMovies = {}
+    for movie in allMovies:
+        movieTitle = movie["title"]
+        if movieTitle in uniqueMovies:
+            continue
+        else:
+            uniqueMovies[movieTitle] = movie
+    
+    print(uniqueMovies.values())
+    return uniqueMovies.values() 
+
+
+    #helper function
+def find_unique_user_movies(user_data):
+    list_of_titles=[]
+    watched =user_data["watched"]
+    for movie in watched:
+        title = movie["title"]
+        list_of_titles.append(title)
+    set_user_unique_movies=set(list_of_titles)   
+    return set_user_unique_movies
+
+
+def find_user_movies(user_data):
+    watched =user_data["watched"]
+    return watched
+
+
+def get_friends_unique_watched(user_data):
+    list_of_titles=[]
+    list_all_movies=[]
+
+    all_friends=user_data["friends"]
+#print (all_friends)
+    for f in all_friends:
+        friend_unique_movies = find_unique_user_movies(f)
+        list_of_titles.extend(friend_unique_movies)
+        list_all_movies.extend(find_user_movies(f))
+#print (list_all_movies)
+
+
+
+    set_of_unique_titles_friends=set(list_of_titles)
+    set_user_watched = find_unique_user_movies(user_data)
+
+
+#print(set_of_unique_titles_friends)
+    movies_only_friends_watched=set_of_unique_titles_friends.difference(set_user_watched)
+
+    output=[]
+    for m in list_all_movies:
+        if m["title"] in movies_only_friends_watched:
+            output.append(m)
+            movies_only_friends_watched.remove(m["title"])
+    print (output)  
+    return output      
+
 
 
 # -----------------------------------------
