@@ -135,10 +135,56 @@ def get_available_recs(user_data):
   for movie in movies_friends_no_dup: #list without duplicates and compare movie["host"] is in list of subscriptions
     if movie["host"] in user_data["subscriptions"]:
       recommended_movies.append(movie)
-  # #print(recommended_movies)
 
   return recommended_movies
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+def get_new_rec_by_genre(user_data):
+  movies_friends_watched = []
+  movies_user_watched = []
+  movies_friends_no_dup = []
+  recommended_movies = []
+  genre_list = []
+  most_watched_genre = ""
+  
+  for movie in user_data["watched"]:
+    movies_user_watched.append(movie)
+
+  for movie in range(len(user_data["friends"])):
+    for friends_watched in user_data["friends"][movie]["watched"]:
+      movies_friends_watched.append(friends_watched)
+    # #print(movies_friends_watched)
+
+  for movie in movies_friends_watched: #testing for duplicates from friends and user
+    if movie not in movies_user_watched:
+      movies_friends_no_dup.append(movie) #list without dupliocates
+  #print(movies_friends_no_dup)
+  #print()
+  for i in range(len(user_data["watched"])):
+    movie = user_data["watched"][i]['genre']
+    genre_list.append(movie)
+    #print(genre_list) #['Fantasy', 'Fantasy', 'Fantasy', 'Action', 'Intrigue', 'Intrigue']
+    most_watched_genre = max(genre_list, key = genre_list.count)
+    #using max and count function to count genres and find the most common element
+  #print(most_watched_genre)
+
+  for movie in movies_friends_no_dup: #list without duplicates and compare movie["host"] is in list of subscriptions
+    if movie["genre"] == most_watched_genre:
+      recommended_movies.append(movie)
+    #print(recommended_movies)
+  return recommended_movies
+
+def get_rec_from_favorites(user_data):
+  fav_movies = []
+  movies_friends_watched = []
+  for movie in range(len(user_data["friends"])):
+    for friends_watched in user_data["friends"][movie]["watched"]:
+      movies_friends_watched.append(friends_watched)
+  #print(user_data)
+  for movie in user_data["favorites"]:
+    if movie not in movies_friends_watched: #should be only 4 user favorite movies
+      fav_movies.append(movie)
+    print(fav_movies)
+  return fav_movies
