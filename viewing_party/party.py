@@ -139,10 +139,11 @@ def get_new_rec_by_genre(user_data):
     for item in user_data["watched"]: # loops through list
         most_common_genre.append(item["genre"]) # appends values of "genre" key to genre_list dictionary
 
-    most_common_genre.sort() # sorts list in place (modifies original list)
-    most_freq_genre = max(most_common_genre, key = most_common_genre.count) # uses the max function to find the most common genre in genre_list with list.count function to count the occurences
-
-    print(most_freq_genre)
+    if len(user_data["watched"]) != 0:
+        most_common_genre.sort() # sorts list in place (modifies original list)
+        most_freq_genre = max(most_common_genre, key = most_common_genre.count) # uses the max function to find the most common genre in genre_list with list.count function to count the occurences
+    else:
+        return user_movie_recs_by_genre # returns if list is empty
 
     for i in user_data["friends"]:
         for j in i["watched"]:
