@@ -102,37 +102,39 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 
 def get_watched_avg_rating(user_data):
+    """
+    Input: user_data = dictionary of lists (watched list and watch list)
+    Output: average movie rating (float)
+    """
+
     # Calculate the average rating of all the movies in the watched list
         # Empty list average rating is 0.0
     # Return average rating
+    
     total = 0
     count = 0
     ave_rating = 0
     
-    # print(user_data)
     for category in user_data:
         # Loop enters dictionary 
-        # print(user_data[category])
         if category == "watched":
             # Checking for "watched" list
             # If the "watched" key is found, step into the "watched" list
-            # print(user_data[category])
+
             if not user_data[category]:
                 # If the "watched" list is empty, set average rating to 0.0
-                # print("EMPTY")
                 total += 0.0
                 count += 1
                 ave_rating = 0.0
-            #     print(user_data[category])
+
             else:
                 # user_data at this point: [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}]
                 for val in user_data[category]:
                     # Loop enters the "watched" list
-                    # print(val)
+
                     for info in val:
                         # Loop through the different movie information
-                        # print(info)
-                        
+
                         if info == "rating":
                             # print(val[info])
                             total += val[info]
@@ -141,6 +143,13 @@ def get_watched_avg_rating(user_data):
     ave_rating = float(total/count)
     return ave_rating
 
+
+def get_most_watched_genre(user_data):
+    """
+    Input: user_data = dictionary with a 'watched' list of movie dictionaries
+    Output: most popular movie genre
+    """
+    pass
 
 # TESTING!!
 # EMPTY LIST:
@@ -151,7 +160,7 @@ def get_watched_avg_rating(user_data):
 # title = 'The Lord of the Functions: The Fellowship of the Function'
 
 # watch_movie(user_data, title)
-# output from watch_movie:
+# output from watch_movie before calling get_watched_avg_rating(user_data):
 # {'watchlist': [], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}]}
 # get_watched_avg_rating(user_data)
 

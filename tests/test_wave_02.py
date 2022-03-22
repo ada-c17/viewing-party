@@ -13,7 +13,7 @@ def test_calculates_watched_average_rating():
     # Assert
     assert average == pytest.approx(3.58333)
     assert janes_data == clean_wave_2_data()
-# TEST TWO 
+# TEST TWO - PASSED
 # @pytest.mark.skip()
 def test_empty_watched_average_rating_is_zero():
     # Arrange
