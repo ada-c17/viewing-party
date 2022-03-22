@@ -183,7 +183,52 @@ def clean_wave_5_data():
     return copy.deepcopy(USER_DATA_5)
 
 
+def get_friends_unique_watched(user_data):
+    list_both_watched = []
+    for i in range(len(user_data["watched"])):
+        for j in range(len(user_data["friends"])):
+            for k in range(len(user_data["friends"][j]["watched"])):
+                if user_data["watched"][i]["title"] == user_data["friends"][j]["watched"][k]["title"] \
+                    and user_data["watched"][i]["title"] not in list_both_watched:
+                    list_both_watched.append(user_data["watched"][i])
+    
+    list_friend_watched = []
+    for j in range(len(user_data["friends"])):
+            for k in range(len(user_data["friends"][j]["watched"])):
+                list_friend_watched.append(user_data["friends"][j]["watched"][k])
+
+    list_unique_friend_watched = []
+    for item in list_friend_watched:
+        if item not in list_both_watched and item not in list_unique_friend_watched:
+            list_unique_friend_watched.append(item)
+
+    return list_unique_friend_watched
 
 
-empty_l = []
-print(len(empty_l))
+def get_new_rec_by_genre(user_data):
+
+    genre_dict = {}
+    for movie_dict in user_data["watched"]:
+        movie_genre = movie_dict["genre"]
+        if movie_genre in genre_dict.keys():
+            genre_dict[movie_genre] += 1
+        else:
+            genre_dict[movie_genre] = 1
+    
+    most_frequent_genres = []
+    for genre_name, popularity in genre_dict.items():
+        if popularity == max(genre_dict.values()):
+            most_frequent_genres.append(genre_name)
+    
+    recommended_movies = []
+    friend_recs = get_friends_unique_watched(user_data)
+    for i in range(len(friend_recs)):
+        if friend_recs[i]["genre"] in most_frequent_genres:
+            recommended_movies.append(friend_recs[i])
+    
+    return recommended_movies
+
+
+sonyas_data = clean_wave_5_data()
+
+get_new_rec_by_genre(sonyas_data)
