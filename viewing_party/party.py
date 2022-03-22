@@ -107,32 +107,52 @@ def get_watched_avg_rating(user_data):
     # Return average rating
     total = 0
     count = 0
+    ave_rating = 0
     
+    # print(user_data)
     for category in user_data:
+        # Loop enters dictionary 
         # print(user_data[category])
         if category == "watched":
+            # Checking for "watched" list
+            # If the "watched" key is found, step into the "watched" list
             # print(user_data[category])
-            for val in user_data[category]:
-                # print(user_data[category])
-                for info in val:
-                    
-                    if info == "rating":
-                        # print(val[info])
-                        total += val[info]
-                        count += 1
+            if not user_data[category]:
+                # If the "watched" list is empty, set average rating to 0.0
+                # print("EMPTY")
+                total += 0.0
+                count += 1
+                ave_rating = 0.0
+            #     print(user_data[category])
+            else:
+                # user_data at this point: [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}]
+                for val in user_data[category]:
+                    # Loop enters the "watched" list
+                    # print(val)
+                    for info in val:
+                        # Loop through the different movie information
+                        # print(info)
+                        
+                        if info == "rating":
+                            # print(val[info])
+                            total += val[info]
+                            count += 1
     
     ave_rating = float(total/count)
     return ave_rating
 
 
 # TESTING!!
+# EMPTY LIST:
+# user_data = {'watchlist': [{'title': 'The Lord of the Functions: The Fellowship of the Function','genre': 'Fantasy', 'rating': 4.8}], 'watched': []}
 
-# user_data = {'watchlist': [{'title': 'The Lord of the Functions: The Fellowship of the Function','genre': 'Fantasy', 'rating': 4.8}], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}]}
+# NORMAL LIST:
+# user_data = {'watchlist': [], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}]}
 # title = 'The Lord of the Functions: The Fellowship of the Function'
 
 # watch_movie(user_data, title)
-# # # output from watch_movie:
-# # # {'watchlist': [], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}]}
+# output from watch_movie:
+# {'watchlist': [], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}]}
 # get_watched_avg_rating(user_data)
 
 # -----------------------------------------

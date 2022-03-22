@@ -1,7 +1,7 @@
 import pytest
 from viewing_party.party import *
 from tests.test_constants import *
-# TEST ONE
+# TEST ONE - PASSED
 # @pytest.mark.skip()
 def test_calculates_watched_average_rating():
     # Arrange
@@ -14,7 +14,7 @@ def test_calculates_watched_average_rating():
     assert average == pytest.approx(3.58333)
     assert janes_data == clean_wave_2_data()
 # TEST TWO 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_empty_watched_average_rating_is_zero():
     # Arrange
     janes_data = {
