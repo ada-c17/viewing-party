@@ -1,5 +1,3 @@
-import copy
-
 # ------------- WAVE 1 --------------------
 
 
@@ -24,7 +22,7 @@ def add_to_watchlist(user_data, movie):
 
 
 def watch_movie(user_data, title):
-    updated_data = copy.deepcopy(user_data)
+    updated_data = user_data.copy()
 
     for movie in user_data["watchlist"]:
         if movie["title"] == title:
