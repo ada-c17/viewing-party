@@ -1,4 +1,5 @@
 from collections import Counter
+from shutil import move
 
 # ------------- WAVE 1 --------------------
 
@@ -101,7 +102,7 @@ def get_friends_unique_watched(user_data):
 
     for friend in user_data["friends"]:
         for movie in friend["watched"]:
-            if movie not in friend_movies: #remove duplicates from friend_movies
+            if movie not in friend_movies: 
                 if movie["title"] not in my_movies:
                     friend_movies.append(movie)
     
@@ -111,6 +112,29 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
+def get_available_recs(user_data):
+
+    recommended_movies = []
+    movies_user_watched = []
+    
+    if not user_data["watched"]:
+        return recommended_movies
+
+    for elem in user_data["watched"]:
+        movies_user_watched.append(elem["title"])
+    
+    for friends in user_data["friends"]:
+        for movie in friends["watched"]:
+            if movie["title"] not in movies_user_watched:
+                recommended_movies.append(movie)
+    
+    for recommendation in recommended_movies:
+        if recommendation["host"] not in user_data["subscriptions"]:
+            recommended_movies.remove(recommendation)
+    
+    return recommended_movies
+
+# get_available_recs(janes_data)
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
