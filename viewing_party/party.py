@@ -52,13 +52,16 @@ def get_most_watched_genre(user_data):
     for movie in user_data['watched']:
         count = 0
 # Add to running list of genres
-        genre_list.append(movie["genre"])
+        if movie["genre"] not in genre_count:
+            genre_count[movie["genre"]] = 1
+        else:
+            genre_count[movie["genre"]] += 1
 # Iterate over the list to update a counter
-        for genre in genre_list:
-            if genre == movie["genre"]:
-                count += 1
+        # for genre in genre_list:
+        #     if genre == movie["genre"]:
+        #         count += 1
 # Add a key with the genre name and value with count to a dict
-        genre_count[movie["genre"]] = count
+        # genre_count[movie["genre"]] = count
 # Iterate over the dict and return the genre with highest count
     for genre in genre_count:
         if genre_count[genre] == max(genre_count.values()):
