@@ -1,6 +1,9 @@
 
 # ------------- WAVE 1 --------------------
 
+from logging.handlers import WatchedFileHandler
+
+
 def create_movie(title, genre, rating):
     '''
     this function adds movie details to dictionary and returns movie details.
@@ -155,7 +158,25 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
+def get_available_recs(user_data):
+    '''
+    this function returns a list of recommended movies
+    that the user has not watched and at least
+    one of the users friends has watched, while
+    the host of the movie is a service the user
+    is subscribed to
+    '''
+
+    movie_recommendations = []
+
+    friend_unique_movies = get_friends_unique_watched(user_data)
+
+    for movie in friend_unique_movies:
+        if movie["host"] in user_data["subscriptions"]:
+            movie_recommendations.append(movie)
+
+    return movie_recommendations
+
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
-
