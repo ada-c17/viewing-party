@@ -110,13 +110,14 @@ def get_watched_avg_rating(user_data):
     # Calculate the average rating of all the movies in the watched list
         # Empty list average rating is 0.0
     # Return average rating
-    
+
     total = 0
     count = 0
     ave_rating = 0
     
     for category in user_data:
         # Loop enters dictionary 
+
         if category == "watched":
             # Checking for "watched" list
             # If the "watched" key is found, step into the "watched" list
@@ -149,7 +150,31 @@ def get_most_watched_genre(user_data):
     Input: user_data = dictionary with a 'watched' list of movie dictionaries
     Output: most popular movie genre
     """
-    pass
+    seen_genre = []
+    most_popular_genre = 0
+    
+    
+    for category in user_data:
+    # Loop enters dictionary 
+        if category == "watched":
+            # Checking for "watched" list
+            # print(user_data[category])
+
+            for item in user_data[category]:
+                # Loop enters "watched" list which contains dictionaries
+                # print(item)
+                
+                for movie_info in item:
+                    # Looping through the different movie information like: title, genre, rating
+                    # print(movie_info)
+                    if movie_info == "genre":
+                        seen_genre.append(item[movie_info])
+    
+    # FIX THIS!!
+    # Need to add different genres and counts to dictionary? or list?
+    most_popular_genre = max(set(seen_genre), key = seen_genre.count)
+    return most_popular_genre
+
 
 # TESTING!!
 # EMPTY LIST:
@@ -162,7 +187,10 @@ def get_most_watched_genre(user_data):
 # watch_movie(user_data, title)
 # output from watch_movie before calling get_watched_avg_rating(user_data):
 # {'watchlist': [], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}]}
+
 # get_watched_avg_rating(user_data)
+
+# get_most_watched_genre(user_data)
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
