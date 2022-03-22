@@ -82,12 +82,12 @@ def get_friends_unique_watched(user_data):
 
     for friend in user_data["friends"]:
         for movie in friend["watched"]:
-            friends_watched_list.append(movie)
+            if movie not in friends_watched_list:
+                friends_watched_list.append(movie)
 
     for movie in friends_watched_list:
         if movie not in watched_list:
             friends_unique_movies.append(movie)
-
     return friends_unique_movies
 
 
