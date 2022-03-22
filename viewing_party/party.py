@@ -74,26 +74,47 @@ def watch_movie(user_data, title):
     # TASK TWO 
     # If you find it, remove the movie title from watchlist and add it to watched
 
-    for key, val in user_data.items():
-        # Loop enters dictionary and checks for the "watchlist" key
-        if key == "watchlist":
-            # If the "watchlist" key is in the dictionary, access the "watchlist" dictionary
+    # for key, val in user_data.items():
+    #     # Loop enters dictionary and checks for the "watchlist" key
+    #     if key == "watchlist":
+    #         # If the "watchlist" key is in the dictionary, access the "watchlist" dictionary
 
-            for category in user_data[key]:
-                # Loop through the list value of the "watchlist" key 
+    #         for category in user_data[key]:
+    #             # Loop through the list value of the "watchlist" key 
 
-                if title == category["title"]:
-                    # If title is in the inner dictionary as a key, loop enters the dictionary inside the list
+    #             if title == category["title"]:
+    #                 # If title is in the inner dictionary as a key, loop enters the dictionary inside the list
                     
-                    move_movie = (user_data[key][0])
-                    user_data[key].pop(0)
+    #                 move_movie = (user_data[key][0])
+    #                 user_data[key].pop(0)
 
-                    if move_movie not in user_data["watched"]:
-                        # If the movie title isn't already in the "watched" list, add the title
-                        # Can't have duplicate names
-                        user_data["watched"].append(move_movie)
+    #                 if move_movie not in user_data["watched"]:
+    #                     # If the movie title isn't already in the "watched" list, add the title
+    #                     # Can't have duplicate names
+    #                     user_data["watched"].append(move_movie)
 
-    return user_data
+    # return user_data
+
+    watch_list = user_data["watchlist"]
+    move_movie = 0
+    watched_already = []
+
+    # print(watch_list)
+
+    for item in watch_list:
+        if item["title"] == title:
+            # print("MATCH")
+            move_movie = item["title"]
+            # print("testing: ", item["title"])
+            # print("need to pop: ", item)
+            watch_list.pop(item)
+    # print(move_movie)
+    # print("checking: ",watch_list)
+        # print(item["title"])
+    if move_movie not in watched_already:
+        watched_already.append(move_movie)
+    return watched_already
+
 
 
 
@@ -187,10 +208,10 @@ def get_most_watched_genre(user_data):
 # user_data = {'watchlist': [{'title': 'The Lord of the Functions: The Fellowship of the Function','genre': 'Fantasy', 'rating': 4.8}], 'watched': []}
 
 # NORMAL LIST:
-# user_data = {'watchlist': [], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}]}
-# title = 'The Lord of the Functions: The Fellowship of the Function'
+user_data = {'watchlist': [], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}]}
+title = 'The Lord of the Functions: The Fellowship of the Function'
 
-# watch_movie(user_data, title)
+watch_movie(user_data, title)
 # output from watch_movie before calling get_watched_avg_rating(user_data):
 # {'watchlist': [], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}]}
 
@@ -198,9 +219,32 @@ def get_most_watched_genre(user_data):
 
 # get_most_watched_genre(user_data)
 
+
+
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+
+def get_unique_watched(user_data):
+    """
+    Input: user_data = dictionary with "watched" list of movie dictionaries, "friends" is a list with each item as a dictionary
+    Output: return list of dictionaries
+    """
+    # return a list of dictionaries
+
+    # print(user_data)
+    friends_data = []
+    user_unique_movies = []
+
+    # pass
+
+# if movie not in my_movie_list and movie not in unique_list:
+
+# get_watched_avg_rating(user_data)
+
+# get_most_watched_genre(user_data)
+
+# get_unique_watched(user_data)
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
