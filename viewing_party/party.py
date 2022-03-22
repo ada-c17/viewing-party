@@ -82,7 +82,7 @@ def get_unique_watched(user_data):
         
 def get_friends_unique_watched(user_data):
     user_movie_titles = set()
-    for user_movie in user_data["watched"]
+    for user_movie in user_data["watched"]:
         user_movie_titles.add(user_movie["title"])
     friend_unique_titles = set()
     friends_unique = []
@@ -90,13 +90,11 @@ def get_friends_unique_watched(user_data):
         for friend_movie in friend["watched"]:
             if friend_movie["title"] in user_movie_titles:
                 continue
+            elif friend_movie["title"] in friend_unique_titles:
+                continue
             else:
-                if friend_movie["title"] in friend_unique_titles:
-                    continue
-                else:
-                    friend_unique_titles.add(friend_movie["title"])
-                    friends_unique.append(friend_movie)
-                    
+                friend_unique_titles.add(friend_movie["title"])
+                friends_unique.append(friend_movie)
     return friends_unique
 
 
