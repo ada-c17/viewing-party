@@ -123,8 +123,8 @@ def test_moves_movie_from_watchlist_to_empty_watched():
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
-# TEST EIGHT
-@pytest.mark.skip()
+# TEST EIGHT - PASSED
+# @pytest.mark.skip()
 def test_moves_movie_from_watchlist_to_watched():
     # Arrange
     movie_to_watch = HORROR_1

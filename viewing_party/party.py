@@ -77,116 +77,39 @@ def watch_movie(user_data, title):
 
     # TEST EIGHT: need to account for duplicate title names --> can only have unique title names
 
-    
-    # TEST SEVEN: dictionary where key = string, value = list of dictionaries
-    # janes_data = {
-    #     "watchlist": [{
-    #         "title": MOVIE_TITLE_1,
-    #         "genre": GENRE_1,
-    #         "rating": RATING_1
-    #     }],
-    #     "watched": []
-    # }
-
-    # print("before function, all data: ", user_data)
-    # print("**********")
-    # print("title: ", title)
-
-
-
     # Act
     # updated_data = watch_movie(janes_data, MOVIE_TITLE_1)
 
-    # print("watchlist: ", user_data["watchlist"][0])
-    # print("watched: ", user_data["watched"])
-    # print("all data: ", user_data)
-
-    # for key, val in user_data.items():
-    #     print("key: ", key)
-    #     print("value: ", val)
-
-    #     for item in val:
-    #         print("******")
-    #         print(item)
-    # move_this = []
-    # new_list = []
-    # print("before: ", user_data)
-
     for key, val in user_data.items():
-
+        # Loop enters dictionary and checks for the "watchlist" key
         if key == "watchlist":
-            # print(key) 
-            # print(user_data[key])
-            # move_this = user_data["watchlist"].pop()
-            # user_data["watched"].append(move_this)
-            # print(val[0]["title"])
-            # print(val)
+            # If the "watchlist" key is in the dictionary, access the "watchlist" dictionary
+
             for category in user_data[key]:
+                # Loop through the list value of the "watchlist" key 
+                # print(user_data[key])
                 if title == category["title"]:
+                    # If title is in the inner dictionary as a key, loop enters the dictionary inside the list
+                    
+                    move_movie = (user_data[key][0])
 
-                    # print(category["title"])
-                    # print(category)
-                    # move_this = category.pop(title)
-                    user_data["watched"].append(user_data[key][0])
+                    # user_data["watched"].append(user_data[key][0])
                     user_data[key].pop(0)
-                    # print(user_data[key][0])
-    
+                    # print(user_data)
+                    # print(move_movie)
+
+                    if move_movie not in user_data["watched"]:
+                        user_data["watched"].append(move_movie)
+
+
     return user_data
-
-            
-
-    
-    # print("after: ", user_data)
-    # print("move this: ", move_this)
-    # print("new list:", new_list)
-    # print("watched: ", user_data["watched"])
-
-
-
-    # if title == user_data["watchlist"][0]["title"]:
-
-    #     print("YES!")
-
-
-
-
-    #     user_data["watchlist"].remove(title)
-    #     user_data["watched"].append(title)
-    
-    # return user_data
-
-    # print("watchlist:  ", user_data["watchlist"][0]["title"])
-    # print("**********")
-    # print("watched: ", user_data["watched"][0]["title"])
-    # print("**********")
-    # print("all data: ", user_data)
-
-    # rem = user_data["watchlist"][0].pop(title)
-    # print(rem)
-
-
-
-
-
-    # if title in user_data["watchlist"]:
-    #     # print("yes!")
-    #     user_data["watchlist"].remove(title)
-    #     user_data["watched"].append(title)
-    #     return user_data
-    # else:
-    #     return user_data
-
-    # print("watchlist:", user_data["watchlist"])
-    # print("watched:", user_data["watched"])
-    # print(user_data)
-    
 
 
 # TESTING!!
-# user_data = {'watchlist': [{'title': 'The Lord of the Functions: The Fellowship of the Function','genre': 'Fantasy', 'rating': 4.8}], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}]}
-# title = 'The Lord of the Functions: The Fellowship of the Function'
+user_data = {'watchlist': [{'title': 'The Lord of the Functions: The Fellowship of the Function','genre': 'Fantasy', 'rating': 4.8}], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}]}
+title = 'The Lord of the Functions: The Fellowship of the Function'
 
-# watch_movie(user_data, title)
+watch_movie(user_data, title)
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
