@@ -18,14 +18,13 @@ def add_to_watched(user_data, movie):
     return user_data
 
 def add_to_watchlist(user_data, movie):
-    user_data["watchlist"] .append(movie)
+    user_data["watchlist"].append(movie)
     return user_data
 
-def watch_movie(user_data, movie_title):
-    
+def watch_movie(user_data, movie_title): 
     for movie in user_data["watchlist"]:
         if movie["title"] == movie_title:
-            user_data["watched"].append(movie)
+            add_to_watched(user_data, movie)
             user_data["watchlist"].remove(movie)
     
     return user_data
@@ -47,8 +46,10 @@ def get_watched_avg_rating(user_data):
 
 def get_most_watched_genre(user_data):
     
-    genre_freq = {}
     watched_lst = user_data["watched"]
+    genre_freq = {}
+    most_watched_count = 0
+    most_watched_genre = ""
 
     # Check empty watched list
     if not watched_lst:
@@ -56,16 +57,19 @@ def get_most_watched_genre(user_data):
     
     for movie in watched_lst:
         genre = movie["genre"]
+
+        # Count genre frequency
         if genre not in genre_freq.keys():
             genre_freq[genre] = 1
         else:
             genre_freq[genre] += 1
+        
+        # Update the most_watched_count and most_watched_genre
+        if genre_freq[genre] > most_watched_count:
+            most_watched_count = genre_freq[genre]
+            most_watched_genre = genre
 
-    most_watched_freq = max(genre_freq.values())
-
-    for genre, freq in genre_freq.items():
-        if freq == most_watched_freq:
-            return genre
+    return most_watched_genre
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
@@ -88,7 +92,7 @@ def get_friends_unique_watched(user_data):
     return friends_unique_watched 
 
 #                                               *********** WAVE 3 Helper Functions **********
-def ele_in_a_not_b (a_lst, b_lst):
+def ele_in_a_not_b(a_lst, b_lst):
     '''
     Parameters: two lists
     Return: a single list that contains elements in a_list but not in b_list 
@@ -103,11 +107,11 @@ def ele_in_a_not_b (a_lst, b_lst):
 def get_friends_watched_movies(user_data):
     '''
     Parameter: one user_data
-    Return: a single list that contains all friends watched movies
+    Return: a single list that contains all friends watched movies, allow duplicated values
     '''
     friends_watched = []               
 
-    for friend in user_data["friends"]:         # user_data["friends"] is a list of dict,  dict key: "watched" - value: a list of watched movies 
+    for friend in user_data["friends"]:                                     # user_data["friends"] is a list of dict,  dict key: "watched" - value: a list of watched movies 
         for movie in friend["watched"]:
                 friends_watched.append(movie)
 
@@ -119,62 +123,40 @@ def get_friends_watched_movies(user_data):
 
 def get_available_recs(user_data):
 
-    output = []
+    recs = []
     user_hosts = user_data['subscriptions']
     friend_watched = get_friends_unique_watched(user_data)
 
     for movie in friend_watched:
         if movie['host'] in user_hosts:
-            output.append(movie)
+            recs.append(movie)
 
-    return output
+    return recs
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
 def get_new_rec_by_genre(user_data):
-    rec = []
-
-    friend_unique_watched = get_friends_unique_watched(user_data)           # movies that friends watched but user has not
-    user_watched = user_data["watched"]                                     # all user watched movies
-    user_watched_genre = {}                                                 # a dict of users watched genre with freq
-
-    # get the frequency of user watched genre
-    for movie in user_watched:
-        genre = movie["genre"]
-        if genre not in user_watched_genre :
-            user_watched_genre [genre] = 1
-        else:
-            user_watched_genre [genre] += 1
     
-    # find the most frequently watched genre
-    most_watched = 0
-    most_genre = ""
+    friend_unique_watched = get_friends_unique_watched(user_data)          # movies that friends watched but user has not                                          
+    most_watched_genre = get_most_watched_genre(user_data)
+    recs = []
 
-    for genre, freq in user_watched_genre.items():
-        if freq > most_watched:
-            most_watched = freq
-            most_genre = genre
-
-    # build the rec list: friends watched, and its genre is same as the users most freq genre
+    # build the rec list: movies friends have already watched, and its genre is same as the users most freq genre
     for movie in friend_unique_watched:
-        if movie['genre'] == most_genre:
-            rec.append(movie)
+        if movie['genre'] == most_watched_genre:
+            recs.append(movie)
 
-    return rec
+    return recs
 
 def get_rec_from_favorites(user_data):
     user_fav = user_data["favorites"]
-    friend_watched = []
 
-    # get the list of movies that friends have watched
-    for friend in user_data['friends']:
-        for movie in friend["watched"]:
-            if movie not in friend_watched:
-                friend_watched.append(movie)
+    # use the WAVE_03 help function (get_friends_watched_movies) to get the list of movies that friends have watched
+    friend_watched = get_friends_watched_movies(user_data)
     
-    # use the WAVE_03 help function to get the list of movies that in user_favorite but friends haven't watched
-    rec = ele_in_a_not_b(user_fav, friend_watched)                         
+    # use the WAVE_03 help function (ele_in_a_not_b) to get the list of movies that in user_favorite but friends haven't watched
+    recs = ele_in_a_not_b(user_fav, friend_watched)                         
 
-    return rec
+    return recs
