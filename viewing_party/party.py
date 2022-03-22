@@ -2,6 +2,8 @@
 
 from multiprocessing.sharedctypes import Value
 
+from pytest import freeze_includes
+
 
 def create_movie(title, genre, rating):
     
@@ -77,19 +79,46 @@ def get_most_watched_genre(user_data):
             popular = genre
             
     return popular
-              
-
 
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 def get_unique_watched(user_data):
-    pass
+    user_list = []
+    friend_movie_list = []
+    # Generate a overall friend movie list
+    for item in user_data["friends"]:
+        for movie in item["watched"]:
+            friend_movie_list.append(movie)
+            
+    for movie in user_data["watched"]:
+        if movie not in friend_movie_list:
+            user_list.append(movie)
+            
+    return user_list
+        
 
 def get_friends_unique_watched(user_data):
-    pass
-        
+    friend_movie_list = []
+    user_not_watched_list = []
+    for item in user_data["friends"]:
+        for movie in item["watched"]:
+            friend_movie_list.append(movie)
+            
+    for movie in friend_movie_list:
+        if movie not in user_data["watched"]:
+            exists = False
+            for user_movie in user_not_watched_list:
+                if user_movie["title"] == movie["title"]:
+                    exists = True
+                    break
+            if not exists:
+                user_not_watched_list.append(movie)
+    
+    return user_not_watched_list
+            
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
