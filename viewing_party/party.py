@@ -17,6 +17,16 @@ def create_movie(title, genre, rating):
 
     return new_movie
 
+def add_to_watched(user_data, movie):
+    # this function should add the dictionary movie to user_data.
+    # user_data is also a dictionary with one key, "watched"
+    # the value of user_data["watched"] is a list of dictionaries (i.e., each movie),
+    # each with keys "title", "genre", and "rating"
+
+    user_data["watched"].append(movie)
+
+    return user_data
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
@@ -26,7 +36,7 @@ def create_movie(title, genre, rating):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-        
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
