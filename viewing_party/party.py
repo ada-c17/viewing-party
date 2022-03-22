@@ -61,11 +61,11 @@ def get_most_watched_genre(user_data):
 # ----------------------------------------
 
 def get_unique_watched(user_data):
-    # movies watched by user, and by friends
+# lists of movies watched by user, and by friends 
     movies_user_watched = []
     movies_friends_watched = []
 
-    # add movie dictionaries to the lists
+    # add movie titles to the lists
     for i in range(len(user_data["watched"])):
         movie_title = user_data["watched"][i]['title']
         movies_user_watched.append(movie_title)
@@ -75,14 +75,11 @@ def get_unique_watched(user_data):
         for i in range(len(list_of_dicts)):
             movies_friends_watched.append(list_of_dicts[i]['title'])
     
-
     # use set to compare the lists, taking the difference between the user's set from the friends set.
-    user_set = set(movies_user_watched)
-    friends_set = set(movies_friends_watched)
     # new_set = set_a - set_b
-    unique_user_set = user_set - friends_set
-    list(unique_user_set)
+    unique_user_set = set(movies_user_watched) - set(movies_friends_watched)
 
+    # set of movie titles --> list of dictionaries of those movies
     unique_list_of_dicts = []
     for movie in unique_user_set:
         for i in range(len(user_data["watched"])):
@@ -91,8 +88,38 @@ def get_unique_watched(user_data):
 
     return unique_list_of_dicts
 
-def get_friends_unique_watched():
-    pass
+def get_friends_unique_watched(user_data):
+    # lists of movies watched by user, and by friends 
+    movies_user_watched = []
+    movies_friends_watched = []
+
+    # add movie titles to the lists
+    for i in range(len(user_data["watched"])):
+        movie_title = user_data["watched"][i]['title']
+        movies_user_watched.append(movie_title)
+
+    for i in range(len(user_data["friends"])):
+        list_of_dicts = user_data["friends"][i]['watched']
+        for i in range(len(list_of_dicts)):
+            movies_friends_watched.append(list_of_dicts[i]['title'])
+
+    # difference between sets to find movies ONLY in friends lists
+    unique_friends_set = set(movies_friends_watched) - set(movies_user_watched)
+
+    # set of movie titles  --> list of dictionaries of those movies
+    unique_list_of_dicts = []
+    for i in range(len(user_data["friends"])):
+        for i in range(len(list_of_dicts)):
+            if list_of_dicts[i]['title'] in unique_friends_set == True:
+                unique_list_of_dicts.append(list_of_dicts[i])
+
+# unique_friends_set is populated with 3 movie titles. For some reason the following expression never 
+# evaluates to True: if user_data["friends"][i]["watched"][i]["title"] in unique_friends_set:
+ # if user_data["friends"][i]["watched"][i]["title"] in unique_friends_set == True:
+#             IndexError: list index out of range
+
+    return unique_list_of_dicts
+
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
