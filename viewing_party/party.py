@@ -29,10 +29,10 @@ def watch_movie(user_data, movie):
             user_data['watchlist'].remove(i)    
     return user_data
 
-
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+
 def get_watched_avg_rating(user_data):
     rating_total = 0
     counter = 0
@@ -50,17 +50,48 @@ def get_most_watched_genre(user_data):
     genre_list = []
     for i in user_data['watched']:
         genre_list.append(i['genre'])
-    print(genre_list)
     if genre_list:
         return max(set(genre_list), key = genre_list.count)
-
-
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-        
+def get_unique_watched(user_data):
+    user_movies = []
+    friends_movies = []
+    user_unique_movies = []
+
+    for i in user_data['watched']:
+        user_movies.append(i)
+
+    for i in user_data['friends']:
+        for x in i['watched']:
+            friends_movies.append(x)
+
+    for i in user_movies:
+        if i not in friends_movies and i not in user_unique_movies:
+            user_unique_movies.append(i) 
+    return user_unique_movies
+
+def get_friends_unique_watched(user_data):
+    user_movies = []
+    friends_movies = []
+    friends_unique_movies = []
+
+    for i in user_data['watched']:
+        user_movies.append(i)
+
+    for i in user_data['friends']:
+        for x in i['watched']:
+            friends_movies.append(x)
+
+    for i in friends_movies:
+        if i not in user_movies and i not in friends_unique_movies:
+            friends_unique_movies.append(i) 
+    return friends_unique_movies
+
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
