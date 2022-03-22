@@ -115,10 +115,11 @@ def test_moves_movie_from_watchlist_to_empty_watched():
 
     # Act
     updated_data = watch_movie(janes_data, MOVIE_TITLE_1)
-    print(updated_data)
+    # print(updated_data)
     # Assert
     assert len(updated_data["watchlist"]) == 0
     assert len(updated_data["watched"]) == 1
+    assert MOVIE_TITLE_1 == "It Came from the Stack Trace"
     
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
@@ -138,16 +139,17 @@ def test_moves_movie_from_watchlist_to_watched():
 
     # Act
     updated_data = watch_movie(janes_data, movie_to_watch["title"])
-    print(updated_data)
+    # print(updated_data)
     # Assert
     assert len(updated_data["watchlist"]) == 1
     assert len(updated_data["watched"]) == 2
+    assert updated_data["watchlist"][0]["genre"] == "Horror"
     
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
 # TEST NINE - PASSED
-# @pytest.mark.skip()
+@pytest.mark.skip()
 def test_does_nothing_if_movie_not_in_watchlist():
     # Arrange
     movie_to_watch = HORROR_1

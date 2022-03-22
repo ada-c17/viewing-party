@@ -74,46 +74,26 @@ def watch_movie(user_data, title):
     # TASK TWO 
     # If you find it, remove the movie title from watchlist and add it to watched
 
-    # for key, val in user_data.items():
-    #     # Loop enters dictionary and checks for the "watchlist" key
-    #     if key == "watchlist":
-    #         # If the "watchlist" key is in the dictionary, access the "watchlist" dictionary
+    for key, val in user_data.items():
+        # Loop enters dictionary and checks for the "watchlist" key
+        if key == "watchlist":
+            # If the "watchlist" key is in the dictionary, access the "watchlist" dictionary
 
-    #         for category in user_data[key]:
-    #             # Loop through the list value of the "watchlist" key 
+            for category in user_data[key]:
+                # Loop through the list value of the "watchlist" key 
 
-    #             if title == category["title"]:
-    #                 # If title is in the inner dictionary as a key, loop enters the dictionary inside the list
+                if title == category["title"]:
+                    # If title is in the inner dictionary as a key, loop enters the dictionary inside the list
                     
-    #                 move_movie = (user_data[key][0])
-    #                 user_data[key].pop(0)
+                    move_movie = (user_data[key][0])
+                    user_data[key].pop(0)
 
-    #                 if move_movie not in user_data["watched"]:
-    #                     # If the movie title isn't already in the "watched" list, add the title
-    #                     # Can't have duplicate names
-    #                     user_data["watched"].append(move_movie)
+                    if move_movie not in user_data["watched"]:
+                        # If the movie title isn't already in the "watched" list, add the title
+                        # Can't have duplicate names
+                        user_data["watched"].append(move_movie)
 
-    # return user_data
-
-    watch_list = user_data["watchlist"]
-    move_movie = 0
-    watched_already = []
-
-    # print(watch_list)
-
-    for item in watch_list:
-        if item["title"] == title:
-            # print("MATCH")
-            move_movie = item["title"]
-            # print("testing: ", item["title"])
-            # print("need to pop: ", item)
-            watch_list.pop(item)
-    # print(move_movie)
-    # print("checking: ",watch_list)
-        # print(item["title"])
-    if move_movie not in watched_already:
-        watched_already.append(move_movie)
-    return watched_already
+    return user_data
 
 
 
