@@ -46,7 +46,6 @@ def test_friends_unique_movies():
     assert FANTASY_4 in friends_unique_movies
     assert amandas_data == clean_wave_3_data()
 
-@pytest.mark.skip()
 # Wave 3 / Test 4
 # Make sure no duplicates in list of friend's unique movies
 def test_friends_unique_movies_not_duplicated():

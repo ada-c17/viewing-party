@@ -2,9 +2,6 @@
 # ------------- WAVE 1 --------------------
 # -----------------------------------------
 
-from logging.handlers import WatchedFileHandler
-
-
 def create_movie(title, genre, rating):
     new_movie = {"title" : title, "genre" : genre, "rating" : rating}
     if new_movie["title"] == None or new_movie["genre"] == None or new_movie["rating"] == None:
@@ -59,7 +56,6 @@ def get_most_watched_genre(user_data):
     popular_genre = max(genre_counting_dict, key = genre_counting_dict.get)
     return popular_genre
 
-
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
@@ -83,9 +79,9 @@ def get_friends_unique_watched(user_data):
 
     friends_unique_watched = []
     for movie in friends_movies:
-        if movie not in user_data["watched"]:
+        if movie not in user_data["watched"] and movie not in friends_unique_watched:
             friends_unique_watched.append(movie)
-    
+
     return friends_unique_watched
 
 # -----------------------------------------
