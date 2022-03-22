@@ -2,6 +2,9 @@
 
 # this is a test change
 
+from audioop import avg
+
+
 def create_movie(title, genre, rating):
     if (title == None) or (genre == None) or (rating == None):
        return None
@@ -56,6 +59,50 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+
+
+def get_watched_avg_rating(user_data):
+    rating_sum = 0
+    for key in user_data:
+        if len(user_data["watched"]) == 0:
+            return 0
+        for index in range(len(user_data["watched"])):
+            if user_data["watched"] == []:
+                return 0
+            else:
+                rating_sum +=  user_data["watched"][index]["rating"]
+        avg_rating = rating_sum/(len(user_data["watched"]))
+    return avg_rating
+            
+            
+'''
+- take one parameter: `user_data`
+- the value of `user_data` will be a dictionary with a `"watched"` list of movie dictionaries. 
+    Each movie dictionary has a key `"genre"`.
+    - This represents that the user has a list of watched movies. Each watched movie has a genre.
+    - The values of `"genre"` is a string.
+- Determine which genre is most frequently occurring in the watched list
+- return the genre that is the most frequently watched
+- If the value of "watched" is an empty list, `get_most_watched_genre` should return `None`.
+'''
+
+def get_most_watched_genre(user_data):
+    genres = {}
+    for key in user_data:
+        if user_data["watched"] == []:
+            return None
+        for item in user_data["watched"]:
+            if item not in genres.values():
+                genres[[user_data]["watched"]["genre"]] = 1
+            else:
+                genres[([user_data]["watched"]["genre"])]+= 1
+    for value in genres.values():
+        return max(value)
+            
+    
+
+
+
 
 
 # -----------------------------------------
