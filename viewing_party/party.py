@@ -181,28 +181,8 @@ def get_available_recs(user_data):
 # -----------------------------------------
 
 def get_new_rec_by_genre(user_data):
-    # create dict with genres as keys, counts as values for user_data watched movies 
-    genre_tracking_dict = {}
-    watch_count = 0
-    most_watched_genre = ""
     genre_rec_list = []
-
-    # iterate over watched list, increasing movie counts for each genre watched
-    for i in range(len(user_data["watched"])):
-        key = user_data["watched"][i]["genre"]
-        if key in genre_tracking_dict.keys():
-            genre_tracking_dict[key] += 1
-        else:
-            genre_tracking_dict[key] = 1
-
-    # determine most watched genre by movie count
-    for genre, count in genre_tracking_dict.items():
-        if count > watch_count:
-            most_watched_genre = genre
-            watch_count = count
-        else:
-            continue
-    
+    most_watched_genre = get_most_watched_genre(user_data)
     # get list of movies friends have watched that user hasn't
     friends_recommend = get_friends_unique_watched(user_data)
 
@@ -212,8 +192,13 @@ def get_new_rec_by_genre(user_data):
     
     return genre_rec_list
 
+def get_rec_from_favorites(user_data):
+    favorites_rec_list = []
 
-
+    unique_watchlist = get_unique_watched(user_data)
+    # compare movies in user's unique watchlist to user favorites
+    for movie in unique_watchlist:
+        if movie in user_data["favorites"]:
+            favorites_rec_list.append(movie)
     
-    # use get friends unique watched to determine movies friends have watched that user hasn't
-    # iterate over recs and add movies of appropriate genre to new rec list
+    return favorites_rec_list
