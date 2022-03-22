@@ -69,32 +69,111 @@ def get_most_watched_genre(user_data):
     return most_watched_genre
 
 
-# janes_data = {
-#     "watched": [{
-#         "title": "Grease",
-#         "genre": "Fantasy",
-#         "rating": 4.8},
-#         {
-#             "title": "Up",
-#             "genre": "Action",
-#             "rating": 4.0},
-#         {
-#         "title": "Sammy",
-#         "genre": "Fantasy",
-#         "rating": 4.0}]
-# }
-# print(get_most_watched_genre(janes_data))
-
-
 # -----------------------------------------
 # ------------- WAVE 3 -------∫-------------
 # -----------------------------------------
 
+def get_unique_watched(user_data):
+    user_watched = user_data["watched"]
+    friends_list = user_data["friends"]
+    friends_watched_lists = []
+    friends_watched = []
+    for friend in friends_list:
+        for watched, movies in friend.items():
+            friends_watched_lists.append(movies)
+    for group in friends_watched_lists:
+        for movie in group:
+            friends_watched.append(movie)
+    unique = [movie for movie in user_watched if movie not in friends_watched]
+    return unique
 
-# -----------------------------------------
-# ------------- WAVE 4 --------------------
-# -----------------------------------------
 
-# -----------------------------------------
-# ------------- WAVE 5 --------------------
-# -----------------------------------------
+
+    #
+    # -----------------------------------------
+    # ------------- WAVE 4 --------------------
+    # -----------------------------------------
+    # -----------------------------------------
+    # ------------- WAVE 5 --------------------
+    # -----------------------------------------
+
+
+FANTASY_1 = {
+    "title": "The Lord of the Functions: The Fellowship of the Function",
+    "genre": "Fantasy",
+    "rating": 4.8
+}
+FANTASY_2 = {
+    "title": "The Lord of the Functions: The Two Parameters",
+    "genre": "Fantasy",
+    "rating": 4.0
+}
+FANTASY_3 = {
+    "title": "The Lord of the Functions: The Return of the Value",
+    "genre": "Fantasy",
+    "rating": 4.0
+}
+FANTASY_4 = {
+    "title": "The Programmer: An Unexpected Stack Trace",
+    "genre": "Fantasy",
+    "rating": 4.0
+}
+ACTION_1 = {
+    "title": "The JavaScript and the React",
+    "genre": "Action",
+    "rating": 2.2
+}
+HORROR_1 = {
+    "title": "Scream",
+    "genre": "Horror",
+    "rating": 3.5
+}
+
+INTRIGUE_1 = {
+    "title": "Recursion",
+    "genre": "Intrigue",
+    "rating": 2.0
+}
+INTRIGUE_2 = {
+    "title": "Instructor Student TA Manager",
+    "genre": "Intrigue",
+    "rating": 4.5
+}
+INTRIGUE_3 = {
+    "title": "Zero Dark Python",
+    "genre": "Intrigue",
+    "rating": 3.0
+}
+
+
+USER_DATA_2 = {
+    "watched": [
+        FANTASY_1,
+        FANTASY_2,
+        FANTASY_3,
+        ACTION_1,
+        INTRIGUE_1,
+        INTRIGUE_2
+    ],
+}
+USER_DATA_2["friends"] = [
+    {
+        "watched": [
+            FANTASY_1,
+            FANTASY_3,
+            FANTASY_4,
+            HORROR_1,
+        ]
+    },
+    {
+        "watched": [
+            FANTASY_1,
+            ACTION_1,
+            INTRIGUE_1,
+            INTRIGUE_3,
+        ]
+    }
+]
+
+
+get_unique_watched(USER_DATA_2)
