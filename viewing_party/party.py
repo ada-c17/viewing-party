@@ -1,6 +1,8 @@
 # ------------- WAVE 1 --------------------
 
 from curses import keyname
+from lib2to3.pgen2.tokenize import generate_tokens
+from operator import itemgetter
 from xml.sax.handler import EntityResolver
 
 from tests.test_constants import GENRE_1, MOVIE_TITLE_1, RATING_1, USER_DATA_2
@@ -55,12 +57,34 @@ def get_watched_avg_rating(user_data):
         average_rating = 0
     return average_rating
 
+# returns most watched genre in user's movies
+def get_most_watched_genre(user_data):
+    genres = {}
+    if len(user_data["watched"]) > 0:
+        for movie in user_data["watched"]: 
+            for category, item in movie.items():
+                if category == "genre":
+                    if item not in genres:
+                        genres[item] = 0
+                    else:
+                        genres[item] += 1
+        popular_genre = (max(genres, key=genres.get))
+        return popular_genre
+
+    else:
+        return None
+    
+
+
+
+
+
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-        
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
