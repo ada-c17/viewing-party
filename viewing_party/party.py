@@ -116,14 +116,20 @@ def get_watched_avg_rating(user_data):
     movie_ratings = []
 
     movies_watched = user_data["watched"]
+    # Get the "watched" list from inside the dictionary
 
     if len(movies_watched) == 0:
+        # If the "watched" list is empty, return an average rating of 0.0
         return 0.0
     else:
         for movie in movies_watched:
+            # If the "watched" list isn't empty, loop enters the list value of dictionaries
             if movie["rating"]:
+                # If inner dictionary (inside the list value) has a key of "rating"
+                # Count that it's there and append the rating value to the movie_ratings list
                 count += 1
                 movie_ratings.append(movie["rating"])
+        # Return average movie rating
         return float(sum(movie_ratings)/count)
 
 
@@ -162,6 +168,9 @@ def get_most_watched_genre(user_data):
                 # Find the most frequent element in the list, this is the most popular genre
 
     return most_popular_genre
+
+
+
 
 
 # TESTING!!
