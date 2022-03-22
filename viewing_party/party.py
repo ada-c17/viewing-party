@@ -1,9 +1,6 @@
 
 # ------------- WAVE 1 --------------------
 
-from logging.handlers import WatchedFileHandler
-
-
 def create_movie(title, genre, rating):
     '''
     this function adds movie details to dictionary and returns movie details.
@@ -208,11 +205,6 @@ def get_rec_from_favorites(user_data):
     from movies in the user's favorites list, which the user's
     friends have not watched 
     '''
-    
-    # initialize  recommendations list
-    # get list of user's unique movies (friends haven't seen)
-    # if unique movie is in user favorites, add to rec list
-    # return rec list 
 
     favorite_movie_recommendations = []
 
@@ -223,4 +215,3 @@ def get_rec_from_favorites(user_data):
             favorite_movie_recommendations.append(movie)
 
     return favorite_movie_recommendations
-
