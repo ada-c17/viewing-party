@@ -106,8 +106,13 @@ def get_available_recs(user_data):
 # -----------------------------------------
 
 def get_new_rec_by_genre(user_data):
-    available_recs = get_available_recs(user_data)
     recommendations = []
+    
+    # Check for content inside user's watched list
+    if not user_data["watched"]:
+        return recommendations
+    
+    available_recs = get_available_recs(user_data)
 
     genres = {}
     for movie in user_data["watched"]:
