@@ -1,5 +1,8 @@
 # ------------- WAVE 1 --------------------
 
+from turtle import title
+
+
 def create_movie(movie_title, genre, rating):
     new_movie = {"title" : movie_title , "genre" : genre , "rating" : rating }
     if movie_title == None:
@@ -15,19 +18,25 @@ def create_movie(movie_title, genre, rating):
 
 
 def add_to_watched(user_data, movie):
-    user_data = {
-        "watched": []
-    }
     user_data["watched"] += [movie]
     return user_data
     
 
 def add_to_watchlist(user_data, movie):
-    user_data = {
-        "watchlist": []
-    }
     user_data["watchlist"] += [movie]
     return user_data
+
+def watch_movie(user_data, title):
+    for movie in user_data["watchlist"]:
+        if movie["title"] == title:
+            add_to_watched(user_data, movie)
+            user_data["watchlist"].remove(movie)
+    return user_data
+
+
+
+
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
