@@ -108,15 +108,8 @@ def get_friends_unique_watched(user_data):
     # -----------------------------------------
 def get_available_recs(user_data):
     user_watched = user_data["watched"]
-    #make list of all movies friends have watched
-    friends_unique_watched = []
-    for friend in user_data["friends"]:
-        for watched, movies in friend.items():
-            if watched == "watched":
-                for movie in movies:
-                    if movie not in friends_unique_watched:
-                        friends_unique_watched.append(movie)
-
+    friends_unique_watched = get_friends_unique_watched(user_data)
+    
     return [movie for movie in friends_unique_watched if movie not in user_watched and movie["host"] in user_data["subscriptions"]]
 
 
@@ -131,107 +124,16 @@ def get_available_recs(user_data):
 def get_new_rec_by_genre(user_data):
     most_watched_genre = get_most_watched_genre(user_data)
     user_watched = user_data["watched"]
-    friends_unique_watched = []
-    for friend in user_data["friends"]:
-        for watched, movies in friend.items():
-            if watched == "watched":
-                for movie in movies:
-                    if movie not in friends_unique_watched:
-                        friends_unique_watched.append(movie)
-
+    friends_unique_watched = get_friends_unique_watched(user_data)
 
     return [movie for movie in friends_unique_watched if movie not in user_watched and movie["genre"] == most_watched_genre]
 
 def get_rec_from_favorites(user_data):
     favorites = user_data["favorites"]
-    friends_unique_watched = []
-    for friend in user_data["friends"]:
-        for watched, movies in friend.items():
-            if watched == "watched":
-                for movie in movies:
-                    if movie not in friends_unique_watched:
-                        friends_unique_watched.append(movie)
+    unique_watched = get_unique_watched(user_data)
     
-    return [movie for movie in favorites if movie not in friends_unique_watched]
+    return [movie for movie in favorites if movie in unique_watched]
 
 
 
 
-FANTASY_1 = {
-    "title": "The Lord of the Functions: The Fellowship of the Function",
-    "genre": "Fantasy",
-    "rating": 4.8
-}
-FANTASY_2 = {
-    "title": "The Lord of the Functions: The Two Parameters",
-    "genre": "Fantasy",
-    "rating": 4.0
-}
-FANTASY_3 = {
-    "title": "The Lord of the Functions: The Return of the Value",
-    "genre": "Fantasy",
-    "rating": 4.0
-}
-FANTASY_4 = {
-    "title": "The Programmer: An Unexpected Stack Trace",
-    "genre": "Fantasy",
-    "rating": 4.0
-}
-ACTION_1 = {
-    "title": "The JavaScript and the React",
-    "genre": "Action",
-    "rating": 2.2
-}
-HORROR_1 = {
-    "title": "Scream",
-    "genre": "Horror",
-    "rating": 3.5
-}
-
-INTRIGUE_1 = {
-    "title": "Recursion",
-    "genre": "Intrigue",
-    "rating": 2.0
-}
-INTRIGUE_2 = {
-    "title": "Instructor Student TA Manager",
-    "genre": "Intrigue",
-    "rating": 4.5
-}
-INTRIGUE_3 = {
-    "title": "Zero Dark Python",
-    "genre": "Intrigue",
-    "rating": 3.0
-}
-
-
-USER_DATA_2 = {
-    "watched": [
-        FANTASY_1,
-        FANTASY_2,
-        FANTASY_3,
-        ACTION_1,
-        INTRIGUE_1,
-        INTRIGUE_2
-    ],
-}
-USER_DATA_2["friends"] = [
-    {
-        "watched": [
-            FANTASY_1,
-            FANTASY_3,
-            FANTASY_4,
-            HORROR_1,
-        ]
-    },
-    {
-        "watched": [
-            FANTASY_1,
-            ACTION_1,
-            INTRIGUE_1,
-            INTRIGUE_3,
-        ]
-    }
-]
-
-get_friends_unique_watched(USER_DATA_2)
