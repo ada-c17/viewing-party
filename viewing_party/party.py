@@ -156,23 +156,29 @@ def get_most_watched_genre(user_data):
     
     for category in user_data:
     # Loop enters dictionary 
-        if category == "watched":
-            # Checking for "watched" list
-            # print(user_data[category])
 
-            for item in user_data[category]:
-                # Loop enters "watched" list which contains dictionaries
-                # print(item)
-                
-                for movie_info in item:
-                    # Looping through the different movie information like: title, genre, rating
-                    # print(movie_info)
-                    if movie_info == "genre":
-                        seen_genre.append(item[movie_info])
-    
-    # FIX THIS!!
-    # Need to add different genres and counts to dictionary? or list?
-    most_popular_genre = max(set(seen_genre), key = seen_genre.count)
+        if category == "watched":
+        # Checking for "watched" list
+
+            if not user_data[category]:
+                # If the "watched" list is empty, return most_popular_genre as None
+                most_popular_genre = None
+                return most_popular_genre
+            else:
+                for item in user_data[category]:
+                    # If the "watched" list isn't empty, loop through the "watched" list
+                    # Loop enters "watched" list which contains dictionaries
+                    
+                    for movie_info in item:
+                        # Looping through the different movie information like: title, genre, rating
+
+                        if movie_info == "genre":
+                            # Get the genre info and append to the empty list seen_genre
+                            seen_genre.append(item[movie_info])
+
+                most_popular_genre = max(set(seen_genre), key = seen_genre.count)
+                # Find the most frequent element in the list, this is the most popular genre
+
     return most_popular_genre
 
 

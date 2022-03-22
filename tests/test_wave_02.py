@@ -38,8 +38,8 @@ def test_most_watched_genre():
     # Assert
     assert popular_genre == "Fantasy"
     assert janes_data == clean_wave_2_data()
-# TEST FOUR
-@pytest.mark.skip()
+# TEST FOUR - PASSED
+# @pytest.mark.skip()
 def test_genre_is_None_if_empty_watched():
     # Arrange
     janes_data = {
