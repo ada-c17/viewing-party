@@ -8,11 +8,11 @@ def create_movie(movie_title, genre, rating):
     if movie_title == None or genre == None or rating == None:
         return None
 
-    new_movie = {
-        "title" : movie_title,
-        "genre" : genre,
-        "rating" : rating
-    }
+    new_movie = {}
+
+    new_movie["title"] = movie_title
+    new_movie["genre"] = genre
+    new_movie["rating"] = rating
 
     return new_movie
 
@@ -50,25 +50,6 @@ def watch_movie(user_data, movie):
 
 def get_watched_avg_rating(user_data):
 
-    '''
-        USER_DATA_2 = {
-        "watched": [
-            FANTASY_1, 
-            FANTASY_2, 
-            FANTASY_3, 
-            ACTION_1, 
-            INTRIGUE_1, 
-            INTRIGUE_2
-            ],    
-    }
-
-    FANTASY_1 = {
-    "title": "The Lord of the Functions: The Fellowship of the Function",
-    "genre": "Fantasy",
-    "rating": 4.8
-
-    '''
-
     count_rating = 0
     count_sum_rating = 0
 
@@ -84,18 +65,6 @@ def get_watched_avg_rating(user_data):
 
     return average
 
-'''
-The next three tests are about a get_most_watched_genre() function.
-In party.py, there should be a function named get_most_watched_genre. This function should...
-
-take one parameter: user_data
-the value of user_data will be a dictionary with a "watched" list of movie dictionaries. Each movie dictionary has a key "genre".
-This represents that the user has a list of watched movies. Each watched movie has a genre.
-The values of "genre" is a string.
-Determine which genre is most frequently occurring in the watched list
-return the genre that is the most frequently watched
-If the value of "watched" is an empty list, get_most_watched_genre should return None.
-'''
 def get_most_watched_genre(user_data):
 
     list_of_genre = []
@@ -123,6 +92,7 @@ def get_most_watched_genre(user_data):
 
     return popular_genre
 
+get_most_watched_genre(user_data)
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
