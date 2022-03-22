@@ -89,13 +89,18 @@ def get_friends_unique_watched(user_data):
         if movie not in watched_list:
             friends_unique_movies.append(movie)
     return friends_unique_movies
-
-
-
         
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+def get_available_recs(user_data):
+    friends_unique_movies = get_friends_unique_watched(user_data)
+    recommendations = []
+    for movie in friends_unique_movies:
+        if movie["rating"] >= 3.5:
+            recommendations.append(movie)
+    return recommendations 
+
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
