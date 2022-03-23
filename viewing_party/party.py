@@ -2,6 +2,7 @@
 
 from audioop import avg
 from collections import Counter
+from shutil import move
 
 
 def create_movie(title, genre, rating):
@@ -113,8 +114,6 @@ def get_most_watched_genre(user_data):
 
 def get_unique_watched(user_data):
 
-    print(user_data)
-
     user_compiled_watched_set = set()
     friends_unique_compiled_set = set()
 
@@ -164,6 +163,26 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+
+def get_available_recs(user_data):
+
+    movie_recommended_by_friends = get_friends_unique_watched(user_data)
+
+    recommended_movies_list = []
+
+    user_subscriptions = user_data["subscriptions"]
+
+    for movie in movie_recommended_by_friends:
+        for key, value in movie.items():
+            if key == "host":
+                if value in user_subscriptions:
+                    recommended_movies_list.append(movie)
+
+    return(recommended_movies_list)
+
+
+
+
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
