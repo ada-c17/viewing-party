@@ -87,17 +87,20 @@ def get_watched_avg_rating(user_data):
 '''
 
 def get_most_watched_genre(user_data):
-    genres = {}
+    genres_dict = {}
     for key in user_data:
         if user_data["watched"] == []:
             return None
-        for item in user_data["watched"]:
-            if item not in genres.values():
-                genres[[user_data]["watched"]["genre"]] = 1
+        for index in range(len(user_data["watched"])):
+            # if "genre" in user_data["watched"][index]:
+            if user_data["watched"][index]["genre"] not in genres_dict:
+                genres_dict[user_data["watched"][index]["genre"]] = 1   
             else:
-                genres[([user_data]["watched"]["genre"])]+= 1
-    for value in genres.values():
-        return max(value)
+                genres_dict[user_data["watched"][index]["genre"]] += 1
+    max_genre = max(genres_dict, key=genres_dict.get)
+    return max_genre
+    
+    
             
     
 
