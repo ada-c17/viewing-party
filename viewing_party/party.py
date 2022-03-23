@@ -234,56 +234,22 @@ def get_friends_unique_watched(user_data):
     friend_unique_list = []
 
 
+
+    # Flatten friend_list so that its a list of dictionaries
     for friend_film in friends_data:
+        # Loop through inner list that has two "watched" dictionaries
         for film in friend_film["watched"]:
+            # Append a dictionary to the empty friends_movies so that its a list of dictionaries
             friend_movie_list.append(film)
 
+
     for movie in friend_movie_list:
+        # Loop through the user_list (list of dictionaries)
         if (movie not in user_movie_list) and (movie not in friend_unique_list):
+            # Movie not in user list --> add to friends unique list
             friend_unique_list.append(movie)
     
     return friend_unique_list
-
-# user_data = {
-#     'watched': 
-#     [
-#         {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
-#         {'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, 
-#         {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, 
-#         {'title': 'The JavaScript and the React', 'genre': 'Action', 'rating': 2.2}, 
-#         {'title': 'Recursion', 'genre': 'Intrigue', 'rating': 2.0}, 
-#         {'title': 'Instructor Student TA Manager', 'genre': 'Intrigue', 'rating': 4.5}
-#     ], 
-
-# 'friends': [
-#         {'watched': [
-#                         {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
-#                         {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, 
-#                         {'title': 'The Programmer: An Unexpected Stack Trace', 'genre': 'Fantasy', 'rating': 4.0}, 
-#                         {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}
-#                     ]
-#         }, 
-
-#         {'watched': [
-#                         {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
-#                         {'title': 'The JavaScript and the React', 'genre': 'Action', 'rating': 2.2}, 
-#                         {'title': 'Recursion', 'genre': 'Intrigue', 'rating': 2.0}, 
-#                         {'title': 'Zero Dark Python', 'genre': 'Intrigue', 'rating': 3.0}
-#                     ]
-#         }
-#     ]
-# }
-
-# get_unique_watched(user_data)
-
-# Emily's suggestion:
-# if movie not in my_movie_list and movie not in unique_list:
-
-# get_watched_avg_rating(user_data)
-
-# get_most_watched_genre(user_data)
-
-# get_unique_watched(user_data)
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
