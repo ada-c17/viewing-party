@@ -52,17 +52,19 @@ def watch_movie(user_data, movie_title):
 
 def get_watched_avg_rating(user_data):
     # this function accesses the ratings for all of the movies in watched
-    # and return the average of those ratings
+    # and returns the average of those ratings
 
     total = 0
 
     for movie in user_data["watched"]:
-        # convert string ratings to float to allow for math operations
-        float_rating = float(movie["rating"])
-        total += float_rating
+        # add each movie's rating to the total
+        total += movie["rating"]
     
     # calculate average rating for all movies within "watched"
-    rating_average = total/len(user_data["watched"])
+    if total == 0:
+        rating_average = 0
+    else:
+        rating_average = total/len(user_data["watched"])
 
     return rating_average
 
