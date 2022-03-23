@@ -121,31 +121,48 @@ def get_unique_set_watch_from_friends(user_data):
 
 def get_unique_watched(user_data):
 
+    # creating sets of unique movies for user and friends
     set_of_users_films = get_unique_set_watch_from_user(user_data)
     set_of_friends_films = get_unique_set_watch_from_friends(user_data)
 
     # determine which movies the user has watched, but none of their friends have watched
     list_for_suggestion = list(set_of_users_films - set_of_friends_films)
 
-    # return a list of dictionaries, that represents a list of movies
-    dict_list_for_suggestion = []
+    # return fron list nested list of dictionaries, by key "title" and by value store in 
+    # the list_for_suggestion
+    dict_list_for_suggestion_by_user = []
     user_watch_list = user_data["watched"]
     for films in range(len(list_for_suggestion)):
         for values in range(len(user_watch_list)):
             if user_watch_list[values]["title"] == list_for_suggestion[films]:
-                dict_list_for_suggestion.append(user_watch_list[values])
+                dict_list_for_suggestion_by_user.append(user_watch_list[values])
 
-    return dict_list_for_suggestion
+    return dict_list_for_suggestion_by_user
 
 def get_friends_unique_watched(user_data):
 
+    # creating sets of unique movies for user and friends
     set_of_users_films = get_unique_set_watch_from_user(user_data)
     set_of_friends_films = get_unique_set_watch_from_friends(user_data)
 
-    # list_unique_watched = 
+    # determine which movies the friends has watched, but user did not watched
+    list_unique_watched = list(set_of_friends_films - set_of_users_films)
 
+    # return fron list nested list of dictionaries, by key "title" and by value store in 
+    # the list_unique_watched
 
+    friends_watched_list = user_data["friends"]
+    dict_list_for_suggestion_by_friends = []
 
+    for items in range(len(list_unique_watched)):
+        for i in range(len(friends_watched_list)):
+            watched_lists = friends_watched_list[i]["watched"]
+            for films in range(len(watched_lists)):
+                if watched_lists[films]["title"] == list_unique_watched[items]:
+                    if not watched_lists[films] in dict_list_for_suggestion_by_friends:
+                        dict_list_for_suggestion_by_friends.append(watched_lists[films])
+
+    return dict_list_for_suggestion_by_friends
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
