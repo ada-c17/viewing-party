@@ -111,10 +111,25 @@ def get_available_recs(user_data):
                 user_recommendations.append(i)
 
     return user_recommendations
-    
+
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+def get_new_rec_by_genre(user_data):
+    genre_most_watched = get_most_watched_genre(user_data)
+    friends_watched = []
+    most_genre_recommendations = []
+
+    for dicts in user_data['friends']:
+        for movie in dicts['watched']:
+            friends_watched.append(movie)
+
+    for i in friends_watched:
+        if i not in user_data['watched']:
+            if i['genre'] == genre_most_watched:
+                most_genre_recommendations.append(i)
+
+    return most_genre_recommendations
 # need to go back to wave 3 assert tests to add in a few more assertions
