@@ -99,9 +99,6 @@ def get_friends_unique_watched(user_data):
     return [movie for movie in friends_unique_watched if movie not in user_watched]
 
     
-
-
-
     #
     # -----------------------------------------
     # ------------- WAVE 4 --------------------
@@ -111,10 +108,6 @@ def get_available_recs(user_data):
     friends_unique_watched = get_friends_unique_watched(user_data)
     
     return [movie for movie in friends_unique_watched if movie not in user_watched and movie["host"] in user_data["subscriptions"]]
-
-
-
-
 
 
     # -----------------------------------------
