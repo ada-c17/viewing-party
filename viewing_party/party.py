@@ -44,11 +44,19 @@ def get_most_watched_genre(user_data):
     for movie in user_data["watched"]:
         if 'genre' in movie:
             genres.append(movie['genre'])
-    
+    # find user's most watched genre
     if len(genres) == 0:
         return None
     else:
-        popular_genre = max(set(genres), key = genres.count)
+        most_watched_genre = None
+        counter = 0
+        for genre in genres:
+            curr_frequency = genres.count(genre)
+            if (curr_frequency > counter):
+                counter = curr_frequency
+                most_watched_genre = genre
+    return most_watched_genre
+
     return popular_genre
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
@@ -84,7 +92,11 @@ def get_friends_unique_watched(user_data):
 def get_available_recs(user_data):
     unique_friend_movies = get_friends_unique_watched(user_data)
     user_subscriptions = user_data['subscriptions']
-    return [movie for movie in unique_friend_movies if movie['host'] in user_subscriptions]
+    recommendations = []
+    for movie in unique_friend_movies:
+        if 'host' in movie and movie['host'] in user_subscriptions:
+            recommendations.append(movie)
+    return recommendations
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
