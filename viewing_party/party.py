@@ -12,29 +12,21 @@ def create_movie(title, genre, rating):
         "rating": rating
     }
     # checks to make sure that the variables passed into the function are real values and not none. 
-    # If none, returns none. If valid input, then returns the dict.
+    # If none, returns. If valid input, then returns the dict.
     if title is None or genre is None or rating is None:
-        return None
+        return 
     else:
         return new_movie_added
 
 def add_to_watched(user_data, movie):
-    # checks to see if list is empty, if it is empty, it returns empty list. 
-    # If not empty, continues with conditional and appends movie dictionary to value in watched_movies 
-    if not user_data:
-        return user_data
-    else:
-        user_data["watched"].append(movie)
+    # adds movies passed as an argument to the user_data["watched"] list 
+    user_data["watched"].append(movie)
     
     return user_data
 
 def add_to_watchlist(user_data, movie):
-    # checks to see if list is empty, if it is empty, it returns empty list. 
-    # If not empty, continues with conditional and appends movie dictionary to value in movies_to_watch dictionary
-    if not user_data:
-        return user_data
-    else:
-        user_data["watchlist"].append(movie)
+    # adds movies passed as an argument to the user_data["watched"] list 
+    user_data["watchlist"].append(movie)
     
     return user_data
 
