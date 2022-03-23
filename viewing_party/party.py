@@ -79,8 +79,32 @@ def get_unique_watched(user_data):
             
     return final_list
 
-    
+def get_friends_unique_watched(user_data):
+    unique_movies = copy.deepcopy(user_data['friends'])
 
+    users_watched_list = []
+    final_list = []
+
+    for i in range(len(user_data['watched'])):
+        users_watched_list.append(user_data['watched'][i]['title'])
+    # print(users_watched_list)
+    for j in range(len(unique_movies)):
+        # CODE FOR LIST COMPREHENSION BUT FOR SOME REASON DOES NOT WORK LOL
+        # final_list = [unique_movies[j]['watched'][k] for k in range(len(unique_movies[j]['watched'])) \
+        #     if not unique_movies[j]['watched'][k]['title'] in users_watched_list]
+        for k in range(len(unique_movies[j]['watched'])):
+            #BUT THIS METHOD WORKS
+            if not unique_movies[j]['watched'][k]['title'] in users_watched_list:
+                if not unique_movies[j]['watched'][k] in final_list:
+                    final_list.append(unique_movies[j]['watched'][k])
+
+    return final_list
+
+
+
+
+    
+# get_friends_unique_watched(USER_DATA_4)
 
 
 
