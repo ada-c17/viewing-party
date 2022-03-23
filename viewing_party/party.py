@@ -12,14 +12,16 @@ def create_movie(title, genre, rating):
         "genre": genre,
         "rating": rating
     }
-    # checks to make sure that the variables passed into the function are real values and not none. If none, returns none. If valid input, then returns the dict.
+    # checks to make sure that the variables passed into the function are real values and not none. 
+    # If none, returns none. If valid input, then returns the dict.
     if title is None or genre is None or rating is None:
         return None
     else:
         return new_movie_added
 
 def add_to_watched(user_data, movie):
-    # checks to see if list is empty, if it is empty, it returns empty list. If not empty, continues with conditional and appends movie dictionary to value in watched_movies 
+    # checks to see if list is empty, if it is empty, it returns empty list. 
+    # If not empty, continues with conditional and appends movie dictionary to value in watched_movies 
     if not user_data:
         return user_data
     else:
@@ -28,7 +30,8 @@ def add_to_watched(user_data, movie):
     return user_data
 
 def add_to_watchlist(user_data, movie):
-    # checks to see if list is empty, if it is empty, it returns empty list. If not empty, continues with conditional and appends movie dictionary to value in movies_to_watch dictionary
+    # checks to see if list is empty, if it is empty, it returns empty list. 
+    # If not empty, continues with conditional and appends movie dictionary to value in movies_to_watch dictionary
     if not user_data:
         return user_data
     else:
@@ -122,7 +125,6 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 
 def get_available_recs(user_data):
-    # TODO: ask if list name too long and too specific - how to get better at creating variable names?
     # initialize list object that will store movie recommedations from user_data["friends"] if available through user_data["subscriptions"]
     movie_recs_by_subs = []
 
@@ -148,15 +150,12 @@ def get_new_rec_by_genre(user_data):
 
     return movie_recs_by_genre
 
-def get_rec_from_favorites(user_data):
-    # TODO: Ask about two return statements so close together 
+def get_rec_from_favorites(user_data): 
     # uses get_unique_watched function to return movies only watched by user and stores it in user_unique_movies variable
     user_unique_movies = get_unique_watched(user_data)
 
     # list comprehension where a list object is created that contains movies that are both in the user_unique_movies list and the user_data["favorites"] list
     user_movie_favorite_recs = [movie for movie in user_data["favorites"] if movie in user_unique_movies ]
-    if len(user_movie_favorite_recs) == 0: # if there are no elements in list
-        return user_movie_favorite_recs # returns empty list
 
     return user_movie_favorite_recs
     
