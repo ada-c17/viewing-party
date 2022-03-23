@@ -19,10 +19,10 @@ def add_to_watchlist(user_data, movie):
     return user_data
 
 def watch_movie(user_data, title):
-    for i in range(len(user_data["watchlist"])):
-        if title in user_data["watchlist"][i].values():
-            user_data = add_to_watched(user_data, user_data["watchlist"][i])
-            user_data["watchlist"].pop(i)
+    for movie in user_data["watchlist"]:
+        if title in movie.values():
+            user_data["watchlist"].remove(movie)
+            user_data = add_to_watched(user_data, movie)
     return user_data
 
 # -----------------------------------------
