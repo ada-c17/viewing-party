@@ -4,8 +4,8 @@
 
 from pyparsing import empty
 
-
 def create_movie(title, genre, rating):
+    # TODO: create better comments
     # creating a dictionary that stores the variables passed into the function as the values
     new_movie_added = {
         "title": title,
@@ -37,10 +37,10 @@ def add_to_watchlist(user_data, movie):
     return user_data
 
 def watch_movie(user_data, title):   
-    for i in range(len(user_data["watchlist"])): # loops through all_movies["watchlist"] 
-        if title in user_data["watchlist"][i]["title"]: # conditional that checks if the title is in the all_movies["watchlist"] at index i 
-            user_data["watchlist"].remove(user_data["watchlist"][i]) # removes the title from the all_movies["watchlist"]  at index i 
-            user_data["watched"].append(title) # adds the title to the all_movies["watched"] 
+    for movie in range(len(user_data["watchlist"])): # loops through user_data["watchlist"] 
+        if title in user_data["watchlist"][movie]["title"]: # conditional that checks if the title is in the user_data["watchlist"] at index i 
+            user_data["watchlist"].remove(user_data["watchlist"][movie]) # removes the title from the user_data["watchlist"]  at index i 
+            user_data["watched"].append(title) # adds the title to the user_data["watched"] 
 
     return user_data
 
@@ -49,125 +49,115 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 
 def get_watched_avg_rating(user_data):
-    ratings_list = []
+    # initialize list object that will store all movie ratings from user_data["watched"]
+    user_movie_ratings = []
+    # inititalize float variable that stores ratings for empty lists 
     empty_list_rating = 0.0
 
-    for item in user_data["watched"]: # loops through all items in "watched"
-        ratings_list.append(item["rating"]) # adds the ratings from "watched" to ratings_list
+    for movie in user_data["watched"]: # loops through movies in "watched"
+        user_movie_ratings.append(movie["rating"]) # adds the ratings from "watched" to ratings_list
     
-    if len(user_data["watched"]) != 0:
-        movie_ratings_average = sum(ratings_list) / len(ratings_list)
+    if len(user_data["watched"]) != 0: # if list contains elements and is not equal to 0
+        # calculates average by dividing the sum of the list with the length of the list
+        movie_ratings_average = sum(user_movie_ratings) / len(user_movie_ratings) 
     else:
         return empty_list_rating # returns 0.0
     
-    return movie_ratings_average # returns if finished with average calculation 
+    return movie_ratings_average 
 
 def get_most_watched_genre(user_data):
-    genre_list = []
+    # initialize list object that will store the genres of all the movies in user_data["watched"]
+    user_movie_genre = []
 
-    for item in user_data["watched"]: # loops through list
-        genre_list.append(item["genre"]) # appends values of "genre" key to genre_list dictionary
+    for movie in user_data["watched"]: # loops through movie in user_data["watched"] list 
+        user_movie_genre.append(movie["genre"]) # appends values of "genre" key to user_movie_genre list
 
-    if len(user_data["watched"]) != 0:
-        genre_list.sort() # sorts list in place (modifies original list)
-        most_common_genre = max(genre_list, key = genre_list.count) # uses the max function to find the most common genre in genre_list with list.count function to count the occurences
+    if len(user_data["watched"]) != 0: # if the list contains elements and is greater than 0 
+        user_movie_genre.sort() # sorts list in place (modifies original list)
+        # uses the max function to find the most common genre in genre_list with list.count function to count the occurences
+        most_common_user_genre = max(user_movie_genre, key = user_movie_genre.count)
     else:
-        return None 
+        return None # if list is empty
     
-    return most_common_genre
+    return most_common_user_genre
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
 def get_unique_watched(user_data):
-    user_watched_movies = []
-    friends_watched_movies = []
+    # initialize list object to store movies that both user and friends have watched
+    both_watched_movies = []
 
-    for item in user_data ["watched"]:
-        user_watched_movies.append(item)
-    
-    for i in range(len(user_data ["friends"])):
-        for item in user_data["friends"][i]["watched"]: 
-            friends_watched_movies.append(item)
+    for movies in user_data["friends"]: # loops through movies in user_data["friends"]
+        for friend_movies in movies["watched"]: # loops through movies in user_data["friends"]["watched"]
+            if friend_movies in user_data["watched"]: # conditional that checks if movies that friends have seen are in user_data["watched"] list
+                both_watched_movies.append(friend_movies) # adds to list if both friends and user have seen the movie
+    # list comprehension that creates new list object that stores movies that only the user has watched 
+    unique_user_movies = [movie for movie in user_data["watched"] if movie not in both_watched_movies]
 
-    unique_user_movies = [item for item in user_watched_movies if item not in friends_watched_movies] # list comprehension that stores all movie titles not in friends_watched_movies
-    
     return unique_user_movies
 
+
 def get_friends_unique_watched(user_data): 
-    user_watched_movies = []
-    friends_watched_movies = []
+    # initialize list object to store movies that user has not seen
+    user_not_watched_movies = []
+    # initialize list object to store movies only friends have seen without duplicates 
     unique_friend_movies = []
 
-    for item in user_data ["watched"]:
-        user_watched_movies.append(item)
+    for movies in user_data["friends"]: # loops through movies in user_data["friends"]
+        for friends_watched in movies["watched"]: # loops through movies in user_data["friends"]["watched"]
+            if friends_watched not in user_data["watched"]: # conditional that checks if movies that friends have seen are not in user_data["watched"] list
+                user_not_watched_movies.append(friends_watched) # adds to list if user has not seen the movie, but the friends have
     
-    for i in range(len(user_data["friends"])):
-        for item in user_data["friends"][i]["watched"]: 
-            friends_watched_movies.append(item)
-
-    friend_movies_list = [item for item in friends_watched_movies if item not in user_watched_movies] # list comprehension that stores all movie titles not in friends_watched_movies
-    for item in friend_movies_list:
-        if item not in unique_friend_movies:
-            unique_friend_movies.append(item)
-
+    for movie in user_not_watched_movies: # loops through movies in user_not_watched_movies list
+        if movie not in unique_friend_movies: # conditional that checks if movie is not (already) in unique_friend_movies - checks for duplicates
+            unique_friend_movies.append(movie) # if the movie is not present in unique_friend_movies list, it adds that movie 
+    
     return unique_friend_movies
+
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
 def get_available_recs(user_data):
-    user_movie_recs = []
+    # TODO: ask if list name too long and too specific - how to get better at creating variable names?
+    # initialize list object that will store movie recommedations from user_data["friends"] if available through user_data["subscriptions"]
+    movie_recs_by_subs = []
 
-    for friend in user_data["friends"]:
-        for movie in friend["watched"]:
-            if movie not in user_data["watched"] and movie["host"] in user_data["subscriptions"]: 
-                user_movie_recs.append(movie)
+    for friend in user_data["friends"]: # loops through each friend in user_data["friends"] list
+        for movie in friend["watched"]: # loops through each movie in friend["watched"]
+            # conditional that checks that movie is not in user_data["watched"] list and the "host" in user_data["friends"] matches "subscription" in user_data
+            if movie not in user_data["watched"] and movie["host"] in user_data["subscriptions"]:
+                movie_recs_by_subs.append(movie) # adds movie to list 
 
-    return user_movie_recs
+    return movie_recs_by_subs
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
 def get_new_rec_by_genre(user_data):
-    most_common_genre = []
-    user_movie_recs_by_genre = []
+    # uses friend_unique_movies function to get movies that only friends have watched 
+    friend_unique_movies = get_friends_unique_watched(user_data)
+    # uses get_most_watched_genre function to get most common genre and stores that in most_freq_data variable
+    most_freq_genre = get_most_watched_genre(user_data) 
+    # list comprehension where a list object is created that contains movies that have only been watched by friends and matches users most frequent genre
+    movie_recs_by_genre = [movie for movie in friend_unique_movies if movie["genre"] == most_freq_genre]
 
-    for item in user_data["watched"]: # loops through list
-        most_common_genre.append(item["genre"]) # appends values of "genre" key to genre_list dictionary
-
-    if len(user_data["watched"]) != 0:
-        most_common_genre.sort() # sorts list in place (modifies original list)
-        most_freq_genre = max(most_common_genre, key = most_common_genre.count) # uses the max function to find the most common genre in genre_list with list.count function to count the occurences
-    else:
-        return user_movie_recs_by_genre # returns if list is empty
-
-    for i in user_data["friends"]:
-        for j in i["watched"]:
-            if j not in user_data["watched"] and j["genre"] == most_freq_genre:
-                user_movie_recs_by_genre.append(j)
-
-    return user_movie_recs_by_genre
+    return movie_recs_by_genre
 
 def get_rec_from_favorites(user_data):
-    friends_watched_list = []
-    user_favorites_list = []
-    user_movie_recs_from_favorites = []
+    # TODO: Ask about two return statements so close together 
+    # uses get_unique_watched function to return movies only watched by user and stores it in user_unique_movies variable
+    user_unique_movies = get_unique_watched(user_data)
 
-    for i in user_data["friends"]:
-        for j in i["watched"]:
-            friends_watched_list.append(j)
+    # list comprehension where a list object is created that contains movies that are both in the user_unique_movies list and the user_data["favorites"] list
+    user_movie_favorite_recs = [movie for movie in user_data["favorites"] if movie in user_unique_movies ]
+    if len(user_movie_favorite_recs) == 0: # if there are no elements in list
+        return user_movie_favorite_recs # returns empty list
 
-    for i in user_data["favorites"]:
-        user_favorites_list.append(i)
-
-    user_movie_recs_from_favorites = [item for item in user_favorites_list if item not in friends_watched_list]
-
-    if len(user_movie_recs_from_favorites) == 0:
-        return user_movie_recs_from_favorites
-
-    return user_movie_recs_from_favorites
-
+    return user_movie_favorite_recs
+    
+    
