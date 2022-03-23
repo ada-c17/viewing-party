@@ -1,7 +1,7 @@
 # ------------- WAVE 1 --------------------
 
 from turtle import title
-
+import copy
 
 def create_movie(movie_title, genre, rating):
     new_movie = {"title" : movie_title , "genre" : genre , "rating" : rating }
@@ -57,8 +57,22 @@ def get_most_watched_genre(user_data):
     best_genre = max(popular_genre, key = popular_genre.get)
     return best_genre
 
+def get_unique_watched(user_data):
+    unique_movie_list = copy.deepcopy(user_data["watched"])
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie in unique_movie_list:
+                unique_movie_list.remove(movie)
+    return unique_movie_list
+        
 
-
+def get_friends_unique_watched(user_data):
+    friends_unique_list = []
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie not in user_data["watched"] and movie not in friends_unique_list:
+                friends_unique_list.append(movie)
+    return friends_unique_list
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
