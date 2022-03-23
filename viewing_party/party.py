@@ -1,6 +1,5 @@
 # ------------- WAVE 1 --------------------
 
-import enum
 from re import U
 
 # Creates a dictionary for a movie if the parameters are all truthy
@@ -35,6 +34,7 @@ def watch_movie(user_data, title):
         if movie["title"] == title:
             transfer_movie = watchlist.pop(index)
             watched_list.append(transfer_movie)
+            break
     
     return user_data
 
@@ -48,8 +48,8 @@ def get_watched_avg_rating(user_data):
     ratings = []
     movie_list = user_data["watched"]
     
-    for dict in movie_list:
-        ratings.append(dict["rating"])
+    for movie in movie_list:
+        ratings.append(movie["rating"])
     
     if not ratings:
         return 0.0
@@ -128,7 +128,7 @@ def get_new_rec_by_genre(user_data):
 
 # Return list of movie dicts that is a user favorite and friends haven't watched
 def get_rec_from_favorites(user_data):
-    movie_recs = []
+    rec_list = []
     user_favs = user_data["favorites"]
     friends_list = user_data["friends"]
 
@@ -138,6 +138,6 @@ def get_rec_from_favorites(user_data):
 
     for movie in user_favs:
         if movie not in friends_watched_list:
-            movie_recs.append(movie)
+            rec_list.append(movie)
 
-    return movie_recs
+    return rec_list
