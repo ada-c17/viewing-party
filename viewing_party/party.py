@@ -122,3 +122,16 @@ def get_new_rec_by_genre(user_data):
     except KeyError as error:
         return []
 
+def get_rec_from_favorites(user_data):
+    rec_movies_user = []
+    favorites = []
+    watched_by_friends=[]
+    for movie in user_data["favorites"]:
+        favorites.append(movie)
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            watched_by_friends.append(movie)
+    for movie in watched_by_friends:
+        if movie in favorites:
+            favorites.remove(movie)
+    return favorites
