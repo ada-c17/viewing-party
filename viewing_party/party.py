@@ -77,23 +77,61 @@ def get_most_watched_genre(user_data):
         
     return popular_genre
 
-    # user_data = {
-    #     "watchlist": [{
-    #         "title": MOVIE_TITLE_1,
-    #         "genre": GENRE_1,
-    #         "rating": RATING_1
-    #     }],
-    #     "watched":  [{
-    #         "title": MOVIE_TITLE_1,
-    #         "genre": GENRE_1,
-    #         "rating": RATING_1
-    # }
-
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
-def get_unique_watched(amandas_data)
-    pass
+def get_friends_watched_movies(user_data):
+    friends = user_data["friends"]  #Each element in the friends list is a dictionary 
+    friends_watched_list = []
+    for friend in friends:
+        # print(f" THIS IS FRIEND HERE: {friend=}")
+        for movie in friend["watched"]:
+            # print(f" THIS IS FRIEND HERE: {friend=}")
+            friends_watched_list.append(movie)
+        
+    return friends_watched_list
+
+def get_unique_watched(user_data):
+    unique_watched_list = []
+    watched_movies = user_data["watched"] #An array of dictionaries representing each watched film  
+    friends_watched_list = get_friends_watched_movies(user_data)
+    for movie in watched_movies:
+        if movie not in friends_watched_list:
+            unique_watched_list.append(movie)
+    #Movie title variable? For each movie in movie ditionary in watched movies
+    
+    return unique_watched_list
+
+def get_friends_unique_watched(user_data):
+    friends_unique_watched_list = []
+    watched_movies = user_data["watched"] #An array of dictionaries representing each watched film  
+    friends_watched_list = get_friends_watched_movies(user_data)
+    for movie in friends_watched_list:
+        if movie in friends_unique_watched_list:
+            continue 
+        elif movie not in watched_movies:
+            friends_unique_watched_list.append(movie)
+            
+    #Movie title variable? For each movie in movie ditionary in watched movies
+    print(f"HERE IS THE LIST*************** {friends_unique_watched_list}")       
+    return friends_unique_watched_list
+
+
+
+
+
+# user_data = {
+#     "watchlist": [{
+#         "title": MOVIE_TITLE_1,
+#         "genre": GENRE_1,
+#         "rating": RATING_1
+#     }],
+#     "watched":  [{
+#         "title": MOVIE_TITLE_1,
+#         "genre": GENRE_1,
+#         "rating": RATING_1
+#     }]
+# }
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
