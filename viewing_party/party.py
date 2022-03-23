@@ -185,25 +185,27 @@ def get_unique_watched(user_data):
     # Return a list of dictionaries --> list of movies
 
     # print(user_data)
-    
-    unique_list = []
 
     friend_list = user_data["friends"]
     user_list = user_data["watched"]
     
-    # # print("user list: ", user_list)
-    # # print("friend list: ", friends_list)
-
-    # for user_movie in user_list:
-    #     print(user_movie)
+    unique_list = []
+    friends_movies = []
 
     for friend_movie in friend_list:
         # print(friend_movie)
         for film in friend_movie["watched"]:
             # print(film)
-            if (film not in user_list) and (film not in unique_list):
-                print(film)
+            friends_movies.append(film)
+    # print(friends_movies)
+            # if (film not in user_list) and (film not in unique_list):
+            #     print(film)
             #     unique_list.append(film)
+    
+    for movie in user_list:
+        if (movie not in friends_movies) and (movie not in unique_list):
+            unique_list.append(movie)
+    return unique_list
 
         # if movie not in user_list:
             # print(movie)
@@ -213,32 +215,35 @@ def get_unique_watched(user_data):
     # return unique_list
 
 
-user_data = {'watched': [
-    {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
-    {'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, 
-    {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, 
-    {'title': 'The JavaScript and the React', 'genre': 'Action', 'rating': 2.2}, 
-    {'title': 'Recursion', 'genre': 'Intrigue', 'rating': 2.0}, 
-    {'title': 'Instructor Student TA Manager', 'genre': 'Intrigue', 'rating': 4.5}
+user_data = {
+    'watched': 
+    [
+        {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
+        {'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, 
+        {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, 
+        {'title': 'The JavaScript and the React', 'genre': 'Action', 'rating': 2.2}, 
+        {'title': 'Recursion', 'genre': 'Intrigue', 'rating': 2.0}, 
+        {'title': 'Instructor Student TA Manager', 'genre': 'Intrigue', 'rating': 4.5}
     ], 
 
 'friends': [
-    {'watched': [
-                {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
-                {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, 
-                {'title': 'The Programmer: An Unexpected Stack Trace', 'genre': 'Fantasy', 'rating': 4.0}, 
-                {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}
-                ]
-    }, 
+        {'watched': [
+                        {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
+                        {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, 
+                        {'title': 'The Programmer: An Unexpected Stack Trace', 'genre': 'Fantasy', 'rating': 4.0}, 
+                        {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}
+                    ]
+        }, 
 
-    {'watched': [{'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
-                {'title': 'The JavaScript and the React', 'genre': 'Action', 'rating': 2.2}, 
-                {'title': 'Recursion', 'genre': 'Intrigue', 'rating': 2.0}, 
-                {'title': 'Zero Dark Python', 'genre': 'Intrigue', 'rating': 3.0}
-                ]
-    }
+        {'watched': [
+                        {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
+                        {'title': 'The JavaScript and the React', 'genre': 'Action', 'rating': 2.2}, 
+                        {'title': 'Recursion', 'genre': 'Intrigue', 'rating': 2.0}, 
+                        {'title': 'Zero Dark Python', 'genre': 'Intrigue', 'rating': 3.0}
+                    ]
+        }
     ]
-    }
+}
 
 get_unique_watched(user_data)
 
