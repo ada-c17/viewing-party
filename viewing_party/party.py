@@ -193,7 +193,7 @@ def get_unique_watched(user_data):
     user_list = user_data["watched"]
     
     # Empty list to put movies only the user has seen
-    unique_list = []
+    user_unique_list = []
     # Empty list to populate with --> want to flatten the friend_list so that list of dictionaries (one dictionary, one movie)
     friends_movies = []
 
@@ -209,19 +209,40 @@ def get_unique_watched(user_data):
     
     for movie in user_list:
         # Loop through the user_list (list of dictionaries)
-        if (movie not in friends_movies) and (movie not in unique_list):
+        if (movie not in friends_movies) and (movie not in user_unique_list):
             # Find the movies that only the user has watched
-            unique_list.append(movie)
+            user_unique_list.append(movie)
             
-    return unique_list
+    return user_unique_list
 
-        # if movie not in user_list:
-            # print(movie)
-            # print(user_list[movie])
-            # unique_list.append(movie)
-    # print(unique_list)
-    # return unique_list
 
+def get_friends_unique_watched(user_data):
+    # print(user_data)
+
+    #List of movies friends have watched
+    # the elements are dictionaries with lists of dictionaries are the values
+    friends_data = user_data["friends"]
+
+    # List of movies the user has watched
+    # the elements are dictionaries (one dictionary, one movie)
+    user_movie_list = user_data["watched"]
+
+    # Empty list to populate with --> want to flatten the friend_list so that list of dictionaries (one dictionary, one movie)
+    friend_movie_list = []
+    
+    # Empty list to put movies only the friends have seen
+    friend_unique_list = []
+
+
+    for friend_film in friends_data:
+        for film in friend_film["watched"]:
+            friend_movie_list.append(film)
+
+    for movie in friend_movie_list:
+        if (movie not in user_movie_list) and (movie not in friend_unique_list):
+            friend_unique_list.append(movie)
+    
+    return friend_unique_list
 
 # user_data = {
 #     'watched': 
