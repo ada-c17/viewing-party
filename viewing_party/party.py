@@ -48,28 +48,34 @@ def get_watched_avg_rating(user_data):
 
 def get_most_watched_genre(user_data):
     #I'm guessing this may be a frequency map
-    popular_genre = {}
+    popular_genre_dict = {}
     watched_movies = user_data["watched"] #An array of dictionaries representing each watched film  
-    
+    if len(watched_movies) == 0:
+        return None
+
     for movies in watched_movies:
-        # print(f"*********This is the value of: {movies=}")
-        
+        # print(f"*********This is the value of: {movies=}")     
         # print(f"*********This is the value of: {genre=}")
-        for genre, frequency in popular_genre.items():
-            genre = movies["genre"]
-            frequency = 0
-            if genre in popular_genre:
-                frequency += 1 
-                print(f"*********This is the value of: {frequency=}")
-            else:
-                frequency = 1
-            
+        # for genre, frequency in popular_genre.items():
+        genre = movies["genre"]
+        if genre in popular_genre_dict:
+            frequency = popular_genre_dict[genre] + 1 
+            print(f"*********This is the value of: {frequency=}")
+        else:
+            frequency = 1
             # popular_genre = {str(genre): frequency}
-
-            popular_genre.update({genre: frequency})
-            print(f"*********This is the value of: {popular_genre=}")
+        popular_genre_dict.update({genre: frequency})
+        print(f"*********This is the value of: {popular_genre_dict=}")
+    popular_genre = None
+    highest_frequency = 0
+    for genre, frequency in popular_genre_dict.items():
+        if frequency > highest_frequency:
+            highest_frequency = frequency
+            popular_genre = genre
+        # highest_frequency = max(popular_genre_dict.values)
+        # popular_genre = max(popular_genre_dict, genre = popular_genre_dict.get) 
+        
     return popular_genre
-
 
     # user_data = {
     #     "watchlist": [{
@@ -83,12 +89,11 @@ def get_most_watched_genre(user_data):
     #         "rating": RATING_1
     # }
 
-
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
-
-
+def get_unique_watched(amandas_data)
+    pass
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
