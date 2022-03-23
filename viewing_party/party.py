@@ -33,6 +33,19 @@ def add_to_watchlist(user_data, movie):
 
     return user_data
 
+def watch_movie(user_data, movie_title):
+    # this function will loop through the list user_data["watchlist"]
+    # if user_data["watch_ist"][i]["title"] == movie_title, then 
+    # that inner dictionary will be added to user_data["watched"] user_data["watched"].append(user_data[watchlist][i])
+    # and be removed from user_data["watchlist"]
+
+    for movie in user_data["watchlist"]:
+        if movie["title"] == movie_title:
+            user_data["watched"].append(movie)
+            user_data["watchlist"].remove(movie)
+    
+    return user_data
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
