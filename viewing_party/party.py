@@ -5,7 +5,6 @@
 from pyparsing import empty
 
 def create_movie(title, genre, rating):
-    # TODO: create better comments
     # creating a dictionary that stores the variables passed into the function as the values
     new_movie_added = {
         "title": title,
