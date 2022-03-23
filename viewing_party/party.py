@@ -39,7 +39,7 @@ def get_watched_avg_rating(user_data):
     average = 0.0
     for movie in watched_movies:    #For each dictionary/movie in this array 
             ratings_data.append(movie["rating"])
-            print(f"*********This is the: {ratings_data=}")
+            # print(f"*********This is the: {ratings_data=}")
         
             ratings_total = sum(ratings_data)
             average = ratings_total / len(ratings_data)
@@ -47,10 +47,30 @@ def get_watched_avg_rating(user_data):
     return average
 
 def get_most_watched_genre(user_data):
-    genre_data = []
+    #I'm guessing this may be a frequency map
+    popular_genre = {}
     watched_movies = user_data["watched"] #An array of dictionaries representing each watched film  
     
-    #This may be a frequency map
+    for movies in watched_movies:
+        # print(f"*********This is the value of: {movies=}")
+        
+        # print(f"*********This is the value of: {genre=}")
+        for genre, frequency in popular_genre.items():
+            genre = movies["genre"]
+            frequency = 0
+            if genre in popular_genre:
+                frequency += 1 
+                print(f"*********This is the value of: {frequency=}")
+            else:
+                frequency = 1
+            
+            # popular_genre = {str(genre): frequency}
+
+            popular_genre.update({genre: frequency})
+            print(f"*********This is the value of: {popular_genre=}")
+    return popular_genre
+
+
     # user_data = {
     #     "watchlist": [{
     #         "title": MOVIE_TITLE_1,
@@ -62,8 +82,6 @@ def get_most_watched_genre(user_data):
     #         "genre": GENRE_1,
     #         "rating": RATING_1
     # }
-
-# new_movie = create_movie(movie_title, genre, rating)
 
 
 # -----------------------------------------
