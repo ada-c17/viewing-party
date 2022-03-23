@@ -165,10 +165,10 @@ def get_most_watched_genre(user_data):
         # else:
         #     return None
     # print(seen_genre)
-    # print(max(seen_genre))
+    # print(max(set(seen_genre)))
 
     # most_popular_genre = max(set(seen_genre), key = seen_genre.count)
-    # return most_popular_genre
+    # print(most_popular_genre)
 
 
     
@@ -206,19 +206,19 @@ def get_most_watched_genre(user_data):
 
 # TESTING!!
 # EMPTY LIST:
-user_data = {'watchlist': [{'title': 'The Lord of the Functions: The Fellowship of the Function','genre': 'Fantasy', 'rating': 4.8}], 'watched': []}
+# user_data = {'watchlist': [{'title': 'The Lord of the Functions: The Fellowship of the Function','genre': 'Fantasy', 'rating': 4.8}], 'watched': []}
 
 # NORMAL LIST:
 # user_data = {'watchlist': [], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}]}
-title = 'The Lord of the Functions: The Fellowship of the Function'
+# title = 'The Lord of the Functions: The Fellowship of the Function'
 
 # watch_movie(user_data, title)
 # output from watch_movie before calling get_watched_avg_rating(user_data):
 # {'watchlist': [], 'watched': [{'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}]}
 
-get_watched_avg_rating(user_data)
+# get_watched_avg_rating(user_data)
 
-get_most_watched_genre(user_data)
+# get_most_watched_genre(user_data)
 
 
 
