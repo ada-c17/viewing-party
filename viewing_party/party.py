@@ -184,27 +184,35 @@ def get_unique_watched(user_data):
     # Find movies the user has watched but friends HAVEN'T
     # Return a list of dictionaries --> list of movies
 
-    # print(user_data)
-
+    # List of movies friends have watched
+    # the elements are dictionaries with lists of dictionaries are the values
     friend_list = user_data["friends"]
+
+    # List of movies the user has watched
+    # the elements are dictionaries (one dictionary, one movie)
     user_list = user_data["watched"]
     
+    # Empty list to put movies only the user has seen
     unique_list = []
+    # Empty list to populate with --> want to flatten the friend_list so that list of dictionaries (one dictionary, one movie)
     friends_movies = []
 
+
+    # Flatten friend_list so that its a list of dictionaries
     for friend_movie in friend_list:
-        # print(friend_movie)
+        # Loop enters the inner list with two "watched" dictionaries
         for film in friend_movie["watched"]:
-            # print(film)
+            # Loop through the dictionaries in the two "watched" dictionaries 
             friends_movies.append(film)
-    # print(friends_movies)
-            # if (film not in user_list) and (film not in unique_list):
-            #     print(film)
-            #     unique_list.append(film)
+            # Append a dictionary to the empty friends_movies so that its a list of dictionaries
+
     
     for movie in user_list:
+        # Loop through the user_list (list of dictionaries)
         if (movie not in friends_movies) and (movie not in unique_list):
+            # Find the movies that only the user has watched
             unique_list.append(movie)
+            
     return unique_list
 
         # if movie not in user_list:
@@ -215,37 +223,37 @@ def get_unique_watched(user_data):
     # return unique_list
 
 
-user_data = {
-    'watched': 
-    [
-        {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
-        {'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, 
-        {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, 
-        {'title': 'The JavaScript and the React', 'genre': 'Action', 'rating': 2.2}, 
-        {'title': 'Recursion', 'genre': 'Intrigue', 'rating': 2.0}, 
-        {'title': 'Instructor Student TA Manager', 'genre': 'Intrigue', 'rating': 4.5}
-    ], 
+# user_data = {
+#     'watched': 
+#     [
+#         {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
+#         {'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, 
+#         {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, 
+#         {'title': 'The JavaScript and the React', 'genre': 'Action', 'rating': 2.2}, 
+#         {'title': 'Recursion', 'genre': 'Intrigue', 'rating': 2.0}, 
+#         {'title': 'Instructor Student TA Manager', 'genre': 'Intrigue', 'rating': 4.5}
+#     ], 
 
-'friends': [
-        {'watched': [
-                        {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
-                        {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, 
-                        {'title': 'The Programmer: An Unexpected Stack Trace', 'genre': 'Fantasy', 'rating': 4.0}, 
-                        {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}
-                    ]
-        }, 
+# 'friends': [
+#         {'watched': [
+#                         {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
+#                         {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, 
+#                         {'title': 'The Programmer: An Unexpected Stack Trace', 'genre': 'Fantasy', 'rating': 4.0}, 
+#                         {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}
+#                     ]
+#         }, 
 
-        {'watched': [
-                        {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
-                        {'title': 'The JavaScript and the React', 'genre': 'Action', 'rating': 2.2}, 
-                        {'title': 'Recursion', 'genre': 'Intrigue', 'rating': 2.0}, 
-                        {'title': 'Zero Dark Python', 'genre': 'Intrigue', 'rating': 3.0}
-                    ]
-        }
-    ]
-}
+#         {'watched': [
+#                         {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
+#                         {'title': 'The JavaScript and the React', 'genre': 'Action', 'rating': 2.2}, 
+#                         {'title': 'Recursion', 'genre': 'Intrigue', 'rating': 2.0}, 
+#                         {'title': 'Zero Dark Python', 'genre': 'Intrigue', 'rating': 3.0}
+#                     ]
+#         }
+#     ]
+# }
 
-get_unique_watched(user_data)
+# get_unique_watched(user_data)
 
 # Emily's suggestion:
 # if movie not in my_movie_list and movie not in unique_list:
