@@ -138,42 +138,6 @@ def get_most_watched_genre(user_data):
     Input: user_data = dictionary with a 'watched' list of movie dictionaries
     Output: most popular movie genre
     """
-    # genre_list = []
-
-    # # print(user_data)
-
-    # watched = user_data["watched"]
-    # # print(watched)
-
-    # for movie in watched:
-    #     # print(movie)
-    #     if not movie :
-    #         # print(movie)
-    #     #     print("EMPTY")
-    #         return None
-    #     else:
-    #     # #     print(movie)
-    #     # #     return True
-    #         if movie["genre"]:
-    #             # print(movie["genre"])
-    #             genre_list.append(movie["genre"])
-    #         # else:
-    #         # If the "watched" list is empty, return most_popular_genre as None
-    #             # most_popular_genre = None
-    #     #         return most_popular_genre
-    #     # else:
-    #     #     return None
-    # # print(genre_list)
-    # # print(max(seen_genre))
-
-    # # most_popular_genre = max(set(seen_genre), key = seen_genre.count)
-    # # print(most_popular_genre)
-    # seen_genre = []
-
-
-    # for i in genre_list:
-    #     print(i)
-
     seen_genre = []
     
     
@@ -213,15 +177,70 @@ def get_most_watched_genre(user_data):
 def get_unique_watched(user_data):
     """
     Input: user_data = dictionary with "watched" list of movie dictionaries, "friends" is a list with each item as a dictionary
-    Output: return list of dictionaries
+    Output: return list of dictionaries --> unique_list
     """
-    # return a list of dictionaries
+    # List of movies user has watched
+    # List of movies friends have watched
+    # Find movies the user has watched but friends HAVEN'T
+    # Return a list of dictionaries --> list of movies
 
     # print(user_data)
-    friends_data = []
-    user_unique_movies = []
+    
+    unique_list = []
 
-    pass
+    friend_list = user_data["friends"]
+    user_list = user_data["watched"]
+    
+    # # print("user list: ", user_list)
+    # # print("friend list: ", friends_list)
+
+    # for user_movie in user_list:
+    #     print(user_movie)
+
+    for friend_movie in friend_list:
+        # print(friend_movie)
+        for film in friend_movie["watched"]:
+            # print(film)
+            if (film not in user_list) and (film not in unique_list):
+                print(film)
+            #     unique_list.append(film)
+
+        # if movie not in user_list:
+            # print(movie)
+            # print(user_list[movie])
+            # unique_list.append(movie)
+    # print(unique_list)
+    # return unique_list
+
+
+user_data = {'watched': [
+    {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
+    {'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, 
+    {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, 
+    {'title': 'The JavaScript and the React', 'genre': 'Action', 'rating': 2.2}, 
+    {'title': 'Recursion', 'genre': 'Intrigue', 'rating': 2.0}, 
+    {'title': 'Instructor Student TA Manager', 'genre': 'Intrigue', 'rating': 4.5}
+    ], 
+
+'friends': [
+    {'watched': [
+                {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
+                {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, 
+                {'title': 'The Programmer: An Unexpected Stack Trace', 'genre': 'Fantasy', 'rating': 4.0}, 
+                {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}
+                ]
+    }, 
+
+    {'watched': [{'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
+                {'title': 'The JavaScript and the React', 'genre': 'Action', 'rating': 2.2}, 
+                {'title': 'Recursion', 'genre': 'Intrigue', 'rating': 2.0}, 
+                {'title': 'Zero Dark Python', 'genre': 'Intrigue', 'rating': 3.0}
+                ]
+    }
+    ]
+    }
+
+get_unique_watched(user_data)
 
 # Emily's suggestion:
 # if movie not in my_movie_list and movie not in unique_list:

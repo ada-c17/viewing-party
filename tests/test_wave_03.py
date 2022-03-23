@@ -9,6 +9,7 @@ def test_my_unique_movies():
 
     # Act
     amandas_unique_movies = get_unique_watched(amandas_data)
+    print(amandas_unique_movies)
 
     # Arrange
     assert len(amandas_unique_movies) == 2
