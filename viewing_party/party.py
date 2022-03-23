@@ -1,7 +1,9 @@
 # ------------- WAVE 1 --------------------
 
+from audioop import avg
 from sys import argv
-
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
 
 def create_movie(movie_title, genre, rating):
     dict = {}
@@ -35,12 +37,57 @@ def watch_movie(user_data, title):
     
     return user_data
 
-    
-
-
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+
+def get_watched_avg_rating(user_data):
+    movies = user_data["watched"]
+    summation = 0
+
+    if len(movies) == 0:
+        return 0.0
+    
+    for movie_dict in movies:
+        summation += movie_dict["rating"] 
+
+    return summation / len(movies)
+
+
+def get_most_watched_genre(user_data):
+    watched_movies = user_data["watched"]
+    if watched_movies == []:
+        return None
+    logbook = {}
+    
+    for movie in watched_movies:
+        genre = movie["genre"]
+
+
+        if genre in logbook:
+            logbook[genre] += 1
+        else:
+            logbook[genre] = 1
+            
+    max_count = 0
+    most_watched_genre = ""
+
+    for genre, count in logbook.items():
+        if count > max_count:
+            max_count = count
+            most_watched_genre = genre
+    
+    pp.pprint(most_watched_genre)
+    return most_watched_genre
+
+
+
+        
+
+
+
+
+
 
 
 # -----------------------------------------
