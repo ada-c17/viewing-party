@@ -96,7 +96,25 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
+def get_available_recs(user_data):
+    user_subscriptions = user_data['subscriptions']
+    user_recommendations = []
+    friends_watched = []
+
+    for dicts in user_data['friends']:
+        for movie in dicts['watched']:
+            friends_watched.append(movie)
+
+    for i in friends_watched:
+        if i['host'] in user_subscriptions:
+            if i not in user_data['watched'] and i not in user_recommendations:
+                user_recommendations.append(i)
+
+    return user_recommendations
+    
+
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+# need to go back to wave 3 assert tests to add in a few more assertions
