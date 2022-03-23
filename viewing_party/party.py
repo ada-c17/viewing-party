@@ -1,3 +1,7 @@
+import copy
+# from typing import final
+# from testing_values import *
+
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
@@ -55,11 +59,34 @@ def get_most_watched_genre(user_data):
         return max(most_watched_dict, key=most_watched_dict.get)
 
 
+# -----------------------------------------
+# ------------- WAVE 3 --------------------
+# -----------------------------------------
+
+def get_unique_watched(user_data):
+    unique_movies = copy.deepcopy(user_data['watched'])
+    friends_watched_list = []
+    final_list = []
+
+
+    for j in range(len(user_data['friends'])):
+        for k in range(len(user_data['friends'][j]['watched'])):
+            friends_watched_list.append(user_data['friends'][j]['watched'][k]['title'])
+            
+
+    final_list = [unique_movies[i] for i in range(len(unique_movies)) \
+        if not unique_movies[i]['title'] in friends_watched_list]
+            
+    return final_list
+
+    
+
+
 
 
 
 # janes_data = {
-#     "watchlist": [{
+#     "watched": [{
 #         "title": "a",
 #         "genre": "b",
 #         "rating": "c"
@@ -69,40 +96,39 @@ def get_most_watched_genre(user_data):
 #         "genre": "e",
 #         "rating": "f"
 #     }],
-#     "watched": [{
-#         "title": "aa",
-#         "genre": "bb",
-#         "rating": "cc"
-#     }, 
-#     {
-#         "title": "dd",
-#         "genre": "ee",
-#         "rating": "ff"
-#     },
-#     {
-#         "title": "aa",
-#         "genre": "bb",
-#         "rating": "cc"
-#     }, 
-#     {
-#         "title": "dd",
-#         "genre": "bb",
-#         "rating": "ff"
-#     }]
+#     "friends" : [
+#         {"watched": [{
+#                 "title": "a",
+#                 "genre": "b",
+#                 "rating": "c"
+#         },
+#         {
+#                 "title": "cc",
+#                 "genre": "dd",
+#                 "rating": "ee"
+#         }]
+#         },
+#         {"watched": [{
+#                 "title": "dd",
+#                 "genre": "ee",
+#                 "rating": "ff"
+#         },
+#         {
+#                 "title": "gg",
+#                 "genre": "hh",
+#                 "rating": "ii"
+#         }]
+#         }
+#     ]  
+ 
 # }
 
-# test_most_watched_genre(janes_data)
+# get_unique_watched(USER_DATA_3)
 
 
 
 
 
-
-
-
-# -----------------------------------------
-# ------------- WAVE 3 --------------------
-# -----------------------------------------
 
         
 # -----------------------------------------
