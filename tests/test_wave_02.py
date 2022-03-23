@@ -48,6 +48,5 @@ def test_genre_is_None_if_empty_watched():
 
     # Act
     popular_genre = get_most_watched_genre(janes_data)
-
     # Assert
     assert popular_genre == None
