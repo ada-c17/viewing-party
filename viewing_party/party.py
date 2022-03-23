@@ -66,8 +66,8 @@ def get_most_watched_genre(user_data):
     for elem in user_data["watched"]:
         genre_list.append(elem["genre"])
         
-    counters = Counter(genre_list)
-    return max(counters, key=counters.get)
+    counters = Counter(genre_list) #returns dictionary with genre as key and number of times it appears as val
+    return max(counters, key=counters.get) #returns the key in counters with the highest value
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
@@ -134,7 +134,46 @@ def get_available_recs(user_data):
     
     return recommended_movies
 
-# get_available_recs(janes_data)
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+
+def get_new_rec_by_genre(user_data):
+    favorite_genres = []
+    recommended_movies = get_available_recs(user_data)
+    
+    if not recommended_movies:
+        return recommended_movies
+
+    for elem in user_data["watched"]:
+        favorite_genres.append(elem["genre"])
+        
+    counters = Counter(favorite_genres)
+    favorite_genre = max(counters, key=counters.get)
+
+    for recommendation in recommended_movies:
+        if recommendation["genre"] != favorite_genre:
+            recommended_movies.remove(recommendation)
+    
+    return recommended_movies
+
+def get_rec_from_favorites(user_data):
+    recommended_movies = []
+    friend_movies = []
+    
+    if not user_data["watched"] or not user_data["friends"]:
+        return recommended_movies
+
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            friend_movies.append(movie)
+
+    for movie in user_data["watched"]:
+        if movie not in friend_movies:
+            recommended_movies.append(movie)
+
+    for recommendation in recommended_movies:
+        if recommendation not in user_data["favorites"]:
+            recommended_movies.remove(recommendation)
+    
+    return recommended_movies
