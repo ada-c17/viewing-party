@@ -158,7 +158,7 @@ def get_friends_unique_watched(user_data):
 
 def get_available_recs(user_data):
     available_recs = []
-    user_subscriptions = user_data["subscriptions"]
+    user_subscriptions = user_data.get("subscriptions", [])
 
     for friends_list in user_data["friends"]:
         for movie in friends_list["watched"]:
@@ -175,7 +175,11 @@ def get_available_recs(user_data):
 def get_new_rec_by_genre(user_data):
     recs = []
 
-    if user_data["watched"] and user_data["friends"][0]["watched"]: #should probably check more than just index 0
+    # for friends_list in user_data["friends"]:
+    #     if not friends_list["watched"]:
+    #         return recs
+
+    if user_data["watched"]: 
         favorite_genre = get_most_watched_genre(user_data)
         all_recs = get_available_recs(user_data)
 

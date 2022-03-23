@@ -170,3 +170,8 @@ user_data = clean_wave_5_data()
 #         if movie["host"] in user_subscriptions and movie not in user_data["watched"]:
 #             recs.append(movie)
 
+test = {"subscriptions": ["test"]}
+
+testing = test.get("subscription", [])
+
+print(testing)
