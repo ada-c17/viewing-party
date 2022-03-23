@@ -1,5 +1,6 @@
 # ------------- WAVE 1 --------------------
 
+from cmath import rect
 from time import monotonic
 
 
@@ -132,4 +133,19 @@ def get_new_rec_by_genre(user_data):
                 most_genre_recommendations.append(i)
 
     return most_genre_recommendations
+
+def get_rec_from_favorites(user_data):
+    user_favorites = user_data['favorites']
+    friends_watched = []
+    rec_from_favorites = []
+
+    for dicts in user_data['friends']:
+        for movie in dicts['watched']:
+            friends_watched.append(movie)
+    
+    for i in user_favorites:
+        if i not in friends_watched:
+            rec_from_favorites.append(i)
+
+    return rec_from_favorites
 # need to go back to wave 3 assert tests to add in a few more assertions
