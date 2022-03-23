@@ -54,7 +54,10 @@ def test_friends_unique_movies_not_duplicated():
 
     # Arrange
     assert len(friends_unique_movies) == 3
-
+    friends_unique_movies_list = []
+    for movie in friends_unique_movies:
+        friends_unique_movies_list.append(movie["title"])
+    assert len(friends_unique_movies) == len(set(friends_unique_movies_list))
     # *************************************************************************************************
     # ****** Add assertions here to test that the correct movies are in friends_unique_movies **********
     # **************************************************************************************************
