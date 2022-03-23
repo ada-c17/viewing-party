@@ -39,4 +39,3 @@ def test_no_available_friend_recs():
     assert len(recommendations) == 0
 
 
-#write test to make sure a movie is not recommended twice

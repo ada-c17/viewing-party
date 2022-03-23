@@ -73,6 +73,7 @@ def test_unique_rec_from_favorites():
     assert INTRIGUE_2b in recommendations
     assert sonyas_data == clean_wave_5_data()
 
+# Adjusted test to use get_rec_from_favorites
 #@pytest.mark.skip()
 def test_unique_from_empty_favorites():
     # Arrange
@@ -95,6 +96,7 @@ def test_unique_from_empty_favorites():
     # Assert
     assert len(recommendations) == 0
 
+# Adjusted test to use get_rec_from_favorites
 #@pytest.mark.skip()
 def test_new_fav_rec_from_empty_friends():
     # Arrange
