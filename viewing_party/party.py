@@ -29,20 +29,28 @@ def watch_movie(user_data, movie_title):
 
     return user_data
 
+# -----------------------------------------
+# ------------- WAVE 2 --------------------
+# -----------------------------------------
+
 def get_watched_avg_rating(user_data):
     ratings_data = []
     watched_movies = user_data["watched"] #An array of dictionaries 
-
+    average = 0.0
     for movie in watched_movies:    #For each dictionary/movie in this array 
-        # for movie["rating"] in movie:
-        ratings_data.append(movie["rating"])
-    print(f"*********This is the: {ratings_data=}")
+            ratings_data.append(movie["rating"])
+            print(f"*********This is the: {ratings_data=}")
         
-    ratings_total = sum(ratings_data)
-    average = ratings_total / len(ratings_data)
+            ratings_total = sum(ratings_data)
+            average = ratings_total / len(ratings_data)
 
     return average
 
+def get_most_watched_genre(user_data):
+    genre_data = []
+    watched_movies = user_data["watched"] #An array of dictionaries representing each watched film  
+    
+    #This may be a frequency map
     # user_data = {
     #     "watchlist": [{
     #         "title": MOVIE_TITLE_1,
@@ -55,22 +63,7 @@ def get_watched_avg_rating(user_data):
     #         "rating": RATING_1
     # }
 
-# The first two tests are about a get_watched_avg_rating() function.
-# In party.py, there should be a function named get_watched_avg_rating. This function should...
-
-# take one parameter: user_data
-# the value of user_data will be a dictionary with a "watched" list of movie dictionaries
-# This represents that the user has a list of watched movies
-# Calculate the average rating of all movies in the watched list
-# The average rating of an empty watched list is 0.0
-# return the average rating
-
-
 # new_movie = create_movie(movie_title, genre, rating)
-
-# -----------------------------------------
-# ------------- WAVE 2 --------------------
-# -----------------------------------------
 
 
 # -----------------------------------------
