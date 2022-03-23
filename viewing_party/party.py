@@ -146,7 +146,7 @@ def get_rec_from_favorites(user_data):
     user_unique_movies = get_unique_watched(user_data)
 
     # list comprehension where a list object is created that contains movies that are both in the user_unique_movies list and the user_data["favorites"] list
-    user_movie_favorite_recs = [movie for movie in user_data["favorites"] if movie in user_unique_movies ]
+    user_movie_favorite_recs = [movie for movie in user_data["favorites"] if movie in user_unique_movies]
 
     return user_movie_favorite_recs
     
