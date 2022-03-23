@@ -34,7 +34,6 @@ def watch_movie(user_data, title):
             user_data["watchlist"].pop(index)
     return user_data
 
-
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 def get_watched_avg_rating(user_data):
@@ -68,11 +67,9 @@ def get_most_watched_genre(user_data):
         return None
     return most_watched_genre
 
-
 # -----------------------------------------
 # ------------- WAVE 3 -------∫-------------
 # -----------------------------------------
-
 def get_unique_watched(user_data):
     user_watched = user_data["watched"]
     friends_list = user_data["friends"]
@@ -98,8 +95,6 @@ def get_friends_unique_watched(user_data):
                         friends_unique_watched.append(movie)
     return [movie for movie in friends_unique_watched if movie not in user_watched]
 
-    
-    #
     # -----------------------------------------
     # ------------- WAVE 4 --------------------
     # -----------------------------------------
@@ -109,11 +104,9 @@ def get_available_recs(user_data):
     
     return [movie for movie in friends_unique_watched if movie not in user_watched and movie["host"] in user_data["subscriptions"]]
 
-
     # -----------------------------------------
     # ------------- WAVE 5 --------------------
     # -----------------------------------------
-
 def get_new_rec_by_genre(user_data):
     most_watched_genre = get_most_watched_genre(user_data)
     user_watched = user_data["watched"]
