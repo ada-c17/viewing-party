@@ -5,6 +5,7 @@
 def create_movie(title, genre, rating):
     '''
     Input: parameters title, genre, and rating
+
     Output: Returns a dictionary with the parameters as values, with
     each key defined as a string of the same parameter name.
     If a parameter is missing, no dictionary is created.
@@ -19,6 +20,7 @@ def add_to_watched(user_data, movie):
     '''
     Input: user_data (a dictionary with key "watched" and a list
     as the value), and movie (a dictionary)
+
     Output: Returns updated user_data dictionary, with the dictionary
     movie appended to the list in the value of "watched".
     '''
@@ -31,6 +33,7 @@ def add_to_watchlist(user_data, movie):
     '''
     Input: user_data (a dictionary with key "watchlist" and a list
     as the value), and movie (a dictionary)
+    
     Output: Returns updated user_data dictionary, with the dictionary
     movie appended to the list in the value of "watchlist".
     '''
@@ -42,7 +45,8 @@ def add_to_watchlist(user_data, movie):
 def watch_movie(user_data, movie_to_watch):
     '''
     Input: user_data (a dictionary with keys "watched" and "watchlist",
-    with lists as their values, and movie-to-watch (a dictionary)
+    with lists as their values), and movie-to-watch (a dictionary)
+   
     Output: Returns updated user_data dictionary, with the dictionary
     movie-to-watch appended to "watched" and removed from the "watchlist".
     '''
@@ -61,6 +65,7 @@ def get_watched_avg_rating(user_data):
     Input: user_data (a dictionary with keys "watched" and "watchlist",
     with lists as their values). Each element of the lists "watched" 
     and "watchlist" is a dictionary that contains details about a movie.
+    
     Output: Returns the average rating of all watched movies (a float).
     '''
     total_rating = 0
@@ -79,6 +84,7 @@ def get_most_watched_genre(user_data):
     Input: user_data (a dictionary with keys "watched" and "watchlist",
     with lists as their values). Each element of the lists "watched" 
     and "watchlist" is a dictionary that contains details about a movie.
+
     Output: Returns the most commonly watched genre of the "watched" 
     list (a string). Does not account for two equally popular genres.
     '''
@@ -104,6 +110,7 @@ def get_unique_watched(user_data):
     with lists as their values). Elements of "watched" list are dictionaries
     of movies. Each element of "friends" list is a dictionary with key
     "watched" and a list of movies as a value. 
+
     Output: Returns a list of movies that the user has watched but 
     none of their friends have watched.
     '''
@@ -124,6 +131,7 @@ def get_friends_unique_watched(user_data):
     with lists as their values). Elements of "watched" list are dictionaries
     of movies. Each element of "friends" list is a dictionary with key
     "watched" and a list of movies as a value. 
+
     Output: Returns a list of unique movies that the user's friends have watched
     but the user has not.
     '''
@@ -143,12 +151,23 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 
 def get_available_recs(user_data):
+    '''
+    Input: user_data (a dictionary with keys "watched", "friends", and 
+    "subscriptions" with lists as their values). Elements of "watched" 
+    list are dictionaries of movies. Each element of "friends" list 
+    is a dictionary with key "watched" and a list of movies as a value. 
+    "Subscriptions" is a list of hosting services the user is subscribed to.
+    
+    Output: Returns a list of movies that at least one of the user's 
+    friends have watched but the user has not, if the user subscribes
+    to that movie's hosting service.
+    '''
     recommendations = []
-    for friend in user_data["friends"]:
-        for movie in friend["watched"]:
-            if movie not in user_data["watched"] and movie["host"] in user_data["subscriptions"]:
-                recommendations.append(movie)
-        return recommendations
+    friend_unique_watched = get_friends_unique_watched(user_data)
+    for movie in friend_unique_watched:
+        if movie["host"] in user_data["subscriptions"]:
+            recommendations.append(movie)
+    return recommendations
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
