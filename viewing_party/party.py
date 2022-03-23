@@ -124,7 +124,8 @@ def get_new_rec_by_genre(user_data):
     for movie in friend_watched:
         total_movies.append(movie)
     for movie in total_movies:
-        if movie not in user_watched and movie in friend_watched and movie["genre"]==most_watched_genre:
+        if movie not in user_watched and movie in friend_watched \
+            and movie["genre"]==most_watched_genre:
             rec_movies_by_genre.append(movie)
     return rec_movies_by_genre
 
