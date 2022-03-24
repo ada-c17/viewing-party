@@ -48,13 +48,12 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 #user_data is a dictionary with a "watched" list of movie dictionaries
 #{"watched":[{},{},{}]
-#is there a better way to find lengh of value
 def get_watched_avg_rating(user_data):
-    #try:
+
         total = 0
         count = 0
         
-        for key, value in user_data.items():
+        for value in user_data.values():
             for i in range(len(value)):
                 total += value[i]["rating"]
                 count += 1
@@ -76,9 +75,7 @@ def get_most_watched_genre(user_data):
         else:
             for i in range(len(value)):
                 genre = value[i]["genre"]
-                #if genre not in genre_frequency:
-                genre_frequency[genre] = genre_frequency.get(genre, 0) +1
-                #genre_frequency[genre] += 1 KeyError
+                genre_frequency[genre] = genre_frequency.get(genre, 0) + 1
                 if genre_frequency[genre] >= most_freq:
                     most_freq, genre_result = genre_frequency[genre], genre
     
@@ -203,87 +200,3 @@ def get_rec_from_favorites(user_data):
                 if movie == list_movie:
                     recommended_favorites.append(movie)
     return recommended_favorites
-
-            
-#Below comment is for my own referrence and record of wave03 functions
-#misundersting of return value caused wrong approach and code 
-#set(dictionary) causes KeyError, set is immutable
-#get_unique_watched(user_data)          
-# def get_unique_watched(user_data):
-#     user_movies = set()
-#     friend_movies = set()
-#     list_of_dictionary_user = []
-#     list_of_dictionary_friends = []
-#     for value in user_data.values(): 
-#         if value == user_data["watched"]: #6 movies user watched
-#             #print(value)
-#             len_my_watched = len(value)
-#             #print(len_my_watched) 
-#             if len_my_watched > 0:
-#                 for i in range(len_my_watched):
-#                     #user_movies.add(value[i]["title"])
-#                     #print(user_movies)
-#                     print(value[i])
-#                     list_of_dictionary_user.append(value[i])
-#             else:
-#                 return list_of_dictionary_friends
-#         else:
-#             #have friends' list of movie dict [{"watched":[{},{},{}]}, "watched":[{},{}]}]
-#             #print(value)
-#             for dict in value:
-#                 watched_each_in_list = dict["watched"] 
-#                 len_movie = len(watched_each_in_list)
-#                 #print(len_movie) #4 movies in each friend's watched list
-#                 if len_movie > 0:
-#                     for index in range(len_movie):
-#                         #friend_movies.add(watched_each_in_list[index]["title"]) #7 unique movies in set now
-#                         #print(friend_movies)
-#                         #print(watched_each_in_list[index])
-#                         list_of_dictionary_friends.append(watched_each_in_list[index])
-                        
-#                 else:
-#                     return list_of_dictionary_user
-#     #Return a list of dictionaries, that represents a list of movies
-#     #print(list_of_dictionary_user  - list_of_dictionary_friends)
-#     return (set(list_of_dictionary_user) - set(list_of_dictionary_friends)) ####didn't print the whole {} but title TypeError: unhashable type: 'dict'
-
-# #Consider the movies that the user has watched, and consider the movies that their friends have watched. 
-# # Determine which movies at least one of the user's friends have watched, but the user has not watched.
-# def get_friends_unique_watched(user_data):
-#     user_movies = set()
-#     friend_movies = set()
-#     list_of_dictionary_user = []
-#     list_of_dictionary_friends = []
-#     for value in user_data.values(): 
-#         if value == user_data["watched"]: #6 movies user watched
-#             #print(value)
-#             len_my_watched = len(value)
-#             #print(len_my_watched) 
-#             if len_my_watched > 0:
-#                 for i in range(len_my_watched):
-#                     user_movies.add(value[i]["title"])
-#                     #print(user_movies)
-#                     list_of_dictionary_user.append(value[i])
-#             else:
-#                 return list(friend_movies)
-#         else:
-#             #have friends' list of movie dict [{"watched":[{},{},{}]}, "watched":[{},{}]}]
-#             #print(value)
-#             for dict in value:
-#                 watched_each_in_list = dict["watched"] 
-#                 len_movie = len(watched_each_in_list)
-#                 #print(len_movie) #4 movies in each friend's watched list
-#                 if len_movie > 0:
-#                     for index in range(len_movie):
-#                         friend_movies.add(watched_each_in_list[index]["title"]) #7 unique movies in set now
-#                         #print(friend_movies)
-#                         list_of_dictionary_friends.append(watched_each_in_list[index])
-                        
-#                 else:
-#                     return list(user_movies)
-#     #Return a list of dictionaries, that represents a list of movies
-#     #no unique movies from friends:
-#     if friend_movies.issubset(user_movies):
-#         return []
-#     else:
-#         return friend_movies-user_movies
