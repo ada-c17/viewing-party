@@ -94,8 +94,7 @@ def get_unique_watched(user_data):
         found = False 
         
         for friend in friends:
-            friend_movies = friend["watched"]
-                
+            friend_movies = friend["watched"] 
             for friend in friend_movies:
                 if movie["title"] == friend["title"]:
                     found = True 
@@ -106,6 +105,24 @@ def get_unique_watched(user_data):
     
     return difference_movies
 
+def get_friends_unique_watched(user_data):
+    movies_not_watched_by_user = []
+    watched_movies = user_data["watched"]
+    friends = user_data["friends"]
+
+    for friend in friends:
+        friend_movies = friend["watched"]
+        for friend_movie in friend_movies:
+
+            if friend_movie not in watched_movies:
+                if friend_movie in movies_not_watched_by_user:
+                    continue
+                #else:
+                movies_not_watched_by_user.append(friend_movie)
+
+    return movies_not_watched_by_user
+
+                
 
 
 
