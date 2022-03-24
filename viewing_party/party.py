@@ -185,11 +185,6 @@ def get_new_rec_by_genre(user_data):
 
 def get_rec_from_favorites(user_data):
     
-    recommended_movies = []
-
-        #access user fav movies as list of dicts
-    user_fav_movies = user_data["favorites"]
-    
     #access friends' movie titles as list of strings
     friends_watched_titles = []
 
@@ -199,8 +194,9 @@ def get_rec_from_favorites(user_data):
 
     #initialize unique movie list of dicts
     recommended_movies = []   
+    
     #compare every title between user and friends
-    for user_movie in user_fav_movies:
+    for user_movie in user_data["favorites"]:
         if user_movie["title"] not in friends_watched_titles: #compare title names
             recommended_movies.append(user_movie) #append unique movies
 

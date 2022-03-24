@@ -74,7 +74,7 @@ def test_unique_rec_from_favorites():
     assert sonyas_data == clean_wave_5_data()
 
 
-def test_unique_from_empty_favorites(): #updated test, updated Act to match favorites function(prviously matched genre function), and updated sonya's data to include favorites key with empty value list
+def test_unique_from_empty_favorites(): #updated test, updated Act to match favorites function(previously matched genre function), and updated sonya's data to include favorites key with empty value list
     # Arrange
     sonyas_data = {
         "watched": [],
