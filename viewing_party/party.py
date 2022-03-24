@@ -168,6 +168,54 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
+'''
+USER_DATA_4 = {
+    "watched": [
+        FANTASY_1b, 
+        FANTASY_2b, 
+        FANTASY_3b, 
+        ACTION_1b, 
+        INTRIGUE_1b, 
+        INTRIGUE_2b
+        ],  
+    "friends":  [
+        {
+            "watched": [
+                FANTASY_1b,
+                FANTASY_3b,
+                FANTASY_4b,
+                HORROR_1b,
+            ]
+        },
+        {
+            "watched": [
+                FANTASY_1b,
+                ACTION_1b,
+                INTRIGUE_1b,
+                INTRIGUE_3b,
+            ]
+        }  
+    ]
+}
+
+USER_DATA_4["subscriptions"] = ["netflix", "hulu"]
+
+'''
+
+def get_available_recs(user_data):
+
+# invoke dict_list_for_suggestion_by_friends from get_friends_unique_watched(user_data) function
+    dict_list_for_suggestion_by_friends = get_friends_unique_watched(user_data)
+
+
+# creating a dictionary films with subscribstions user has
+    dict_lists_films_wich_user_subscribe_by_host = []
+    for films in range(len(dict_list_for_suggestion_by_friends)):
+        for subscriptions in range(len(user_data["subscriptions"])):
+            if dict_list_for_suggestion_by_friends[films]["host"] == user_data["subscriptions"][subscriptions]:
+                dict_lists_films_wich_user_subscribe_by_host.append(dict_list_for_suggestion_by_friends[films])
+    return dict_lists_films_wich_user_subscribe_by_host
+
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
