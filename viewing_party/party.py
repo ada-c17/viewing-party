@@ -75,28 +75,31 @@ def get_most_watched_genre(user_data):
     # otherwise, set movie_genre_count[genre] += 1
     # set popular_genre = max value from movie_genre_count
     # return popular_genre
-
+    
     # empty dictionary to hold movie genres and their frequency
     movie_genre_count = {}
 
-    # loop to update movie_genre_count based on watch history
-    for movie in user_data["watched"]:
-        genre = movie["genre"]
-        if genre not in movie_genre_count:
-            movie_genre_count[genre] = 1
-        else:
-            movie_genre_count[genre] += 1
+    if not user_data["watched"]:
+        popular_genre = None
+    else:
+        # loop to update movie_genre_count based on watch history
+        for movie in user_data["watched"]:
+            genre = movie["genre"]
+            if genre not in movie_genre_count:
+                movie_genre_count[genre] = 1
+            else:
+                movie_genre_count[genre] += 1
 
-    # convert movie_genre_count keys and values to lists to allow for max function
-    key_list = list(movie_genre_count.keys())
-    value_list = list(movie_genre_count.values())
-    max_value = max(value_list)
+        # convert movie_genre_count keys and values to lists to allow for max function
+        key_list = list(movie_genre_count.keys())
+        value_list = list(movie_genre_count.values())
+        max_value = max(value_list)
 
-    # identify index of most popular genre
-    popular_genre_index = value_list.index(max_value)
+        # identify index of most popular genre
+        popular_genre_index = value_list.index(max_value)
 
-    # identify the most frequently watched movie genre
-    popular_genre = key_list[popular_genre_index]
+        # identify the most frequently watched movie genre
+        popular_genre = key_list[popular_genre_index]
 
     return popular_genre
 
