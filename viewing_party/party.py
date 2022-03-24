@@ -123,51 +123,49 @@ def get_available_recs(user_data):
 
     return final_list
 
+# -----------------------------------------
+# ------------- WAVE 5 --------------------
+# -----------------------------------------
 
-    
+def get_new_rec_by_genre(user_data):
+    try:
+        unique_movies = copy.deepcopy(user_data['friends'])
+        top_genre_list = [user_data['watched'][i]['genre'] for i in range(len(user_data['watched']))]
+
+        top_genre = max(set(top_genre_list), key = top_genre_list.count)
+        users_watched_list = []
+        final_list = []
+
+        for i in range(len(user_data['watched'])):
+            users_watched_list.append(user_data['watched'][i]['title'])
+            
+
+        for j in range(len(unique_movies)):
+            for k in range(len(unique_movies[j]['watched'])):
+                if not unique_movies[j]['watched'][k]['title'] in users_watched_list and unique_movies[j]['watched'][k]['genre'] == top_genre:
+                    final_list.append(unique_movies[j]['watched'][k])
+        return final_list
+    except:
+        return []
 
 
+def get_rec_from_favorites(user_data):
+    try:
+        unique_movies = copy.deepcopy(user_data['favorites'])
+        friends_watched_list = []
+        final_list = []
 
+        for j in range(len(user_data['friends'])):
+            for k in range(len(user_data['friends'][j]['watched'])):
+                friends_watched_list.append(user_data['friends'][j]['watched'][k]['title'])
+                
 
-# janes_data = {
-#     "watched": [{
-#         "title": "a",
-#         "genre": "b",
-#         "rating": "c"
-#     }, 
-#     {
-#         "title": "d",
-#         "genre": "e",
-#         "rating": "f"
-#     }],
-#     "friends" : [
-#         {"watched": [{
-#                 "title": "a",
-#                 "genre": "b",
-#                 "rating": "c"
-#         },
-#         {
-#                 "title": "cc",
-#                 "genre": "dd",
-#                 "rating": "ee"
-#         }]
-#         },
-#         {"watched": [{
-#                 "title": "dd",
-#                 "genre": "ee",
-#                 "rating": "ff"
-#         },
-#         {
-#                 "title": "gg",
-#                 "genre": "hh",
-#                 "rating": "ii"
-#         }]
-#         }
-#     ]  
- 
-# }
-
-# get_unique_watched(USER_DATA_3)
+        final_list = [unique_movies[i] for i in range(len(unique_movies)) \
+            if not unique_movies[i]['title'] in friends_watched_list]
+                
+        return final_list
+    except:
+        return []
 
 
 
@@ -177,7 +175,5 @@ def get_available_recs(user_data):
         
 
 
-# -----------------------------------------
-# ------------- WAVE 5 --------------------
-# -----------------------------------------
+
 
