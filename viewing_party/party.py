@@ -255,6 +255,56 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
+def get_available_recs(user_data):
+    """
+    Input: user_data = dictionary with "watched" list of movie dictionaries, "friends" is a list with each item as a dictionary
+    Output: return list of recommended movies
+    """
+    # print(user_data)
+    # platforms = user_data["subscriptions"]
+    friend_list = user_data["friends"]
+    user_list = user_data["watched"]
+
+    # user's subscriptions
+    user_subscriptions = user_data["subscriptions"]
+
+    # for info in user_list:
+    #     # print(item)
+    #     for k, v in info.items():
+    #         # print(info[k])
+    #         if k == 'host':
+    #             # print(v)
+    #             user_subscriptions.append(v)
+    # # print(user_subscriptions)
+
+
+    # List of recommended movies
+    #   --> User has NOT watched it
+    #   --> A least ONE FRIEND has seen it
+    #   --> "host" of the movie is a service in the USERS "subscriptions"
+    recommended_list = []
+
+    # print(user_list)
+    # for i in user_list:
+    #     print(i)
+
+    friend_movie_list = []
+
+    for friend in friend_list:
+        # print(friend)
+        for movie in friend["watched"]:
+            # print(movie)
+            friend_movie_list.append(movie)
+    # print(friend_movie_list)
+
+    for film in friend_movie_list:
+        if (film not in user_list) and (film in friend_movie_list):
+            if film["host"] in user_subscriptions:
+                recommended_list.append(film)
+        # print(film["host"])
+    
+    return recommended_list
+
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
