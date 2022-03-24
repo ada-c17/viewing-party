@@ -68,6 +68,7 @@ def get_most_watched_genre(janes_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+
 def get_unique_watched(amandas_data):
     amandas_unique_movies =[]
     list_friends = []
@@ -96,6 +97,34 @@ def get_friends_unique_watched(amandas_data):
     for element in amandas_data["friends"]:
         for movie_data in element["watched"]:
                 list_friends.append(movie_data)
+    # print (list_friends)
+    
+    for element in amandas_data["watched"]:
+            list_amandas.append(element)
+    # print(list_amandas)
+
+    for element in list_friends:
+        if element not in list_amandas:
+            friends_unique_movies.append(element)
+    # print(friends_unique_movies)
+    # print("hello")
+    return friends_unique_movies
+
+        
+# -----------------------------------------
+# ------------- WAVE 4 --------------------
+# -----------------------------------------
+
+def get_available_recs(amandas_data):
+
+    rec_list = []
+    friends_unique_movies =[]
+    list_friends = []
+    list_amandas = []
+
+    for element in amandas_data["friends"]:
+        for movie_data in element["watched"]:
+                list_friends.append(movie_data)
     
     
     for element in amandas_data["watched"]:
@@ -105,15 +134,50 @@ def get_friends_unique_watched(amandas_data):
     for element in list_friends:
         if element not in list_amandas:
             friends_unique_movies.append(element)
-   
-    return friends_unique_movies
 
-        
-# -----------------------------------------
-# ------------- WAVE 4 --------------------
-# -----------------------------------------
-
+    for movie in friends_unique_movies:
+        if movie["host"] in amandas_data ["subscriptions"]:
+            rec_list.append(movie)
+    
+    return rec_list
+    
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+def get_new_rec_by_genre(sonyas_data):
+    rec_list_genre = []
+    friends_unique_movies =[]
+    list_friends = []
+    list_sonyas = []
+    fav_genre = []
+
+    # if (sonyas_data["friends"]["watched"]) == 0:
+        # return rec_list_genre
+    for element in sonyas_data["friends"]:
+        for movie_data in element["watched"]:
+            list_friends.append(movie_data)
+    
+    if len (sonyas_data["watched"])== 0:
+        return rec_list_genre
+    for element in sonyas_data["watched"]:
+        list_sonyas.append(element)
+
+
+    for element in list_friends:
+        if element not in list_sonyas:
+            friends_unique_movies.append(element)
+
+    for movie in sonyas_data["favorites"]:
+        fav_genre.append(movie["genre"])
+
+    
+    for movie in friends_unique_movies:
+        if movie["host"] in sonyas_data ["subscriptions"]:
+            if movie["genre"] in fav_genre:
+                rec_list_genre.append(movie)
+
+    return rec_list_genre
+    
+
+
 
