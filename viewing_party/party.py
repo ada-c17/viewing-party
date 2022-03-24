@@ -1,4 +1,6 @@
 import copy
+
+
 # from typing import final
 # from testing_values import *
 
@@ -100,11 +102,29 @@ def get_friends_unique_watched(user_data):
 
     return final_list
 
+# -----------------------------------------
+# ------------- WAVE 4 --------------------
+# -----------------------------------------
 
+def get_available_recs(user_data):
+    available_subscriptions = user_data['subscriptions']
+    unique_movies = copy.deepcopy(user_data['friends'])
+    users_watched_list = []
+    final_list = []
+
+    for i in range(len(user_data['watched'])):
+        users_watched_list.append(user_data['watched'][i]['title'])
+
+    for j in range(len(unique_movies)):
+        for k in range(len(unique_movies[j]['watched'])):
+            if not unique_movies[j]['watched'][k]['title'] in users_watched_list and unique_movies[j]['watched'][k]['host'] in available_subscriptions:
+                if not unique_movies[j]['watched'][k] in final_list:
+                    final_list.append(unique_movies[j]['watched'][k])
+
+    return final_list
 
 
     
-# get_friends_unique_watched(USER_DATA_4)
 
 
 
@@ -155,9 +175,7 @@ def get_friends_unique_watched(user_data):
 
 
         
-# -----------------------------------------
-# ------------- WAVE 4 --------------------
-# -----------------------------------------
+
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
