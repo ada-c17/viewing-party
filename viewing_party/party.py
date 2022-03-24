@@ -68,6 +68,40 @@ def get_watched_avg_rating(user_data):
 
     return rating_average
 
+def get_most_watched_genre(user_data):
+    # create an empty dictionary called movie_genre_count
+    # within user_data["watched"], iterate through each movie and access user_data["watched"][movie]["genre"]
+    # if the genre isn't in movie_genre_count, set movie_genre_count[genre] = 1
+    # otherwise, set movie_genre_count[genre] += 1
+    # set popular_genre = max value from movie_genre_count
+    # return popular_genre
+
+    # empty dictionary to hold movie genres and their frequency
+    movie_genre_count = {}
+
+    # loop to update movie_genre_count based on watch history
+    for movie in user_data["watched"]:
+        genre = movie["genre"]
+        if genre not in movie_genre_count:
+            movie_genre_count[genre] = 1
+        else:
+            movie_genre_count[genre] += 1
+
+    # convert movie_genre_count keys and values to lists to allow for max function
+    key_list = list(movie_genre_count.keys())
+    value_list = list(movie_genre_count.values())
+    max_value = max(value_list)
+
+    # identify index of most popular genre
+    popular_genre_index = value_list.index(max_value)
+
+    # identify the most frequently watched movie genre
+    popular_genre = key_list[popular_genre_index]
+
+    return popular_genre
+
+
+
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
