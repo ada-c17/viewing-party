@@ -153,14 +153,12 @@ def get_friends_unique_watched(user_data):
 def get_available_recs(user_data):
     '''
     Input: user_data (a dictionary with keys "watched", "friends", and 
-    "subscriptions" with lists as their values). Elements of "watched" 
-    list are dictionaries of movies. Each element of "friends" list 
-    is a dictionary with key "watched" and a list of movies as a value. 
-    "Subscriptions" is a list of hosting services the user is subscribed to.
+    "subscriptions" with lists as their values). "subscriptions" is a
+    list of hosting services the user is subscribed to.
     
-    Output: Returns a list of movies that at least one of the user's 
-    friends have watched but the user has not, if the user subscribes
-    to that movie's hosting service.
+    Output: Returns a list of recommended movies that at least one of
+    the user's friends have watched but the user has not, if the user
+    subscribes to that movie's hosting service.
     '''
     recommendations = []
     friend_unique_watched = get_friends_unique_watched(user_data)
@@ -172,3 +170,21 @@ def get_available_recs(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+
+def get_new_rec_by_genre(user_data):
+    '''
+    Input: user_data (a dictionary with keys "watched", "friends", and 
+    "subscriptions" with lists as their values). 
+    
+    Output: Returns a list of recommended movies that at least one of 
+    the user's friends have watched but the user has not, if the genre
+    of that movie is the user's most-watched genre.
+    '''
+    recommendations_by_genre = []
+    friend_unique_watched = get_friends_unique_watched(user_data)
+    favorite_genre = get_most_watched_genre(user_data)
+    for movie in friend_unique_watched:
+        if movie["genre"] == favorite_genre:
+            recommendations_by_genre.append(movie)
+    return recommendations_by_genre
+
