@@ -96,9 +96,6 @@ def get_unique_watched(user_data):
     #user_data= {watched: [{}, {}, {}], friends: [watched: [{title: string}, {title: string}, {title: string}], [], []]}
 
     #compare movie titles for every movie in user_data["watched"] to movie titles for every movie of every friend in user_data["friends"] and append unique MOVIES to list
-
-    #access user movies as list of dicts
-    user_watched_movies = user_data["watched"]
     
     #access friends' movie titles as list of strings
     friends_watched_titles = []
@@ -109,8 +106,9 @@ def get_unique_watched(user_data):
 
     #initialize unique movie list of dicts
     unique_movies = []   
+    
     #compare every title between user and friends
-    for user_movie in user_watched_movies:
+    for user_movie in user_data["watched"]:
         if user_movie["title"] not in friends_watched_titles: #compare title names
             unique_movies.append(user_movie) #append unique movies
 
