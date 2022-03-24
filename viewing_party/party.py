@@ -151,7 +151,7 @@ def get_available_recs(user_data):
     #get movies friends have watched but user has not
     friends_unique_watched_movies = get_friends_unique_watched(user_data)
 
-    #"host" of the movie is a service that is in the user's `"subscriptions"
+    #initialize list of recs
     recommended_movies = []
 
     for movie in friends_unique_watched_movies:
