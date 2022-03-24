@@ -59,12 +59,13 @@ def get_most_watched_genre(user_data):
     genre_counter = {}
 
     for list, movie_data in user_data.items():
-        for data in movie_data:
-            genre = data["genre"]
-            if genre in genre_counter:
-                genre_counter[genre] += 1
-            else:
-                genre_counter[genre] = 1
+        if list == "watched":
+            for data in movie_data:
+                genre = data["genre"]
+                if genre in genre_counter:
+                    genre_counter[genre] += 1
+                else:
+                    genre_counter[genre] = 1
 
     if len(genre_counter) == 0:
         return None
@@ -137,3 +138,14 @@ def get_available_recs(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+
+def get_new_rec_by_genre(user_data):
+    recommendation = []
+    user_has_not_watched = get_friends_unique_watched(user_data)
+    fav_genre = get_most_watched_genre(user_data)
+
+    for movie in user_has_not_watched:
+        if movie["genre"] == fav_genre:
+            recommendation.append(movie)
+
+    return recommendation
