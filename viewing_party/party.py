@@ -79,9 +79,28 @@ def get_available_recs(user_data):
     seen_by_friends = get_friends_unique_watched(user_data)
     for friend in user_data["friends"]:
         for movie in friend["watched"]:
-            if movie["host"] in user_data["subscriptions"] and movie in seen_by_friends:
-                recomended_list.append(movie)
+            try:
+                if movie["host"] in user_data["subscriptions"] and movie in seen_by_friends:
+                    recomended_list.append(movie)
+            except KeyError:
+                return recomended_list
     return recomended_list
+
+def get_new_rec_by_genre(user_data):
+    recomended_movies = []
+    users_fav_genre = get_most_watched_genre(user_data)
+    for movie in get_available_recs(user_data):
+        if movie["genre"] == users_fav_genre:
+            recomended_movies.append(movie)
+    return recomended_movies
+
+def get_rec_from_favorites(user_data):
+    recs_from_favorites = []
+    for movie in user_data["favorites"]:
+        if movie in get_unique_watched(user_data):
+            recs_from_favorites.append(movie)
+    return recs_from_favorites
+
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
