@@ -222,7 +222,7 @@ In `party.py`, there should be a function named `add_to_watched`. This function 
     - An empty list represents that the user has no movies in their watched list
   - the value of `movie` will be a dictionary in this format:
     - ```python
-      {
+      { 
         "title": "Title A",
         "genre": "Horror",
         "rating": 3.5
@@ -302,7 +302,7 @@ In `party.py`, there should be a function named `get_unique_watched`. This funct
   - the value of `user_data` will be a dictionary with a `"watched"` list of movie dictionaries, and a `"friends"`
     - This represents that the user has a list of watched movies and a list of friends
     - The value of `"friends"` is a list
-    - Each item in `"friends"` is a dictionary. This dictionary has a key `"watched"`, which has a list of movie dictionaries.
+    - Each item in `"friends"` is a dictionary. This dictionary has a key `"watched"`, which has a list of movie dictionaries. 
     - Each movie dictionary has a `"title"`.
 - Consider the movies that the user has watched, and consider the movies that their friends have watched. Determine which movies the user has watched, but none of their friends have watched.
 - Return a list of dictionaries, that represents a list of movies
