@@ -2,7 +2,7 @@
 
 def create_movie(title, genre, rating):
     
-    if not title or not genre or not rating:
+    if not (title and genre and rating):
         return None
     else:
         new_movie = {
@@ -18,8 +18,8 @@ def add_to_watched(user_data, movie):
     return user_data
 
 def add_to_watchlist(user_data, movie):
-     user_data["watchlist"].append(movie)
-     return user_data 
+    user_data["watchlist"].append(movie)
+    return user_data 
 
 def watch_movie(user_data, movie_title):
     for movie in user_data["watchlist"]:    
@@ -107,7 +107,9 @@ def get_friends_unique_watched(user_data):
     watched_movies = user_data["watched"] #An array of dictionaries representing each watched film  
     friends_watched_list = get_friends_watched_movies(user_data)
     for movie in friends_watched_list:
-        if movie in friends_unique_watched_list:
+        if len(friends_watched_list) == 0:
+            return None
+        elif movie in friends_unique_watched_list:
             continue 
         elif movie not in watched_movies:
             friends_unique_watched_list.append(movie)
@@ -115,11 +117,47 @@ def get_friends_unique_watched(user_data):
     #Movie title variable? For each movie in movie ditionary in watched movies
     print(f"HERE IS THE LIST*************** {friends_unique_watched_list}")       
     return friends_unique_watched_list
+    
+# -----------------------------------------
+# ------------- WAVE 4 --------------------
+# -----------------------------------------
+def get_available_recs(user_data):
+    #An array of strings representing each subscription
+    recommendations = []
+    watched_movies = user_data["watched"] #An array of dictionaries representing each watched film  
+    friends_unique_watched = get_friends_unique_watched(user_data)
+    subscriptions = user_data["subscriptions"] # This represents the names of streaming services that the user has access to
+    friends = user_data["friends"]  #Each element in the friends list is a dictionary 
+#   - The user has not watched it
+#   - At least one of the user's friends has watched
+#   - The `"host"` of the movie is a service that is in the user's `"subscriptions"`
+# - Return the list of recommended movies    
+    # friends_watched_list = get_friends_watched_movies(user_data)
+    
+    # for friend in friends:
+    for movie in friends_unique_watched:
+        if len(friends_unique_watched) == 0:
+            return None
+        for subscription in subscriptions:
+            print(f"********THIS IS THE HOST: {host}")
+            if host in subscriptions:
+                recommendations.append(movie)        
+        
+    return recommendations
 
+# 1. There are four tests about a `get_available_recs` function
 
+# Create a function named `get_available_recs`
 
-
-
+# - takes one parameter: `user_data`
+#   - `user_data` will have a field `"subscriptions"`. The value of `"subscriptions"` is a list of strings
+#     - This represents the names of streaming services that the user has access to
+#     - Each friend in `"friends"` has a watched list. Each movie in the watched list has a `"host"`, which is a string that says what streaming service it's hosted on
+# - Determine a list of recommended movies. A movie should be added to this list if and only if:
+#   - The user has not watched it
+#   - At least one of the user's friends has watched
+#   - The `"host"` of the movie is a service that is in the user's `"subscriptions"`
+# - Return the list of recommended movies
 # user_data = {
 #     "watchlist": [{
 #         "title": MOVIE_TITLE_1,
@@ -133,10 +171,6 @@ def get_friends_unique_watched(user_data):
 #     }]
 # }
 # -----------------------------------------
-# ------------- WAVE 4 --------------------
-# -----------------------------------------
-
-# -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
@@ -149,9 +183,6 @@ def get_friends_unique_watched(user_data):
 #         return movies
 #     else:
 #         return None
-
-
-
 
     # for title in user_data["watchlist"][0].values():    #Figure out how to make it dynamic. 
     
