@@ -38,7 +38,11 @@ def test_new_genre_rec_from_empty_watched():
     # Assert
     assert len(recommendations) == 0
 
-#@pytest.mark.skip()
+    # *********************************************************************
+    # ****** Complete the Act and Assert Portions of theis tests **********
+    # *********************************************************************
+
+#Tori completed the Act/Assertion portion of the test below (though it appeared to be a duplicate):
 def test_new_genre_rec_from_empty_friends():
     # Arrange
     sonyas_data = {
@@ -52,9 +56,14 @@ def test_new_genre_rec_from_empty_friends():
             }
         ]
     }
+    # Act
+    recommendations = get_new_rec_by_genre(sonyas_data)
+
+    # Assert
+    assert len(recommendations) == 0
 
     # *********************************************************************
-    # ****** Complete the Act and Assert Portions of theis tests **********
+    # *********************************************************************
     # *********************************************************************
 
 #@pytest.mark.skip()
