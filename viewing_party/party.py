@@ -310,4 +310,23 @@ def get_new_rec_by_genre(user_data):
         # User has not seen it
         # At least one friend has watched it
         # "genre" is the same as the user's most frequent genre
-    pass
+
+
+    # TASK ONE: parse through User's data --> get movie titles and genres
+    # TASK TWO: from user's genres --> find most popular genre
+    # TASK THREE: find movies that user has NOT watched, a friend HAS watched,
+                # and is of user's most popular genre
+
+    # List of movies the user has watched
+    # the elements are dictionaries (one dictionary, one movie)
+    user_list = user_data["watched"]
+
+    # Get user's genre's --> find most popular genre
+    users_genres =[]
+
+    for title in user_list:
+        users_genres.append(title["genre"])
+
+    print(users_genres)
+    print(max(set(users_genres)), key = users_genres)
+    # print(mode(users_genres))
