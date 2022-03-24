@@ -167,13 +167,13 @@ def get_available_recs(user_data):
 
 def get_new_rec_by_genre(user_data):
     
-
     #determine most frequently watched genre
     most_watched_genre = get_most_watched_genre(user_data)
 
-    #get movies friends have watched but user has no
+    #get movies friends have watched but user has not
     friends_unique_watched_movies = get_friends_unique_watched(user_data)
 
+    #initialize unqiue movie list
     recommended_movies = []
 
     for movie in friends_unique_watched_movies:
@@ -194,7 +194,7 @@ def get_rec_from_favorites(user_data):
 
     #initialize unique movie list of dicts
     recommended_movies = []   
-    
+
     #compare every title between user and friends
     for user_movie in user_data["favorites"]:
         if user_movie["title"] not in friends_watched_titles: #compare title names
