@@ -1,7 +1,7 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
-    
+    #if any parameter is empty return none
     if title and genre and rating:
         new_movie = {"title": title, "genre": genre, "rating": rating}
         return new_movie
