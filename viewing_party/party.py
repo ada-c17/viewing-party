@@ -38,8 +38,8 @@ def watch_movie(user_data, title):
     # outer loop goes through list of movies in "watchlist"
     for movie in list(user_data["watchlist"]):  # use the copy of user_data["watchlist"] to be safe since we remove movies
         if movie["title"] == title:
-             user_data["watched"].append(movie)
-             user_data["watchlist"].remove(movie)
+            user_data["watched"].append(movie)
+            user_data["watchlist"].remove(movie)
 
     return user_data
 
@@ -51,11 +51,11 @@ def watch_movie(user_data, title):
 def get_watched_avg_rating(user_data):
     if user_data["watched"] == []: # watched list of movies is empty
             return 0.0
-    average_rating = [] #list to keep average of each movie
+    average_rating = [] #list to keep rating of each movie
 
     # loop go through list of movies in watched list
     for movie in user_data["watched"]:
-       average_rating.append(movie["rating"])
+        average_rating.append(movie["rating"])
     return sum(average_rating) / len(average_rating)
 
 
@@ -97,11 +97,11 @@ def get_unique_watched(user_data):
     for friend in user_data["friends"]:
         # inner loop goes through list of friend's watched movies 
         for friend_movie in friend["watched"]:
-            friends_watched.append(friend_movie["title"])
+            friends_watched.append(friend_movie)
 
     #add user movie to list of dictionaries if user's watched title not in the list of friend watched titles
     for user_movie in user_data['watched']:
-        if user_movie["title"] not in friends_watched:
+        if user_movie not in friends_watched:
             unique_watched_user.append(user_movie)
     
     return unique_watched_user
@@ -110,15 +110,16 @@ def get_unique_watched(user_data):
 def get_friends_unique_watched(user_data):
     user_watched = []
     friends_unique_movies = []
-    #cget the list of titles user watched
+    # get the list of movies user watched
     for movie in user_data["watched"]:
-        user_watched.append(movie["title"])
+        user_watched.append(movie)
 
+    # get the list of movies friends watched but user not
     # outer loop goes through list of friends of user
     for friend in user_data["friends"]:
         # inner loop goes through list of friend's watched movies
         for friend_movie in friend["watched"]:
-            if friend_movie["title"] not in user_watched:
+            if friend_movie not in user_watched:
                 if friend_movie not in friends_unique_movies:
                     friends_unique_movies.append(friend_movie)
 
