@@ -33,12 +33,7 @@ def watch_movie(user_data, movie):
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 def get_watched_avg_rating(user_data):
-    # rating_list = []
-    # for movie_dict in user_data["watched"]:
-    #     rating_list.append(movie_dict["rating"])
-
     rating_list = [movie_dict["rating"]for movie_dict in user_data["watched"]]
-
     if rating_list != []:
         average = sum(rating_list)/len(user_data["watched"])
     else:
@@ -46,10 +41,6 @@ def get_watched_avg_rating(user_data):
     return average
 
 def get_most_watched_genre(user_data):
-    # genre_list = []
-    # for movie_dict in user_data["watched"]:
-    #     genre_list.append(movie_dict["genre"])
-
     genre_list = [movie_dict["genre"] for movie_dict in user_data["watched"]]
 
     if genre_list != []:
@@ -61,7 +52,7 @@ def get_most_watched_genre(user_data):
 # ----------------------------------------
 
 def get_unique_watched(user_data):
-# lists of movies watched by user, and by friends 
+    # lists of movies watched by user, and by friends 
     movies_user_watched = []
     movies_friends_watched = []
 
@@ -75,7 +66,7 @@ def get_unique_watched(user_data):
         for i in range(len(list_of_dicts)):
             movies_friends_watched.append(list_of_dicts[i]['title'])
     
-    # use set to compare the lists, taking the difference between the user's set from the friends set.
+    # use set to compare the lists, taking the difference between the user's set and the friends set.
     unique_user_set = set(movies_user_watched) - set(movies_friends_watched)
 
     # convert set of movie titles --> list of dictionaries of those movies
@@ -118,50 +109,34 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 def get_available_recs(user_data):
-
-# find list of movies that friends have watched and user has not
+    # finds list of movies that friends have watched and user has not
     movies_friends_watched = get_friends_unique_watched(user_data)
-
-# check if 'host' is in the user's 'subscrptions' list
+    # checks if 'host' is in the user's 'subscrptions' list
     list_of_recommendations = [movie for movie in movies_friends_watched if movie['host'] in user_data['subscriptions']]
-
-    # list_of_recommendations = []
-    # for movie in movies_friends_watched:
-    #     if movie['host'] in user_data['subscriptions']:
-    #         list_of_recommendations.append(movie)
-
     return list_of_recommendations
         
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 def get_new_rec_by_genre(user_data):
-    
-# find list of movies that friends have watched and user has not (this is a list of dictionaries)
+    # movies_friends_watched variable is list of movies that friends have watched and user has not (this is a list of dictionaries)
     movies_friends_watched = get_friends_unique_watched(user_data)
-    
-# most watched genre (this is a string)
     favorite_genre = get_most_watched_genre(user_data)
-
     fav_genre_rec_list = [movie for movie in movies_friends_watched if movie['genre'] == favorite_genre]
-    # fav_genre_rec_list =[]
-    # for movie in movies_friends_watched:
-    #     if movie['genre'] == favorite_genre:
-    #         fav_genre_rec_list.append(movie)
     return fav_genre_rec_list
 
 def get_rec_from_favorites(user_data):
-# This func returns a list of movie dictionaries; movies are in user's "favorites" and none of the user's friends have watched them
+    # This func returns a list of movie dictionaries; movies are in user's "favorites" and none of the user's friends have watched them
     recommended_list = []
     movies_friends_watched = []
 
-# make a list of movies watched by friends
+    # makes list of movies watched by friends
     for i in range(len(user_data["friends"])):
         list_of_dicts = user_data["friends"][i]['watched']
         for i in range(len(list_of_dicts)):
             movies_friends_watched.append(list_of_dicts[i])
             
-# if the movies are in the user's fav list and NOT in the friends watched list, add to recommendations
+    # if the movies are in the user's fav list and NOT in the friends watched list, adds to recommendations list
     for movie in user_data['favorites']:
         if movie not in movies_friends_watched:
             recommended_list.append(movie)
