@@ -10,7 +10,7 @@ def test_my_unique_movies():
     # Act
     amandas_unique_movies = get_unique_watched(amandas_data)
 
-    # Arrange
+    # Assert
     assert len(amandas_unique_movies) == 2
     assert FANTASY_2 in amandas_unique_movies
     assert INTRIGUE_2 in amandas_unique_movies
@@ -25,7 +25,7 @@ def test_my_not_unique_movies():
     # Act
     amandas_unique_movies = get_unique_watched(amandas_data)
 
-    # Arrange
+    # Assert
     assert len(amandas_unique_movies) == 0
 
 #@pytest.mark.skip()
@@ -36,7 +36,7 @@ def test_friends_unique_movies():
     # Act
     friends_unique_movies = get_friends_unique_watched(amandas_data)
 
-    # Arrange
+    # Assert
     assert len(friends_unique_movies) == 3
     assert INTRIGUE_3 in friends_unique_movies
     assert HORROR_1 in friends_unique_movies
@@ -52,9 +52,12 @@ def test_friends_unique_movies_not_duplicated():
     # Act
     friends_unique_movies = get_friends_unique_watched(amandas_data)
 
-    # Arrange
+    # Assert
     assert len(friends_unique_movies) == 3
-
+    assert friends_unique_movies[0] != friends_unique_movies[1]
+    assert friends_unique_movies[0] != friends_unique_movies[2] 
+    assert friends_unique_movies[1] !=friends_unique_movies[2]
+    # I added lines 57,58,59
     # *************************************************************************************************
     # ****** Add assertions here to test that the correct movies are in friends_unique_movies **********
     # **************************************************************************************************
@@ -84,5 +87,5 @@ def test_friends_not_unique_movies():
     # Act
     friends_unique_movies = get_friends_unique_watched(amandas_data)
 
-    # Arrange
+    # Assert
     assert len(friends_unique_movies) == 0
