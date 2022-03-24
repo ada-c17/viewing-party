@@ -1,8 +1,11 @@
-# ------------- WAVE 1 --------------------
 
 from collections import Counter
 
 
+# ------------- WAVE 1 --------------------
+
+
+# create_movie_function takes in three parameters (title, genre, rating) and returns a dictionary called movie. 
 def create_movie(title, genre, rating):
 
     if title and genre and rating:
@@ -16,7 +19,9 @@ def create_movie(title, genre, rating):
     
     else:
         return None
+
     
+# add_to_watched function takes in two parameters (user_data, movie) and creates a list of movies watched by the user.
 def add_to_watched(user_data, movie):
     
     watched = []
@@ -28,6 +33,8 @@ def add_to_watched(user_data, movie):
                 
     return user_data
 
+
+# add_to_watchlist function takes in two parameters (user_data, movie) and creates a list of movies to be watched by the user.
 def add_to_watchlist(user_data, movie):
 
     watchlist = []
@@ -39,6 +46,9 @@ def add_to_watchlist(user_data, movie):
 
     return user_data
 
+
+# watch_movie function takes in two parameters (user_data, title) and once the user watches a movie included in the user's watchlist,/ 
+# the function will remove the movie from the user's watchlist and add it to the user's watched list.
 def watch_movie(user_data, title):
 
     for i in range(len(user_data["watchlist"])):
@@ -57,6 +67,7 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 
 
+# get_watched_avg_rating function calculates the average rating of all movies in the user's watched list.
 def get_watched_avg_rating(user_data):
 
     ratings_list = []
@@ -69,6 +80,8 @@ def get_watched_avg_rating(user_data):
     else: 
         return sum(ratings_list) / len(ratings_list)
 
+
+# get_most_watched_genre function determines which genre is most frequently occuring in the watched list.
 def get_most_watched_genre(user_data):
 
     genre_list = []
@@ -79,6 +92,9 @@ def get_most_watched_genre(user_data):
     if genre_list == []:
         return None
     
+    # Counter function is imported from the Collections library which creates a dictionary of genres where the value of each genre key /
+    # is the frequency of those genres in the user's watched list. The Counter is then used to return a list of the most common genre / 
+    # and the number of times it appeard in the user's watched list. 
     else:
         genre_frequency = Counter(genre_list)
         most_common_genre_frequency = genre_frequency.most_common(1)
@@ -90,11 +106,16 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
+
+# get_unique_watched function identifies which movies the user has watched that none of their friends have watched.
 def get_unique_watched(user_data):
 
+    # an empty set is created to store the user and friend's watched movies, respectively.
     user_compiled_watched_set = set()
     friends_unique_compiled_set = set()
 
+    # each movie dictionary in the user and user's friends watched lists are converted into a tuple where each key-value dictionary pair/ 
+    # is stored as a set within the tuple. Each tuple is then appended to the the respective set.
     for movie in user_data["watched"]:
         user_compiled_watched_set.add(tuple(movie.items()))
 
@@ -103,16 +124,20 @@ def get_unique_watched(user_data):
                 for movie in watched:
                     friends_unique_compiled_set.add(tuple(movie.items()))
 
+    # Once the movies watched by the user and user's friends are in sets, duplicate values are removed, and we are able to use the /
+    # .difference() function to evaluate what movies the user has watched that none of their friends have.
     user_but_not_friends = user_compiled_watched_set.difference(friends_unique_compiled_set)
 
-    movies_user_has_watched_but_friends_have_not = []
+    movie_user_has_watched_but_friends_have_not = []
 
+    # each tuple in the respective set is converted back into a dictionary. These movie dictionaries are then appended to a list.
     for tup in user_but_not_friends:
         user_but_not_friends_dict_type = dict(tup)
-        movies_user_has_watched_but_friends_have_not.append(user_but_not_friends_dict_type)
+        movie_user_has_watched_but_friends_have_not.append(user_but_not_friends_dict_type)
         
-    return movies_user_has_watched_but_friends_have_not
+    return movie_user_has_watched_but_friends_have_not
 
+# get_friends_unique_watched function identifies which movies the user's friends have watched that the user has not watched.
 def get_friends_unique_watched(user_data):
 
     user_compiled_watched_set = set()
@@ -128,19 +153,22 @@ def get_friends_unique_watched(user_data):
 
     friends_but_not_user = friends_unique_compiled_set.difference(user_compiled_watched_set)
 
-    movies_friends_have_but_user_has_not = []
+    movie_friends_have_watched_but_user_has_not = []
 
     for tup in friends_but_not_user:
         friends_but_not_user_dict_type = dict(tup)
-        movies_friends_have_but_user_has_not.append(friends_but_not_user_dict_type)
+        movie_friends_have_watched_but_user_has_not.append(friends_but_not_user_dict_type)
         
-    return movies_friends_have_but_user_has_not
+    return movie_friends_have_watched_but_user_has_not
 
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
+
+# get_available_recs function creates a list of movie recommendations based on movies watched by the user's friends and not yet watched /
+# by the user if the user subscribes to the app that hosts the movie.
 def get_available_recs(user_data):
 
     movie_recommended_by_friends = get_friends_unique_watched(user_data)
@@ -160,6 +188,9 @@ def get_available_recs(user_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+
+# get_new_rec_by_genre function creates a list of movie recommendations based on movies watched by the user's friends and not yet watched /
+# by the user if the movie's genre is the same as the user's most frequently watched genre.
 def get_new_rec_by_genre(user_data):
 
     movie_recommended_by_friends = get_friends_unique_watched(user_data)
@@ -176,22 +207,25 @@ def get_new_rec_by_genre(user_data):
 
     return recommended_movie_list_by_genre
 
+
+# get_rec_from_favorites function creates a list of movie recommendations based on movies that the user has watched that none of their /
+# friends have watched if the user has included the movie in their favorites list.
 def get_rec_from_favorites(user_data):
 
-    user_watched_movies = get_unique_watched(user_data)
+    user_watched_movie = get_unique_watched(user_data)
 
-    user_favorites = user_data["favorites"]
+    user_watched_movie_set = set()
+    user_favorite_movie_set = set()
 
-    user_watched_movies_set = set()
-    user_favorite_movies_set = set()
-
-    for movie in user_watched_movies:
-        user_watched_movies_set.add(tuple(movie.items()))
+    for movie in user_watched_movie:
+        user_watched_movie_set.add(tuple(movie.items()))
 
     for movie in user_data["favorites"]:
-        user_favorite_movies_set.add(tuple(movie.items()))
+        user_favorite_movie_set.add(tuple(movie.items()))
 
-    user_watched_favorites = user_favorite_movies_set.intersection(user_watched_movies_set)
+    # Once the movies watched by only the user and the user's favorite movies are in sets, duplicate values are removed and we are able /
+    # to use the .intersection() function to evaluate what movies are in both sets.
+    user_watched_favorites = user_favorite_movie_set.intersection(user_watched_movie_set)
 
     recommended_movie_list_from_favorites = []
 
