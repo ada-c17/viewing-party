@@ -79,6 +79,7 @@ def get_most_watched_genre(user_data):
     # empty dictionary to hold movie genres and their frequency
     movie_genre_count = {}
 
+    # check if watched list is empty
     if not user_data["watched"]:
         popular_genre = None
     else:
@@ -110,6 +111,31 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
+def get_unique_watched(user_data):
+    # create an empty list called movies_in_common and my_unique_movies
+    # loop through user_data["friends"]. for friend in user_data["friends"],
+    # for movie in user_data["friends"][friend]["watched"],
+    # if movie in user_data["watched"], movies_in_common.append(movie)
+    # loop through user_data["watched"] and compare to movies_in_common list
+    # if the movie is not in movies_in_common, add it to my_unique_movies
+    # return my_unique_movies
+
+    # create lists to store unique movies and movies that user and friends have watched
+    movies_in_common = []
+    my_unique_movies = []
+
+    # loop through friends' watched movies to identify movies user and friends have both watched
+    for i in range(len(user_data["friends"])):
+        for movie in user_data["friends"][i]["watched"]:
+            if movie in user_data["watched"]:
+                movies_in_common.append(movie)
+    
+    # loop through user's watched movies and compare to movies in common to find unique movies
+    for my_movie in user_data["watched"]:
+        if my_movie not in movies_in_common:
+            my_unique_movies.append(my_movie)
+    
+    return my_unique_movies
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
