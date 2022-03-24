@@ -32,12 +32,7 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 
 def get_watched_avg_rating(user_data):
-    # Not using list comprehension
-    # list_of_ratings=[]
-    # for item in user_data["watched"]:
-    #     list_of_ratings.append(item["rating"])
     
-    # Using list comprehension
     list_of_ratings = [item["rating"] for item in user_data["watched"]]
 
     # This will account for the situation when the watched list is empty
@@ -47,12 +42,7 @@ def get_watched_avg_rating(user_data):
     return sum(list_of_ratings)/len(list_of_ratings)
 
 def get_most_watched_genre(user_data):
-    # Not using list comprehension
-    # list_of_genres = []
-    # for item in user_data["watched"]:
-    #     list_of_genres.append(item["genre"])
-    
-    # Using list comprehension
+ 
     list_of_genres = [item["genre"] for item in user_data["watched"]]
 
     # This will account for the situation when the watched list is empty
@@ -139,14 +129,10 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 
 def get_available_recs(user_data):
-    recommended_movies = []
     friend_recs = get_friends_unique_watched(user_data)
-    for item in friend_recs:
-        if item["host"] in user_data["subscriptions"]:
-            recommended_movies.append(item)
+    recommended_movies = \
+        [item for item in friend_recs if item["host"] in user_data["subscriptions"]]
     return recommended_movies
-
-
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
@@ -154,6 +140,7 @@ def get_available_recs(user_data):
 
 def get_new_rec_by_genre(user_data):
 
+    # Create a dictionary of genres and their overall frequency
     genre_dict = {}
     for movie_dict in user_data["watched"]:
         movie_genre = movie_dict["genre"]
@@ -162,17 +149,18 @@ def get_new_rec_by_genre(user_data):
         else:
             genre_dict[movie_genre] = 1
     
+    # Create a list to store most popular genres, in case there are more than one
     most_frequent_genres = []
     for genre_name, popularity in genre_dict.items():
         if popularity == max(genre_dict.values()):
             most_frequent_genres.append(genre_name)
     
+    # Filter and store possible movie recommendations
     recommended_movies = []
     friend_recs = get_friends_unique_watched(user_data)
     for i in range(len(friend_recs)):
         if friend_recs[i]["genre"] in most_frequent_genres:
             recommended_movies.append(friend_recs[i])
-    
     return recommended_movies
 
 def get_rec_from_favorites(user_data):
@@ -183,5 +171,3 @@ def get_rec_from_favorites(user_data):
             recommendations.append(item)
     return recommendations
     
-
-

@@ -1,3 +1,5 @@
+# This file is solely for personal debugging purposes
+
 import copy
 
 # ********************************
