@@ -123,6 +123,49 @@ def test_moves_movie_from_watchlist_to_empty_watched():
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
 
+# Tori added below tests:
+def test_moves_HORROR_1_from_watchlist_to_empty_watched_title():
+    # Arrange
+    janes_data = {
+        "watchlist": [{
+            "title": MOVIE_TITLE_1,
+            "genre": GENRE_1,
+            "rating": RATING_1
+        }],
+        "watched": []
+    }
+
+    # Act
+    updated_data = watch_movie(janes_data, MOVIE_TITLE_1)
+
+    # Assert
+    assert updated_data["watchlist"] == []
+    assert updated_data["watched"][0]["title"] == "It Came from the Stack Trace"
+
+#@pytest.mark.skip()
+def test_moves_HORROR_1_from_watchlist_to_empty_watched_dict_values():
+    # Arrange
+    janes_data = {
+        "watchlist": [{
+            "title": MOVIE_TITLE_1,
+            "genre": GENRE_1,
+            "rating": RATING_1
+        }],
+        "watched": []
+    }
+
+    # Act
+    updated_data = watch_movie(janes_data, MOVIE_TITLE_1)
+
+    # Assert
+    assert updated_data["watched"][0]["title"] == "It Came from the Stack Trace"
+    assert updated_data["watched"][0]["genre"] == "Horror"
+    assert updated_data["watched"][0]["rating"] == 3.5
+
+    # *******************************************************************************************
+    # *******************************************************************************************
+    # *******************************************************************************************
+
 #@pytest.mark.skip()
 def test_moves_movie_from_watchlist_to_watched():
     # Arrange
@@ -144,6 +187,49 @@ def test_moves_movie_from_watchlist_to_watched():
     
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
+    # *******************************************************************************************
+
+# Tori added below tests:
+def test_moves_FANTASY_2_from_watchlist_to_watched_title():
+    # Arrange
+    movie_to_watch = FANTASY_2
+    janes_data = {
+        "watchlist": [
+            FANTASY_1,
+            movie_to_watch
+        ],
+        "watched": [HORROR_1]
+    }
+
+    # Act
+    updated_data = watch_movie(janes_data, movie_to_watch["title"])
+
+    # Assert
+    assert updated_data["watchlist"][0]["title"] != "The Lord of the Functions: The Two Parameters"
+    assert updated_data["watched"][1]["title"] == "The Lord of the Functions: The Two Parameters"
+
+
+def test_moves_FANTASY_2_from_watchlist_to_watched_dict_values():
+    # Arrange
+    movie_to_watch = FANTASY_2
+    janes_data = {
+        "watchlist": [
+            FANTASY_1,
+            movie_to_watch
+        ],
+        "watched": [HORROR_1]
+    }
+
+    # Act
+    updated_data = watch_movie(janes_data, movie_to_watch["title"])
+
+    # Assert
+    assert updated_data["watched"][1]["title"] == "The Lord of the Functions: The Two Parameters"
+    assert updated_data["watched"][1]["genre"] == "Fantasy"
+    assert updated_data["watched"][1]["rating"] == 4.0
+
+    # *******************************************************************************************
+    # *******************************************************************************************
     # *******************************************************************************************
 
 #@pytest.mark.skip()
