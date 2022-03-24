@@ -5,13 +5,7 @@ import copy
 
 def create_movie(movie_title, genre, rating):
     new_movie = {"title" : movie_title , "genre" : genre , "rating" : rating }
-    if movie_title == None:
-        new_movie = None
-        return new_movie
-    elif genre == None:
-        new_movie = None
-        return new_movie
-    elif rating == None:
+    if movie_title == None or genre == None or rating == None:
         new_movie = None
         return new_movie
     return new_movie
@@ -93,6 +87,7 @@ def get_new_rec_by_genre(user_data):
         if movie["genre"] == users_fav_genre:
             recomended_movies.append(movie)
     return recomended_movies
+
 
 def get_rec_from_favorites(user_data):
     recs_from_favorites = []
