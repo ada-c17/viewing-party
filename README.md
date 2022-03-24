@@ -20,7 +20,7 @@ For this project, you will be given some data structure that represents the thin
 
 ## One-Time Project Setup
 
-Follow these directions once, a the beginning of your project:
+Follow these directions once, at the beginning of your project:
 
 1. Navigate to your projects folder named `projects`
 
@@ -28,7 +28,7 @@ Follow these directions once, a the beginning of your project:
 $ cd ~/Developer/projects
 ```
 
-2. In Github click on the "Fork" button in github and fork the repository to your Github account.  This will make a copy of the project in your github account. 
+2. In Github click on the "Fork" button in github and fork the repository to your Github account.  This will make a copy of the project in your github account.
 
 ![Fork Button](images/fork.png)
 
@@ -92,7 +92,7 @@ $ source venv/bin/activate
 2. Check the `tests` folder, and find the test file you want to run
 
    - In that test file, read through each test case
-      - If it is incomplete, complete the test. 
+      - If it is incomplete, complete the test.
         - *Is this a nominal or edge case?*
         - *What type of input do we need to test this case?*
         - *What is the expected output for the given input?*
@@ -106,7 +106,7 @@ $ source venv/bin/activate
 $ pytest
 ```
 
-4. Read through the test failure, and understand why the failure is happening. Confirm your findings with a classmate. 
+4. Read through the test failure, and understand why the failure is happening. Confirm your findings with a classmate.
     - If it is a test you wrote, consider whether you are actually testing what you intend to test. Does the test need modification?
 
 5. Make a plan to implement code to pass the test.
@@ -186,13 +186,13 @@ To run this file, use:
 python3 play_tester.py
 ```
 
-There is some starter code provided in `play_tester.py`. This code prints the test data that is used for many of the tests. Looking closely at this data can help us think critically about the expected output for given input for each function. Then, calling each function with this data allows us to observe the **actual** output for given input. 
+There is some starter code provided in `play_tester.py`. This code prints the test data that is used for many of the tests. Looking closely at this data can help us think critically about the expected output for given input for each function. Then, calling each function with this data allows us to observe the **actual** output for given input.
 
 ## Test Data
 
-We will note that much of the test data for this project is provided by the file `test_constants.py`. As test data gets more and more complex, it is helpful to organize this data in its own file to enhance consistency and readability. Pytest, like many testing libraries, provide a special too for test data called **fixtures**. We will learn about fixtures later in the curriculum. 
+We will note that much of the test data for this project is provided by the file `test_constants.py`. As test data gets more and more complex, it is helpful to organize this data in its own file to enhance consistency and readability. Pytest, like many testing libraries, provide a special too for test data called **fixtures**. We will learn about fixtures later in the curriculum.
 
-For the time being, we need to make sure that the data provided to each test is clean and free of any changes that running another test may have introduced. Recall the *Modifying Mutable Objects* section of the *Variables Are References lesson.* To ensure that the data for each test is storied in a unique place in memory, there are functions implemented in `test_constants.py` that provide clean test data (i.e. `clean_wave_3_data`) by using `copy.deepcopy`. 
+For the time being, we need to make sure that the data provided to each test is clean and free of any changes that running another test may have introduced. Recall the *Modifying Mutable Objects* section of the *Variables Are References lesson.* To ensure that the data for each test is storied in a unique place in memory, there are functions implemented in `test_constants.py` that provide clean test data (i.e. `clean_wave_3_data`) by using `copy.deepcopy`.
 
 ## Project Directions
 
