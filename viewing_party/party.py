@@ -70,6 +70,65 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 
 
+def get_watched_avg_rating(user_data):
+    """Calculating the average of rating and return average rating"""
+    
+    # return 0 if user data watched is empty
+    if len(user_data["watched"]) == 0:
+        return 0
+
+    # otherwise, calculating the average rating
+    else:
+        # assign 0 to total rating 
+        sum_rating = 0
+        # loop to get each value of user data watched list
+        for i in range(len(user_data["watched"])):
+            # sum all rating of user data watched list
+            sum_rating += user_data["watched"][i]["rating"]
+        # calculate the average rating
+        average_rating = sum_rating / len(user_data["watched"])
+    return average_rating
+
+
+def get_most_watched_genre(user_data):
+    """ finding most watched genre and return it """
+
+    # return 0, if the user data watched is empty
+    if len(user_data["watched"]) == 0:
+        return None
+
+    # otherwise, finding most watched genre
+    else:
+        # This dictionary has key is value of genre from user watched, value is numbers of duplication of genre
+        genre = {}
+        # variable to find most watched genre
+        max_value = 0
+        # variable to store most watched genre and return at the end
+        most_watched_genre = ""
+
+        # create a dictionary that has key is value of genre and value is numbers of duplication of genre from user watched
+        # loop over each element of user watched to genre
+        for item in user_data["watched"]:
+            # assigne genre to key variable
+            key = item["genre"]
+
+            # add key as key of genre dictionary and assigne 0 as value 
+            if key not in genre:
+                genre[key] = 0
+            # increasing by 1 if genre of user watched is in genre dictionary 
+            if item["genre"] in genre:
+                genre[key] += 1
+        
+        # find most watched genre
+        # loop over key and value of genre dictionary to use on purpose finding most watched genre
+        for key, value in genre.items():
+            # if value value greater than max_value 
+            # assign  value to max_value for comparing next value
+            # assign key of dictionary to most_watched_genre that is the answer after finishing comparing
+            if value > max_value:
+                max_value = value
+                most_watched_genre = key
+        return most_watched_genre
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
