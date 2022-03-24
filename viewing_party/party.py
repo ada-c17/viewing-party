@@ -172,3 +172,20 @@ def get_available_recs(user_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+def get_new_rec_by_genre(user_data):
+    
+    # list to store recommended movies in user's most popular genre
+    my_recs_by_genre = []
+    
+    # variable to identify user's most watched genre using helper function
+    most_popular_genre = get_most_watched_genre(user_data)
+
+    # variable to identify movies that the user hasn't watched, but their friends have watched
+    unwatched_friends_movies = get_friends_unique_watched(user_data)
+
+    # check list of unwatched movies that friends have watched; add any that are user's most-watched genre to recs list
+    for movie in unwatched_friends_movies:
+        if movie["genre"] == most_popular_genre:
+            my_recs_by_genre.append(movie)
+    
+    return my_recs_by_genre
