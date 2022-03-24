@@ -65,7 +65,7 @@ def test_friends_unique_movies_not_duplicated():
     # **************************************************************************************************
 
 # Test 18
-@pytest.mark.skip()
+#@pytest.mark.skip()
 def test_friends_not_unique_movies():
     # Arrange
     amandas_data = {
