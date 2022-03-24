@@ -29,14 +29,12 @@ def watch_movie(user_data, title):
 
 def get_watched_avg_rating(user_data):
     total = 0
+    if len(user_data["watched"]) <= 0:
+        return 0.0
     for movie in user_data["watched"]:
         total += movie["rating"]
-    if len(user_data["watched"]) <= 0:
-        average = 0.0
-        return average
-    elif len(user_data["watched"]) > 0:
         average = total / len(user_data["watched"])
-        return average
+    return average
 
 
 def get_most_watched_genre(user_data):
@@ -50,6 +48,7 @@ def get_most_watched_genre(user_data):
             popular_genre[movie["genre"]] += 1
     best_genre = max(popular_genre, key = popular_genre.get)
     return best_genre
+
 
 def get_unique_watched(user_data):
     unique_movie_list = copy.deepcopy(user_data["watched"])
