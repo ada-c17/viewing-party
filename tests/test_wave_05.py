@@ -1,7 +1,7 @@
 import pytest
 from viewing_party.party import *
 from tests.test_constants import *
-
+# TEST ONE 
 @pytest.mark.skip()
 def test_new_genre_rec():
     # Arrange
@@ -16,7 +16,7 @@ def test_new_genre_rec():
     assert len(recommendations) == 1
     assert FANTASY_4b in recommendations
     assert sonyas_data == clean_wave_5_data()
-
+# TEST TWO 
 @pytest.mark.skip()
 def test_new_genre_rec_from_empty_watched():
     # Arrange
@@ -37,7 +37,7 @@ def test_new_genre_rec_from_empty_watched():
 
     # Assert
     assert len(recommendations) == 0
-
+# TEST THREE
 @pytest.mark.skip()
 def test_new_genre_rec_from_empty_friends():
     # Arrange
@@ -54,9 +54,9 @@ def test_new_genre_rec_from_empty_friends():
     }
 
     # *********************************************************************
-    # ****** Complete the Act and Assert Portions of theis tests **********
+    # ****** Complete the Act and Assert Portions of these tests **********
     # *********************************************************************
-
+# TEST FOUR
 @pytest.mark.skip()
 def test_unique_rec_from_favorites():
     # Arrange
@@ -70,7 +70,7 @@ def test_unique_rec_from_favorites():
     assert FANTASY_2b in recommendations
     assert INTRIGUE_2b in recommendations
     assert sonyas_data == clean_wave_5_data()
-
+# TEST FIVE
 @pytest.mark.skip()
 def test_unique_from_empty_favorites():
     # Arrange
@@ -91,7 +91,7 @@ def test_unique_from_empty_favorites():
 
     # Assert
     assert len(recommendations) == 0
-
+# TEST SIX
 @pytest.mark.skip()
 def test_new_rec_from_empty_friends():
     # Arrange

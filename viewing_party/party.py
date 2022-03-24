@@ -34,13 +34,6 @@ def add_to_watched(user_data, movie):
     return user_data
 
 
-# TESTING add_to_watched()
-# user_data = { "watched": []}
-# movie = {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}
-
-# add_to_watched(user_data, movie)
-
-
 def add_to_watchlist(user_data, movie):
     """
     Input: 
@@ -101,6 +94,7 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+
 
 def get_watched_avg_rating(user_data):
     """
@@ -217,9 +211,8 @@ def get_unique_watched(user_data):
 
 
 def get_friends_unique_watched(user_data):
-    # print(user_data)
 
-    #List of movies friends have watched
+    # List of movies friends have watched
     # the elements are dictionaries with lists of dictionaries are the values
     friends_data = user_data["friends"]
 
@@ -299,7 +292,22 @@ def get_available_recs(user_data):
     
     return recommended_list
 
+
+
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+
+def get_new_rec_by_genre(user_data):
+    """
+    Input: user_data = dictionary with "watched" list of movie dictionaries, "friends" is a list with each item as a dictionary
+    Output: return list of recommended movies
+    """
+    # User's most frequently watched genre --> list of recommended movies
+
+    # Add to recommended movies if:
+        # User has not seen it
+        # At least one friend has watched it
+        # "genre" is the same as the user's most frequent genre
+    pass
