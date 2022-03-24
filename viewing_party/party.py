@@ -68,6 +68,7 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 
 def get_unique_watched(user_data):
+    # Method that doesn't use list comprehension, and would work if a friend gave a move a different rating than the user 
     # list_both_watched = []
     # for i in range(len(user_data["watched"])):
     #     for j in range(len(user_data["friends"])):
@@ -75,44 +76,62 @@ def get_unique_watched(user_data):
     #             if user_data["watched"][i]["title"] == user_data["friends"][j]["watched"][k]["title"] \
     #                 and user_data["watched"][i]["title"] not in list_both_watched:
     #                 list_both_watched.append(user_data["watched"][i])
+    # list_user_watched = []
+    # for i in range(len(user_data["watched"])):
+    #     list_user_watched.append(user_data["watched"][i])
+    # 
+    # list_unique_watched = []
+    # for item in list_user_watched:
+    #     if item not in list_both_watched:
+    #         list_unique_watched.append(item)
 
-    list_both_watched = []
-    for i in range(len(user_data["watched"])):
-        for j in range(len(user_data["friends"])):
-            for k in range(len(user_data["friends"][j]["watched"])):
-                if user_data["watched"][i]["title"] == user_data["friends"][j]["watched"][k]["title"] \
-                    and user_data["watched"][i]["title"] not in list_both_watched:
-                    list_both_watched.append(user_data["watched"][i])
 
-    list_user_watched = []
-    for i in range(len(user_data["watched"])):
-        list_user_watched.append(user_data["watched"][i])
+    list_friend_watched = []
+    for i in range(len(user_data["friends"])):
+        for j in range(len((user_data)["friends"][i]["watched"])):
+            list_friend_watched.append(user_data["friends"][i]["watched"][j])
 
-    list_unique_watched = []
+    list_user_watched = [item for item in user_data["watched"]]
+
+    list_unique_user_watched = []
     for item in list_user_watched:
-        if item not in list_both_watched:
-            list_unique_watched.append(item)
+        if item not in list_friend_watched:
+            list_unique_user_watched.append(item)
 
-    return list_unique_watched
+    return list_unique_user_watched
 
 def get_friends_unique_watched(user_data):
-    list_both_watched = []
-    for i in range(len(user_data["watched"])):
-        for j in range(len(user_data["friends"])):
-            for k in range(len(user_data["friends"][j]["watched"])):
-                if user_data["watched"][i]["title"] == user_data["friends"][j]["watched"][k]["title"] \
-                    and user_data["watched"][i]["title"] not in list_both_watched:
-                    list_both_watched.append(user_data["watched"][i])
+    # Method that doesn't use list comprehension, and would work if a friend gave a move a different rating than the user
+    # list_both_watched = []
+    # for i in range(len(user_data["watched"])):
+    #     for j in range(len(user_data["friends"])):
+    #         for k in range(len(user_data["friends"][j]["watched"])):
+    #             if user_data["watched"][i]["title"] == user_data["friends"][j]["watched"][k]["title"] \
+    #                 and user_data["watched"][i]["title"] not in list_both_watched:
+    #                 list_both_watched.append(user_data["watched"][i])
     
+    # list_friend_watched = []
+    # for j in range(len(user_data["friends"])):
+    #         for k in range(len(user_data["friends"][j]["watched"])):
+    #             list_friend_watched.append(user_data["friends"][j]["watched"][k])
+
+    # list_unique_friend_watched = []
+    # for item in list_friend_watched:
+    #     if item not in list_both_watched and item not in list_unique_friend_watched:
+    #         list_unique_friend_watched.append(item)
+
     list_friend_watched = []
-    for j in range(len(user_data["friends"])):
-            for k in range(len(user_data["friends"][j]["watched"])):
-                list_friend_watched.append(user_data["friends"][j]["watched"][k])
+    for i in range(len(user_data["friends"])):
+        for j in range(len((user_data)["friends"][i]["watched"])):
+            list_friend_watched.append(user_data["friends"][i]["watched"][j])
+
+    list_user_watched = [item for item in user_data["watched"]]
 
     list_unique_friend_watched = []
     for item in list_friend_watched:
-        if item not in list_both_watched and item not in list_unique_friend_watched:
+        if item not in list_user_watched and item not in list_unique_friend_watched:
             list_unique_friend_watched.append(item)
+    
 
     return list_unique_friend_watched
 # -----------------------------------------
