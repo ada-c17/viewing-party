@@ -189,3 +189,21 @@ def get_new_rec_by_genre(user_data):
             my_recs_by_genre.append(movie)
     
     return my_recs_by_genre
+
+def get_rec_from_favorites(user_data):
+    # user_data has a key, "favorites", whose value is a list of movie dictionaries
+    # create a list of recommended movies
+    # only add movies that are in "favorites" and none of the user's friends have watched
+
+    # list to hold recommended movies
+    my_recs_from_favorites = []
+
+    # variable to identify movies that user's friends have not watched
+    # note for future refactoring: consider updating to include movies from user's watchlist that friends haven't watched
+    my_watched_movies = get_unique_watched(user_data)
+
+    for movie in my_watched_movies:
+        if movie in user_data["favorites"]:
+            my_recs_from_favorites.append(movie)
+
+    return my_recs_from_favorites
