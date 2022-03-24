@@ -90,23 +90,9 @@ def get_available_recs(user_data):
 
 # ------------- WAVE 5 --------------------
 
-def get_favorite_genre(user_data):
-    genres = {}
-    for movie in user_data["watched"]:
-        if movie["genre"] in genres.keys():
-            genres[movie["genre"]] += 1
-        else:
-            genres[movie["genre"]] = 1
-    # Return 
-    try:
-        return max(genres, key=genres.get)
-    except ValueError:
-        return None
-
-
 def get_new_rec_by_genre(user_data):
     recs = []
-    fav_genre = get_favorite_genre(user_data)
+    fav_genre = get_most_watched_genre(user_data)
     friends_unique_movies = get_friends_unique_watched(user_data)
     for movie in friends_unique_movies:
         if movie["genre"] == fav_genre and movie not in recs:
