@@ -47,16 +47,13 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 def get_watched_avg_rating(user_data):
 
-    #simplify list
-    watched= user_data["watched"]
-
-    #initiate running total
+    #initiate running total for rating score
     total = 0
-    for i in range(len(watched)):
-            total += watched[i]["rating"]
+    for i in range(len(user_data["watched"])):
+            total += user_data["watched"][i]["rating"]
     
-    try:
-        average = total/len(watched)
+    try: #get avg rating score
+        average = total/len(user_data["watched"])
     except ZeroDivisionError: #if empty list
         return 0
 
