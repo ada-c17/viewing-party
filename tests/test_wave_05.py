@@ -60,11 +60,8 @@ def test_new_genre_rec_from_empty_friends():
     # Assert
     assert len(recommendations) == 0
 
-    # *********************************************************************
-    # ****** Complete the Act and Assert Portions of theis tests **********
-    # *********************************************************************
-
-@pytest.mark.skip()
+#Wave 5 / Test 4
+# Recommend movie from user's favorites that no friend has watched
 def test_unique_rec_from_favorites():
     # Arrange
     sonyas_data = clean_wave_5_data()
@@ -78,7 +75,7 @@ def test_unique_rec_from_favorites():
     assert INTRIGUE_2b in recommendations
     assert sonyas_data == clean_wave_5_data()
 
-@pytest.mark.skip()
+#Wave 5 / Test 5
 def test_unique_from_empty_favorites():
     # Arrange
     sonyas_data = {
@@ -99,7 +96,7 @@ def test_unique_from_empty_favorites():
     # Assert
     assert len(recommendations) == 0
 
-@pytest.mark.skip()
+#Wave 5 / Test 6
 def test_new_rec_from_empty_friends():
     # Arrange
     sonyas_data = {

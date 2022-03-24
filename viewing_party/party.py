@@ -188,3 +188,22 @@ def get_new_rec_by_genre(user_data):
             recommendations_by_genre.append(movie)
     return recommendations_by_genre
 
+def get_rec_from_favorites(user_data):
+    '''
+    Input: user_data (a dictionary with keys "watched", "friends",
+    "subscriptions", and "favorites", with lists as their values). 
+    
+    Output: Returns a list of recommended movies from the user's 
+    "favorites" list if none of the user's friends have it in their
+    "watched" list already.
+    '''
+    friends_movies = []
+    for friend_movie_dict_index in range(len(user_data["friends"])):
+        friends_movies += user_data["friends"][friend_movie_dict_index]["watched"]
+
+    recommendations_from_favorites = []
+    for favorite_movie in user_data["favorites"]:
+        if favorite_movie not in friends_movies and favorite_movie not in recommendations_from_favorites:
+                recommendations_from_favorites.append(favorite_movie)
+    
+    return recommendations_from_favorites
