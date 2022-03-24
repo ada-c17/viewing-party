@@ -14,7 +14,7 @@ def create_movie(title, genre, rating):
     return new_movie
 
 def add_to_watched(user_data, movie):
-    user_data["watched"].append(movie)          # updated_data = user_data.update({"watched": movie})
+    user_data["watched"].append(movie)          
     return user_data
 
 def add_to_watchlist(user_data, movie):
@@ -35,28 +35,25 @@ def watch_movie(user_data, movie_title):
 
 def get_watched_avg_rating(user_data):
     ratings_data = []
-    watched_movies = user_data["watched"] #An array of dictionaries 
+    watched_movies = user_data["watched"] # An array of dictionaries 
     average = 0.0
-    for movie in watched_movies:    #For each dictionary/movie in this array 
-            ratings_data.append(movie["rating"])
-            # print(f"*********This is the: {ratings_data=}")
-        
-            ratings_total = sum(ratings_data)
-            average = ratings_total / len(ratings_data)
+    for movie in watched_movies:    # For each dictionary/movie in this array 
+        ratings_data.append(movie["rating"])
+    
+        ratings_total = sum(ratings_data)
+        average = ratings_total / len(ratings_data)
 
     return average
 
 def get_most_watched_genre(user_data):
-    #I'm guessing this may be a frequency map
+    #The aim appears to be a frequency map
     popular_genre_dict = {}
-    watched_movies = user_data["watched"] #An array of dictionaries representing each watched film  
+    watched_movies = user_data["watched"] 
     if len(watched_movies) == 0:
         return None
 
     for movies in watched_movies:
-        # print(f"*********This is the value of: {movies=}")     
-        # print(f"*********This is the value of: {genre=}")
-        # for genre, frequency in popular_genre.items():
+    # for genre, frequency in popular_genre.items():
         genre = movies["genre"]
         if genre in popular_genre_dict:
             frequency = popular_genre_dict[genre] + 1 
@@ -81,31 +78,29 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 def get_friends_watched_movies(user_data):
-    friends = user_data["friends"]  #Each element in the friends list is a dictionary 
+    friends = user_data["friends"]   
     friends_watched_list = []
     for friend in friends:
-        # print(f" THIS IS FRIEND HERE: {friend=}")
         for movie in friend["watched"]:
-            # print(f" THIS IS FRIEND HERE: {friend=}")
             friends_watched_list.append(movie)
         
     return friends_watched_list
 
 def get_unique_watched(user_data):
     unique_watched_list = []
-    watched_movies = user_data["watched"] #An array of dictionaries representing each watched film  
+    watched_movies = user_data["watched"]   
     friends_watched_list = get_friends_watched_movies(user_data)
     for movie in watched_movies:
         if movie not in friends_watched_list:
             unique_watched_list.append(movie)
-    #Movie title variable? For each movie in movie ditionary in watched movies
     
     return unique_watched_list
 
 def get_friends_unique_watched(user_data):
     friends_unique_watched_list = []
-    watched_movies = user_data["watched"] #An array of dictionaries representing each watched film  
+    watched_movies = user_data["watched"] 
     friends_watched_list = get_friends_watched_movies(user_data)
+
     for movie in friends_watched_list:
         if len(friends_watched_list) == 0:
             return None
@@ -122,20 +117,24 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 def get_available_recs(user_data):
-    #An array of strings representing each subscription
-    recommendations = []
-    watched_movies = user_data["watched"] #An array of dictionaries representing each watched film  
+    recommendations = []    
+    watched_movies = user_data["watched"]  
     friends_unique_watched = get_friends_unique_watched(user_data)
     subscriptions = user_data["subscriptions"] # This represents the names of streaming services that the user has access to
-    # friends = user_data["friends"]  #Each element in the friends list is a dictionary 
 
     for movie in friends_unique_watched:
         if movie not in watched_movies:
             host = movie["host"]
             if host in subscriptions:
-                recommendations.append(movie)        # - Return the list of recommended movies  
+                recommendations.append(movie)
             
     return recommendations
+
+# -----------------------------------------
+# ------------- WAVE 5 --------------------
+# -----------------------------------------
+
+
 
 
 # user_data = {
@@ -150,32 +149,3 @@ def get_available_recs(user_data):
 #         "rating": RATING_1
 #     }]
 # }
-# -----------------------------------------
-# ------------- WAVE 5 --------------------
-# -----------------------------------------
-
-# def create_movie(title, genre, rating):
-#     movies = {}
-#     if title and genre and rating: 
-#         movies["title"] = title
-#         movies["genre"] = genre
-#         movies["rating"] = rating
-#         return movies
-#     else:
-#         return None
-
-    # for title in user_data["watchlist"][0].values():    #Figure out how to make it dynamic. 
-    
-    
-    # for movie in range(len(user_data["watchlist"])): 
-    #     # print(f"HERE: {title}")
-    #     if title in user_data["watchlist"][movie].values():            
-    #         user_data = add_to_watched(user_data, user_data["watchlist"][title])
-    #         user_data["watchlist"].pop(title)
-            
-    #     else:
-    #         len(["watchlist"]) == 0
-            
-    # return user_data 
-    
-# example_dict[ key_to_find_inner_list ][ index_to_find_element ]
