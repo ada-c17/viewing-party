@@ -137,6 +137,19 @@ def get_unique_watched(user_data):
     
     return my_unique_movies
 
+def get_friends_unique_watched(user_data):
+
+    # list to store movies only friends have watched
+    friends_unique_movies = []
+
+    # loop through friends' watched movies to identify movies that friends have watched, but user hasn't watched
+    for i in range(len(user_data["friends"])):
+        for movie in user_data["friends"][i]["watched"]:
+            if movie not in user_data["watched"] and movie not in friends_unique_movies:
+                friends_unique_movies.append(movie)
+    
+    return friends_unique_movies
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
