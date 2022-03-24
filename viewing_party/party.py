@@ -260,22 +260,28 @@ def get_available_recs(user_data):
     Input: user_data = dictionary with "watched" list of movie dictionaries, "friends" is a list with each item as a dictionary
     Output: return list of recommended movies
     """
-    # print(user_data)
-    # platforms = user_data["subscriptions"]
+    # List of movies friends have watched
+    # the elements are dictionaries with lists of dictionaries are the values
     friend_list = user_data["friends"]
+
+    # List of movies the user has watched
+    # the elements are dictionaries (one dictionary, one movie)
     user_list = user_data["watched"]
 
-    # user's subscriptions
+    # User's subscriptions services
     user_subscriptions = user_data["subscriptions"]
 
-    # for info in user_list:
-    #     # print(item)
-    #     for k, v in info.items():
-    #         # print(info[k])
-    #         if k == 'host':
-    #             # print(v)
-    #             user_subscriptions.append(v)
-    # # print(user_subscriptions)
+    # Empty list to populate with --> want to flatten the friend_list 
+    # so that list of dictionaries (one dictionary, one movie)
+    friend_movie_list = []
+
+
+
+    for friend in friend_list:
+        # Loop through the inner list that has two "watched" dictionaries
+        for movie in friend["watched"]:
+            # For each film in the "watched" dictionaries, append to the empty list
+            friend_movie_list.append(movie)
 
 
     # List of recommended movies
@@ -284,24 +290,12 @@ def get_available_recs(user_data):
     #   --> "host" of the movie is a service in the USERS "subscriptions"
     recommended_list = []
 
-    # print(user_list)
-    # for i in user_list:
-    #     print(i)
-
-    friend_movie_list = []
-
-    for friend in friend_list:
-        # print(friend)
-        for movie in friend["watched"]:
-            # print(movie)
-            friend_movie_list.append(movie)
-    # print(friend_movie_list)
-
     for film in friend_movie_list:
+        # Loop through each film in friend_movie_list
         if (film not in user_list) and (film in friend_movie_list):
             if film["host"] in user_subscriptions:
+                # If the film meets these criteria, add to recommended list
                 recommended_list.append(film)
-        # print(film["host"])
     
     return recommended_list
 
