@@ -1,6 +1,7 @@
 import pytest
 # NOTE: In production code, we developers should change import * to something more specific. Due to some constraints of this project, we will import * in our test files.
 # from viewing_party.main import *
+
 from viewing_party.party import *
 from tests.test_constants import *
 
@@ -13,7 +14,7 @@ def test_create_successful_movie():
 
     # Act
     new_movie = create_movie(movie_title, genre, rating)
-
+    
     # Assert
     assert new_movie["title"] is MOVIE_TITLE_1
     assert new_movie["genre"] is GENRE_1
