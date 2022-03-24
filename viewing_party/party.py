@@ -64,17 +64,15 @@ def get_watched_avg_rating(user_data):
 
 def get_most_watched_genre(user_data):
 
-    watched = user_data["watched"]
-
     #return None for empty watched list
-    if len(watched) == 0:
+    if len(user_data["watched"]) == 0:
         return None
     
     #set count for each genre
     genre_count = {"Fantasy": 0, "Action": 0, "Intrigue": 0, "Horror": 0}
 
     #loop over each item's genre and check which genre it matches, 
-    for movie in watched:
+    for movie in user_data["watched"]:
         if movie["genre"] == "Fantasy":
             genre_count["Fantasy"]+=1
         elif movie["genre"] == "Action":
@@ -84,9 +82,7 @@ def get_most_watched_genre(user_data):
         else:
             genre_count["Horror"] += 1
     
-
     #return max genre count genre
-
     return max(genre_count, key = genre_count.get)
     
 # -----------------------------------------
@@ -106,7 +102,7 @@ def get_unique_watched(user_data):
 
     #initialize unique movie list of dicts
     unique_movies = []   
-    
+
     #compare every title between user and friends
     for user_movie in user_data["watched"]:
         if user_movie["title"] not in friends_watched_titles: #compare title names
