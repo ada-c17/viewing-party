@@ -27,16 +27,14 @@ def add_to_watchlist(user_data, movie):
 
 def watch_movie(user_data, title):
     
-    watchlist = user_data["watchlist"] #list we iterate over
-    new_watchlist = [] #new list, avoiding mutating iterated list^
-    watched = user_data["watched"] #list we append to
+    #new list to add unwatched movies to
+    new_watchlist = [] 
 
-    for i in range(len(watchlist)):
-        if title in watchlist[i].values(): #titles
-            #if value==title: #if movie was watched
-            watched.append(watchlist[i]) #add to watched list
+    for i in range(len(user_data["watchlist"])):
+        if title in user_data["watchlist"][i].values(): #add to watched list
+            user_data["watched"].append(user_data["watchlist"][i]) 
         else: #remain in watchlist
-            new_watchlist.append(watchlist[i])
+            new_watchlist.append(user_data["watchlist"][i])
 
     user_data["watchlist"] = new_watchlist #update watchlist in user data
 
