@@ -134,9 +134,50 @@ def get_available_recs(user_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+def get_new_rec_by_genre(user_data):
+# Consider the user's most frequently watched genre. 
+    user_fave_genre = get_most_watched_genre(user_data)
+# Then, determine a list of recommended movies. 
+    watched_movies = user_data["watched"]  
 
+    recs_by_genre = []
+    recommendations = get_available_recs(user_data)  
+    # friends_unique_watched = get_friends_unique_watched(user_data)
+    # for movie in friends_unique_watched:
+    #     if movie not in watched_movies:
+    #         for genre in friends_unique_watched["genre"]: 
+    #             if genre in user_fave_genre:
+    #                 recs_by_genre = recs_by_genre.append(movie)
+    for movie in recommendations:
+        if movie not in watched_movies:
+            for genre in movie:
+                if genre == user_fave_genre:
+                    recs_by_genre = recs_by_genre.append(movie)
 
+    return recs_by_genre    
 
+        
+
+# A movie should be added to this list if and only if:
+
+# The user has not watched it
+# At least one of the user's friends has watched
+# The "genre" of the movie is the same as the user's most frequent genre
+# Return the list of recommended movies
+# There are also two tests about a get_rec_from_favorites function
+# Create a function named get_rec_from_favorites
+
+# takes one parameter: user_data
+# user_data will have a field "favorites". The value of "favorites" is a list of movie dictionaries
+# This represents the user's favorite movies
+# Then, determine a list of recommended movies. A movie should be added to this list if and only if:
+# The movie is in the user's "favorites"
+# None of the user's friends have watched it
+# Return the list of recommended movies
+
+def new_genre_rec_from_empty_watched():
+    user_data["watched"] = []   #Due to test arrange section
+    pass
 # user_data = {
 #     "watchlist": [{
 #         "title": MOVIE_TITLE_1,
