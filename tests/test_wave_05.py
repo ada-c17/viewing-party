@@ -52,7 +52,10 @@ def test_new_genre_rec_from_empty_friends():
             }
         ]
     }
-
+    ### Act
+    recommendations = get_new_rec_by_genre(sonyas_data)
+    ###Assert
+    assert len(recommendations) == 0
     # *********************************************************************
     # ****** Complete the Act and Assert Portions of theis tests **********
     # *********************************************************************
@@ -112,3 +115,5 @@ def test_new_rec_from_empty_friends():
 
     # Assert
     assert len(recommendations) == 0
+
+    
