@@ -30,7 +30,7 @@ def test_empty_watched_average_rating_is_zero():
     assert average == pytest.approx(0.0)
 
 # Test 3
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_most_watched_genre():
     # Arrange
     janes_data = clean_wave_2_data()
@@ -43,7 +43,7 @@ def test_most_watched_genre():
     assert janes_data == clean_wave_2_data()
 
 # Test 4
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_genre_is_None_if_empty_watched():
     # Arrange
     janes_data = {
