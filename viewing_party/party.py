@@ -2,6 +2,7 @@
 
 def create_movie(title, genre, rating):
 
+    #return None of title, genre, and rating are empty
     if not (title and genre and rating):
         return None
     
@@ -13,17 +14,20 @@ def create_movie(title, genre, rating):
             }
     return movie
 
+
 def add_to_watched(user_data, movie):
 
     user_data["watched"].append(movie)
     
     return user_data
 
+
 def add_to_watchlist(user_data, movie):
 
     user_data["watchlist"].append(movie)
     
     return user_data
+
 
 def watch_movie(user_data, title): 
 
@@ -39,38 +43,40 @@ def watch_movie(user_data, title):
     return user_data
             
 
-
-
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 
 def get_watched_avg_rating(user_data):
 
-    subtotal = 0
-
     watched_movies = user_data["watched"]
-    
+
     if watched_movies: 
+        
+        subtotal = 0
 
         for movie in watched_movies:
-            subtotal += movie["rating"]
+
+            subtotal += movie["rating"] #add up ratings
         
-        avg_rating = subtotal/float(len(user_data["watched"]))
+        avg_rating = subtotal/float(len(watched_movies)) #calculate avg
         
-    else: 
+    else: #avg is 0 if no watched movies
         avg_rating = 0
 
     return avg_rating
 
+
 def get_most_watched_genre(user_data):
 
+    #list of dictionaries with watched movies
     watched_movies = user_data["watched"]
 
     if not watched_movies:
 
         return None
 
+    #initialize dictionary to track genres and frequencies
     watched_genres = {}
 
     #calculate frequency
@@ -84,7 +90,7 @@ def get_most_watched_genre(user_data):
             watched_genres[movie["genre"]] = 1
 
     
-    #find which genre is most watched
+    #find the frequency of most watched genre
     
     list_of_frequencies = list(watched_genres.values())
 
@@ -92,6 +98,7 @@ def get_most_watched_genre(user_data):
 
     most_watched_value = list_of_frequencies[-1]
 
+    #loop through the gengand find the first movie that matches that frequency
     for genre in watched_genres:
 
         if watched_genres[genre] == most_watched_value:
@@ -101,10 +108,7 @@ def get_most_watched_genre(user_data):
 
 
     return most_watched_genre
-
-
-   
-
+  
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
@@ -118,11 +122,12 @@ def get_friends_watched_movies(user_data):
 
     friends_watched_movies = []
 
+    #loop though each friend and all of the movies they watched and
     for friend in friends:
 
         for movie in friend["watched"]:
-
-            if movie not in friends_watched_movies:
+            
+            if movie not in friends_watched_movies: #check for duplicates
 
                 friends_watched_movies.append(movie)
     
@@ -146,6 +151,7 @@ def get_unique_watched(user_data):
 
     return unique_watched
 
+
 def get_friends_unique_watched(user_data):
 
     your_watched_movies = user_data["watched"]
@@ -163,9 +169,11 @@ def get_friends_unique_watched(user_data):
 
     return friends_unique_watched
 
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+
 def get_available_recs(user_data):
 
     recommended_movies = []
@@ -179,6 +187,8 @@ def get_available_recs(user_data):
             recommended_movies.append(movie)
     
     return recommended_movies
+
+
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
@@ -186,22 +196,28 @@ def get_available_recs(user_data):
 def get_new_rec_by_genre(user_data):
 
     new_rec_by_genre = []
-
+    
+    #find the most watched genre
     most_watched_genre = get_most_watched_genre(user_data)
 
+    #generate movies that only your friends have seen
     friends_unique_watched = get_friends_unique_watched(user_data)
 
+    #loop through movies that only friends have seen
     for movie in friends_unique_watched:
 
+        #if the movies is in the most watched genre add it to the list
         if movie["genre"] == most_watched_genre:
 
             new_rec_by_genre.append(movie)
     
     return new_rec_by_genre
 
+
 def get_rec_from_favorites(user_data):
 
     favorites = user_data["favorites"]
+
     recommendations = []
 
     friends_watched_movies = get_friends_watched_movies(user_data)
