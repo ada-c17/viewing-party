@@ -127,37 +127,17 @@ def get_available_recs(user_data):
     watched_movies = user_data["watched"] #An array of dictionaries representing each watched film  
     friends_unique_watched = get_friends_unique_watched(user_data)
     subscriptions = user_data["subscriptions"] # This represents the names of streaming services that the user has access to
-    friends = user_data["friends"]  #Each element in the friends list is a dictionary 
-#   - The user has not watched it
-#   - At least one of the user's friends has watched
-#   - The `"host"` of the movie is a service that is in the user's `"subscriptions"`
-# - Return the list of recommended movies    
-    # friends_watched_list = get_friends_watched_movies(user_data)
-    
-    # for friend in friends:
+    # friends = user_data["friends"]  #Each element in the friends list is a dictionary 
+
     for movie in friends_unique_watched:
-        if len(friends_unique_watched) == 0:
-            return None
-        for subscription in subscriptions:
-            print(f"********THIS IS THE HOST: {host}")
+        if movie not in watched_movies:
+            host = movie["host"]
             if host in subscriptions:
-                recommendations.append(movie)        
-        
+                recommendations.append(movie)        # - Return the list of recommended movies  
+            
     return recommendations
 
-# 1. There are four tests about a `get_available_recs` function
 
-# Create a function named `get_available_recs`
-
-# - takes one parameter: `user_data`
-#   - `user_data` will have a field `"subscriptions"`. The value of `"subscriptions"` is a list of strings
-#     - This represents the names of streaming services that the user has access to
-#     - Each friend in `"friends"` has a watched list. Each movie in the watched list has a `"host"`, which is a string that says what streaming service it's hosted on
-# - Determine a list of recommended movies. A movie should be added to this list if and only if:
-#   - The user has not watched it
-#   - At least one of the user's friends has watched
-#   - The `"host"` of the movie is a service that is in the user's `"subscriptions"`
-# - Return the list of recommended movies
 # user_data = {
 #     "watchlist": [{
 #         "title": MOVIE_TITLE_1,
