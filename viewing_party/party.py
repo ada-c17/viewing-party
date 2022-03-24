@@ -1,15 +1,14 @@
 # ------------- WAVE 1 --------------------
-#this is where I will create a function
 def create_movie(title, genre, rating):
     if not title or not genre or not rating:
         return None
 
-    movie_dictionary ={}
-    movie_dictionary["title"] = title
-    movie_dictionary["genre"] = genre
-    movie_dictionary["rating"] = rating
+    movie ={}
+    movie["title"] = title
+    movie["genre"] = genre
+    movie["rating"] = rating
 
-    return movie_dictionary
+    return movie
 
 def add_to_watched(user_data, movie):
     user_data["watched"].append(movie)
@@ -37,6 +36,7 @@ def get_watched_avg_rating(user_data):
     for item in user_data["watched"]:
         list_of_ratings.append(item["rating"])
     if len(list_of_ratings) == 0:
+    # This will account for the situation when the watched list is empty
         list_of_ratings.append(0)
     return sum(list_of_ratings)/len(list_of_ratings)
 
@@ -44,10 +44,12 @@ def get_most_watched_genre(user_data):
     list_of_genres=[]
     for item in user_data["watched"]:
         list_of_genres.append(item["genre"])
+    # This will account for the situation when the watched list is empty
     if len(list_of_genres) == 0:
         return None
-    popular_value = max(set(list_of_genres), key = list_of_genres.count) #getting the mode of a list
-    return popular_value
+    # Getting the mode of the list of genres
+    popular_genre = max(set(list_of_genres), key = list_of_genres.count)
+    return popular_genre
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
