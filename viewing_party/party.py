@@ -1,3 +1,4 @@
+import copy
 # ------------- WAVE 1 --------------------
 movies = {}
 
@@ -5,6 +6,7 @@ def create_movie(title, genre, rating):
     if title != None and genre != None and rating != None:
         movies.update({"genre": genre, "rating": rating, "title": title})
         return movies
+    
     else:
         return None
 
@@ -19,14 +21,14 @@ def add_to_watchlist(user_data, movie):
 def watch_movie(user_data, title):
 
     #work through the whole watchlist; copy it first so no DANGERZONE/index/key errors
-    copy_list = user_data["watchlist"]
+    copy_list = user_data["watchlist"].copy()
     for i in range(len(copy_list)):
 
     #find the title of the movie in the watchlist
-        if user_data["watchlist"][i]["title"] == title:
+        if copy_list[i]["title"] == title:
 
             #if the title is in the watchlist, move it to watched then delete
-            user_data["watched"].append(user_data["watchlist"][i])
+            user_data["watched"].append(copy_list[i])
             del user_data["watchlist"][i]
 
     return user_data
@@ -38,6 +40,7 @@ def get_watched_avg_rating(user_data):
 
     #make sure the dictionary isn't empty
     if user_data["watched"]:
+
         #iterate over the watched list and add averages to total
         for i in range(len(user_data["watched"])):
             total += user_data["watched"][i]["rating"]
