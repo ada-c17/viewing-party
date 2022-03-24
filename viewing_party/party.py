@@ -1,8 +1,6 @@
 # ------------- WAVE 1 --------------------
 
-from audioop import avg
-from collections import Counter             #check to make sure that it's ok for you to use the counter
-from shutil import move
+from collections import Counter
 
 
 def create_movie(title, genre, rating):
@@ -25,7 +23,7 @@ def add_to_watched(user_data, movie):
 
     user_data = {"watched": watched}
 
-    for value in user_data:
+    for value in user_data.values():
         watched.append(movie)
                 
     return user_data
@@ -36,34 +34,28 @@ def add_to_watchlist(user_data, movie):
 
     user_data = {"watchlist": watchlist}
 
-    for value in user_data:
+    for value in user_data.values():
         watchlist.append(movie)
 
     return user_data
 
 def watch_movie(user_data, title):
 
-    watchlist = user_data["watchlist"]
-    watched = user_data["watched"]
+    for i in range(len(user_data["watchlist"])):
+        if (user_data["watchlist"][i]["title"]) == title:
+            watched_movie = user_data["watchlist"].pop(i)
 
-    watchlist_index = len([ele for ele in watchlist if isinstance(ele, dict)])
-
-    for i in range(watchlist_index):
-        if (watchlist[i]["title"]) == title:
-            watched_movie = watchlist.pop(i)
-
-            for value in user_data:
-                watched.append(watched_movie)
+            for value in user_data.values():
+                user_data["watched"].append(watched_movie)
                 return user_data
 
-        elif (watchlist[i]["title"]) != title:
-            print("test") # delete print statement but get check for errors before and after. this is funky.
-
     return user_data
+
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+
 
 def get_watched_avg_rating(user_data):
 
@@ -80,7 +72,6 @@ def get_watched_avg_rating(user_data):
 def get_most_watched_genre(user_data):
 
     genre_list = []
-    genre_count = {}
 
     for movie in user_data["watched"]:
         genre_list.append(movie["genre"])
@@ -91,8 +82,8 @@ def get_most_watched_genre(user_data):
     else:
         genre_frequency = Counter(genre_list)
         most_common_genre_frequency = genre_frequency.most_common(1)
-        most_common_genre = most_common_genre_frequency[0]
-        return most_common_genre[0]
+        most_common_genre = most_common_genre_frequency[0][0]
+        return most_common_genre
 
 
 # -----------------------------------------
@@ -104,13 +95,13 @@ def get_unique_watched(user_data):
     user_compiled_watched_set = set()
     friends_unique_compiled_set = set()
 
-    for movies in user_data["watched"]:
-        user_compiled_watched_set.add(tuple(movies.items()))
+    for movie in user_data["watched"]:
+        user_compiled_watched_set.add(tuple(movie.items()))
 
     for i in range(len(user_data["friends"])):
-            for friend, movies in user_data["friends"][i].items():
-                for watched in movies:
-                    friends_unique_compiled_set.add(tuple(watched.items()))
+            for watched in user_data["friends"][i].values():
+                for movie in watched:
+                    friends_unique_compiled_set.add(tuple(movie.items()))
 
     user_but_not_friends = user_compiled_watched_set.difference(friends_unique_compiled_set)
 
@@ -122,19 +113,18 @@ def get_unique_watched(user_data):
         
     return movies_user_has_watched_but_friends_have_not
 
-
 def get_friends_unique_watched(user_data):
 
     user_compiled_watched_set = set()
     friends_unique_compiled_set = set()
 
-    for movies in user_data["watched"]:
-        user_compiled_watched_set.add(tuple(movies.items()))  #see if there is a better way to do this / more pythonic way to do this
+    for movie in user_data["watched"]:
+        user_compiled_watched_set.add(tuple(movie.items()))
 
-    for i in range(len(user_data["friends"])):  #understand what this line is doing
-            for friend, movies in user_data["friends"][i].items():
-                for watched in movies:
-                    friends_unique_compiled_set.add(tuple(watched.items()))
+    for i in range(len(user_data["friends"])):
+            for watched in user_data["friends"][i].values():
+                for movie in watched:
+                    friends_unique_compiled_set.add(tuple(movie.items()))
 
     friends_but_not_user = friends_unique_compiled_set.difference(user_compiled_watched_set)
 
@@ -157,15 +147,14 @@ def get_available_recs(user_data):
 
     recommended_movie_list = []
 
-    user_subscriptions = user_data["subscriptions"]
-
     for movie in movie_recommended_by_friends:
         for key, value in movie.items():
             if key == "host":
-                if value in user_subscriptions:
+                if value in user_data["subscriptions"]:
                     recommended_movie_list.append(movie)
 
     return(recommended_movie_list)
+
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
@@ -197,7 +186,7 @@ def get_rec_from_favorites(user_data):
     user_favorite_movies_set = set()
 
     for movie in user_watched_movies:
-        user_watched_movies_set.add(tuple(movie.items()))  #see if there is a better way to do this / more pythonic way to do this
+        user_watched_movies_set.add(tuple(movie.items()))
 
     for movie in user_data["favorites"]:
         user_favorite_movies_set.add(tuple(movie.items()))
