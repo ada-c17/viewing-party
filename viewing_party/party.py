@@ -222,26 +222,25 @@ def get_available_recs(user_data):
 
 def get_new_rec_by_genre(user_data):
 
-    '''
-    USER_DATA_5 = copy.deepcopy(USER_DATA_4)
-
-USER_DATA_5["favorites"] = [
-    FANTASY_1b, 
-    FANTASY_2b, 
-    INTRIGUE_1b,
-    INTRIGUE_2b
-    ]
-
-
-    '''
     # movies at least one of the user's friends have watched, but the user has not watched collect in the function: get_friends_unique_watched()
     user_no_watch_list = get_friends_unique_watched(user_data)
     # we are determine popular genre in get_most_watched_genre
     popular_genre = get_most_watched_genre(user_data)
 
-    recomendations_list = []
+    recomendations_to_user_list = []
     for films in range(len(user_no_watch_list)):
-        if user_no_watch_list[films]['genre'] == popular_genre:
-            recomendations_list.append(user_no_watch_list[films])
-    return recomendations_list
-    
+        if user_no_watch_list[films]["genre"] == popular_genre:
+            recomendations_to_user_list.append(user_no_watch_list[films])
+    return recomendations_to_user_list
+
+def get_rec_from_favorites(user_data):
+
+    # none of the user's friends have watched it from get_unique_watched function
+    friend_no_watch_list = get_unique_watched(user_data)
+
+    recomendations_from_user_list = []
+    for films in range(len(friend_no_watch_list)):
+        for i in range(len(user_data["favorites"])):
+            if user_data["favorites"][i] == friend_no_watch_list[films]:
+                recomendations_from_user_list.append(user_data["favorites"][i])
+    return recomendations_from_user_list
