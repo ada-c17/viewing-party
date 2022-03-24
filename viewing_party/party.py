@@ -32,21 +32,33 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 
 def get_watched_avg_rating(user_data):
-    list_of_ratings=[]
-    for item in user_data["watched"]:
-        list_of_ratings.append(item["rating"])
-    if len(list_of_ratings) == 0:
+    # Not using list comprehension
+    # list_of_ratings=[]
+    # for item in user_data["watched"]:
+    #     list_of_ratings.append(item["rating"])
+    
+    # Using list comprehension
+    list_of_ratings = [item["rating"] for item in user_data["watched"]]
+
     # This will account for the situation when the watched list is empty
+    if len(list_of_ratings) == 0:
         list_of_ratings.append(0)
+    
     return sum(list_of_ratings)/len(list_of_ratings)
 
 def get_most_watched_genre(user_data):
-    list_of_genres=[]
-    for item in user_data["watched"]:
-        list_of_genres.append(item["genre"])
+    # Not using list comprehension
+    # list_of_genres = []
+    # for item in user_data["watched"]:
+    #     list_of_genres.append(item["genre"])
+    
+    # Using list comprehension
+    list_of_genres = [item["genre"] for item in user_data["watched"]]
+
     # This will account for the situation when the watched list is empty
     if len(list_of_genres) == 0:
         return None
+    
     # Getting the mode of the list of genres
     popular_genre = max(set(list_of_genres), key = list_of_genres.count)
     return popular_genre
@@ -56,6 +68,14 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 
 def get_unique_watched(user_data):
+    # list_both_watched = []
+    # for i in range(len(user_data["watched"])):
+    #     for j in range(len(user_data["friends"])):
+    #         for k in range(len(user_data["friends"][j]["watched"])):
+    #             if user_data["watched"][i]["title"] == user_data["friends"][j]["watched"][k]["title"] \
+    #                 and user_data["watched"][i]["title"] not in list_both_watched:
+    #                 list_both_watched.append(user_data["watched"][i])
+
     list_both_watched = []
     for i in range(len(user_data["watched"])):
         for j in range(len(user_data["friends"])):
@@ -63,7 +83,7 @@ def get_unique_watched(user_data):
                 if user_data["watched"][i]["title"] == user_data["friends"][j]["watched"][k]["title"] \
                     and user_data["watched"][i]["title"] not in list_both_watched:
                     list_both_watched.append(user_data["watched"][i])
-    
+
     list_user_watched = []
     for i in range(len(user_data["watched"])):
         list_user_watched.append(user_data["watched"][i])
