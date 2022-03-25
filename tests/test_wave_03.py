@@ -31,7 +31,7 @@ def test_my_not_unique_movies():
     assert len(amandas_unique_movies) == 0
 
 # Test 3
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_friends_unique_movies():
     # Arrange
     amandas_data = clean_wave_3_data()
@@ -47,7 +47,7 @@ def test_friends_unique_movies():
     assert amandas_data == clean_wave_3_data()
 
 # Test 4
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_friends_unique_movies_not_duplicated():
     # Arrange
     amandas_data = clean_wave_3_data()
@@ -60,11 +60,13 @@ def test_friends_unique_movies_not_duplicated():
     assert len(friends_unique_movies) == 3
 
     # *************************************************************************************************
-    # ****** Add assertions here to test that the correct movies are in friends_unique_movies **********
+    assert INTRIGUE_3 in friends_unique_movies
+    assert HORROR_1 in friends_unique_movies
+    assert FANTASY_4 in friends_unique_movies
     # **************************************************************************************************
 
 # Test 5
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_friends_not_unique_movies():
     # Arrange
     amandas_data = {
