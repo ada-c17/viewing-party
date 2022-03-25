@@ -43,6 +43,7 @@ def get_most_watched_genre(user_data):
     if user_data["watched"]:
         for movie in user_data["watched"]:
             genres.append(movie["genre"])
+        # will return the genre with the highest count in the list
         return max(genres, key = genres.count)
     else:
         return None
@@ -53,6 +54,8 @@ def get_most_watched_genre(user_data):
 def get_unique_watched(user_data):
     unique_movies = []
     friend_count = len(user_data["friends"])
+    # Use friend_watched count to keep track of all the friends, to be sure that the movie
+    # is not in either friends watched list 
     for movie in user_data["watched"]:
         friend_watched = 0
         for friend in user_data["friends"]:
@@ -104,4 +107,3 @@ def get_rec_from_favorites(user_data):
         if movie in unique_movies:
                 reccomendations.append(movie)
     return reccomendations
-    
