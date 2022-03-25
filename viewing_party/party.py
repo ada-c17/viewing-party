@@ -110,11 +110,8 @@ def get_available_recs(user_data):
 
 def get_new_rec_by_genre(user_data):
     genre = get_most_watched_genre(user_data)
-    new_rec = []
-    for friend in user_data["friends"]:
-        for movie in friend["watched"]:
-            if movie["genre"] == genre and movie not in user_data["watched"]:
-                new_rec.append(movie)
+    friends_unique_watched = get_friends_unique_watched(user_data)
+    new_rec = [movie for movie in friends_unique_watched if movie["genre"] == genre and movie not in user_data["watched"]]
     return new_rec
 
 def get_rec_from_favorites(user_data):
