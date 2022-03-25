@@ -1,37 +1,39 @@
 # ------------- WAVE 1 --------------------
-
+ # create_movie returns a dictionary with "title", "genre"
+ # and "rating" as keys
 def create_movie(title, genre, rating):
     movie_table = {}
+   
     if title and genre and rating:
         movie_table["title"] = title
         movie_table["genre"] = genre
         movie_table["rating"] = rating
         return movie_table
+
+
 def add_to_watched(user_data,movie):
         if not all((user_data,movie)):
             return None   
-        watched = user_data["watched"]
-        watched.append(movie)
-        print(user_data) 
+        user_data["watched"].append(movie) 
         return user_data
-        # return updated_datas
+    # return updated_datas
+
 def add_to_watchlist(user_data,movie):
         if not all((user_data,movie)):
             return None
-        watchlist = user_data["watchlist"]
-        watchlist.append(movie)
+        user_data["watchlist"].append(movie)
         return user_data
+
 def watch_movie(user_data, title):
-    watchlist = user_data["watchlist"]
-    new_watchlist = []
-    watched = user_data["watched"]
+    # print (user_data)
+    for movie in user_data["watchlist"]:
+        if movie["title"] == title:
+            user_data["watchlist"].remove(movie)
+            user_data["watched"].append(movie)
     
-    for item in range(len(list(watchlist))):
-        if watchlist[item]["title"] != title:
-            new_watchlist.append(watchlist[item])
-        else:
-            watched.append(title)
-    user_data["watchlist"] = new_watchlist
+    # if title in [movie["title"] for movie in user_data["watched"]]:
+    #     user_data["watchlist"].remove(movie)
+    #     user_data["watched"].append(movie)
 
     return user_data
 
@@ -42,38 +44,68 @@ def watch_movie(user_data, title):
 def get_watched_avg_rating(user_data):
     if not user_data["watched"]:
         return 0.0
-    watched = user_data["watched"]
-    print (watched)
-    total_rating = 0.0
-    for movies in range(len(list(watched))):
-        total_rating += watched[movies]["rating"]
-    print (total_rating)
-    return total_rating/len(watched) 
+    # watched = user_data["watched"]
+    # total_rate = 0.0
+    # for movies in range(len(list(watched))):
+    #     total_rate += watched[movies]["rating"]
+    x = [movie["rating"] for movie in user_data["watched"]]
+
+    return sum(x)/len(x)
 
 def get_most_watched_genre(user_data):
     if not user_data["watched"]:
         return None
-    watched = user_data["watched"]
-    Genre = []
-    temp = {}
-    for movie in range(len(list(watched))):
-        Genre.append(watched[movie]["genre"])
-        # Genre.append("a")
+    # watched = user_data["watched"]
+    # genre_frequency = {}
+    # for movie in watched:
+    #     if movie["genre"] in genre_frequency:
+    #         genre_frequency[movie["genre"]] += 1
+    #     elif movie["genre"] not in genre_frequency:
+    #         genre_frequency[movie["genre"]] = 1
+    # max_value = max(genre_frequency, key=genre_frequency.get)
+    x = [movie["genre"] for movie in user_data["watched"]]
+
+    return max(set(x), key = x.count)
     
-    for i in range(len(set(Genre))):
-        temp[Genre[i]] = (Genre.count(Genre[i]))
-    return(max(temp, key=temp.get))
+    return max_value
+
+
+
+    # watched = user_data["watched"]
+    # Genre = []
+    # temp = {}
+    # for movie in range(len(list(watched))):
+    #     Genre.append(watched[movie]["genre"])
+    #     # Genre.append("a")
+    
+    # for i in range(len(set(Genre))):
+    #     temp[Genre[i]] = (Genre.count(Genre[i]))
+    # return(max(temp, key=temp.get))
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 def get_unique_watched(user_data):
-    # if not user_data["watched"] or not user_data["friends"]:
-    #     return None
+    # unique = []
+    
+    # for movie in user_data["watched"]:
+    #     # print("***************************")
+    #     # print (movie)
+    #     for f_movie in range(len(user_data["friends"])):
+    #         # print("########")
+    #         # print (user_data["friends"][f_movie]["watched"])
+    #         for f_title in range(len(user_data["friends"][f_movie])):
+    #             if movie["title"] != user_data["friends"][f_movie]["watched"][f_title]["title"]:
+    #                 if movie in unique:
+    #                     continue
+    #                 else:
+    #                     unique.append(movie)
+                    
+    # print("***************************")
+    # print (unique)
+    # return unique
     watched = user_data["watched"]
-    print(watched)
     friends_watched = user_data["friends"]
-    print(friends_watched)
     all_movies = []
     final_list = []
     # print (len(list(friends_watched)))
@@ -96,7 +128,7 @@ def get_unique_watched(user_data):
     return final_list
 
 def get_friends_unique_watched(user_data):
-
+    print ('hello')
     watched = user_data["watched"]
     # print(watched)
     friends_watched = user_data["friends"]
@@ -104,8 +136,7 @@ def get_friends_unique_watched(user_data):
     all_movies = []
     
     
-    # final_list = []
-    # print (len(list(friends_watched)))
+
     
     for movies in range(len(list(watched))):
         all_movies.append(watched[movies]["title"])
