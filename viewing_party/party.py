@@ -32,14 +32,14 @@ def watch_movie(user_data, title):
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 def get_watched_avg_rating(user_data):
-    lst = []
+    watched_movies_list = []
     sum = 0
     for item in user_data["watched"]:
-        lst.append(item["rating"])
-    for number in lst:
+        watched_movies_list.append(item["rating"])
+    for number in watched_movies_list:
         sum += number
-    if lst:
-        return sum / len(lst)
+    if watched_movies_list :
+        return sum / len(watched_movies_list)
     else:
         return 0.0
 
@@ -61,6 +61,7 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+
 def get_unique_watched(user_data):
     list_watched = []
     for movie in user_data["watched"]:
@@ -106,13 +107,13 @@ def get_available_recs(user_data):
         for movie in friend["watched"]:
             friends_watched_list.append(movie)
 
-    list_friends_watched = []
+    list_only_friends_watched = []
     for movie in friends_watched_list:
         if movie["title"] not in set_watched:
-            list_friends_watched.append(movie)
+            list_only_friends_watched.append(movie)
 
     recs_list = []
-    for movie in list_friends_watched:
+    for movie in list_only_friends_watched:
         if movie["host"] in user_data["subscriptions"]:
             recs_list.append(movie)
 
@@ -134,13 +135,13 @@ def get_new_rec_by_genre(user_data):
         for movie in friend["watched"]:
             friends_watched_list.append(movie)
 
-    list_friends_watched = []
+    list_only_friends_watched = []
     for movie in friends_watched_list:
         if movie["title"] not in set_watched:
-            list_friends_watched.append(movie)
+            list_only_friends_watched.append(movie)
 
     rec_by_genre_list = []
-    for movie in list_friends_watched:
+    for movie in list_only_friends_watched:
         if movie["genre"] == most_watched_genre:
             rec_by_genre_list.append(movie)
     return rec_by_genre_list
