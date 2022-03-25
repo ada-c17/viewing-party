@@ -132,13 +132,13 @@ def get_friends_unique_watched(user_data):
 # movies from friends' list are unwatched by user and have host that is in user subscriptions
 def get_available_recs(user_data):
     recommendations = []
-    user_subscriptions = user_data["subscriptions"]
     unique_watched = get_unique_watched(user_data)
     friends_unique_watched = get_friends_unique_watched(user_data)
-    for friend_movie in friends_unique_watched:
-        if friend_movie not in unique_watched:
-            if friend_movie["host"] in user_subscriptions:
-                recommendations.append(friend_movie)
+    if "subscriptions" in user_data:
+        for friend_movie in friends_unique_watched:
+            if friend_movie not in unique_watched:
+                if friend_movie["host"] in user_data["subscriptions"]:
+                    recommendations.append(friend_movie)
 
     return recommendations
 
