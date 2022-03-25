@@ -13,6 +13,14 @@ pp = pprint.PrettyPrinter(indent=4)
 # pp.pprint(HORROR_1)
 # pp.pprint(FANTASY_1)
 # pp.pprint(FANTASY_2)
+# print("____")
+# movie_title = "Title A"
+# genre = None
+# rating = 3.5
+
+# new_movie = create_movie(movie_title, genre, rating)
+# print(new_movie)
+
 
 # print("wave 1 test 8 playtest below")
 
@@ -98,6 +106,8 @@ pp = pprint.PrettyPrinter(indent=4)
 # amandas_data = clean_wave_3_data()
 # amandas_data = clean_wave_3_data()
 # amandas_data["friends"][0]["watched"].append(INTRIGUE_3)
+
+# get_unique_watched(amandas_data)
 
 # amandas_data = {
 #     "watched": [
@@ -214,21 +224,21 @@ pp = pprint.PrettyPrinter(indent=4)
 
 
 # Wave 05 user data
-print("\n-----Wave 05 user_data-----")
-pp.pprint(clean_wave_5_data())
+# print("\n-----Wave 05 user_data-----")
+# pp.pprint(clean_wave_5_data())
 
-sonyas_data = clean_wave_5_data()
+# sonyas_data = clean_wave_5_data()
 
-sonyas_data = {
-    "watched": [],
-    "friends": [
-        {
-            "watched": [INTRIGUE_1b]
-        },
-        {
-            "watched": [INTRIGUE_2b,HORROR_1b]
-        }
-    ]
-}
+# sonyas_data = {
+#     "watched": [],
+#     "friends": [
+#         {
+#             "watched": [INTRIGUE_1b]
+#         },
+#         {
+#             "watched": [INTRIGUE_2b,HORROR_1b]
+#         }
+#     ]
+# }
 
-pp.pprint(get_new_rec_by_genre(sonyas_data))
+# pp.pprint(get_new_rec_by_genre(sonyas_data))
