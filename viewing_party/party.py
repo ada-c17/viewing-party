@@ -1,3 +1,12 @@
+
+# I was inspired by Joan's idea of making a helper function instead of copy-pasting
+def create_friend_watched_list(user_data):
+    friend_watched = []
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            friend_watched.append(movie)
+    return friend_watched
+
 # ------------- WAVE 1 --------------------
 
 from hashlib import new
@@ -70,27 +79,19 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 
 def get_unique_watched(user_data):
-    friend_watched = []
+    friend_watched = create_friend_watched_list(user_data)
     unique_user_watched = []
-    for friend in user_data["friends"]:
-        for key, value in friend.items():
-# Not strictly necessary for the data set we have but in theory there could be "subscriptions" etc like for the main user
-            if key == 'watched':
-                for movie in value:
-                    friend_watched.append(movie)
     for movie in user_data["watched"]:
         if movie not in friend_watched:
             unique_user_watched.append(movie)
     return unique_user_watched
 
 def get_friends_unique_watched(user_data):
+    friend_watched = create_friend_watched_list(user_data)
     unique_friend_watched = []
-    for friend in user_data["friends"]:
-        for key, value in friend.items():
-            if key == 'watched':
-                for movie in value:
-                    if movie not in user_data["watched"] and movie not in unique_friend_watched:
-                        unique_friend_watched.append(movie)
+    for movie in friend_watched:
+        if movie not in user_data["watched"] and movie not in unique_friend_watched:
+            unique_friend_watched.append(movie)
     return unique_friend_watched
 
 # -----------------------------------------
@@ -98,15 +99,12 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 
 def get_available_recs(user_data):
-    user_hosts = user_data["subscriptions"]
-    friend_watched = []
-    for friend in user_data["friends"]:
-        for key, value in friend.items():
-            if key == 'watched':
-                for movie in value:
-                    if movie["host"] in user_hosts and movie not in user_data["watched"]:
-                        friend_watched.append(movie)
-    return friend_watched
+    friend_watched = create_friend_watched_list(user_data)
+    available_recs = []
+    for movie in friend_watched:
+        if movie["host"] in user_data["subscriptions"] and movie not in user_data["watched"]:
+            available_recs.append(movie)
+    return available_recs
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
@@ -116,20 +114,12 @@ def get_new_rec_by_genre(user_data):
     genre = get_most_watched_genre(user_data)
     new_rec = []
     for friend in user_data["friends"]:
-        for key, value in friend.items():
-            if key == 'watched':
-                for movie in value:
-                    if movie["genre"] == genre and movie not in user_data["watched"]:
-                        new_rec.append(movie)
+        for movie in friend["watched"]:
+            if movie["genre"] == genre and movie not in user_data["watched"]:
+                new_rec.append(movie)
     return new_rec
 
 def get_rec_from_favorites(user_data):
-    favorites = user_data["favorites"]
-    friend_watched = []
-    for friend in user_data["friends"]:
-        for key, value in friend.items():
-            if key == 'watched':
-                for movie in value:
-                        friend_watched.append(movie)
-    unwatched_favorites = [movie for movie in favorites if movie not in friend_watched]
+    friend_watched = create_friend_watched_list(user_data)
+    unwatched_favorites = [movie for movie in user_data["favorites"] if movie not in friend_watched]
     return unwatched_favorites
