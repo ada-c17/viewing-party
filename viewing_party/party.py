@@ -8,11 +8,10 @@ def create_movie(title, genre, rating):
 
     Output: Returns a dictionary with the parameters as values, with
     each key defined as a string of the same parameter name.
-    If a parameter is missing, no dictionary is created.
+    If a parameter is None/falsey, no dictionary is created.
     '''
     new_movie = {"title" : title, "genre" : genre, "rating" : rating}
-    if new_movie["title"] == None or new_movie["genre"] == None \
-    or new_movie["rating"] == None:
+    if not all((title, genre, rating)):
         new_movie = None
     return new_movie
 
@@ -46,14 +45,14 @@ def watch_movie(user_data, movie_to_watch):
     '''
     Input: user_data (a dictionary with keys "watched" and "watchlist",
     with lists as their values), and movie-to-watch (a dictionary)
-   
+
     Output: Returns updated user_data dictionary, with the dictionary
     movie-to-watch appended to "watched" and removed from the "watchlist".
     '''
-    for i in range(len(user_data["watchlist"])):
-        if user_data["watchlist"][i]["title"] == movie_to_watch:
-            user_data["watched"].append(user_data["watchlist"][i])
-            user_data["watchlist"].pop(i)
+    for movie in range(len(user_data["watchlist"])):
+        if user_data["watchlist"][movie]["title"] == movie_to_watch:
+            user_data["watched"].append(user_data["watchlist"][movie])
+            user_data["watchlist"].pop(movie)
     return user_data
 
 # -----------------------------------------
