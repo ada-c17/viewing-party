@@ -94,7 +94,7 @@ def get_friends_unique_watched(user_data):
     not_common = []
     for elements in all_friends_movies:
         if elements not in user_movie:
-            if elements not in not_common:#??????????????????
+            if elements not in not_common:
                 not_common.append(elements)
 
     return not_common
