@@ -4,10 +4,7 @@ def create_movie(title, genre, rating):
     if title == None or genre == None or rating == None:
         return None
 
-    new_movie = {}
-    new_movie["title"] = title
-    new_movie["genre"] = genre
-    new_movie["rating"] = rating
+    new_movie = {"title": title, "genre": genre, "rating": rating}
     return new_movie
 
 def add_to_watched(user_data, movie):
@@ -19,7 +16,6 @@ def add_to_watchlist(user_data, movie):
     return user_data
 
 def watch_movie(user_data, title):
-    # movie_watched = ""
     for i in range(len(user_data["watchlist"])):
         if user_data["watchlist"][i]["title"] == title:
             movie_watched = user_data["watchlist"][i]
@@ -53,27 +49,44 @@ def get_most_watched_genre(user_data):
     else:
         # To get the most frequent genre. I'm not sure if it accounts for ties.
         return max(set(genre_list), key=genre_list.count)
-        # might be better to use Count from importing collections.. look at StackOverflow
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
 def get_unique_watched(user_data):
-    # Can I also create a set with a combination of the users and friends watched list?"
-    friends_movie_lists = [d["watched"] for d in user_data["friends"]] 
-    unique_watched_list = []
+    # make friends_movie_list 
+    friends_movie_list = []
+    for dictionary in user_data["friends"]:
+        for movie in dictionary["watched"]:
+            if movie not in friends_movie_list:
+                friends_movie_list.append(movie)
+    # alternative way: friends_movie_lists = [d["watched"] for d in user_data["friends"]] 
 
+    # iterate over user_data["watched"] and add each unique movie to a new empty list
+    unique_watched_list = []
+    
     for movie in user_data["watched"]:
-        if not any(movie in d for d in friends_movie_lists):
+        if movie not in friends_movie_list and movie not in unique_watched_list:
             unique_watched_list.append(movie)
+
+    # return unique_watched_list
     return unique_watched_list      
 
 def get_friends_unique_watched(user_data):
-    friends_movie_lists = [d["watched"] for d in user_data["friends"]]
-    flat_list = [movie for sublist in friends_movie_lists for movie in sublist]
+    # make friends_movie_list 
+    friends_movie_list = []
+    for dictionary in user_data["friends"]:
+        for movie in dictionary["watched"]:
+            if movie not in friends_movie_list:
+                friends_movie_list.append(movie)
+    # alternative method: friends_movie_lists = [d["watched"] for d in user_data["friends"]]
+    #                     flat_list = [movie for sublist in friends_movie_lists for movie in sublist]
+    
+
+    # iterate over friends_movie_list and add each unique movie into a new empty list.
     friends_unique_list = []
-    for movie in flat_list:
+    for movie in friends_movie_list:
         if movie not in user_data["watched"] and movie not in friends_unique_list:
             friends_unique_list.append(movie)
     return friends_unique_list
@@ -84,7 +97,11 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 
 def get_available_recs(user_data):
+    # get friends_unique_watched_list
     friends_unique_list = get_friends_unique_watched(user_data)
+    # iterate over friends unique list and see if each movie["host"] value \
+    # in user's subscription hosts
+    # if so, add to a recommended list
     recommended_list = []
     for movie in friends_unique_list:
         if movie["host"] in user_data["subscriptions"]:
@@ -104,7 +121,7 @@ def get_new_rec_by_genre(user_data):
         genre_list.append(movie["genre"])
     
     if len(genre_list) > 0:  
-        max_genre = max(set(genre_list), key=genre_list.count) #howww?
+        max_genre = max(set(genre_list), key=genre_list.count) 
         for movie in friends_unique_list:
             if movie["genre"] == max_genre:
                 new_rec.append(movie)
