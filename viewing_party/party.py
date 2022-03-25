@@ -61,19 +61,81 @@ def get_most_watched_genre(user_data):
             counter_genre = genre_dict[genre] 
             
 
-    return popular_genre
+    return popular_genre 
 
         
 
 
     
-        
-        
 
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+
+def get_unique_watched(user_data):
+   
+    # index_movies = 0
+    # unique_set = set()
+    # user_set = set(user_data["watched"])
+    # for friend in range (len(user_data["friends"])):
+    #     unique_set = set(user_data["frieds"][friend]["watched"]) | unique_set
+    # return user_set - unique_set
+
+
+    # create a dictionary with all movies and use title as a key.
+    # Keys(titles) will be used as elements/items for create two sets. 
+    # One is for Amanda and the other one for the rest of their friends.
+    # return amanda_set - friend_set 
+    # Create a list with all movies from the remaining  set
+
+    
+    movie_dict = {} #Complete library of movies
+    user_set = set() #Set of Amanda (user) has watched.
+    friend_set = set() #Sets of users friends has watched.
+    unique_list =[] # a list of the difference of users watched and friends watched.
+    
+    for movie in user_data["watched"]:
+        movie_dict[movie["title"]] = movie
+        user_set.add(movie["title"])
+
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            movie_dict[movie["title"]] = movie
+            friend_set.add(movie["title"])
+
+    unique_set = user_set - friend_set
+    friends_unique_set = friend_set - user_set
+
+    for movies in unique_set :
+        unique_list.append (movie_dict[movies])
+    
+    return unique_list 
+
+def get_friends_unique_watched(user_data):
+    
+    movie_dict = {} #Complete library of movies
+    user_set = set() #Set of Amanda (user) has watched.
+    friend_set = set() #Sets of users friends has watched.
+    unique_list =[] # a list of the difference of users watched and friends watched.
+    
+    for movie in user_data["watched"]:
+        movie_dict[movie["title"]] = movie
+        user_set.add(movie["title"])
+
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            movie_dict[movie["title"]] = movie
+            friend_set.add(movie["title"])  
+    
+    friends_unique_set = friend_set - user_set
+
+    for movies in friends_unique_set :
+        unique_list.append (movie_dict[movies])
+    
+    return unique_list 
+    
+
 
         
 # -----------------------------------------
