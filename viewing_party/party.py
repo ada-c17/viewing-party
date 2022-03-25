@@ -69,6 +69,7 @@ def get_most_watched_genre(user_data):
     if len(genre_list) == 0:
         return None
     
+    # my solution assume that it will be just one most watched genre, no possibility for two or more
     pop_genre = genre_list[0]
     counter = 1
     most_watched_genre_dict = {}
