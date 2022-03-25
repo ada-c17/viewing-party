@@ -53,7 +53,6 @@ def get_watched_avg_rating(user_data):
 
 
 def get_most_watched_genre(user_data):
-    user_genre_list = []
     user_genre_dict = {}
     most_watched_genre = []
 
@@ -61,17 +60,13 @@ def get_most_watched_genre(user_data):
     if user_data['watched'] == []:
         return None
 
-    # adds all the genres into the list
+    # loops through user's watched
+    # adds genre as key, occurances as value for user_genre_dict
     for movie in user_data['watched']:
-        user_genre_list.append(movie['genre'])
-
-    # loops through the user_genre_list
-    # and adds genre as key with occurances as value 
-    for genre in user_genre_list:
-        if genre in user_genre_dict.keys():
-            user_genre_dict[genre] += 1
+        if movie['genre'] in user_genre_dict:
+            user_genre_dict[movie['genre']] += 1
         else:
-            user_genre_dict[genre] = 1
+            user_genre_dict[movie['genre']] = 1
     
     # finds highest value and returns the key (genre) 
     most_watched_genre = max(user_genre_dict, key=user_genre_dict.get)
@@ -84,7 +79,7 @@ def get_most_watched_genre(user_data):
 
 def get_unique_watched(user_data):
     user_unique_movies = []
-    user_movies = get_user_watched_movies(user_data)
+    user_movies = user_data['watched']
     friend_movies = get_friend_movies(user_data)
 
     # loops through user_movies
@@ -95,36 +90,25 @@ def get_unique_watched(user_data):
 
     return user_unique_movies
 
-# helper function to grab all the user watched movies in a list
-def get_user_watched_movies(user_data):
-    user_movies = []    
-    for movie in user_data['watched']:
-            user_movies.append(movie)
-
-    return user_movies
 
 # helper function to grab all the friend movies in a list
+# also avoids adding duplicates into the list
 def get_friend_movies(user_data):
     friend_movies = []
     for selection in user_data['friends']:
         for movie in selection['watched']:
-            friend_movies.append(movie)
+            if movie not in friend_movies:
+                friend_movies.append(movie)
 
     return friend_movies
 
 def get_friends_unique_watched(user_data):
-    friend_undup_movies = []
     friend_unique_movies = []
-    user_movies = get_user_watched_movies(user_data)
+    user_movies = user_data['watched']
     friend_movies = get_friend_movies(user_data)
-
-    # loop through to get rid of duplicates in friend_movies
-    for movie in friend_movies:
-        if movie not in friend_undup_movies:
-            friend_undup_movies.append(movie)
     
     # loop through to append friend movies that not are in user movies
-    for movie in friend_undup_movies:
+    for movie in friend_movies:
         if movie not in user_movies:
             friend_unique_movies.append(movie)
     return friend_unique_movies
