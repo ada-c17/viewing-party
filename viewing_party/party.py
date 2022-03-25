@@ -40,20 +40,14 @@ def add_to_watchlist(user_data, movie):
 #   - return the `user_data`
 
 def watch_movie(user_data, title):
-    if user_data["watchlist"][0]["title"] == title:
-        user_data["watchlist"].remove(user_data["watchlist"][0])
-        user_data["watched"].append(title)
-        return user_data
-    else:
-        return user_data
-
-# def watch_movie(user_data, title):
-#     if user_data["watchlist"][0]["title"] == title:
-#         specific_title = user_data["watchlist"][0]["title"]
-#         user_data["watchlist"].remove(specific_title)
-#         user_data["watched"].append(user_data["watchlist"])
-#     else:
-#         return user_data
+    for index in range(len(user_data["watchlist"])):
+        if user_data["watchlist"][index]["title"] == title:
+            movie_to_move = user_data["watchlist"][index]
+            user_data["watchlist"].remove(user_data["watchlist"][index])
+            user_data["watched"].append(movie_to_move)
+    return user_data
+    
+    
 
 
 # -----------------------------------------
@@ -165,3 +159,15 @@ def get_new_rec_by_genre(user_data):
         if friends_movies[movie]["genre"] == get_most_watched_genre(user_data):
             list_by_genre.append(friends_movies[movie])
     return list_by_genre
+
+def get_rec_from_favorites(user_data):
+    friends_list = []
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie not in friends_list:
+                friends_list.append(movie)
+    recommendations = []
+    for movie in range(len(user_data["favorites"])):
+        if user_data["favorites"][movie] not in friends_list:
+            recommendations.append(user_data["favorites"][movie])
+    return recommendations
