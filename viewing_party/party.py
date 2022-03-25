@@ -97,17 +97,17 @@ def get_friends_unique_watched(amandas_data):
     for element in amandas_data["friends"]:
         for movie_data in element["watched"]:
                 list_friends.append(movie_data)
-    # print (list_friends)
+    
     
     for element in amandas_data["watched"]:
             list_amandas.append(element)
-    # print(list_amandas)
+  
 
     for element in list_friends:
         if element not in list_amandas:
-            friends_unique_movies.append(element)
-    # print(friends_unique_movies)
-    # print("hello")
+            if element not in friends_unique_movies:
+                friends_unique_movies.append(element)
+    
     return friends_unique_movies
 
         
@@ -151,8 +151,6 @@ def get_new_rec_by_genre(sonyas_data):
     list_sonyas = []
     fav_genre = []
 
-    # if (sonyas_data["friends"]["watched"]) == 0:
-        # return rec_list_genre
     for element in sonyas_data["friends"]:
         for movie_data in element["watched"]:
             list_friends.append(movie_data)
@@ -162,7 +160,8 @@ def get_new_rec_by_genre(sonyas_data):
     for element in sonyas_data["watched"]:
         list_sonyas.append(element)
 
-
+    if len(list_friends) == 0:
+        return rec_list_genre
     for element in list_friends:
         if element not in list_sonyas:
             friends_unique_movies.append(element)
@@ -178,6 +177,29 @@ def get_new_rec_by_genre(sonyas_data):
 
     return rec_list_genre
     
+def get_rec_from_favorites(sonyas_data):
 
+    rec_list_fav = []
+    sonyas_unique_movies =[]
+    list_friends = []
+    list_sonyas = []
 
+    for element in sonyas_data["friends"]:
+        for movie_data in element["watched"]:
+            list_friends.append(movie_data)
+    
+    
+    for element in sonyas_data["watched"]:
+        list_sonyas.append(element)
+
+    
+    for element in list_sonyas:
+        if element not in list_friends:
+            sonyas_unique_movies.append(element)
+
+    for movie in sonyas_unique_movies:
+        if movie not in list_friends:
+            rec_list_fav.append(movie)
+
+    return rec_list_fav
 
