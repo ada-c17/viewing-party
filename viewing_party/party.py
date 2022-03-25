@@ -55,13 +55,11 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 def get_watched_avg_rating(user_data):
     if len(user_data["watched"]) == 0:
-        average = 0.0
-        return average
+        return 0.0
     rating_list = []
     for dict in range (len(user_data["watched"])):
         rating_list.append(user_data["watched"][dict]["rating"])
-    average = sum(rating_list)/len(rating_list)
-    return average
+    return sum(rating_list)/len(rating_list)
 
 def get_most_watched_genre(user_data):
     if len(user_data["watched"]) == 0:
