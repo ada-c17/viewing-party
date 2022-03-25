@@ -17,7 +17,6 @@ def create_movie(title, genre, rating):
             "genre" : genre,
             "rating" : rating
     }
-
     return movie
 
 # adds movie to watched list
@@ -72,20 +71,6 @@ def get_most_watched_genre(user_data):
     else:
         return None
 
-    # genres = []
-    # genre_count = {}
-    # for movie in user_data["watched"]:
-    #     genre = movie["genre"]
-    #     if genre not in genre_count["genre"]:
-    #         genre_count["genre"] = 1
-    #     elif genre in genre_count["genre"]:
-    #         genre_count[genre] += 1
-            
-    #     most_watched_genre = max(genre_count, key=genre_count.get)
-    #     return most_watched_genre
-    
-
-
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
@@ -102,7 +87,6 @@ def get_unique_watched(user_data):
         if user_movie not in friend_movies:
                 if user_movie not in unique_watched:
                     unique_watched.append(user_movie)
-
     return unique_watched
 
 # returns unique friends movie list from friends' movies
@@ -121,7 +105,6 @@ def get_friends_unique_watched(user_data):
                 if friend_movie not in friends_unique_watched:
                     friends_unique_watched.append(friend_movie)
 
-    print(friends_unique_watched)
     return friends_unique_watched
 
 # -----------------------------------------
@@ -139,13 +122,14 @@ def get_available_recs(user_data):
             if friend_movie not in unique_watched:
                 if friend_movie["host"] in user_data["subscriptions"]:
                     recommendations.append(friend_movie)
-
     return recommendations
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+# return recommendations list from friends' movie list
+# for movies matching user's favorite genre
 def get_new_rec_by_genre(user_data):
     recs_by_genre = []
     favorite_genre = get_most_watched_genre(user_data)
@@ -154,5 +138,18 @@ def get_new_rec_by_genre(user_data):
         if friend_movie["genre"] == favorite_genre:
             if friend_movie not in recs_by_genre:
                 recs_by_genre.append(friend_movie)
-    
     return recs_by_genre
+
+def get_rec_from_favorites(user_data):
+    recommendations = []
+    user_favorites = user_data["favorites"]
+    friends = user_data["friends"]
+    friend_movies = []
+    for friend in friends: # loops through friend 0 and friend 1
+        friend_movies += friend["watched"] #assigns list
+    for user_movie in user_favorites: #gets the first user movie
+        if user_movie not in friend_movies:
+                if user_movie not in recommendations:
+                    recommendations.append(user_movie)
+    return recommendations
+# -----------------------------------------
