@@ -135,7 +135,7 @@ def test_moves_movie_from_watchlist_to_empty_watched():
     # *******************************************************************************************
 
 # Test 8
-pytest.mark.skip()
+#pytest.mark.skip()
 def test_moves_movie_from_watchlist_to_watched():
     # Arrange
     movie_to_watch = HORROR_1
@@ -156,10 +156,12 @@ def test_moves_movie_from_watchlist_to_watched():
     
     # *******************************************************************************************
     assert updated_data["watched"][1]["title"] == movie_to_watch["title"]
+    assert updated_data["watched"][1]["genre"] == movie_to_watch["genre"]
+    assert updated_data["watched"][1]["rating"] == movie_to_watch["rating"]
     # *******************************************************************************************
 
 # Test 9
-pytest.mark.skip()
+#pytest.mark.skip()
 def test_does_nothing_if_movie_not_in_watchlist():
     # Arrange
     movie_to_watch = HORROR_1

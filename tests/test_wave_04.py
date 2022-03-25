@@ -2,6 +2,7 @@ import pytest
 from viewing_party.party import *
 from tests.test_constants import *
 
+
 # Test 19
 #@pytest.mark.skip()
 def test_get_available_friend_rec():
@@ -39,3 +40,5 @@ def test_no_available_friend_recs():
 
     # Arrange
     assert len(recommendations) == 0
+
+
