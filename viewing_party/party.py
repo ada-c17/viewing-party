@@ -53,16 +53,46 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 
 
-# -----------------------------------------
 # ------------- WAVE 3 --------------------
+def get_unique_watched(user_data):
+    unique_movie_list = []
+    combined_friend_movie_list = []
+
+    for friend_index in range(len(user_data["friends"])):
+        user_friend_index = user_data["friends"][friend_index]["watched"]
+        for film in range(len(user_friend_index)):
+            combined_friend_movie_list.append(user_friend_index[film])
+    for movie in range(len(user_data["watched"])):
+        user_watched_title = user_data["watched"][movie]
+        if user_watched_title not in combined_friend_movie_list and\
+            user_watched_title not in unique_movie_list:
+            unique_movie_list.append(user_watched_title)
+        # for friend_index in range(len(user_data["friends"])):
+        #     user_friend_index = user_data["friends"][friend_index]["watched"]
+        #     if user_watched_title not in user_friend_index and \
+        #         user_watched_title not in unique_movie_list:
+        #             unique_movie_list.append(user_watched_title)
+# GOAL: APPEND MOVIE TO UNIQUE_MOVIE_LIST THAT IS NOT IN /ANY/ OF THE USER_DATA["FRIENDS"][INDEX]["WATCHED"] LISTS
+# expected len is 2 and we've got 6 so clearly we are screwing something up here
+# problem: movie gets added to list if its not in indexed list, but doesnt account for further lists
+# might as well try and merge em lol ugh
+    return unique_movie_list
+
+def get_friends_unique_watched(user_data):
+    pass
 # -----------------------------------------
 
-        
-# -----------------------------------------
+
 # ------------- WAVE 4 --------------------
+def get_available_recs():
+    pass
 # -----------------------------------------
 
-# -----------------------------------------
 # ------------- WAVE 5 --------------------
+def get_new_rec_by_genre():
+    pass
+
+def get_rec_from_favorites():
+    pass
 # -----------------------------------------
 
