@@ -59,7 +59,7 @@ def get_watched_avg_rating(user_data):
 # returns most watched genre in user's movies
 def get_most_watched_genre(user_data):
     genres = {}
-    if len(user_data["watched"]) > 0:
+    if user_data["watched"]:
         for movie in user_data["watched"]: 
             for category, item in movie.items():
                 if category == "genre":
@@ -69,9 +69,22 @@ def get_most_watched_genre(user_data):
                         genres[item] += 1
         popular_genre = (max(genres, key=genres.get))
         return popular_genre
-
     else:
         return None
+
+    # genres = []
+    # genre_count = {}
+    # for movie in user_data["watched"]:
+    #     genre = movie["genre"]
+    #     if genre not in genre_count["genre"]:
+    #         genre_count["genre"] = 1
+    #     elif genre in genre_count["genre"]:
+    #         genre_count[genre] += 1
+            
+    #     most_watched_genre = max(genre_count, key=genre_count.get)
+    #     return most_watched_genre
+    
+
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
@@ -124,7 +137,7 @@ def get_available_recs(user_data):
     friends_unique_watched = get_friends_unique_watched(user_data)
     for friend_movie in friends_unique_watched:
         if friend_movie not in unique_watched:
-            if friend_movie["host"] in user_data["subscriptions"]:
+            if friend_movie["host"] in user_subscriptions:
                 recommendations.append(friend_movie)
 
     return recommendations
@@ -132,3 +145,14 @@ def get_available_recs(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+
+def get_new_rec_by_genre(user_data):
+    recs_by_genre = []
+    favorite_genre = get_most_watched_genre(user_data)
+    recommendations = get_available_recs(user_data)
+    for friend_movie in recommendations:
+        if friend_movie["genre"] == favorite_genre:
+            if friend_movie not in recs_by_genre:
+                recs_by_genre.append(friend_movie)
+    
+    return recs_by_genre
