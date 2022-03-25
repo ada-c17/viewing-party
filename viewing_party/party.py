@@ -1,7 +1,9 @@
 import statistics
 from statistics import mode
 
+# -----------------------------------------
 # ------------- WAVE 1 --------------------
+# -----------------------------------------
 def create_movie(title, genre, rating):
     """Creates a movie dict."""
     if not title or not genre or not rating:
@@ -30,7 +32,9 @@ def watch_movie(user_data, movie):
             user_data["watched"].append(movie_dict)
     return user_data
 
+# -----------------------------------------
 # ------------- WAVE 2 --------------------
+# -----------------------------------------
 def get_watched_avg_rating(user_data):
     """Gets the average rating of movies a user has watched."""
     ratings = [] 
@@ -63,8 +67,10 @@ def get_most_watched_genre(user_data):
         return None
     
     return mode(genres)
-    
+
+# -----------------------------------------   
 # ------------- WAVE 3 --------------------
+# -----------------------------------------
 def get_unique_watched(user_data):
     """Finds movies watched by a user that their friends have not watched."""
     watched_list = user_data["watched"] 
