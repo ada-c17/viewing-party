@@ -41,14 +41,25 @@ def get_watched_avg_rating(user_data):
         return sum_rating/count
 
 def get_most_watched_genre(user_data):
+    # make a list of all the genres user watched
     genre_list = []
     for i in range(len(user_data["watched"])):
         genre_list.append(user_data["watched"][i]["genre"])
+    # if user did not watch many movies or if genre key has no value, return None
     if len(genre_list) == 0:
         return None
-    else:
-        # To get the most frequent genre. I'm not sure if it accounts for ties.
-        return max(set(genre_list), key=genre_list.count)
+    # use a for loop and a counter to find the most frequent genre
+    current_max_frequency = 0
+    max_genre = ""
+    for genre in genre_list:
+        genre_frequency = genre_list.count(genre)
+        if genre_frequency > current_max_frequency:
+            current_max_frequency = genre_frequency
+            max_genre = genre
+    return max_genre
+    
+    # I can also add if statements to account for multiple genres.
+    # alternative method: return max(set(genre_list), key=genre_list.count)
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
