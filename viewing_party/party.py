@@ -54,7 +54,6 @@ def get_watched_avg_rating(user_data):
 
 def get_most_watched_genre(user_data):
     user_genre_dict = {}
-    most_watched_genre = []
 
     # checks if the data are valid for input
     if user_data['watched'] == []:
