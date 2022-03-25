@@ -20,29 +20,31 @@ def add_to_watched(user_data, movie):
 
     list = user_data["watched"]
     list.append(movie)
-
     return user_data
 
 def add_to_watchlist(user_data, movie):
 
     watchlist_list = user_data["watchlist"]
     watchlist_list.append(movie)
-
     return user_data
 
+# adding helper function remove from watchlist
+def remove_from_watchlist(user_data, movie):
+
+    watchlist_list = user_data["watchlist"]
+    watchlist_list.remove(movie)
+    return user_data
 
 def watch_movie(user_data, movie):
 
     watchlist_list = user_data["watchlist"]
-    watched_list = user_data["watched"]
 
     for film in watchlist_list:
         if film['title'] == movie:
-            watched_list.append(film)
-            watchlist_list.remove(film)
+            add_to_watched(user_data, film)
+            remove_from_watchlist(user_data, film)
 
     return user_data
-
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
@@ -167,40 +169,6 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
-
-'''
-USER_DATA_4 = {
-    "watched": [
-        FANTASY_1b, 
-        FANTASY_2b, 
-        FANTASY_3b, 
-        ACTION_1b, 
-        INTRIGUE_1b, 
-        INTRIGUE_2b
-        ],  
-    "friends":  [
-        {
-            "watched": [
-                FANTASY_1b,
-                FANTASY_3b,
-                FANTASY_4b,
-                HORROR_1b,
-            ]
-        },
-        {
-            "watched": [
-                FANTASY_1b,
-                ACTION_1b,
-                INTRIGUE_1b,
-                INTRIGUE_3b,
-            ]
-        }  
-    ]
-}
-
-USER_DATA_4["subscriptions"] = ["netflix", "hulu"]
-
-'''
 
 def get_available_recs(user_data):
 
