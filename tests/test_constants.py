@@ -6,12 +6,12 @@ import copy
 
 # Data for Unit Tests
 
-#----------WAVE01-------------
+# ----------WAVE01-------------
 MOVIE_TITLE_1 = "It Came from the Stack Trace"
 GENRE_1 = "Horror"
 RATING_1 = 3.5
 
-#----------WAVE02-------------
+# ----------WAVE02-------------
 HORROR_1 = {
     "title": MOVIE_TITLE_1,
     "genre": GENRE_1,
@@ -69,37 +69,38 @@ INTRIGUE_3 = {
 }
 USER_DATA_2 = {
     "watched": [
-        FANTASY_1, 
-        FANTASY_2, 
-        FANTASY_3, 
-        ACTION_1, 
-        INTRIGUE_1, 
+        FANTASY_1,
+        FANTASY_2,
+        FANTASY_3,
+        ACTION_1,
+        INTRIGUE_1,
         INTRIGUE_2
-        ],    
+    ],
 }
 
-#-----WAVE 3--------
+# -----WAVE 3--------
 USER_DATA_3 = copy.deepcopy(USER_DATA_2)
-USER_DATA_3["friends"] =  [
-        {
-            "watched": [
-                FANTASY_1,
-                FANTASY_3,
-                FANTASY_4,
-                HORROR_1,
-            ]
-        },
-        {
-            "watched": [
-                FANTASY_1,
-                ACTION_1,
-                INTRIGUE_1,
-                INTRIGUE_3,
-            ]
-        }
-    ]  
+USER_DATA_3["friends"] = [
+    {
+        "watched": [
+            FANTASY_1,
+            FANTASY_3,
+            FANTASY_4,
+            HORROR_1,
+        ]
+    },
 
-#-----WAVE 4--------
+    {
+        "watched": [
+            FANTASY_1,
+            ACTION_1,
+            INTRIGUE_1,
+            INTRIGUE_3,
+        ]
+    }
+]
+
+# -----WAVE 4--------
 
 HORROR_1b = copy.deepcopy(HORROR_1)
 FANTASY_1b = copy.deepcopy(FANTASY_1)
@@ -127,13 +128,13 @@ INTRIGUE_3b["host"] = "disney+"
 
 USER_DATA_4 = {
     "watched": [
-        FANTASY_1b, 
-        FANTASY_2b, 
-        FANTASY_3b, 
-        ACTION_1b, 
-        INTRIGUE_1b, 
+        FANTASY_1b,
+        FANTASY_2b,
+        FANTASY_3b,
+        ACTION_1b,
+        INTRIGUE_1b,
         INTRIGUE_2b
-        ],  
+    ],
     "friends":  [
         {
             "watched": [
@@ -150,34 +151,38 @@ USER_DATA_4 = {
                 INTRIGUE_1b,
                 INTRIGUE_3b,
             ]
-        }  
+        }
     ]
 }
 
-USER_DATA_4["subscriptions"] = ["netflix", "hulu"]  
+USER_DATA_4["subscriptions"] = ["netflix", "hulu"]
 
 
-#----WAVE 5-----------
+# ----WAVE 5-----------
 
 USER_DATA_5 = copy.deepcopy(USER_DATA_4)
 
 USER_DATA_5["favorites"] = [
-    FANTASY_1b, 
-    FANTASY_2b, 
+    FANTASY_1b,
+    FANTASY_2b,
     INTRIGUE_1b,
     INTRIGUE_2b
-    ]
+]
 
-#----Functions that return clean data for each test----
+# ----Functions that return clean data for each test----
+
 
 def clean_wave_2_data():
     return copy.deepcopy(USER_DATA_2)
 
+
 def clean_wave_3_data():
     return copy.deepcopy(USER_DATA_3)
 
+
 def clean_wave_4_data():
     return copy.deepcopy(USER_DATA_4)
+
 
 def clean_wave_5_data():
     return copy.deepcopy(USER_DATA_5)
