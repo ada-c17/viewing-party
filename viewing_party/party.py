@@ -1,13 +1,10 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
-    pass
-    # using the parameters title, genre, and rating, create a dictionary called new_movie
-    # with keys "title", "genre", and "rating"
-    # and values that are equal to title, genre, rating
 
     new_movie = {}
 
+    # check that all necessary movie characteristics exist before creating new movie
     if title and genre and rating:
         new_movie["title"] = title
         new_movie["genre"] = genre
@@ -18,27 +15,22 @@ def create_movie(title, genre, rating):
     return new_movie
 
 def add_to_watched(user_data, movie):
-    # this function should add the dictionary movie to user_data.
-    # user_data is also a dictionary with one key, "watched"
-    # the value of user_data["watched"] is a list of dictionaries (i.e., each movie),
-    # each with keys "title", "genre", and "rating"
 
+    # add movie to watched list
     user_data["watched"].append(movie)
 
     return user_data
 
 def add_to_watchlist(user_data, movie):
 
+    # add movie to watchlist
     user_data["watchlist"].append(movie)
 
     return user_data
 
 def watch_movie(user_data, movie_title):
-    # this function will loop through the list user_data["watchlist"]
-    # if user_data["watch_ist"][i]["title"] == movie_title, 
-    # that inner dictionary will be added to user_data["watched"]
-    # and be removed from user_data["watchlist"]
 
+    # move movies that user watches from watchlist to watched
     for movie in user_data["watchlist"]:
         if movie["title"] == movie_title:
             user_data["watched"].append(movie)
@@ -51,9 +43,8 @@ def watch_movie(user_data, movie_title):
 # -----------------------------------------
 
 def get_watched_avg_rating(user_data):
-    # this function accesses the ratings for all of the movies in watched
-    # and returns the average of those ratings
 
+    # variable to hold sum of all movie ratings
     total = 0
 
     for movie in user_data["watched"]:
@@ -69,21 +60,15 @@ def get_watched_avg_rating(user_data):
     return rating_average
 
 def get_most_watched_genre(user_data):
-    # create an empty dictionary called movie_genre_count
-    # within user_data["watched"], iterate through each movie and access user_data["watched"][movie]["genre"]
-    # if the genre isn't in movie_genre_count, set movie_genre_count[genre] = 1
-    # otherwise, set movie_genre_count[genre] += 1
-    # set popular_genre = max value from movie_genre_count
-    # return popular_genre
     
     # empty dictionary to hold movie genres and their frequency
     movie_genre_count = {}
 
-    # check if watched list is empty
+    # check if watched list is empty; if so, there will be no most watched genre
     if not user_data["watched"]:
         popular_genre = None
     else:
-        # loop to update movie_genre_count based on watch history
+        # update movie_genre_count based on watch history
         for movie in user_data["watched"]:
             genre = movie["genre"]
             if genre not in movie_genre_count:
@@ -105,20 +90,11 @@ def get_most_watched_genre(user_data):
     return popular_genre
 
 
-
-
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
 def get_unique_watched(user_data):
-    # create an empty list called movies_in_common and my_unique_movies
-    # loop through user_data["friends"]. for friend in user_data["friends"],
-    # for movie in user_data["friends"][friend]["watched"],
-    # if movie in user_data["watched"], movies_in_common.append(movie)
-    # loop through user_data["watched"] and compare to movies_in_common list
-    # if the movie is not in movies_in_common, add it to my_unique_movies
-    # return my_unique_movies
 
     # create lists to store unique movies and movies that user and friends have watched
     movies_in_common = []
@@ -174,7 +150,7 @@ def get_available_recs(user_data):
 
 def get_new_rec_by_genre(user_data):
     
-    # list to store recommended movies in user's most popular genre
+    # list to store recommended movies in user's most watched genre
     my_recs_by_genre = []
     
     # variable to identify user's most watched genre using helper function
@@ -191,9 +167,6 @@ def get_new_rec_by_genre(user_data):
     return my_recs_by_genre
 
 def get_rec_from_favorites(user_data):
-    # user_data has a key, "favorites", whose value is a list of movie dictionaries
-    # create a list of recommended movies
-    # only add movies that are in "favorites" and none of the user's friends have watched
 
     # list to hold recommended movies
     my_recs_from_favorites = []
@@ -202,6 +175,7 @@ def get_rec_from_favorites(user_data):
     # note for future refactoring: consider updating to include movies from user's watchlist that friends haven't watched
     my_watched_movies = get_unique_watched(user_data)
 
+    # add any movies that are in the watched list and favorites list to recommendations
     for movie in my_watched_movies:
         if movie in user_data["favorites"]:
             my_recs_from_favorites.append(movie)
