@@ -56,8 +56,10 @@ def test_new_genre_rec_from_empty_friends():
     # *********************************************************************
     # ****** Complete the Act and Assert Portions of theis tests **********
     # *********************************************************************
+    #act
     recommendations = get_new_rec_by_genre(sonyas_data)
     
+    #assert
     assert len(recommendations) == 0
 
 # @pytest.mark.skip()
