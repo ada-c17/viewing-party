@@ -3,8 +3,8 @@ import pytest
 # from viewing_party.main import *
 from viewing_party.party import *
 from tests.test_constants import *
-
-@pytest.mark.skip()
+# TEST ONE - PASSED
+# @pytest.mark.skip()
 def test_create_successful_movie():
     # Arrange
     movie_title = MOVIE_TITLE_1
@@ -15,11 +15,11 @@ def test_create_successful_movie():
     new_movie = create_movie(movie_title, genre, rating)
 
     # Assert
-    assert new_movie["title"] is MOVIE_TITLE_1
-    assert new_movie["genre"] is GENRE_1
+    assert new_movie["title"] == MOVIE_TITLE_1
+    assert new_movie["genre"] == GENRE_1
     assert new_movie["rating"] == pytest.approx(RATING_1)
-
-@pytest.mark.skip()
+# TEST TWO - PASSED
+# @pytest.mark.skip()
 def test_create_no_title_movie():
     # Arrange
     movie_title = None
@@ -30,9 +30,9 @@ def test_create_no_title_movie():
     new_movie = create_movie(movie_title, genre, rating)
 
     # Assert
-    assert new_movie is None
-
-@pytest.mark.skip()
+    assert new_movie == None
+# TEST THREE - PASSED
+# @pytest.mark.skip()
 def test_create_no_genre_movie():
     # Arrange
     movie_title = "Title A"
@@ -43,9 +43,9 @@ def test_create_no_genre_movie():
     new_movie = create_movie(movie_title, genre, rating)
 
     # Assert
-    assert new_movie is None
-
-@pytest.mark.skip()
+    assert new_movie == None
+# TEST FOUR - PASSED
+# @pytest.mark.skip()
 def test_create_no_rating_movie():
     # Arrange
     movie_title = "Title A"
@@ -56,9 +56,9 @@ def test_create_no_rating_movie():
     new_movie = create_movie(movie_title, genre, rating)
 
     # Assert
-    assert new_movie is None
-
-@pytest.mark.skip()
+    assert new_movie == None
+# TEST FIVE - PASSED
+# @pytest.mark.skip()
 def test_adds_movie_to_user_watched():
     # Arrange
     movie = {
@@ -74,12 +74,12 @@ def test_adds_movie_to_user_watched():
     updated_data = add_to_watched(user_data, movie)
 
     # Assert
-    assert len(updated_data["watched"]) is 1
-    assert updated_data["watched"][0]["title"] is MOVIE_TITLE_1
-    assert updated_data["watched"][0]["genre"] is GENRE_1
-    assert updated_data["watched"][0]["rating"] is RATING_1
-
-@pytest.mark.skip()
+    assert len(updated_data["watched"]) == 1
+    assert updated_data["watched"][0]["title"] == MOVIE_TITLE_1
+    assert updated_data["watched"][0]["genre"] == GENRE_1
+    assert updated_data["watched"][0]["rating"] == RATING_1
+# TEST SIX - PASSED
+# @pytest.mark.skip()
 def test_adds_movie_to_user_watchlist():
     # Arrange
     movie = {
@@ -96,11 +96,11 @@ def test_adds_movie_to_user_watchlist():
 
     # Assert
     assert len(updated_data["watchlist"]) is 1
-    assert updated_data["watchlist"][0]["title"] is MOVIE_TITLE_1
-    assert updated_data["watchlist"][0]["genre"] is GENRE_1
-    assert updated_data["watchlist"][0]["rating"] is RATING_1
-
-@pytest.mark.skip()
+    assert updated_data["watchlist"][0]["title"] == MOVIE_TITLE_1
+    assert updated_data["watchlist"][0]["genre"] == GENRE_1
+    assert updated_data["watchlist"][0]["rating"] == RATING_1
+# TEST SEVEN - PASSED
+# @pytest.mark.skip()
 def test_moves_movie_from_watchlist_to_empty_watched():
     # Arrange
     janes_data = {
@@ -109,21 +109,23 @@ def test_moves_movie_from_watchlist_to_empty_watched():
             "genre": GENRE_1,
             "rating": RATING_1
         }],
+
         "watched": []
     }
 
     # Act
     updated_data = watch_movie(janes_data, MOVIE_TITLE_1)
-
+    # print(updated_data)
     # Assert
-    assert len(updated_data["watchlist"]) is 0
-    assert len(updated_data["watched"]) is 1
+    assert len(updated_data["watchlist"]) == 0
+    assert len(updated_data["watched"]) == 1
+    assert MOVIE_TITLE_1 == "It Came from the Stack Trace"
     
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
-
-@pytest.mark.skip()
+# TEST EIGHT - PASSED
+# @pytest.mark.skip()
 def test_moves_movie_from_watchlist_to_watched():
     # Arrange
     movie_to_watch = HORROR_1
@@ -137,16 +139,17 @@ def test_moves_movie_from_watchlist_to_watched():
 
     # Act
     updated_data = watch_movie(janes_data, movie_to_watch["title"])
-
+    # print(updated_data)
     # Assert
-    assert len(updated_data["watchlist"]) is 1
-    assert len(updated_data["watched"]) is 2
+    assert len(updated_data["watchlist"]) == 1
+    assert len(updated_data["watched"]) == 2
+    assert updated_data["watchlist"][0]["genre"] == "Horror"
     
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
-
-@pytest.mark.skip()
+# TEST NINE - PASSED
+# @pytest.mark.skip()
 def test_does_nothing_if_movie_not_in_watchlist():
     # Arrange
     movie_to_watch = HORROR_1
