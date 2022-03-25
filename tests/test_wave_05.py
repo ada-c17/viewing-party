@@ -1,7 +1,7 @@
 import pytest
 from viewing_party.party import *
 from tests.test_constants import *
-# TEST ONE 
+# TEST ONE - PASSED
 # @pytest.mark.skip()
 def test_new_genre_rec():
     # Arrange
@@ -17,7 +17,7 @@ def test_new_genre_rec():
     assert FANTASY_4b in recommendations
     assert sonyas_data == clean_wave_5_data()
 # TEST TWO 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_new_genre_rec_from_empty_watched():
     # Arrange
     sonyas_data = {

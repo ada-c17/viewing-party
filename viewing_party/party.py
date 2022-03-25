@@ -170,7 +170,8 @@ def get_most_watched_genre(user_data):
 
 def get_unique_watched(user_data):
     """
-    Input: user_data = dictionary with "watched" list of movie dictionaries, "friends" is a list with each item as a dictionary
+    Input: user_data = dictionary with "watched" list of movie dictionaries 
+        and "friends" is a list with each item as a dictionary
     Output: return list of dictionaries --> unique_list
     """
     # List of movies user has watched
@@ -211,6 +212,11 @@ def get_unique_watched(user_data):
 
 
 def get_friends_unique_watched(user_data):
+    """
+    Input: user_data = dictionary with "watched" list of movie dictionaries 
+        and "friends" is a list with each item as a dictionary
+    Output: return list of dictionaries where each dictionary is a movie 
+    """
 
     # List of movies friends have watched
     # the elements are dictionaries with lists of dictionaries are the values
@@ -250,7 +256,8 @@ def get_friends_unique_watched(user_data):
 
 def get_available_recs(user_data):
     """
-    Input: user_data = dictionary with "watched" list of movie dictionaries, "friends" is a list with each item as a dictionary
+    Input: user_data = dictionary with "watched" list of movie dictionaries 
+        and "friends" is a list with each item as a dictionary
     Output: return list of recommended movies
     """
     # List of movies friends have watched
@@ -301,25 +308,31 @@ def get_available_recs(user_data):
 
 def get_new_rec_by_genre(user_data):
     """
-    Input: user_data = dictionary with "watched" list of movie dictionaries, "friends" is a list with each item as a dictionary
+    Input: user_data = dictionary with "watched" list of movie dictionaries 
+        and "friends" is a list with each item as a dictionary
     Output: return list of recommended movies
     """
-    # User's most frequently watched genre --> list of recommended movies
 
-    # Add to recommended movies if:
+    # TASK ONE: parse through User's data --> get movie titles and genres
+    # TASK TWO: from user's genres --> find most popular genre
+    # TASK THREE: find movies that user has NOT watched, a friend HAS watched,
+                # and is of user's most popular genre (TASK TWO)
+
+        # Add to recommended movies if:
         # User has not seen it
         # At least one friend has watched it
         # "genre" is the same as the user's most frequent genre
 
 
-    # TASK ONE: parse through User's data --> get movie titles and genres
-    # TASK TWO: from user's genres --> find most popular genre
-    # TASK THREE: find movies that user has NOT watched, a friend HAS watched,
-                # and is of user's most popular genre
+    # List of movies friends have watched
+    # the elements are dictionaries with lists of dictionaries are the values
+    friend_list = user_data["friends"]
 
     # List of movies the user has watched
     # the elements are dictionaries (one dictionary, one movie)
     user_list = user_data["watched"]
+
+
 
     # Get user's genre's --> find most popular genre
     users_genres =[]
@@ -327,6 +340,29 @@ def get_new_rec_by_genre(user_data):
     for title in user_list:
         users_genres.append(title["genre"])
 
-    print(users_genres)
-    print(max(set(users_genres)), key = users_genres)
-    # print(mode(users_genres))
+    if len(users_genres) > 0:
+        most_popular_genre = max(set(users_genres), key = users_genres.count)
+    else: 
+        most_popular_genre = 0
+
+
+    # Empty list to populate with movies friends have seen
+    friends_movies = []
+
+    for friend in friend_list:
+        for film in friend["watched"]:
+            friends_movies.append(film)
+
+    # Empty list to populate with movie recommendations
+    movie_recs = []
+
+    for movie in friends_movies:
+        if (movie not in user_list) and (movie["genre"] == most_popular_genre):
+            movie_recs.append(movie)
+    
+    return movie_recs
+
+
+
+def get_rec_from_favorites():
+    pass
