@@ -67,29 +67,34 @@ def get_watched_avg_rating(user_data):
 
     return average
 
+# create helper function for find max value from the list
+def find_max_value_from_list_with_dictionary(list):
+
+    dictionary = {}
+    for i in list:
+        if i in dictionary:
+            dictionary[i] += 1
+        else:
+            dictionary[i] = 1
+
+    max_value = 0
+    max_key = ""
+
+    for key,value in dictionary.items():
+        if value > max_value:
+            max_value = value
+            max_key = key
+    return max_key
 
 def get_most_watched_genre(user_data):
 
     list_of_genre = []
-    genre_dict = {}
 
     if not len(user_data["watched"]) == 0:
         for i in range(len(user_data["watched"])):
             list_of_genre.append(user_data["watched"][i]["genre"])
 
-        for genre in list_of_genre:
-            if genre in genre_dict:
-                genre_dict[genre] += 1
-            else:
-                genre_dict[genre] = 1
-
-        max_value = 0
-        popular_genre = ""
-
-        for key,value in genre_dict.items():
-            if value > max_value:
-                max_value = value
-                popular_genre = key
+        popular_genre = find_max_value_from_list_with_dictionary(list_of_genre)
     else:
         popular_genre = None
 
