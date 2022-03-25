@@ -144,69 +144,47 @@ def get_friends_watched_movie(user_data):
 
     return friends_watched_list
 
+
 def get_unique_watched(user_data):
-    # list to store all friend watched movies dictionary to compare with user wathced list
-    friends_watched_movies_list = []
-    
+    """ check the list of movies of user watched list that are not in friend watched list then return it. """
+
+    # assign user's friend watch list that is returning from get_friends_watched_movie function
+    friends_watched_list = get_friends_watched_movie(user_data)
+
     # list of dictionary that store all movies are not in friend watched list
-    unique_watched = []
-    
-    # create friend wathed list
-    # loop to get each value of friend list
-    for i in range(len(user_data["friends"])):
-        
-        # loop to get each value of watched list at each index of friend list
-        for k in range(len(user_data["friends"][i]["watched"])):
-            print()
-            # each movies dictionary at each index of watched list of friend list in user data into a new list 
-            # add that value, if it is not in a new list
-            if user_data["friends"][i]["watched"][k] not in friends_watched_movies_list:
-                friends_watched_movies_list.append(user_data["friends"][i]["watched"][k])
+    user_unique_watched = []
             
-    
     # compare user watched list and friends watched list
-    # loop to get each movie dictionary of user watched list and comparing with friend watched list
-        
-    for value in user_data["watched"]:
-        
-        # value variable is each movie dictionary of user watched list 
-        # add value variable into a new list if it is not duplicate
-        if value not in friends_watched_movies_list:
-            unique_watched.append(value) 
-    return unique_watched
+    # loop to get each movie dictionary of user watched list for comparing with friend watched list
+    for movie in user_data["watched"]:
 
+        
+        # check if the movie that user has watched but none of their friends have wathced
+        # add movie into a new list if it is not duplicate and return that new list at the end
+        if movie not in friends_watched_list and movie not in user_unique_watched:
+            user_unique_watched.append(movie)
+    return user_unique_watched
 
-def get_friends_unique_watched(user_data):
-    # list to store all friend watched movies dictionary to compare with user wathced list
-    friends_watched_movies_list = []
     
-    # list of dictionary that store all movies are not in friend watched list
+def get_friends_unique_watched(user_data):      
+    """ Finding the list of movies that user has no watched but user's friend had watched at least one then return it. """
+
+    # assign user's friend watch list that is returning from get_friends_watched_movie function
+    friends_watched_list = get_friends_watched_movie(user_data)
+
+    # list of dictionary that store all movies are not in user watched list
     friend_unique_watched = []
-    
-    # create friend wathed list
-    # loop to get each value of friend list
-    for i in range(len(user_data["friends"])):
-        
-        # loop to get each value of watched list at each index of friend list
-        for k in range(len(user_data["friends"][i]["watched"])):
-            print()
-            # add each movies dictionary at each index of watched list of friend list in user data into a new list 
-            # add that value, if it is not in a new list
-            if user_data["friends"][i]["watched"][k] not in friends_watched_movies_list:
-                friends_watched_movies_list.append(user_data["friends"][i]["watched"][k])
-            
-    
-    # compare user watched list and friends watched list
-    # loop to get each movie dictionary of firend watched movies list and comparing for comparing with user watched list  
-                
-    for movie in friends_watched_movies_list:
-    
-        # item variable is each movie dictionary of fiend watched movies list 
-        # add item variable into a new list if the values is not duplicate 
-        if movie not in user_data["watched"]:
-            friend_unique_watched.append(movie) 
 
+    # compare user watched list and friends watched list
+    # loop to get each movie dictionary of firend watched movies list for comparing with user watched list          
+    for movie in friends_watched_list:
+
+        # check if the movie that at least one of their friend have watched but the user has not watched
+        # add that movie into a new list if it is not duplicate and return that new list at the end
+        if movie not in user_data["watched"] and movie not in friend_unique_watched:
+            friend_unique_watched.append(movie) 
     return friend_unique_watched
+
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
