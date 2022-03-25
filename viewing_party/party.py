@@ -49,7 +49,7 @@ def get_most_watched_genre(user_data):
                 genre_count[movie["genre"]] = 1
             else:
                 genre_count[movie["genre"]] += 1
-            return max(genre_count, key=genre_count.get)
+        return max(genre_count, key=genre_count.get)
 
 # ------------- WAVE 3 --------------------
 def get_unique_watched(user_data):
