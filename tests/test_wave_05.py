@@ -62,7 +62,7 @@ def test_new_genre_rec_from_empty_friends():
     # *********************************************************************
     # ****** Complete the Act and Assert Portions of these tests **********
     # *********************************************************************
-# TEST FOUR
+# TEST FOUR - PASSED
 # @pytest.mark.skip()
 def test_unique_rec_from_favorites():
     # Arrange
@@ -70,14 +70,14 @@ def test_unique_rec_from_favorites():
 
     # Act
     recommendations = get_rec_from_favorites(sonyas_data)
-
+    print(recommendations)
     # Assert
     assert len(recommendations) == 2
     assert FANTASY_2b in recommendations
     assert INTRIGUE_2b in recommendations
     assert sonyas_data == clean_wave_5_data()
-# TEST FIVE
-@pytest.mark.skip()
+# TEST FIVE - PASSED
+# @pytest.mark.skip()
 def test_unique_from_empty_favorites():
     # Arrange
     sonyas_data = {
@@ -97,8 +97,8 @@ def test_unique_from_empty_favorites():
 
     # Assert
     assert len(recommendations) == 0
-# TEST SIX
-@pytest.mark.skip()
+# TEST SIX - PASSED
+# @pytest.mark.skip()
 def test_new_rec_from_empty_friends():
     # Arrange
     sonyas_data = {

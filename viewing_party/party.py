@@ -373,5 +373,43 @@ def get_new_rec_by_genre(user_data):
 
 
 
-def get_rec_from_favorites():
-    pass
+def get_rec_from_favorites(user_data):
+    """
+    Input: user_data --> dictionary with nested lists/dictionaries
+    Output: list of recommended movies
+    """
+
+    # Make a list of recommended movies
+        # Movie has to be in user's favorites list
+        # None of the user's friends have seen it
+
+    # List of movies the user has watched
+    # the elements are dictionaries (one dictionary, one movie)
+    user_list = user_data["watched"]
+
+
+    # List of user's favorite movies
+    faves = user_data["favorites"]
+    # print(faves)
+
+
+    # Empty list to populate ser's friends movie list --> movies they've seen
+    friends_list = []
+
+    for item in user_data["friends"]:
+        # Loop through list
+        for film in item["watched"]:
+            # Loop through dictionary of movies
+            friends_list.append(film)
+
+
+    # Empty list to populate with list of recommended movies
+    movie_recommendations = []
+
+    for movie in faves:
+        # Loop through each movie in the favorites list
+        if (movie not in friends_list):
+            # If the movie isn't in the friends_list, add it to the movie_recommendations list
+            movie_recommendations.append(movie)
+    
+    return movie_recommendations
