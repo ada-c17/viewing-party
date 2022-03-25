@@ -25,7 +25,7 @@ Follow these directions once, a the beginning of your project:
 1. Navigate to your projects folder named `projects`
 
 ```bash
-$ cd ~/Developer/projects
+$  
 ```
 
 2. In Github click on the "Fork" button in github and fork the repository to your Github account.  This will make a copy of the project in your github account. 
