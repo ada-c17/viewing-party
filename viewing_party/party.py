@@ -83,6 +83,7 @@ def get_unique_watched(user_data):
 def get_friends_unique_watched(user_data):
     friend_watched = create_friend_watched_list(user_data)
     unique_friend_watched = []
+    # Is there a way to list comprehension what I'm doing here? I couldn't figure one out.
     for movie in friend_watched:
         if movie not in user_data["watched"] and movie not in unique_friend_watched:
             unique_friend_watched.append(movie)
