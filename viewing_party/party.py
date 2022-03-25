@@ -145,15 +145,11 @@ def get_friends_unique_watched(user_data):
     Output: Returns a list of unique movies that the user's friends have watched
     but the user has not.
     '''
-    friends_movies = []
-    for friend_movie_dict_index in range(len(user_data["friends"])):
-        friends_movies += user_data["friends"][friend_movie_dict_index]["watched"]
-
     friends_unique_watched = []
+    friends_movies = flattened_friends_watched_list(user_data)
     for movie in friends_movies:
         if movie not in user_data["watched"] and movie not in friends_unique_watched:
             friends_unique_watched.append(movie)
-
     return friends_unique_watched
 
 # -----------------------------------------
