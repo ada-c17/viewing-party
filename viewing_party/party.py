@@ -226,3 +226,67 @@ def get_available_recs(user_data):
 # -----------------------------------------
 
 
+def get_new_rec_by_genre(user_data):
+    """
+    Find recommended movies if:
+    - user has no watched
+    - at least one of user's friend watched it
+    - the "genre" is most frequent genre
+    - return the list of recommended movies at the end. 
+    """
+    # list of recommended movies that will be return at the end
+    recommend_movies_by_genre = []
+
+    # assing most genre that is returning from get_most_watched_genre function
+    most_genre = get_most_watched_genre(user_data)
+
+    # assign user's friend watch list that is returning from get_friends_watched_movie function
+    friend_watched_movies = get_friends_watched_movie(user_data)
+
+    # return [] if friend watched movies is empty
+    if len(friend_watched_movies) == 0 or len(user_data["watched"]) == 0:
+        return []
+
+    # otherwise, find recommended movies list
+    else: 
+        # loop over each element in friend watched movies list and compare with the conditions
+        for movie in friend_watched_movies:
+            
+            # add movies into recommended movies list without dupliated, if it matches the conditions as below
+            # check if user has no watched that moive and it is not in the recommed moive list to avoid duplicated
+            if movie not in user_data["watched"] and movie not in recommend_movies_by_genre:
+                # check if at least one of their friend have watched that movie and it is most frequent genre
+                if friend_watched_movies.count(movie) >= 1 and movie["genre"] == most_genre:
+                    # add movie into recommended movie list
+                    recommend_movies_by_genre.append(movie)
+        return recommend_movies_by_genre
+
+
+def get_rec_from_favorites(user_data):
+    """ 
+    Finding recommended movies if:
+    - the movie is in user's favorites
+    - none of user's friend have watched it
+    - return the list of recommended movies at the end. 
+    """
+    
+    # assign user's friend watch list that is returning from get_friends_watched_movie function
+    friend_watched_movies = get_friends_watched_movie(user_data)
+
+    # list of recommended movies that will be return at the end
+    recommended_from_favorites = []
+
+    # return [] if friend watched movies is empty
+    if len(friend_watched_movies) == 0 or len(user_data["watched"]) == 0:
+        return []
+
+    # otherwise, find recommended movies list from favorite
+    else: 
+        # loop over each movie in user's favorites list to get the movies
+        for movie in user_data["favorites"]:
+            # add movies into recommend list without duplicated if conditions matched
+            # if none of user's friend have watched movie in the user's favorites
+            # check if none of user's friend have wathced it and it is not in recommeded favorites list to avoid duplicated
+            if movie not in friend_watched_movies and movie not in recommended_from_favorites:
+                recommended_from_favorites.append(movie)
+        return recommended_from_favorites
