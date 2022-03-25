@@ -316,7 +316,7 @@ def get_new_rec_by_genre(user_data):
     # TASK ONE: parse through User's data --> get movie titles and genres
     # TASK TWO: from user's genres --> find most popular genre
     # TASK THREE: find movies that user has NOT watched, a friend HAS watched,
-                # and is of user's most popular genre (TASK TWO)
+        # and is of user's most popular genre (TASK TWO)
 
         # Add to recommended movies if:
         # User has not seen it
