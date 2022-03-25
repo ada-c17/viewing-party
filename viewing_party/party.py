@@ -4,6 +4,15 @@ from ast import And
 from itertools import count
 from site import USER_BASE
 from typing import Counter
+import copy # I want to import copy module to use deepcopy
+'''I have choosen to use the deepcopy to ensure that I am not making
+changes to orginal list that is passed through the functions.
+For 3 of the functions in this wave, I am making changes to the new list.
+However, as we know, if I simply do a shallow copy, it will also change the
+orgiginal list since the elements in both the orginal list and new list
+are referecing the same ID number. By createing a deepcopy, I can ensure that
+as the function iterates  through the old list and make changes to the new list, 
+the changes will only affect the new list.'''
 
 
 def create_movie(title, genre, rating):
@@ -18,22 +27,20 @@ def create_movie(title, genre, rating):
             new_movie["rating"] == None:
         return None     
 
-    
     return new_movie
 
 def add_to_watched(user_data, movie):
-    watched_movie = user_data
+    watched_movie = copy.deepcopy(user_data)
     watched_movie["watched"].append(movie)
-    # print(user_data)
     return watched_movie
 
 def add_to_watchlist(user_data, movie):
-    watchlist_movie = user_data
+    watchlist_movie = copy.deepcopy(user_data)
     watchlist_movie["watchlist"].append(movie)
     return watchlist_movie
 
 def watch_movie(user_data, movie_title):
-    updated_movie = user_data
+    updated_movie = copy.deepcopy(user_data)
     for movie in user_data["watchlist"]:
         if movie_title == movie["title"]:
             updated_movie["watched"].append(movie)
@@ -47,21 +54,21 @@ def watch_movie(user_data, movie_title):
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 def get_watched_avg_rating(user_data):
-    rating_total = 0
+    my_ratings_total = 0
+    movie_len = len(user_data["watched"])
     if not user_data["watched"]:
         return 0
-
-    for movies in user_data["watched"]:
-        rating_total += float(movies["rating"])
     
-    movie_len = len(user_data["watched"])
-    rating_average = rating_total / movie_len
+    for movies in user_data["watched"]:
+        my_ratings_total += float(movies["rating"])
+    
+    rating_average = my_ratings_total / movie_len
     return rating_average
 
 def get_most_watched_genre(user_data):
     genres = []
     popular_genre_count = 0
-    popular_genre = ()
+    most_popular_genre = ()
     for movie in user_data["watched"]:
         genres.append(movie["genre"])
 
@@ -70,9 +77,9 @@ def get_most_watched_genre(user_data):
             return None
         if genres.count(genre) >= popular_genre_count:
             popular_genre_count = genres.count(genre)
-            popular_genre = genre
+            most_popular_genre = genre
             
-        return popular_genre
+        return most_popular_genre
 
 
 # -----------------------------------------
@@ -80,17 +87,10 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 def get_unique_watched(user_data):
     unique_movies = []
-    for movie in get_my_movies(user_data):
+    for movie in user_data["watched"]:
         if movie not in get_friends_movies(user_data):
             unique_movies.append(movie)
     return unique_movies
-
-def get_my_movies(user_data):
-    return user_data["watched"]
-    # my_movies = []
-    # for movie in user_data["watched"]:
-    #     my_movies.append(movie) # don't need
-    # return my_movies
 
 def get_friends_movies(user_data):
     friends_movies = []
@@ -99,15 +99,13 @@ def get_friends_movies(user_data):
             friends_movies.append(movie) # don't need
     return friends_movies
 
-# friends_unique_watched = get_friends_unique_watched(user_data)
-
 def get_friends_unique_watched(user_data):
     friends_unique_list = []
     for movie in get_friends_movies(user_data):
-        if movie not in get_my_movies(user_data) and \
+        if movie not in user_data["watched"] and \
             movie not in friends_unique_list:
                 friends_unique_list.append(movie) 
-    return list(friends_unique_list)
+    return friends_unique_list
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
