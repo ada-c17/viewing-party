@@ -285,7 +285,6 @@ def get_rec_from_favorites(user_data):
         # loop over each movie in user's favorites list to get the movies
         for movie in user_data["favorites"]:
             # add movies into recommend list without duplicated if conditions matched
-            # if none of user's friend have watched movie in the user's favorites
             # check if none of user's friend have wathced it and it is not in recommeded favorites list to avoid duplicated
             if movie not in friend_watched_movies and movie not in recommended_from_favorites:
                 recommended_from_favorites.append(movie)
