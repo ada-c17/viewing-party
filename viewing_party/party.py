@@ -34,14 +34,14 @@ def watch_movie(user_data, movie_title):
 # -----------------------------------------
 
 def get_watched_avg_rating(user_data):
-    ratings_data = []
     watched_movies = user_data["watched"] # An array of dictionaries 
-    average = 0.0
+    ratings = 0
+    if len(watched_movies) == 0:
+        return 0.0
     for movie in watched_movies:    # For each dictionary/movie in this array 
-        ratings_data.append(movie["rating"])
-    
-        ratings_total = sum(ratings_data)
-        average = ratings_total / len(ratings_data)
+        ratings += movie["rating"]
+
+    average = ratings/ len(watched_movies)
 
     return average
 
@@ -136,36 +136,15 @@ def get_available_recs(user_data):
 
 def get_new_rec_by_genre(user_data):
 # Consider the user's most frequently watched genre. 
-    user_fave_genre = get_most_watched_genre(user_data)
+    user_fave_genre = get_most_watched_genre(user_data) # This is a string
 # Then, determine a list of recommended movies. 
-    watched_movies = user_data["watched"]  
-
-    recs_by_genre = []
-    recommendations = get_available_recs(user_data)  
-    # friends_unique_watched = get_friends_unique_watched(user_data)
-    # for movie in friends_unique_watched:
-    #     if movie not in watched_movies:
-    #         for genre in friends_unique_watched["genre"]: 
-    #             if genre in user_fave_genre:
-    #                 recs_by_genre = recs_by_genre.append(movie)
-    for movie in recommendations:
-        if movie not in watched_movies:
-            for genre in movie:
-                if genre == user_fave_genre:
-                    recs_by_genre = recs_by_genre.append(movie)
+    recs_by_genre = []  
+    friends_unique_watched = get_friends_unique_watched(user_data)
+    for movie in friends_unique_watched:
+        if movie["genre"] == user_fave_genre:
+            recs_by_genre.append(movie)
 
     return recs_by_genre    
-
-        
-
-# A movie should be added to this list if and only if:
-
-# The user has not watched it
-# At least one of the user's friends has watched
-# The "genre" of the movie is the same as the user's most frequent genre
-# Return the list of recommended movies
-# There are also two tests about a get_rec_from_favorites function
-# Create a function named get_rec_from_favorites
 
 # takes one parameter: user_data
 # user_data will have a field "favorites". The value of "favorites" is a list of movie dictionaries
