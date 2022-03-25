@@ -3,7 +3,7 @@ from statistics import mode
 
 # ------------- WAVE 1 --------------------
 def create_movie(title, genre, rating):
-    """Creates a movie dict"""
+    """Creates a movie dict."""
     if not title or not genre or not rating:
         return None
     return {
@@ -13,15 +13,17 @@ def create_movie(title, genre, rating):
     }
 
 def add_to_watched(user_data, movie):
-    """Adds movie to a user's watched list"""
+    """Adds movie to a user's watched list."""
     user_data["watched"].append(movie)
     return user_data
 
 def add_to_watchlist(user_data, movie):
+    """Adds a movie to a user's watchlist."""
     user_data["watchlist"].append(movie)
     return user_data
 
 def watch_movie(user_data, movie):
+    """Moves a movie from a user's watch list to their watched list."""
     for i in range(len(user_data["watchlist"])):
         if user_data["watchlist"][i]["title"] == movie:
             movie_dict = user_data["watchlist"].pop(i)
@@ -30,20 +32,26 @@ def watch_movie(user_data, movie):
 
 # ------------- WAVE 2 --------------------
 def get_watched_avg_rating(user_data):
-    ratings = [] # Initialize list that will store all ratings 
-    watched_list = user_data["watched"] # Extract the watched list from the rest of the user data
+    """Gets the average rating of movies a user has watched."""
+    ratings = [] 
+    watched_list = user_data["watched"]
     
-    for movie in watched_list: # Iterate through the watched list
-        ratings.append(movie["rating"]) # Add each movies rating to ratings list
+    for movie in watched_list:
+        ratings.append(movie["rating"]) 
 
     ratings_sum = 0.0
     for rating in ratings:
         ratings_sum += rating
-    
-    if ratings_sum != 0: # Calculates avg if ratings sum is not zero
+
+    try:
         avg_rating = ratings_sum / len(ratings)
-    else:
+    except ZeroDivisionError:
         return 0.0
+    
+    # if ratings_sum != 0:
+    #     avg_rating = ratings_sum / len(ratings)
+    # else:
+    #     return 0.0
     return avg_rating
 
 def get_most_watched_genre(user_data):
