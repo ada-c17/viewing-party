@@ -1,7 +1,7 @@
 # ------------- WAVE 1 --------------------
 
 from pickle import NONE
-
+import copy
 
 def create_movie(title, genre, rating):
     if not (title and genre and rating): # if title or genre or rationg is None return None
@@ -32,12 +32,15 @@ def add_to_watchlist(user_data, movie):
     
 
 def watch_movie(user_data, title):
+    # will use deep copy of user data to iterate over it
+    # (since we are modifying user_data)
+    user_data_deep_copy = copy.deepcopy(user_data)
     # if the "title" is in the movie in the watchlist, then add movie to watched and remove from watchlist
     #if the "title" is not in the movie in the watchlist, then return user_data
 
     
     # outer loop goes through list of movies in "watchlist"
-    for movie in list(user_data["watchlist"]):  # use the copy of user_data["watchlist"] to be safe since we remove movies
+    for movie in user_data_deep_copy["watchlist"]: 
         if movie["title"] == title:
             user_data["watched"].append(movie)
             user_data["watchlist"].remove(movie)
