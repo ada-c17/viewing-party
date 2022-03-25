@@ -4,16 +4,19 @@ from tests.test_constants import MOVIE_TITLE_1, RATING_1
 #make a dictioary with three parameters if three of them are truthy
 #if any of them are none function returns none
 def create_movie(title, genre, rating):
-    pass
-
-    new_movie=dict([("MOVIE_TITLE_1",title),("GENRE_1", genre),("RATING_1",rating)])
     
+
+    new_movie=dict([("title",title),("genre", genre),("rating",rating)])
+  
+    # if title is None or genre is None or rating is None:
+    #     return None
     if title is None:
         return None
     if genre is None:
         return None
     if rating is None:
         return None
+    return new_movie
 
 #This function needs to add movie to the watched list inside the user_data
 def add_to_watched(user_data, movie):
@@ -113,7 +116,7 @@ def get_available_recs(user_data):
     host=user_data["subscriptions"]
     available_recs=[]
     for i in uniq_friends:
-       if uniq_friends[0]['host'] in host:
+       if i['host'] in host:
         #    if i not in available_recs:
             available_recs.append(i)
     return available_recs
@@ -129,7 +132,7 @@ def get_new_rec_by_genre(user_data):
     fav_genre = get_most_watched_genre(user_data)
     uniq_friends= get_friends_unique_watched(user_data)
     for i in uniq_friends:
-        if uniq_friends[0]["genre"]in fav_genre:
+        if i["genre"] == fav_genre:
             recommended_list.append(i)
     return recommended_list
 
