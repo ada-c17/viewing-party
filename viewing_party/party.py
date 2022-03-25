@@ -189,6 +189,7 @@ def get_unique_watched(user_data):
     
     # Empty list to put movies only the user has seen
     user_unique_list = []
+
     # Empty list to populate with --> want to flatten the friend_list so that list of dictionaries (one dictionary, one movie)
     friends_movies = []
 
@@ -201,7 +202,7 @@ def get_unique_watched(user_data):
             friends_movies.append(film)
             # Append a dictionary to the empty friends_movies so that its a list of dictionaries
 
-    
+
     for movie in user_list:
         # Loop through the user_list (list of dictionaries)
         if (movie not in friends_movies) and (movie not in user_unique_list):
@@ -390,10 +391,9 @@ def get_rec_from_favorites(user_data):
 
     # List of user's favorite movies
     faves = user_data["favorites"]
-    # print(faves)
 
 
-    # Empty list to populate ser's friends movie list --> movies they've seen
+    # Empty list to populate user's friends movie list --> movies they've seen
     friends_list = []
 
     for item in user_data["friends"]:
