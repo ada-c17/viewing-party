@@ -139,7 +139,7 @@ def get_new_rec_by_genre(user_data):
     return recommendations
 
 def get_rec_from_favorites(user_data):
-    """Give friend's recommendations from user's favorites"""
+    """Give friends recommendations from user's favorites"""
     recommendations = []
     friends_not_watched = get_unique_watched(user_data)
 
