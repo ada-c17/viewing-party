@@ -2,7 +2,9 @@ import pytest
 from viewing_party.party import *
 from tests.test_constants import *
 
-@pytest.mark.skip()
+# Wave 5 / Test 1
+# Recommend movie user has not watched that friends have watched
+# if movie genre matches user's favorite genre
 def test_new_genre_rec():
     # Arrange
     sonyas_data = clean_wave_5_data()
@@ -17,7 +19,7 @@ def test_new_genre_rec():
     assert FANTASY_4b in recommendations
     assert sonyas_data == clean_wave_5_data()
 
-@pytest.mark.skip()
+# Wave 5 / Test 2
 def test_new_genre_rec_from_empty_watched():
     # Arrange
     sonyas_data = {
@@ -38,7 +40,7 @@ def test_new_genre_rec_from_empty_watched():
     # Assert
     assert len(recommendations) == 0
 
-@pytest.mark.skip()
+# Wave 5 / Test 3
 def test_new_genre_rec_from_empty_friends():
     # Arrange
     sonyas_data = {
@@ -52,12 +54,14 @@ def test_new_genre_rec_from_empty_friends():
             }
         ]
     }
+    # Act
+    recommendations = get_new_rec_by_genre(sonyas_data)
 
-    # *********************************************************************
-    # ****** Complete the Act and Assert Portions of theis tests **********
-    # *********************************************************************
+    # Assert
+    assert len(recommendations) == 0
 
-@pytest.mark.skip()
+#Wave 5 / Test 4
+# Recommend movie from user's favorites that no friend has watched
 def test_unique_rec_from_favorites():
     # Arrange
     sonyas_data = clean_wave_5_data()
@@ -71,7 +75,7 @@ def test_unique_rec_from_favorites():
     assert INTRIGUE_2b in recommendations
     assert sonyas_data == clean_wave_5_data()
 
-@pytest.mark.skip()
+#Wave 5 / Test 5
 def test_unique_from_empty_favorites():
     # Arrange
     sonyas_data = {
@@ -92,7 +96,7 @@ def test_unique_from_empty_favorites():
     # Assert
     assert len(recommendations) == 0
 
-@pytest.mark.skip()
+#Wave 5 / Test 6
 def test_new_rec_from_empty_friends():
     # Arrange
     sonyas_data = {
