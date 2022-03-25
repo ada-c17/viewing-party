@@ -151,7 +151,8 @@ def test_moves_movie_from_watchlist_to_watched():
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
-
+    assert updated_data["watched"][1] == HORROR_1
+    
 # @pytest.mark.skip()
 def test_does_nothing_if_movie_not_in_watchlist():
     # Arrange
