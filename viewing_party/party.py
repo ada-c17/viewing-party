@@ -120,15 +120,15 @@ def get_friends_unique_watched(user_data):
     unique_list =[] # a list of the difference of users watched and friends watched.
     
     for movie in user_data["watched"]:
-        movie_dict[movie["title"]] = movie
+        movie_dict[movie["title"]] = movie #movies she has watched
         user_set.add(movie["title"])
 
     for friend in user_data["friends"]:
-        for movie in friend["watched"]:
-            movie_dict[movie["title"]] = movie
+        for movie in friend["watched"]: 
+            movie_dict[movie["title"]] = movie #movies friends had watched
             friend_set.add(movie["title"])  
     
-    friends_unique_set = friend_set - user_set
+    friends_unique_set = friend_set - user_set #set difference
 
     for movies in friends_unique_set :
         unique_list.append (movie_dict[movies])
@@ -163,7 +163,7 @@ def get_available_recs(user_data):
 
 
     for movies in friends_unique_set :
-        if movie_dict[movies]["host"] in user_data["subscriptions"]:
+        if movie_dict[movies]["host"] in user_data["subscriptions"]: #Compare if movies that friends has watched and recommend are hosted in services is is subscripted
             unique_list.append(movie_dict[movies])
     
     return unique_list 
@@ -173,4 +173,66 @@ def get_available_recs(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+
+def get_new_rec_by_genre(user_data):
+
+    
+    movie_dict = {} #Complete library of movies
+    user_set = set() #Set of Amanda (user) has watched.
+    friend_set = set() #Sets of users friends has watched.
+    unique_list =[] # a list of the difference of users watched and friends watched.
+    user_fav_genre_set = set()
+    for movie in user_data["watched"]:
+        movie_dict[movie["title"]] = movie
+        user_set.add(movie["title"])
+
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            movie_dict[movie["title"]] = movie
+            friend_set.add(movie["title"])  
+    
+    friends_unique_set = friend_set - user_set
+    
+    if "favorites" in user_data: #Make sure this key exist in the dictionary
+        for movie in user_data["favorites"]:
+            movie_dict[movie["title"]] = movie
+            user_fav_genre_set.add(movie["genre"])
+
+
+
+    for movies in friends_unique_set :
+        if movie_dict[movies]["genre"] in user_fav_genre_set: # Compare if friends watched and user favoritos share "genre" to recommed.
+            if movie_dict[movies]["host"] in user_data["subscriptions"]: #Compare if movies that friends has watched and recommend are hosted in services is is subscripted
+                unique_list.append(movie_dict[movies])
+    
+    return unique_list 
+
+
+def get_rec_from_favorites(user_data):
+    
+    movie_dict = {} #Complete library of movies
+    user_set = set() #Set of Amanda (user) has watched.
+    friend_set = set() #Sets of users friends has watched.
+    unique_list =[] # a list of the difference of users watched and friends watched.
+
+    for movie in user_data["favorites"]:
+        movie_dict[movie["title"]] = movie
+        user_set.add(movie["title"])
+
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            movie_dict[movie["title"]] = movie
+            friend_set.add(movie["title"])  
+    
+    user_unique_set = user_set - friend_set #change order to hold the difference from favorites.
+    
+    if "favorites" in user_data: #Make sure this key exist in the dictionary
+        for movie in user_data["favorites"]:
+            movie_dict[movie["title"]] = movie
+            
+
+    for movies in user_unique_set:
+        unique_list.append(movie_dict[movies])
+    
+    return unique_list
 
