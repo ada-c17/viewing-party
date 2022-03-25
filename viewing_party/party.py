@@ -47,38 +47,34 @@ def get_watched_avg_rating(user_data):
         avg_rating = ratings_sum / len(ratings)
     except ZeroDivisionError:
         return 0.0
-    
-    # if ratings_sum != 0:
-    #     avg_rating = ratings_sum / len(ratings)
-    # else:
-    #     return 0.0
     return avg_rating
 
 def get_most_watched_genre(user_data):
-    genres = [] # List will hold every instance of a genre in user watched list
-    watched_list = user_data["watched"] # Extract watched list from rest of user data
+    """Finds a user's most watched genre."""
+    genres = [] 
+    watched_list = user_data["watched"] 
 
     for movie in watched_list:
         genres.append(movie["genre"])
 
-    if genres: # Find most popular genre if at least 1 genre exists in data
+    if genres:
         return mode(genres)
-    else: # Return None if genres watched is empty
+    else:
         return None
     
     return mode(genres)
     
 # ------------- WAVE 3 --------------------
 def get_unique_watched(user_data):
-    watched_list = user_data["watched"] # List of user's watched movies. List of movie dicts.
-    friends_watched_list = [] # List that will contain movie dicts of all movies watched by friends
-    unique_movies = [] # List that will contain all movies user has seen that friends haven't
+    """Finds movies watched by a user that their friends have not watched."""
+    watched_list = user_data["watched"] 
+    friends_watched_list = []
+    unique_movies = [] 
 
-    for friend in user_data["friends"]: # Goes to each friend 
-        for movie in friend["watched"]: # Goes to each friend's watched list
-            friends_watched_list.append(movie) # Adds each friends watched movie to the friends watched list
+    for friend in user_data["friends"]: 
+        for movie in friend["watched"]: 
+            friends_watched_list.append(movie) 
 
-    # Check if movie from user's watched list is in friends' watch list, and if not, add to unique movies list
     for movie in watched_list:
         if movie not in friends_watched_list:
             unique_movies.append(movie)
@@ -86,6 +82,7 @@ def get_unique_watched(user_data):
     return unique_movies
 
 def get_friends_unique_watched(user_data):
+    """Finds movies that user's friends have watched that the user has not watched."""
     watched_list = user_data["watched"]
     friends_watched_list = []
     friends_unique_movies = []
@@ -104,6 +101,7 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 def get_available_recs(user_data):
+    """Finds recommendations from user's friends that are available on a streaming service user has access to."""
     friends_unique_movies = get_friends_unique_watched(user_data)
     recommendations = []
     for movie in friends_unique_movies:
