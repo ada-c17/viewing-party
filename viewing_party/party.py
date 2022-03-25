@@ -6,7 +6,7 @@ from itertools import count
 def create_movie(title, genre, rating):
     if None in [title, genre, rating]:
         return None
-        
+
     movie_dict = {
                 "title" : title,
                 "genre" : genre,
@@ -70,7 +70,7 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 def get_unique_watched(user_data):
-    movie_list = user_data["watched"].copy()
+    movie_list = user_data["watched"]
     friend_list = combine_friend_movies(user_data)
     user_only =[]
 
@@ -81,7 +81,7 @@ def get_unique_watched(user_data):
 
 
 def get_friends_unique_watched(user_data):
-    movie_list = user_data["watched"].copy()
+    movie_list = user_data["watched"]
     friend_list = combine_friend_movies(user_data)
     friend_only =[]
 
