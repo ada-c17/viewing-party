@@ -346,18 +346,27 @@ def get_new_rec_by_genre(user_data):
         most_popular_genre = 0
 
 
+
     # Empty list to populate with movies friends have seen
     friends_movies = []
-
-    for friend in friend_list:
-        for film in friend["watched"]:
-            friends_movies.append(film)
 
     # Empty list to populate with movie recommendations
     movie_recs = []
 
+    for friend in friend_list:
+        if friend["watched"]:
+            # If friends "watched" dictionary isn't empty, append movies to friends_movies list
+            for film in friend["watched"]:
+                friends_movies.append(film)
+        else:
+            # If friends "watched" dictionary is empty, return empty list
+            return movie_recs
+
+
     for movie in friends_movies:
+        # Loop through movies in friends_movies list
         if (movie not in user_list) and (movie["genre"] == most_popular_genre):
+            # If movie meets these criteria, append to movie_recs list
             movie_recs.append(movie)
     
     return movie_recs
