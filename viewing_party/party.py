@@ -114,14 +114,16 @@ def get_available_recs(user_data):
 # -----------------------------------------
 
 def get_new_rec_by_genre(user_data):
+    """Find recommendations from user's friend list that are user's favorite genre"""
     recommendations = []
     
-    # Check for content inside user's watched list
+    # Handle empty watched list
     if not user_data["watched"]:
         return recommendations
     
     available_recs = get_available_recs(user_data)
 
+    # Find user's favorite genre
     genres = {}
     for movie in user_data["watched"]:
         if movie["genre"] not in genres:
@@ -134,10 +136,10 @@ def get_new_rec_by_genre(user_data):
     for movie in available_recs:
         if movie["genre"] == favorite_genre:
             recommendations.append(movie)
-
     return recommendations
 
 def get_rec_from_favorites(user_data):
+    """Give friend's recommendations from user's favorites"""
     recommendations = []
     friends_not_watched = get_unique_watched(user_data)
 
