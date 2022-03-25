@@ -91,7 +91,7 @@ def get_watched_avg_rating(user_data):
 
 
 def get_most_watched_genre(user_data):
-    """ finding most watched genre and return it """
+    """ Finding most watched genre and return it """
 
     # return 0, if the user data watched is empty
     if len(user_data["watched"]) == 0:
@@ -99,35 +99,31 @@ def get_most_watched_genre(user_data):
 
     # otherwise, finding most watched genre
     else:
-        # This dictionary has key is value of genre from user watched, value is numbers of duplication of genre
-        genre = {}
-        # variable to find most watched genre
+        # The list to store all genres
+        genres = []
+        # variable to find max counter of most watched genre 
         max_value = 0
         # variable to store most watched genre and return at the end
         most_watched_genre = ""
 
-        # create a dictionary that has key is value of genre and value is numbers of duplication of genre from user watched
-        # loop over each element of user watched to genre
-        for item in user_data["watched"]:
-            # assigne genre to key variable
-            key = item["genre"]
+        # create a list to store all genres from user wathced
+        # loop over each element of user watched to get genre 
+        for movie in user_data["watched"]:
+            # add genre into list
+            genres.append(movie["genre"])
 
-            # add key as key of genre dictionary and assigne 0 as value 
-            if key not in genre:
-                genre[key] = 0
-            # increasing by 1 if genre of user watched is in genre dictionary 
-            if item["genre"] in genre:
-                genre[key] += 1
-        
-        # find most watched genre
-        # loop over key and value of genre dictionary to use on purpose finding most watched genre
-        for key, value in genre.items():
-            # if value value greater than max_value 
-            # assign  value to max_value for comparing next value
-            # assign key of dictionary to most_watched_genre that is the answer after finishing comparing
-            if value > max_value:
-                max_value = value
-                most_watched_genre = key
+        # find the most watched genre
+        # loop over the each element of genres list to get genre 
+        for genre in genres:
+            # count numbers of each genre in the list
+            genre_count = genres.count(genre)
+            # find the max counter of genre 
+            if genre_count > max_value :
+                # reassign the max_value as genre_count everytime when the if statement is true
+                max_value = genre_count
+                # assign genre name to most_watched_genre, it changes for every time the max_value been changed
+                most_watched_genre = genre
+            
         return most_watched_genre
 
 # -----------------------------------------
