@@ -1,7 +1,7 @@
 # ------------- WAVE 1 --------------------
 
 from statistics import mean
-
+import copy
 
 def create_movie(title, genre, rating):
     if None in (title,genre,rating,):
@@ -63,17 +63,41 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 
 def get_unique_watched(user_data):
-    pass
+    user_unique_movies = copy.deepcopy(user_data["watched"])
+    for friend_movie_dict in user_data["friends"]:
+        for movie in friend_movie_dict["watched"]:
+            if movie in user_unique_movies:
+                user_unique_movies.remove(movie)
+    return user_unique_movies
+
 
 def get_friends_unique_watched(user_data):
-    pass
+    friend_movies = []
+    user_unique_movies = user_data["watched"]
+    for friend_movie_dict in user_data["friends"]:
+        for movie in friend_movie_dict["watched"]:
+            if movie not in friend_movies:
+                friend_movies.append(movie)
+    friend_unique_movies = copy.deepcopy(friend_movies)
+    for user_movie in user_unique_movies:
+        for friend_movie in friend_movies:
+            if user_movie == friend_movie:
+                friend_unique_movies.remove(friend_movie)
+    return friend_unique_movies
+    # This is super messy. I don't like it. 
+    # Perhaps I can use filter, list comp, or calculate a difference with sets of dictionaries?
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
 def get_available_recs(user_data):
-    pass
+    recommended_movies = []
+    friends_movies = get_friends_unique_watched(user_data)
+    for movie in friends_movies:
+        if movie["host"] in user_data["subscriptions"]:
+            recommended_movies.append(movie)
+    return recommended_movies
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
