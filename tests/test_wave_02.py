@@ -39,7 +39,8 @@ def test_most_watched_genre():
     assert popular_genre == "Fantasy"
     assert janes_data == clean_wave_2_data()
 
-def test_most_watched_genre_additional():
+def test_most_watched_genre_additional(): #added an additional test to make sure the function picks up 
+                                        #the most watched genre and not just the first one from the list
     # Arrange
     janes_data = clean_wave_2_additional_data()
 
