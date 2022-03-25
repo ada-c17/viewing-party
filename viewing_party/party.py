@@ -5,14 +5,14 @@ from itertools import count
 from site import USER_BASE
 from typing import Counter
 import copy # I want to import copy module to use deepcopy
-'''I have choosen to use the deepcopy to ensure that I am not making
-changes to orginal list that is passed through the functions.
-For 3 of the functions in this wave, I am making changes to the new list.
-However, as we know, if I simply do a shallow copy, it will also change the
-orgiginal list since the elements in both the orginal list and new list
-are referecing the same ID number. By createing a deepcopy, I can ensure that
-as the function iterates  through the old list and make changes to the new list, 
-the changes will only affect the new list.'''
+'''I have chosen to use the deepcopy to ensure that I am not making
+changes to the original list pass through the functions.
+I am making changes to the new list for three(3) of the functions in this wave.
+However, as we know, if I only make a shallow copy, it will also change the 
+original list since the elements in both the original list and the new list
+are referencing the same ID number. By creating a deepcopy, I can ensure that as 
+the function iterates through the old list and changes to the new list,  the 
+changes will only affect the new list.'''
 
 
 def create_movie(title, genre, rating):
