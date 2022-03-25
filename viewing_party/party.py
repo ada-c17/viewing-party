@@ -55,11 +55,9 @@ def get_watched_avg_rating(user_data):
 def get_most_watched_genre(user_data):
     watched = user_data["watched"]
     genre_list = []
-    # occuring_count = dict()
-    # count = 0
 
-    import statistics
-    from statistics import mode
+    # import statistics
+    # from statistics import mode
 
     if len(watched) == 0:
         return None
@@ -67,14 +65,9 @@ def get_most_watched_genre(user_data):
     for item in range(len(watched)):
         genre_list.append(str(watched[item]["genre"]))
 
-    return mode(genre_list)
-    # for genre in genre_list:
-    #     if genre in occuring_count:
-    #         occuring_count[genre]+=1
-    #     else:
-    #         occuring_count[genre]=1
-    # for (genre, number) in  occuring_count:
+    return max(set(genre_list), key = genre_list.count)
 
+    # return mode(genre_list)
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
