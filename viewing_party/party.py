@@ -24,10 +24,10 @@ def add_to_watchlist(user_data, movie):
     return user_data
 
 def watch_movie(user_data, movie):
-    for i in user_data['watchlist']:
-        if i['title'] == movie:
-            user_data['watched'].append(i)
-            user_data['watchlist'].remove(i)    
+    for movie_dicts in user_data['watchlist']:
+        if movie_dicts['title'] == movie:
+            user_data['watched'].append(movie_dicts)
+            user_data['watchlist'].remove(movie_dicts)    
     return user_data
 
 # -----------------------------------------
@@ -36,21 +36,23 @@ def watch_movie(user_data, movie):
 
 def get_watched_avg_rating(user_data):
     rating_total = 0
-    counter = 0
-    for i in user_data['watched']:
-        rating_total += i['rating']
-        counter += 1
+    watch_counter = 0
+    
+    for movie_dicts in user_data['watched']:
+        rating_total += movie_dicts['rating']
+        watch_counter += 1
 
-    if rating_total >0:
-        avg_rating = rating_total/counter
+    if rating_total > 0:
+        avg_rating = rating_total/watch_counter
     else:
         avg_rating = 0
     return avg_rating
 
 def get_most_watched_genre(user_data):
     genre_list = []
-    for i in user_data['watched']:
-        genre_list.append(i['genre'])
+
+    for movie_dicts in user_data['watched']:
+        genre_list.append(movie_dicts['genre'])
     if genre_list:
         return max(set(genre_list), key = genre_list.count)
 
@@ -59,37 +61,31 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 
 def get_unique_watched(user_data):
-    user_movies = []
+    user_movies = user_data['watched']
     friends_movies = []
     user_unique_movies = []
 
-    for i in user_data['watched']:
-        user_movies.append(i)
+    for movie_dicts in user_data['friends']:
+        for movie in movie_dicts['watched']:
+            friends_movies.append(movie)
 
-    for i in user_data['friends']:
-        for x in i['watched']:
-            friends_movies.append(x)
-
-    for i in user_movies:
-        if i not in friends_movies and i not in user_unique_movies:
-            user_unique_movies.append(i) 
+    for user_movie in user_movies:
+        if user_movie not in friends_movies and user_movie not in user_unique_movies:
+            user_unique_movies.append(user_movie) 
     return user_unique_movies
 
 def get_friends_unique_watched(user_data):
-    user_movies = []
+    user_movies = user_data['watched']
     friends_movies = []
     friends_unique_movies = []
 
-    for i in user_data['watched']:
-        user_movies.append(i)
+    for movie_dicts in user_data['friends']:
+        for movie in movie_dicts['watched']:
+            friends_movies.append(movie)
 
-    for i in user_data['friends']:
-        for x in i['watched']:
-            friends_movies.append(x)
-
-    for i in friends_movies:
-        if i not in user_movies and i not in friends_unique_movies:
-            friends_unique_movies.append(i) 
+    for movie_dicts in friends_movies:
+        if movie_dicts not in user_movies and movie_dicts not in friends_unique_movies:
+            friends_unique_movies.append(movie_dicts) 
     return friends_unique_movies
 
 
@@ -102,14 +98,13 @@ def get_available_recs(user_data):
     user_recommendations = []
     friends_watched = []
 
-    for dicts in user_data['friends']:
-        for movie in dicts['watched']:
+    for movie_dicts in user_data['friends']:
+        for movie in movie_dicts['watched']:
             friends_watched.append(movie)
 
-    for i in friends_watched:
-        if i['host'] in user_subscriptions:
-            if i not in user_data['watched'] and i not in user_recommendations:
-                user_recommendations.append(i)
+    for movie_dicts in friends_watched:
+        if movie_dicts['host'] in user_subscriptions and movie_dicts not in user_data['watched'] and movie_dicts not in user_recommendations:
+            user_recommendations.append(movie_dicts)
 
     return user_recommendations
 
@@ -123,14 +118,13 @@ def get_new_rec_by_genre(user_data):
     friends_watched = []
     most_genre_recommendations = []
 
-    for dicts in user_data['friends']:
-        for movie in dicts['watched']:
+    for movie_dicts in user_data['friends']:
+        for movie in movie_dicts['watched']:
             friends_watched.append(movie)
 
-    for i in friends_watched:
-        if i not in user_data['watched']:
-            if i['genre'] == genre_most_watched:
-                most_genre_recommendations.append(i)
+    for movie_dicts in friends_watched:
+        if movie_dicts not in user_data['watched'] and movie_dicts['genre'] == genre_most_watched:
+            most_genre_recommendations.append(movie_dicts)
 
     return most_genre_recommendations
 
@@ -139,13 +133,12 @@ def get_rec_from_favorites(user_data):
     friends_watched = []
     rec_from_favorites = []
 
-    for dicts in user_data['friends']:
-        for movie in dicts['watched']:
+    for movie_dicts in user_data['friends']:
+        for movie in movie_dicts['watched']:
             friends_watched.append(movie)
     
-    for i in user_favorites:
-        if i not in friends_watched:
-            rec_from_favorites.append(i)
+    for movie_dicts in user_favorites:
+        if movie_dicts not in friends_watched:
+            rec_from_favorites.append(movie_dicts)
 
     return rec_from_favorites
-# need to go back to wave 3 assert tests to add in a few more assertions
