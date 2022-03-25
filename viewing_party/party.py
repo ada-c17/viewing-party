@@ -3,6 +3,7 @@ from statistics import mode
 
 # ------------- WAVE 1 --------------------
 def create_movie(title, genre, rating):
+    """Creates a movie dict"""
     if not title or not genre or not rating:
         return None
     return {
@@ -12,6 +13,7 @@ def create_movie(title, genre, rating):
     }
 
 def add_to_watched(user_data, movie):
+    """Adds movie to a user's watched list"""
     user_data["watched"].append(movie)
     return user_data
 
