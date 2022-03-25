@@ -194,37 +194,32 @@ def get_friends_unique_watched(user_data):
 def get_available_recs(user_data):
     """ 
     Finding recommended movies if:
-    - user has no watched
-    - at least one of user's friend watched it
-    - the "host" that is in "subscriptons" field
-    - return the list of recommended movies at the end 
+        - user has no watched
+        - at least one of user's friend watched it
+        - the "host" that is in "subscriptons" field
+        - return the list of recommended movies at the end 
     """
-    # list of dictionary that store all movies are friend watched list
-    friend_watched_list = []
+    # assign user's friend watch list that is returning from get_friends_watched_movie function
+    friend_watched_list = get_friends_watched_movie(user_data)
     # list of movies that will be recommended when it matche all the conditions
     recommend_movie_list = []
 
-    # create friend wathed list
-    # loop to get each value of friend list
-    for i in range(len(user_data["friends"])):
+    # return [] if friend watched movies is empty
+    if len(friend_watched_list) == 0 or len(user_data["watched"]) == 0:
+        return []
 
-        # loop to get each value of watched list at each index of friend list
-        for k in range(len(user_data["friends"][i]["watched"])):
-            
-            # add each movies dictionary at each index of watched list of friend list in user data into a new list 
-            friend_watched_list.append(user_data["friends"][i]["watched"][k])
-    # add all movies that matche the condition into recommend movies list
-    # loop over item in friend watched list to check the conditions
-    for item in friend_watched_list:
-        # add item into recommended movies list if it matches the conditions as below
-        # first condition: if the item is not in user watched list
-        if item not in user_data["watched"]:    
-            # second condition: if the item been happened at least one time in friend watched list
-            if friend_watched_list.count(item) >= 1:
-                # third condition: if the key "host" of item dictionary is in subscriptions of user data 
-                if item["host"] in user_data["subscriptions"]:
-                    recommend_movie_list.append(item)
-    return recommend_movie_list
+    # otherwise, find recommended movies list
+    else: 
+        # loop over each movie in friend watched list to check the conditions
+        for movie in friend_watched_list:
+            # add movie into recommended movies list without duplicating if it matches the conditions as below
+            # check if user has not watched that movie and the host is in subcriptions
+            if movie not in user_data["watched"] and movie["host"] in user_data["subscriptions"]:    
+                # check if at least one of their friend have wathced and it is not in recommended movie list to avoid duplicated.
+                if friend_watched_list.count(movie) >= 1 and movie not in recommend_movie_list:
+                    recommend_movie_list.append(movie)
+        return recommend_movie_list
+
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
