@@ -142,6 +142,34 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
+def get_available_recs(user_data):
+
+    
+    movie_dict = {} #Complete library of movies
+    user_set = set() #Set of Amanda (user) has watched.
+    friend_set = set() #Sets of users friends has watched.
+    unique_list =[] # a list of the difference of users watched and friends watched.
+    
+    for movie in user_data["watched"]:
+        movie_dict[movie["title"]] = movie
+        user_set.add(movie["title"])
+
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            movie_dict[movie["title"]] = movie
+            friend_set.add(movie["title"])  
+    
+    friends_unique_set = friend_set - user_set
+
+
+    for movies in friends_unique_set :
+        if movie_dict[movies]["host"] in user_data["subscriptions"]:
+            unique_list.append(movie_dict[movies])
+    
+    return unique_list 
+
+
+
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
