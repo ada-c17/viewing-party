@@ -53,14 +53,13 @@ def get_most_watched_genre(user_data):
         return None
 
     for movies in watched_movies:
-    # for genre, frequency in popular_genre.items():
         genre = movies["genre"]
         if genre in popular_genre_dict:
             frequency = popular_genre_dict[genre] + 1 
             print(f"*********This is the value of: {frequency=}")
         else:
             frequency = 1
-            # popular_genre = {str(genre): frequency}
+
         popular_genre_dict.update({genre: frequency})
         print(f"*********This is the value of: {popular_genre_dict=}")
     popular_genre = None
@@ -69,8 +68,6 @@ def get_most_watched_genre(user_data):
         if frequency > highest_frequency:
             highest_frequency = frequency
             popular_genre = genre
-        # highest_frequency = max(popular_genre_dict.values)
-        # popular_genre = max(popular_genre_dict, genre = popular_genre_dict.get) 
         
     return popular_genre
 
@@ -109,7 +106,6 @@ def get_friends_unique_watched(user_data):
         elif movie not in watched_movies:
             friends_unique_watched_list.append(movie)
             
-    #Movie title variable? For each movie in movie ditionary in watched movies
     print(f"HERE IS THE LIST*************** {friends_unique_watched_list}")       
     return friends_unique_watched_list
     
@@ -120,7 +116,7 @@ def get_available_recs(user_data):
     recommendations = []    
     watched_movies = user_data["watched"]  
     friends_unique_watched = get_friends_unique_watched(user_data)
-    subscriptions = user_data["subscriptions"] # This represents the names of streaming services that the user has access to
+    subscriptions = user_data["subscriptions"] # User's streaming services
 
     for movie in friends_unique_watched:
         if movie not in watched_movies:
@@ -135,9 +131,7 @@ def get_available_recs(user_data):
 # -----------------------------------------
 
 def get_new_rec_by_genre(user_data):
-# Consider the user's most frequently watched genre. 
     user_fave_genre = get_most_watched_genre(user_data) # This is a string
-# Then, determine a list of recommended movies. 
     recs_by_genre = []  
     friends_unique_watched = get_friends_unique_watched(user_data)
     for movie in friends_unique_watched:
@@ -146,26 +140,13 @@ def get_new_rec_by_genre(user_data):
 
     return recs_by_genre    
 
-# takes one parameter: user_data
-# user_data will have a field "favorites". The value of "favorites" is a list of movie dictionaries
-# This represents the user's favorite movies
-# Then, determine a list of recommended movies. A movie should be added to this list if and only if:
-# The movie is in the user's "favorites"
-# None of the user's friends have watched it
-# Return the list of recommended movies
 
-def new_genre_rec_from_empty_watched():
-    user_data["watched"] = []   #Due to test arrange section
-    pass
-# user_data = {
-#     "watchlist": [{
-#         "title": MOVIE_TITLE_1,
-#         "genre": GENRE_1,
-#         "rating": RATING_1
-#     }],
-#     "watched":  [{
-#         "title": MOVIE_TITLE_1,
-#         "genre": GENRE_1,
-#         "rating": RATING_1
-#     }]
-# }
+def get_rec_from_favorites(user_data):
+    favorites = user_data["favorites"]   # A list of movie dictionaries
+    recs_by_favorites = []
+    friends_watched_list = get_friends_watched_movies(user_data)
+    for movie in favorites:
+        if movie in favorites and movie not in friends_watched_list:
+            recs_by_favorites.append(movie)
+
+    return recs_by_favorites
