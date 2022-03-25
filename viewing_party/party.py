@@ -131,6 +131,19 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 
 
+def get_friends_watched_movie(user_data):
+    """ Creating friend watched movie list from user data to analyze easier then return it. It is reuseable function. """
+
+    # list to store all friend watched movies dictionary to compare with user wathced list
+    friends_watched_list = []
+
+    # loop to get the each friend watched moives
+    for movie in user_data["friends"]:
+        # extend whole list of each friend watched movie into new list
+        friends_watched_list.extend(movie["watched"])
+
+    return friends_watched_list
+
 def get_unique_watched(user_data):
     # list to store all friend watched movies dictionary to compare with user wathced list
     friends_watched_movies_list = []
