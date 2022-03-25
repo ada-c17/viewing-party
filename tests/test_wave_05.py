@@ -52,7 +52,14 @@ def test_new_genre_rec_from_empty_friends():
             }
         ]
     }
+    # Act
+    recommendations = get_new_rec_by_genre(sonyas_data)
 
+    # Assert
+    assert len(recommendations) == 0
+    # assert FANTASY_2b in recommendations
+    # assert INTRIGUE_2b in recommendations
+    # assert sonyas_data == clean_wave_5_data()
     # *********************************************************************
     # ****** Complete the Act and Assert Portions of theis tests **********
     # *********************************************************************
