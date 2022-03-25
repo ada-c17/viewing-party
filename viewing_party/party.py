@@ -36,7 +36,7 @@ def get_watched_avg_rating(janes_data):
         average = 0.0
         return average
     else:
-        for val in USER_DATA_2.values():
+        for val in janes_data.values():
             for dict in val:
                 for key in dict:
                     if key == "rating":
@@ -53,7 +53,7 @@ def get_most_watched_genre(janes_data):
         popular_genre = None
         return popular_genre
     else:                  
-        for watched_items in USER_DATA_2.values():
+        for watched_items in janes_data.values():
             for movie_data in watched_items:
                 key = movie_data["genre"]
                 if key not in genre_dict:
