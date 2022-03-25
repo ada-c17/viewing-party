@@ -16,7 +16,7 @@ def test_new_genre_rec():
     assert len(recommendations) == 1
     assert FANTASY_4b in recommendations
     assert sonyas_data == clean_wave_5_data()
-# TEST TWO 
+# TEST TWO - PASSED
 # @pytest.mark.skip()
 def test_new_genre_rec_from_empty_watched():
     # Arrange
@@ -37,8 +37,8 @@ def test_new_genre_rec_from_empty_watched():
 
     # Assert
     assert len(recommendations) == 0
-# TEST THREE
-@pytest.mark.skip()
+# TEST THREE - PASSED
+# @pytest.mark.skip()
 def test_new_genre_rec_from_empty_friends():
     # Arrange
     sonyas_data = {
