@@ -8,8 +8,7 @@ def create_movie(title, genre, rating):
 
     new_movie=dict([("title",title),("genre", genre),("rating",rating)])
   
-    # if title is None or genre is None or rating is None:
-    #     return None
+    
     if title is None:
         return None
     if genre is None:
@@ -28,12 +27,10 @@ def add_to_watchlist(user_data,movie):
     return user_data
 #If title in watchlist remove and add to watched. Else return user data as is.
 def watch_movie(user_data,title):
-    data=user_data["watched"]
-    data2=user_data["watchlist"]
-    for i in range(len(list(data))):
-        if data[i]["title"]==title:
-            data.append(title)
-            data2.remove(title)
+    for i in user_data["watchlist"]:
+        if i["title"]==title:
+            user_data["watched"].append(i)
+            user_data["watchlist"].remove(i)
     return user_data
     # 
 # ----------------------------------------
