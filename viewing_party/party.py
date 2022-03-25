@@ -77,7 +77,7 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-# returns unique movie from user's movies
+# returns unique movie list from user's movies
 def get_unique_watched(user_data):
     unique_watched = []
     user_watched = user_data["watched"]
@@ -92,7 +92,7 @@ def get_unique_watched(user_data):
 
     return unique_watched
 
-
+# returns unique friends movie list from friends' movies
 def get_friends_unique_watched(user_data):
     friends_unique_watched = []
     user_watched = user_data["watched"]
@@ -111,21 +111,23 @@ def get_friends_unique_watched(user_data):
     print(friends_unique_watched)
     return friends_unique_watched
 
-
-# take one parameter: user_data
-# the value of user_data will be a dictionary with a "watched" list of movie dictionaries, and a "friends"
-# This represents that the user has a list of watched movies and a list of friends
-# The value of "friends" is a list
-# Each item in "friends" is a dictionary. This dictionary has a key "watched", which has a list of movie dictionaries.
-# Each movie dictionary has a "title".
-# Consider the movies that the user has watched, and consider the movies that their friends have watched. Determine which movies at least one of the user's friends have watched, but the user has not watched.
-# Return a list of dictionaries, that represents a list of movies
-
-
-
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+
+# returns recommendations list from friends' movie list
+# movies from friends' list are unwatched by user and have host that is in user subscriptions
+def get_available_recs(user_data):
+    recommendations = []
+    user_subscriptions = user_data["subscriptions"]
+    unique_watched = get_unique_watched(user_data)
+    friends_unique_watched = get_friends_unique_watched(user_data)
+    for friend_movie in friends_unique_watched:
+        if friend_movie not in unique_watched:
+            if friend_movie["host"] in user_data["subscriptions"]:
+                recommendations.append(friend_movie)
+
+    return recommendations
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
