@@ -2,6 +2,12 @@
 
 from enum import unique
 
+# This is a helper function used in some above functions
+def get_users_watched_movie_titles(user_data):
+    users_watched_movies = []
+    for film in user_data["watched"]:
+        users_watched_movies.append(film["title"])
+    return users_watched_movies
 
 def create_movie(title, genre, rating):
     movie = {"title" : title, "genre" : genre, "rating" : rating}
@@ -56,21 +62,15 @@ def get_most_watched_genre(user_data):
     if not user_data["watched"]:
         return None
     else: 
-        genre_dict = {
-            "Intrigue" : 0, "Action" : 0, "Horror" : 0, "Fantasy" : 0
-            }
+        genre_dict = {}
         for movie in user_data["watched"]:
-            if movie["genre"] == "Intrigue":
-                genre_dict["Intrigue"] +=1 
-            elif movie["genre"] == "Action":
-                genre_dict["Action"] +=1 
-            elif movie["genre"] == "Horror":
-                genre_dict["Horror"] +=1 
-            elif movie["genre"] == "Fantasy":
-                genre_dict["Fantasy"] +=1 
+            if movie["genre"] in genre_dict:
+                genre_dict[movie["genre"]] += 1
+            else:
+                genre_dict[movie["genre"]] = 1
         
         popular_genre = max(genre_dict, key=genre_dict.get)
-        
+        print(genre_dict)
         return popular_genre
 
 # -----------------------------------------
@@ -92,11 +92,8 @@ def get_unique_watched(user_data):
     return unique_movies
 
 def get_friends_unique_watched(user_data):
-    users_watched_movies = []
     friends_unique_movies= []
-
-    for film in user_data["watched"]:
-        users_watched_movies.append(film["title"])
+    users_watched_movies = get_users_watched_movie_titles(user_data)
     
     for movies in user_data["friends"]:
         for movie in movies["watched"]:
@@ -111,10 +108,7 @@ def get_friends_unique_watched(user_data):
 
 def get_available_recs(user_data):
     recommended_movies = []
-    users_watched_movies = []
-
-    for film in user_data["watched"]:
-        users_watched_movies.append(film["title"])
+    users_watched_movies = get_users_watched_movie_titles(user_data)
 
     for movies in user_data["friends"]:
         for movie in movies["watched"]:
@@ -129,10 +123,7 @@ def get_available_recs(user_data):
 
 def get_new_rec_by_genre(user_data):
     recommended_movies_by_genre = []
-    users_watched_movies = []
-    
-    for film in user_data["watched"]:
-        users_watched_movies.append(film["title"])
+    users_watched_movies = get_users_watched_movie_titles(user_data)
 
     fav_genre = get_most_watched_genre(user_data)  
 
@@ -157,3 +148,4 @@ def get_rec_from_favorites (user_data):
             recommended_movies_from_favorites.append(film)
     
     return recommended_movies_from_favorites
+

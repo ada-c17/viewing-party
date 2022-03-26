@@ -1,3 +1,4 @@
+from turtle import up
 import pytest
 # NOTE: In production code, we developers should change import * to something more specific. Due to some constraints of this project, we will import * in our test files.
 # from viewing_party.main import *
@@ -119,7 +120,10 @@ def test_moves_movie_from_watchlist_to_empty_watched():
     # Assert
     assert len(updated_data["watchlist"]) is 0
     assert len(updated_data["watched"]) is 1
-    
+    assert updated_data["watched"][0]["title"] is MOVIE_TITLE_1
+    assert updated_data["watched"][0]["genre"] is GENRE_1
+    assert updated_data["watched"][0]["rating"] is RATING_1
+
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
@@ -142,6 +146,7 @@ def test_moves_movie_from_watchlist_to_watched():
     # Assert
     assert len(updated_data["watchlist"]) is 1
     assert len(updated_data["watched"]) is 2
+    assert updated_data["watched"][1] is movie_to_watch
     
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
