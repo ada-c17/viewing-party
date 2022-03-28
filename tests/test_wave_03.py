@@ -2,7 +2,7 @@ import pytest
 from viewing_party.party import *
 from tests.test_constants import *
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_my_unique_movies():
     # Arrange
     amandas_data = clean_wave_3_data()
@@ -16,7 +16,7 @@ def test_my_unique_movies():
     assert INTRIGUE_2 in amandas_unique_movies
     assert amandas_data == clean_wave_3_data()
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_my_not_unique_movies():
     # Arrange
     amandas_data = clean_wave_3_data()
@@ -28,7 +28,7 @@ def test_my_not_unique_movies():
     # Arrange
     assert len(amandas_unique_movies) == 0
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_friends_unique_movies():
     # Arrange
     amandas_data = clean_wave_3_data()
@@ -43,7 +43,7 @@ def test_friends_unique_movies():
     assert FANTASY_4 in friends_unique_movies
     assert amandas_data == clean_wave_3_data()
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_friends_unique_movies_not_duplicated():
     # Arrange
     amandas_data = clean_wave_3_data()
@@ -55,11 +55,15 @@ def test_friends_unique_movies_not_duplicated():
     # Arrange
     assert len(friends_unique_movies) == 3
 
+    assert {'genre': 'Horror','rating': 3.5,'title': 'It Came from the Stack Trace'} in friends_unique_movies
+    assert {'genre': 'Fantasy','rating': 4.0,'title': 'The Programmer: An Unexpected Stack Trace'} in friends_unique_movies
+    assert {'genre': 'Intrigue', 'rating': 3.0, 'title': 'Zero Dark Python'} in friends_unique_movies
+
     # *************************************************************************************************
     # ****** Add assertions here to test that the correct movies are in friends_unique_movies **********
     # **************************************************************************************************
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_friends_not_unique_movies():
     # Arrange
     amandas_data = {
