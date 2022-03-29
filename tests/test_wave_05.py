@@ -2,7 +2,6 @@ import pytest
 from viewing_party.party import *
 from tests.test_constants import *
 
-@pytest.mark.skip()
 def test_new_genre_rec():
     # Arrange
     sonyas_data = clean_wave_5_data()
@@ -17,7 +16,6 @@ def test_new_genre_rec():
     assert FANTASY_4b in recommendations
     assert sonyas_data == clean_wave_5_data()
 
-@pytest.mark.skip()
 def test_new_genre_rec_from_empty_watched():
     # Arrange
     sonyas_data = {
@@ -38,7 +36,6 @@ def test_new_genre_rec_from_empty_watched():
     # Assert
     assert len(recommendations) == 0
 
-@pytest.mark.skip()
 def test_new_genre_rec_from_empty_friends():
     # Arrange
     sonyas_data = {
@@ -56,8 +53,11 @@ def test_new_genre_rec_from_empty_friends():
     # *********************************************************************
     # ****** Complete the Act and Assert Portions of theis tests **********
     # *********************************************************************
+    # act
+    recommendations = get_new_rec_by_genre(sonyas_data)
+    # assert
+    assert len(recommendations) == 0
 
-@pytest.mark.skip()
 def test_unique_rec_from_favorites():
     # Arrange
     sonyas_data = clean_wave_5_data()
@@ -71,7 +71,7 @@ def test_unique_rec_from_favorites():
     assert INTRIGUE_2b in recommendations
     assert sonyas_data == clean_wave_5_data()
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_unique_from_empty_favorites():
     # Arrange
     sonyas_data = {
@@ -92,7 +92,30 @@ def test_unique_from_empty_favorites():
     # Assert
     assert len(recommendations) == 0
 
-@pytest.mark.skip()
+## I added this test, trying to modify the one above to test the correct function.
+def test_unique_from_empty_favorites_added():
+    # Arrange
+    sonyas_data = {
+        "watched": [],
+        "friends": [
+            {
+                "watched": [INTRIGUE_1b]
+            },
+            {
+                "watched": [INTRIGUE_2b,HORROR_1b]
+            }
+        ], 
+        "favorites" : []
+    }
+
+    # Act
+    recommendations = get_rec_from_favorites(sonyas_data)
+
+    # Assert
+    assert len(recommendations) == 0
+    
+
+# @pytest.mark.skip()
 def test_new_rec_from_empty_friends():
     # Arrange
     sonyas_data = {
@@ -112,3 +135,25 @@ def test_new_rec_from_empty_friends():
 
     # Assert
     assert len(recommendations) == 0
+
+## I added this test, trying to modify the test above to test the correct function.
+def test_new_rec_from_empty_friends_added():
+    # Arrange
+    sonyas_data = {
+        "watched": [INTRIGUE_1b],
+        "friends": [
+            {
+                "watched": []
+            },
+            {
+                "watched": []
+            }
+        ],
+        'favorites': [INTRIGUE_1b]
+    }
+
+    # Act
+    recommendations = get_rec_from_favorites(sonyas_data)
+
+    # Assert
+    assert len(recommendations) == 1
