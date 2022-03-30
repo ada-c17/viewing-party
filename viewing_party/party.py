@@ -39,15 +39,20 @@ def get_watched_avg_rating(user_data):
 def get_most_watched_genre(user_data):
     if len(user_data['watched']) ==0:
         return None
-    frequency=Counter(d['genre'] for d in user_data['watched'])
-    return frequency.most_common(1)[0][0]
+    genres={}    
+    for data in user_data['watched']:
+        if data['genre'] not in genres:
+            genres[data['genre']]=1
+        else:
+            genres[data['genre']]+=1
+    return max(genres, key=genres.get)           
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
 def get_unique_watched(user_data):
-    user_unique_movies=copy.deepcopy(user_data['watched'])
+    user_unique_movies=user_data['watched'].copy()
     for data in user_data['friends']:
         for movie in data['watched']:
             if movie in user_unique_movies:
@@ -67,9 +72,9 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 def get_available_recs(user_data):
     recommendations=[]
-    for data in user_data['friends']:
-        for movie in data['watched']:
-            if movie not in user_data['watched'] and movie['host'] in user_data['subscriptions']:
+    friends_unique_movies=get_friends_unique_watched(user_data)
+    for movie in friends_unique_movies:
+            if movie['host'] in user_data['subscriptions']:
                 recommendations.append(movie)
     return recommendations 
 
@@ -79,11 +84,12 @@ def get_available_recs(user_data):
 
 def get_new_rec_by_genre(user_data):
     favourite_genre=get_most_watched_genre(user_data)
+    friends_unique_movies=get_friends_unique_watched(user_data)
     recommendations=[]
-    for data in user_data['friends']:
-        for movie in data['watched']:
-            if movie not in user_data['watched'] and movie['genre'] == favourite_genre:
-                recommendations.append(movie)
+    if user_data['watched'] !=[]:
+        for movie in friends_unique_movies:
+            if  movie['genre'] in favourite_genre:
+                    recommendations.append(movie)
     return recommendations
 
 def get_rec_from_favorites(user_data):
