@@ -94,12 +94,11 @@ def get_most_watched_genre(user_data):
     genre_list= []
     if watched_data == []:
         return None
-    elif watched_data:
-        for movie in watched_data:
-            if movie['genre']: 
-                genre_list.append(movie['genre'])
-            most_watched_genre = mode(genre_list)
-            return most_watched_genre
+    for movie in watched_data:
+        if movie['genre']: 
+            genre_list.append(movie['genre'])
+        most_watched_genre = mode(genre_list)
+        return most_watched_genre
         
 
 
