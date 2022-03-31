@@ -2,12 +2,17 @@
 
 def create_movie(title, genre, rating):
     new_movie = {}
-    if title == None or genre == None or rating == None:
+    if not title or not genre or not rating:
         return None
-    new_movie["title"] = title
-    new_movie["genre"] = genre
-    new_movie["rating"] = rating
-    return new_movie
+    # new_movie["title"] = title
+    # new_movie["genre"] = genre
+    # new_movie["rating"] = rating
+    # return new_movie
+    return {
+        "title": title,
+        "genre": genre,
+        "rating": rating
+    }
 
 
 def add_to_watched(user_data, movie):
@@ -21,10 +26,10 @@ def add_to_watchlist(user_data, movie):
 
 
 def watch_movie(user_data, title):
-    for ele in user_data["watchlist"]:  # ele is a dict
-        if ele["title"] == title:
-            user_data["watchlist"].remove(ele)
-            user_data["watched"].append(ele)
+    for movie_dic in user_data["watchlist"]:
+        if movie_dic["title"] == title:
+            user_data["watchlist"].remove(movie_dic)
+            user_data["watched"].append(movie_dic)
     return user_data
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
@@ -34,29 +39,31 @@ def watch_movie(user_data, title):
 def get_watched_avg_rating(user_data):
     if not user_data["watched"]:
         return 0
-    else:
-        total = 0
-        for ele in user_data["watched"]:
-            total += ele["rating"]
-        return total/len(user_data["watched"])
-    # retun round( total/len(user_data["watched"]), 1)
+    total = 0
+    for ele in user_data["watched"]:
+        total += ele["rating"]
+    return total/len(user_data["watched"])
+# retun round( total/len(user_data["watched"]), 1)
 
 
 def get_most_watched_genre(user_data):
-    if user_data["watched"] == []:
+    if not user_data["watched"]:
+        # don't use  user_data["watched"]==[], since we need to check both user_data["watched"] and user_data are Falsey or not.
+        # In the rare case that user_data or user_data["watched"] is passed in as None or an empty set, list, or tuple
+        # then code won't throw an error trying to find a non-existing "watched" key.
         return None
     my_dic = {}
     max = 0
     result = ""
-    for ele in user_data["watched"]:
-        if ele["genre"] in my_dic:
-            my_dic[ele["genre"]] += 1
+    for movie in user_data["watched"]:
+        if movie["genre"] in my_dic:
+            my_dic[movie["genre"]] += 1
         else:
-            my_dic[ele["genre"]] = 1
-    for k, v in my_dic.items():
-        if v > max:
-            max = v
-            result = k
+            my_dic[movie["genre"]] = 1
+    for movie_name, watched_time in my_dic.items():
+        if watched_time > max:
+            max = watched_time
+            result = movie_name
     return result
 
 # -----------------------------------------
@@ -66,15 +73,16 @@ def get_most_watched_genre(user_data):
 
 def get_unique_watched(user_data):
     mine = user_data["watched"]
-    if not mine:
-        return []
     result = []
+    if not mine:
+        return result
+
     friends_movie = []
     for friend in user_data["friends"]:
         friends_movie += friend["watched"]
-    for ele in mine:
-        if not ele in friends_movie:
-            result.append(ele)
+    for movie in mine:
+        if not movie in friends_movie:
+            result.append(movie)
     return result
 
 
@@ -85,12 +93,13 @@ def get_friends_unique_watched(user_data):
         for movie in friend["watched"]:
             if movie not in friends_movie:
                 friends_movie.append(movie)
-    if not friends_movie:
-        return []
     result = []
-    for ele in friends_movie:
-        if ele not in mine:
-            result.append(ele)
+    if not friends_movie:
+        return result
+
+    for movie in friends_movie:
+        if movie not in mine:
+            result.append(movie)
     return result
 
 
