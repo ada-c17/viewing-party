@@ -54,6 +54,7 @@ def get_watched_avg_rating(user_data):
         return total / len(rating_list)
     else:
         return 0.0
+    #try/catch option wors too
      
 #{"watched": [{},{},{}...]}
 def get_most_watched_genre(user_data):
@@ -118,7 +119,7 @@ USER_DATA_4["subscriptions"] = ["netflix", "hulu"]
 def get_available_recs(user_data):
     recommended_list = []
     friends_unique = get_friends_unique_watched(user_data)
-    print(friends_unique)
+    #print(friends_unique)
     for movie_dict in friends_unique:
         if movie_dict["host"] in user_data["subscriptions"]:
             recommended_list.append(movie_dict)
@@ -151,13 +152,15 @@ return a list of recommendate movies:
 2. None of the user's friends have watched it
 """
 def get_rec_from_favorites(user_data):
-    recommended_favorites, unique_list_from_user = [], []
-    unique_list_from_user = get_unique_watched(user_data)
+    recommended_result, friends_watched = [], []
+    #user_data["favorites"] == {movie} in [{movie},{movie}]
+    for i in range(len(user_data["friends"])): 
+        #print(user_data["friends"][i])
+        friends_watched = user_data["friends"][i]["watched"]
     
-    for list_movie in user_data["favorites"]:
-        print(list_movie)
-        if list_movie is not None:
-            for movie in unique_list_from_user:
-                if movie == list_movie:
-                    recommended_favorites.append(movie)
-    return recommended_favorites
+    #movie in favorate movies [{},{},{}]
+    for movie in user_data["favorites"]:
+        if movie not in friends_watched:
+            recommended_result.append(movie)
+    print(recommended_result)
+    return recommended_result
