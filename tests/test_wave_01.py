@@ -123,6 +123,31 @@ def test_moves_movie_from_watchlist_to_empty_watched():
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
 
+    #Ashley's Test
+    def test_moves_movie_from_watchlist_to_prefilled_list():
+    # Arrange
+        maddies_data = {
+        "watchlist": [{
+            "title": MOVIE_TITLE_1,
+            "genre": GENRE_1,
+            "rating": RATING_1
+        }],
+        "watched": [{
+            "title": MOVIE_TITLE_1,
+            "genre": GENRE_1,
+            "rating": RATING_1
+        }]
+    }
+
+    # Act
+        updated_data = watch_movie(maddies_data, MOVIE_TITLE_1)
+
+    # Assert
+        assert len(updated_data["watchlist"]) is 0
+        assert len(updated_data["watched"]) is 2
+
+
+
 #@pytest.mark.skip()
 def test_moves_movie_from_watchlist_to_watched():
     # Arrange
@@ -142,9 +167,7 @@ def test_moves_movie_from_watchlist_to_watched():
     assert len(updated_data["watchlist"]) is 1
     assert len(updated_data["watched"]) is 2
     
-    # *******************************************************************************************
-    # ****** Add assertions here to test that the correct movie was added to "watched" **********
-    # *******************************************************************************************
+ 
 
 #@pytest.mark.skip()
 def test_does_nothing_if_movie_not_in_watchlist():

@@ -54,6 +54,8 @@ def test_friends_unique_movies_not_duplicated():
 
     # Arrange
     assert len(friends_unique_movies) == 3
+    #Ashley's assertion
+    assert INTRIGUE_3 in amandas_data["friends"][0]["watched"]
 
     # *************************************************************************************************
     # ****** Add assertions here to test that the correct movies are in friends_unique_movies **********
