@@ -15,7 +15,8 @@ def create_movie(title, genre, rating):
 
 # This function adds a key-value pair called "watched" to a dictionary called user_data; It includes all movies that the user has watched 
 def add_to_watched(user_data, movie):
-    user_data["watched"] = [movie]
+    user_data["watched"].append(movie)
+
     return user_data
 
 # This function adds a key-value pair called "watchlist" to a dictionary called user_data. It includes all movies that the user wants to watch 
