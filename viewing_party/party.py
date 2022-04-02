@@ -4,12 +4,12 @@ from re import T
 
 # This function adds 3 key-value pairs to a dictionary called movie_dict
 def create_movie(title, genre, rating):
-    movie_dict = {}
     if title and genre and rating:
-        movie_dict["title"] = title
-        movie_dict["genre"] = genre
-        movie_dict["rating"] = rating
-        return movie_dict
+        return {
+            "title": title,
+            "genre": genre,
+            "rating": rating
+        }
     else:
         return None
 
