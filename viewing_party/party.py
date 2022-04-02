@@ -26,9 +26,8 @@ def add_to_watchlist(user_data, movie):
 
 # This function decides whether to put a movie into a watchlist or a list of watchd movie
 def watch_movie(user_data, title):
-    for index in range(len(user_data["watchlist"])):
-        if title == user_data["watchlist"][index]["title"]:
-            watched_movie = user_data["watchlist"][index]
+    for watched_movie in user_data["watchlist"]:
+        if title == watched_movie["title"]:
             user_data["watchlist"].remove(watched_movie)
             user_data["watched"].append(watched_movie)
     return user_data
