@@ -52,10 +52,14 @@ def test_friends_unique_movies_not_duplicated():
     # Act
     friends_unique_movies = get_friends_unique_watched(amandas_data)
 
-    # Arrange
+    # Assert
     assert len(friends_unique_movies) == 3
-    assert friends_unique_movies == [FANTASY_4, HORROR_1, INTRIGUE_3]
-
+    
+    # refactoring post-submission
+    # OG code: assert friends_unique_movies == [FANTASY_4, HORROR_1, INTRIGUE_3]
+    assert FANTASY_4 in friends_unique_movies
+    assert HORROR_1 in friends_unique_movies
+    assert INTRIGUE_3 in friends_unique_movies
     # *************************************************************************************************
     # ****** Add assertions here to test that the correct movies are in friends_unique_movies **********
     # **************************************************************************************************

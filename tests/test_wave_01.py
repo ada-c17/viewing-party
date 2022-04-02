@@ -1,4 +1,4 @@
-from turtle import update
+# from turtle import update
 import pytest
 # NOTE: In production code, we developers should change import * to something more specific. 
 # Due to some constraints of this project, we will import * in our test files.
@@ -150,7 +150,7 @@ def test_moves_movie_from_watchlist_to_watched():
     # Assert
     assert len(updated_data["watchlist"]) == 1
     assert len(updated_data["watched"]) == 2
-    # refactoring post-submission - recommended to check all keys of dictionary
+    # refactoring post-submission
     # OG CODE: assert updated_data["watched"] == [FANTASY_2, HORROR_1]
     assert FANTASY_2 in updated_data["watched"]
     assert HORROR_1 in updated_data["watched"]
