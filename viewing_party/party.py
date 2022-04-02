@@ -16,7 +16,6 @@ def create_movie(title, genre, rating):
 # This function adds a key-value pair called "watched" to a dictionary called user_data; It includes all movies that the user has watched 
 def add_to_watched(user_data, movie):
     user_data["watched"].append(movie)
-
     return user_data
 
 # This function adds a key-value pair called "watchlist" to a dictionary called user_data. It includes all movies that the user wants to watch 
@@ -47,7 +46,7 @@ def get_watched_avg_rating(user_data):
             average_rating += movie_watched["rating"]
         return average_rating / len(user_data["watched"])
 
-# This function finds out the genre that is the most fewquently watched 
+# This function finds out the genre that is the most frequently watched 
 def get_most_watched_genre(user_data):
     # example of dict_genre_count: {'Fantasy': 3, 'Action': 1, 'Intrigue': 2}
     dict_genre_count = {}
