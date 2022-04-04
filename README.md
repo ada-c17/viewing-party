@@ -97,7 +97,7 @@ $ source venv/bin/activate
         - *What type of input do we need to test this case?*
         - *What is the expected output for the given input?*
    - Remove the lines that contain `@pytest.mark.skip()` for the test(s) you want to run.
-
+  
 3. Run the test(s)!
     - *See the [Details About How to Run Tests](#details-about-how-to-run-tests) section below for more information on how to run test(s).*
 
