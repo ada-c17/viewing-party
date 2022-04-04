@@ -3,7 +3,6 @@
 #DONE
 import re
 
-
 def create_movie(movie_title, genre, rating):
     dict = {}
     
@@ -22,6 +21,7 @@ def create_movie(movie_title, genre, rating):
 
 #DONE
 def add_to_watched(user_data, movie):
+    #hmm I have no idea why I created and empty dictionary and appended user_data["watched"] to it, seeems unnecessary
     emptyDict = {}
     user_data["watched"].append(emptyDict)
     user_data["watched"][0]["title"] = movie["title"]

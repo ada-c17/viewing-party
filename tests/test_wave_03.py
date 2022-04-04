@@ -58,6 +58,10 @@ def test_friends_unique_movies_not_duplicated():
 
     # Arrange
     assert len(friends_unique_movies) == 3
+    assert friends_unique_movies[0]["title"] == "The Programmer: An Unexpected Stack Trace"
+    assert friends_unique_movies[1]["title"] == "It Came from the Stack Trace"
+    assert friends_unique_movies[2]["title"] == "Zero Dark Python"
+    # fantasy4, horror1, intrigue3
 
     # *************************************************************************************************
     # ****** Add assertions here to test that the correct movies are in friends_unique_movies **********
