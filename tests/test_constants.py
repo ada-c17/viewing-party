@@ -1,5 +1,5 @@
 import copy
-
+# Solution to this project: https://github.com/AdaGold/viewing-party/tree/solution 
 # ********************************
 # *** Do Not Modify This File ****
 # ********************************
