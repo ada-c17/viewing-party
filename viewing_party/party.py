@@ -1,6 +1,5 @@
 # ------------- WAVE 1 --------------------
 
-from pickle import NONE
 import copy
 
 def create_movie(title, genre, rating):
