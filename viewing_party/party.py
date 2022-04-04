@@ -52,7 +52,6 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 def get_unique_watched(user_data):
     unique_movies = []
-    friend_count = len(user_data["friends"])
     # Use friend_watched count to keep track of all the friends, to be sure that the movie
     # is not in either friends watched list 
     for movie in user_data["watched"]:
