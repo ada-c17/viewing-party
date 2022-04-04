@@ -59,7 +59,7 @@ def test_new_genre_rec_from_empty_friends():
     assert len(recommendations) == 0
     
     # *********************************************************************
-    # ****** Complete the Act and Assert Portions of theis tests **********
+    # ****** Complete the Act and Assert Portions of this tests **********
     # *********************************************************************
 
 # @pytest.mark.skip()
