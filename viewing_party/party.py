@@ -3,10 +3,11 @@ def create_movie(title, genre, rating):
     if not title or not genre or not rating:
         return None
 
-    movie ={}
-    movie["title"] = title
-    movie["genre"] = genre
-    movie["rating"] = rating
+    movie = {"title": title, "genre": genre, "rating": rating}
+    # movie ={}
+    # movie["title"] = title
+    # movie["genre"] = genre
+    # movie["rating"] = rating
 
     return movie
 
