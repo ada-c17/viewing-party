@@ -1,3 +1,4 @@
+import copy
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
@@ -25,15 +26,16 @@ def add_to_watched(user_data, movie):
 def add_to_watchlist(user_data, movie):
 
     user_data["watchlist"].append(movie)
-    
+
     return user_data
 
 
 def watch_movie(user_data, title): 
 
-    #loop through each movie in the watchlist
-    for movie in user_data["watchlist"]:
+    watchlist_copy = copy.deepcopy(user_data["watchlist"])# copy list of movies in the watch list
 
+    #loop through each movie in the watchlist
+    for movie in watchlist_copy:
         #if it matches the title passed as the arg add it to watch
         if title == movie["title"]:
 
