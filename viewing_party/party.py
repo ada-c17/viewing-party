@@ -1,12 +1,14 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
-    #if any parameter is empty return none
-    if title and genre and rating:
-        new_movie = {"title": title, "genre": genre, "rating": rating}
-        return new_movie
-    else:
+    if not title or not genre or not rating:
         return None
+
+    return { 
+            "title": title, 
+            "genre": genre, 
+            "rating": rating 
+        }
 
 
 
@@ -30,11 +32,11 @@ def watch_movie(user_data, title):
     #new list to add unwatched movies to
     new_watchlist = [] 
 
-    for i in range(len(user_data["watchlist"])):
-        if title in user_data["watchlist"][i].values(): #add to watched list
-            user_data["watched"].append(user_data["watchlist"][i]) 
+    for index in range(len(user_data["watchlist"])):
+        if title in user_data["watchlist"][index].values(): #add to watched list
+            user_data["watched"].append(user_data["watchlist"][index]) 
         else: #remain in watchlist
-            new_watchlist.append(user_data["watchlist"][i])
+            new_watchlist.append(user_data["watchlist"][index])
 
     user_data["watchlist"] = new_watchlist #update watchlist in user data
 
@@ -57,27 +59,44 @@ def get_watched_avg_rating(user_data):
 
     return average
 
+# def get_most_watched_genre(user_data):
+
+#     #return None for empty watched list
+#     if len(user_data["watched"]) == 0:
+#         return None
+    
+#     #set count for each genre
+#     genre_count = {"Fantasy": 0, "Action": 0, "Intrigue": 0, "Horror": 0}
+
+#     #loop over each item's genre and check which genre it matches, 
+#     for movie in user_data["watched"]:
+#         if movie["genre"] == "Fantasy":
+#             genre_count["Fantasy"]+=1
+#         elif movie["genre"] == "Action":
+#             genre_count["Action"]+=1
+#         elif movie["genre"] == "Intrigue":
+#             genre_count["Intrigue"] += 1
+#         else:
+#             genre_count["Horror"] += 1
+    
+#     #return max genre count genre
+#     return max(genre_count, key = genre_count.get)
+
 def get_most_watched_genre(user_data):
 
     #return None for empty watched list
     if len(user_data["watched"]) == 0:
         return None
-    
-    #set count for each genre
-    genre_count = {"Fantasy": 0, "Action": 0, "Intrigue": 0, "Horror": 0}
 
-    #loop over each item's genre and check which genre it matches, 
+    genre_count = {}
+
     for movie in user_data["watched"]:
-        if movie["genre"] == "Fantasy":
-            genre_count["Fantasy"]+=1
-        elif movie["genre"] == "Action":
-            genre_count["Action"]+=1
-        elif movie["genre"] == "Intrigue":
-            genre_count["Intrigue"] += 1
+        if movie["genre"] not in genre_count:
+            genre_count[movie["genre"]]=1
         else:
-            genre_count["Horror"] += 1
+            genre_count[movie["genre"]]+=1
     
-    #return max genre count genre
+    #return max genre count key
     return max(genre_count, key = genre_count.get)
     
 # -----------------------------------------

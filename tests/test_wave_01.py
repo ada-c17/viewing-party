@@ -118,7 +118,7 @@ def test_moves_movie_from_watchlist_to_empty_watched():
     # Assert
     assert len(updated_data["watchlist"]) is 0
     assert len(updated_data["watched"]) is 1
-    assert updated_data["watched"][0]["title"] == "It Came from the Stack Trace"
+    assert updated_data["watched"][0]["title"] == MOVIE_TITLE_1
     
 
 
@@ -139,7 +139,7 @@ def test_moves_movie_from_watchlist_to_watched():
     # Assert
     assert len(updated_data["watchlist"]) is 1
     assert len(updated_data["watched"]) is 2
-    assert updated_data["watched"][1]["title"] == "It Came from the Stack Trace"
+    assert updated_data["watched"][1] == HORROR_1
     
 
 
