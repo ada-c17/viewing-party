@@ -46,22 +46,20 @@ def watch_movie(user_data, title):
 #{"watched":[{},{},{}]
 def get_watched_avg_rating(user_data):
     rating_list = []
-    for movie in user_data["watched"]:
-        rating_list.append(movie["rating"])
+    rating_list.append(user_data["rating"])
     total = sum(rating_list) #use sum() vs accumulate myself?
     
-    if len(rating_list) != 0:
-        return total / len(rating_list)
-    else:
+    if len(rating_list) 0= 0:
         return 0.0
+    else:
+        return total / len(rating_list)
+        
     #try/catch option wors too
      
 #{"watched": [{},{},{}...]}
 def get_most_watched_genre(user_data):
     genre_fq, max_genre = 0, None
-    genre = []
-    for movie in user_data["watched"]:
-        genre.append(movie["genre"])
+    genre = user_data["genre"]
     
     genre_dict = Counter(genre)    
     
