@@ -117,7 +117,6 @@ def get_rec_from_favorites(user_data):
     for friend in user_data["friends"]:
         for movie in friend["watched"]:
             friends_movie_list.append(movie["title"])
-            friends_movie_list
 
     for movie in user_data["favorites"]:
         if movie["title"] not in friends_movie_list:
