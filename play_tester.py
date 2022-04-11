@@ -21,6 +21,81 @@ pp = pprint.PrettyPrinter(indent=4)
 # pp.pprint(clean_wave_2_data())
 
 ### graveyard ###
+
+
+## WAVE 1 ##
+## Create a function that will create a movie function
+# with title, genre, and rating into a dictiionary
+# If there is no title, genre, or rating, return None
+# If any of the three variables is missing, return None
+
+# from decimal import DivisionByZero
+# from tests.test_constants import USER_DATA_2
+
+## Create a function to track when movies are watched
+## use the new_movie list to generate how the function works
+## user_data is what has been "watched:"
+## updated_data = add_to_watched(user_data, movie)
+## Create a function to track a watch list for the user
+## user_data = {"watchlist"}
+## updated_data = add_to_watchlist(user_data, movie)
+
+
+## def a function that will call upon the watched and watchlist functions
+##  adjust the values of watched and watchlist into sets
+## use set functions to create a set that compares the similarities
+## return a set or dictionary that outputs the difference 
+## Return an error message if the movie is on neither list
+#####################
+####WAVE 2 ##########
+## Create a function that will check the average rating of movies watched
+## if average is Zero, return error message
+
+# '''
+# input: a dictionary called 'user_data' with a 'watched' list of
+# movie dictionaries (movies that user has watched)
+# -- Calculate average rating of all movies user has watched
+# -- An empty watch list has an average rating of 0.0
+# output: the average rating
+# # {   'watched': [   {   'genre': 'Fantasy',
+# #                        'rating': 4.8,
+# #                        'title': 'The Lord of the Functions: The Fellowship of '
+# #                                 'the Function'},
+# #                    {   'genre': 'Fantasy',
+# #                        'rating': 4.0,
+# #                        'title': 'The Lord of the Functions: The Two '
+# #                                 'Parameters'},
+# #                    {   'genre': 'Fantasy',
+# #                        'rating': 4.0,
+# #                        'title': 'The Lord of the Functions: The Return of the '
+# #                                 'Value'},
+# #                    {   'genre': 'Action',
+# #                        'rating': 2.2,
+# #                        'title': 'The JavaScript and the React'},
+# #                    {'genre': 'Intrigue', 'rating': 2.0, 'title': 'Recursion'},
+# #                    {   'genre': 'Intrigue',
+# #                        'rating': 4.5,
+# #                        'title': 'Instructor Student TA Manager'}]}
+# '''
+
+## def function to track most watched genre
+## COUNT of times genre appears
+## If there is no amount, return error message
+# '''
+# input: take in the parameter 'user_data' : a nested dictionary 
+# with a VALUE 'watched' list of movie dictionaries
+# each movie has the KEY "genre"
+# >> this VALUE represents user's list of watched movies
+# >> each watched movie contains a genre
+# >>>> the VALUES of  KEY "genre" is a string
+# create a COUNTER to count which "genre" occurs most often
+# If the value of "watched" is empty, return None
+
+# output: The string of the genre that is most frequently watched,
+# if value of watched is an empty list could try ... else none
+
+# '''
+
 # def get_watched_avg_rating(user_data):
 #     watched_movies = user_data["watched"] ## array of dictionaries
 #     total_rating = []
@@ -290,8 +365,7 @@ output a list of dictionaries, list of movies
 ####end graveyard####
 
 # print("\n-----Wave 03 user_data-----")
-# pp.pprint(clean_wave_3_data())
-
+pp.pprint(clean_wave_3_data())
 
 
 
