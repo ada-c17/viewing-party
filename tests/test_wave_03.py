@@ -53,11 +53,12 @@ def test_friends_unique_movies_not_duplicated():
     friends_unique_movies = get_friends_unique_watched(amandas_data)
 
     # Arrange
-    assert len(friends_unique_movies) == 3
 
-    # *************************************************************************************************
-    # ****** Add assertions here to test that the correct movies are in friends_unique_movies **********
-    # **************************************************************************************************
+    assert len(friends_unique_movies) == 3
+    assert INTRIGUE_3 in friends_unique_movies
+    assert HORROR_1 in friends_unique_movies
+    assert FANTASY_4 in friends_unique_movies
+
 
 # @pytest.mark.skip()
 def test_friends_not_unique_movies():
