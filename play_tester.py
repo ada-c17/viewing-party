@@ -365,7 +365,7 @@ output a list of dictionaries, list of movies
 ####end graveyard####
 
 # print("\n-----Wave 03 user_data-----")
-pp.pprint(clean_wave_3_data())
+# pp.pprint(clean_wave_3_data())
 
 
 
@@ -373,25 +373,25 @@ pp.pprint(clean_wave_3_data())
 ################################################
 
 ############ graveyard ############
-'''
-input: takes in user_data, nested dictionary
-> field "subscriptions" is a list of strings
-> represents the names of streaming services that
-user has access to
-> each friend in "friends" has a watched list
->each movie in watched list has a "host" 
->> "host" key holds a string that says the streaming service it is
-hosted on
-> determine list of reccommended movies and add to list
-IF AND ONLY IF (try ... except?)
->>>> user has NOT watched  (not on "watched" list)
->>>> at least ONE friend has it on their "watched" list
-** think, this is a unique movie from friends list
->>>> the "host" of that "title" is in a service that the user has
-in their "subscriptions"
-output: list of recommended movies
+# '''
+# input: takes in user_data, nested dictionary
+# > field "subscriptions" is a list of strings
+# > represents the names of streaming services that
+# user has access to
+# > each friend in "friends" has a watched list
+# >each movie in watched list has a "host" 
+# >> "host" key holds a string that says the streaming service it is
+# hosted on
+# > determine list of reccommended movies and add to list
+# IF AND ONLY IF (try ... except?)
+# >>>> user has NOT watched  (not on "watched" list)
+# >>>> at least ONE friend has it on their "watched" list
+# ** think, this is a unique movie from friends list
+# >>>> the "host" of that "title" is in a service that the user has
+# in their "subscriptions"
+# output: list of recommended movies
 
-'''
+# '''
 # def get_available_recs(user_data):
 #     movie_rec = []
 #     unique_movie_function = get_friends_unique_watched()
