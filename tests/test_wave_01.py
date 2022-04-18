@@ -116,10 +116,8 @@ def test_moves_movie_from_watchlist_to_empty_watched():
     # Assert
     assert len(updated_data["watchlist"]) == 0
     assert len(updated_data["watched"]) == 1
-    
-    # *******************************************************************************************
-    # ****** Add assertions here to test that the correct movie was added to "watched" **********
-    # *******************************************************************************************
+    assert MOVIE_TITLE_1 in updated_data["watched"][0]["title"]
+    assert GENRE_1 in updated_data["watched"][0]["genre"]
 
 
 def test_moves_movie_from_watchlist_to_watched():
@@ -139,10 +137,9 @@ def test_moves_movie_from_watchlist_to_watched():
     # Assert
     assert len(updated_data["watchlist"]) == 1
     assert len(updated_data["watched"]) == 2
-    
-    # *******************************************************************************************
-    # ****** Add assertions here to test that the correct movie was added to "watched" **********
-    # *******************************************************************************************
+    assert FANTASY_2 in updated_data["watched"]
+    assert HORROR_1 in updated_data["watched"]
+
 
 
 def test_does_nothing_if_movie_not_in_watchlist():
