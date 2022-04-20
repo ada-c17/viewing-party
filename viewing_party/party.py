@@ -1,10 +1,5 @@
 # ------------- WAVE 1 --------------------
 
-from imp import new_module
-from turtle import up
-from zoneinfo import available_timezones
-
-
 def create_movie(title, genre, rating):
     """Create a new movie dict with given parameters and return a dict."""
     new_movie = {}
@@ -29,7 +24,8 @@ def watch_movie(user_data, movie_title):
     """Move a movie from a watchlist to watched and return user data."""
     watchlist = user_data['watchlist']
     watched = user_data['watched']
-    for film in watchlist:
+    for i in range(len(watchlist)):
+        film = watchlist[i]
         if film['title'] == movie_title:
             watchlist.remove(film)
             watched.append(film) 
@@ -60,17 +56,17 @@ def get_most_watched_genre(user_data):
 
     if watched == []:
         return None
-    else:
-        for movie in watched:
-            if movie['genre'] in all_genres_watched:
-                all_genres_watched[movie['genre']] += 1
-            else:
-                all_genres_watched[movie['genre']] = 1
-        
-        max_value = max(all_genres_watched.values())
-        popular_genre = [genre for genre, number_watched in all_genres_watched.items() if number_watched == max_value]
 
-        return (', '.join(popular_genre))
+    for movie in watched:
+        if movie['genre'] in all_genres_watched:
+            all_genres_watched[movie['genre']] += 1
+        else:
+            all_genres_watched[movie['genre']] = 1
+    
+    max_value = max(all_genres_watched.values())
+    popular_genre = [genre for genre, number_watched in all_genres_watched.items() if number_watched == max_value]
+
+    return (', '.join(popular_genre))
 
 
 # -----------------------------------------

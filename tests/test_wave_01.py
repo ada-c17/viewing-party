@@ -141,9 +141,7 @@ def test_moves_movie_from_watchlist_to_watched():
     # Assert
     assert len(updated_data["watchlist"]) is 1
     assert len(updated_data["watched"]) is 2
-    assert updated_data["watched"][1]["title"] is MOVIE_TITLE_1
-    assert updated_data["watched"][1]["genre"] is GENRE_1
-    assert updated_data["watched"][1]["rating"] is RATING_1  
+    assert updated_data["watched"][1] == HORROR_1
 
 # @pytest.mark.skip()
 def test_does_nothing_if_movie_not_in_watchlist():
