@@ -14,6 +14,29 @@ pp.pprint(HORROR_1)
 pp.pprint(FANTASY_1)
 pp.pprint(FANTASY_2)
 
+def add_to_watched(user_data, movie):
+
+    #put movie inside value list of of movies
+    for key in user_data:
+        user_data[key].append(movie)
+
+    print(user_data)
+    #return user data
+
+    return user_data
+movie = {
+        "title": MOVIE_TITLE_1,
+        "genre": GENRE_1,
+        "rating": RATING_1
+    }
+user_data = {
+        "watchlist": []
+    }
+
+    # Act
+updated_data = add_to_watchlist(user_data, movie)
+print(updated_data)
+
 # print("\n-----Wave 02 user_data-----")
 # pp.pprint(clean_wave_2_data())
 
