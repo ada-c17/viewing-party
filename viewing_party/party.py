@@ -179,20 +179,40 @@ def get_unique_watched(user_data):
 
     # return user_unique_watched       
 
-    ### refactoring possibility:
-    friend_movies = []
+    ### refactoring possibility 1
+    # friend_movies = []
+    # for friend in user_data["friends"]:
+    #     for movie in friend["watched"]:
+    #         if movie not in friend_movies:
+    #             friend_movies.append(movie)
+    
+    # user_unique_watched = []
+    # for movie in user_data["watched"]:
+    #     if movie not in friend_movies:
+    #         user_unique_watched.append(movie)
+    
+    # return user_unique_watched
+
+    ### refactoring using sets!!!
+    friend_movies_set = set()
     for friend in user_data["friends"]:
         for movie in friend["watched"]:
-            if movie not in friend_movies:
-                friend_movies.append(movie)
+            title = movie["title"]
+            friend_movies_set.add(title)
+
+    user_movies_set = set()
+    for movie in user_data["watched"]:
+        user_movies_set.add(movie["title"])
+    
+    unique_titles = user_movies_set - friend_movies_set
     
     user_unique_watched = []
-    for movie in user_data["watched"]:
-        if movie not in friend_movies:
-            user_unique_watched.append(movie)
-    
-    return user_unique_watched
 
+    for movie in user_data["watched"]:
+        if movie["title"] in unique_titles:
+            user_unique_watched.append(movie)
+
+    return user_unique_watched
 
 def get_friends_unique_watched(user_data):
     """
@@ -237,18 +257,35 @@ def get_friends_unique_watched(user_data):
     
     # return friends_unique_watched
 
-    ### refactoring possibility
-    user_watched_list = []
+    ### refactoring possibility 1
+    # user_watched_list = []
+    # for movie in user_data["watched"]:
+    #     user_watched_list.append(movie)
+    
+    # friends_unique_watched = []
+    # for friend in user_data["friends"]:
+    #     for movie in friend["watched"]:
+    #         if movie not in user_watched_list and movie not in friends_unique_watched:
+    #             friends_unique_watched.append(movie)
+    
+    # return friends_unique_watched
+
+    ### refactoring with sets!
+
+    user_movies_set = set()
     for movie in user_data["watched"]:
-        user_watched_list.append(movie)
+        user_movies_set.add(movie["title"])
     
     friends_unique_watched = []
+
     for friend in user_data["friends"]:
         for movie in friend["watched"]:
-            if movie not in user_watched_list and movie not in friends_unique_watched:
+            if movie["title"] not in user_movies_set and movie not in friends_unique_watched:
                 friends_unique_watched.append(movie)
     
     return friends_unique_watched
+
+
 
 
 # -----------------------------------------
